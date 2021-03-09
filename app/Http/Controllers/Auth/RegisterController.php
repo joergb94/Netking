@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Http\Requests\RegisterUser\RequestUserCreate;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Repositories\ResgisterUserRepository;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -36,10 +38,10 @@ class RegisterController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(ResgisterUserRepository $ResgisterUserRepository)
     {
         $this->middleware('guest');
-        $this->type_user = 3;
+        $this->ResgisterUserRepository = $ResgisterUserRepository;
     }
 
     /**
@@ -57,19 +59,8 @@ class RegisterController extends Controller
         ]);
     }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\Models\User
-     */
     protected function create(array $data)
     {
-        return User::create([
-            'type_user_id'=>$this->type_user,
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        return $this->ResgisterUserRepository->create($data);
     }
 }
