@@ -17,6 +17,7 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('mat', 3)->default('Use');
             $table->unsignedBigInteger('type_user_id')->default(5);
+            $table->string('nickname')->nullable();
             $table->string('name')->nullable();
             $table->string('last_name')->nullable();
             $table->string('phone')->nullable();
