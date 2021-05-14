@@ -2,7 +2,7 @@
 
 use App\Models\Data_menu;
 use App\Models\Type_user_detail;
-use App\Models\Coin_purse;
+use Illuminate\Support\Facades\Auth;
 
 if (!function_exists('accesUrl')) {
  
@@ -17,22 +17,20 @@ if (!function_exists('accesUrl')) {
                                 ->exists();
         if($access == true){
           //get all data for user menu
-          $menuU = Type_user_detail::where('type_user_id',  $user->type_user_id);
-
-          $coins = (Coin_purse::where('user_id',$user->id)->exists())?Coin_purse::where('user_id',$user->id)->first():0;
-
-          $menuU->with(['data_menu' => function($query) {
-              $query->orderby('prioridad');
-            }]);
-
-          $data_menu=$menuU->get();
+          $menuU = Type_user_detail::select('bam.id as id','bam.name as name','bam.icon as icon','bam.link as link')
+                                    ->join('data_menus as bam', 'type_user_details.data_menu_id', '=', 'bam.id')
+                                    ->where('type_user_details.type_user_id',$user->type_user_id)
+                                    ->orderBy('bam.prioridad')->get();
+              
+        
+           
+          $data_menu=$menuU;
           $type_user = $user->type_user_id;
         
         }else{
           
            $data_menu=[];
            $type_user =0;
-           $coins =0;
         }
        
 
@@ -40,7 +38,7 @@ if (!function_exists('accesUrl')) {
           'data_menu'=>$data_menu,
           'access'=>$access,
           'type_user'=>$type_user,
-          'coins'=>$coins,
+          'user'=>Auth::user(),
         ];  
    
       return $menu;

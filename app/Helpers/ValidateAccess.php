@@ -23,49 +23,71 @@ if (!function_exists('validateAccess')) {
     }
 }
 
-
 if (!function_exists('Answer')) {
 
     function validate_title($type){
         switch ($type) {
             case "success":
-                $res='Listo';
+                $res='Success!';
             break;
             case "danger":
-                $res='Error';
+                $res='Error!';
             break;
             case "warning":
-                $res='Advertencia';
+                $res='Warning!';
             break;
             case "info":
-                $res='Informacion';
+                $res='Information!';
             break;
             default:
-                $res='Listo';
+                $res='Success';
           }
           return $res;
     }
     function validate_text($type){
         switch ($type) {
             case "success":
-                $res='Acción completada';
+                $res='Action completed';
             break;
             case "danger":
-                $res='Error en acción';
+                $res='Error in action';
             break;
             case "warning":
-                $res='Precaución con esta acción';
+                $res='Caution with this action';
             break;
             case "info":
-                $res='Verifique la siguiente información';
+                $res='Check the following information';
             break;
             default:
-                $res='Acción completada';
+                $res='Action completed';
           }
           return $res;
     }
 
-    function Answer($typeIn ="", $nameIn ="",$textIn ="",$titleIn =""){
+    
+    function validate_color($color){
+        switch ($color) {
+            case "green":
+                $res='#c3e6cb';
+            break;
+            case "red":
+                $res='#ed969e';
+            break;
+            case "yellow":
+                $res='#ffdf7e';
+            break;
+            case "cyan":
+                $res='#d1ecf1';
+            break;
+            default:
+                $res='#c3e6cb';
+          }
+          return $res;
+    }
+
+
+
+    function Answer($id,$nameIn ="",$textIn ="",$typeIn ="",$colorIn="",$statusIn="",$titleIn =""){
 
             $cleanType = trim($typeIn);
             $type = (strlen($cleanType) > 0)? $typeIn:'success';
@@ -79,10 +101,19 @@ if (!function_exists('Answer')) {
             $cleanName = trim($nameIn);
             $name = (strlen($cleanName) > 0)? $nameIn:'Item';
             
+            $cleancolor = trim($colorIn);
+            $color = validate_color($cleancolor);
+
+            $cleanStatus = trim($statusIn);
+            $status = (strlen($cleanType) > 0)? $statusIn:'all';
             $answer = [
                         'title'=>$title.': ',
                         'text'=>$name.' '.$text.'!',
+                        'name'=>$name.$id,
                         'type'=>$type,
+                        'order'=>'desc',
+                        'status'=> $status,
+                        'color'=>$color
                     ];
                     
         return $answer;
