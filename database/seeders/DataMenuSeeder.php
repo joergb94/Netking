@@ -26,8 +26,6 @@ class DataMenuSeeder extends Seeder
             DB::table('themes')->insert(['name'=>'theme1']);
             DB::table('text_styles')->insert(['name'=>'text1']);
             DB::table('background_images')->insert(['name'=>'image1']);
-
-        
         
     }
 }

@@ -6,6 +6,7 @@ use App\Exceptions\GeneralException;
 use App\Models\User;
 use App\Models\Card;
 use App\Models\Card_detail;
+use App\Models\Cards_items;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -23,7 +24,6 @@ class ResgisterUserRepository
     public function __construct(User $model)
     {
         $this->model = $model;
-        $this->arrayDetailCard =['Header','About me','Videos'];
         $this->type_user =3;
     }
     public function createCard($data){
@@ -44,14 +44,15 @@ class ResgisterUserRepository
 
     public function createCardDetail($data){
 
-        $datos = $this->arrayDetailCard;
+        $datos = Cards_items::whereIn('id',[1,2,3])->get();
         return DB::transaction(function () use ($data, $datos ) {
 
-     
+                    $count = 0;
                     foreach ($datos  as $detail) {
                         $Card =Card_detail::create([
                             'card_id'=>$data['id'],
-                            'name' =>$detail,
+                            'card_item_id' =>$detail['id'],
+                            'order'=>$count++,
                         ]);
                     }
                 

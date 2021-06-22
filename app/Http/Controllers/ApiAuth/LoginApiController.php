@@ -17,4 +17,8 @@ class LoginApiController extends Controller
     {
         return $this->LoginRepository->login($request);
     }
+
+    function test(Request $request){
+        return response()->json(true);
+    }
 }

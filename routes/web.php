@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\web\GeneralController;
+use App\Http\Controllers\web\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,5 +20,12 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+//home 
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::post('/home/deleteOrResotore',[HomeController::class, 'deleteOrResotore']);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//genera 
+Route::get('/getUser', [GeneralController::class, 'get_user']);
+
+
