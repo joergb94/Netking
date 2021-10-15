@@ -1,83 +1,100 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>Azzara Bootstrap 4 Admin Dashboard</title>
+	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+	<link rel="icon" href="assets/img/icon.ico" type="image/x-icon"/>
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+	<!-- Fonts and icons -->
+	<script src="{{ asset('assets/js/plugin/webfont/webfont.min.js') }}"></script>
+	<script>
+		WebFont.load({
+			google: {"families":["Open+Sans:300,400,600,700"]},
+			custom: {"families":["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands"], urls: ['../assets/css/fonts.css']},
+			active: function() {
+				sessionStorage.fonts = true;
+			}
+		});
+	</script>
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+	<!-- CSS Files -->
+	<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('assets/css/azzara.min.css') }}">
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{ asset('js/sweetalert2.js') }}" defer></script>
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+	<!-- CSS Just for demo purpose, don't include it in your project -->
+	<link rel="stylesheet" href="{{ asset('assets/css/demo.css') }}">
 </head>
 <body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+	<div class="wrapper">
+		<!--Main header-->
+        @include('layouts.items.main-header')
+		<!--End Main header-->
+		
+		<!-- Sidebar -->
+        @guest 
+        @else
+            @include('layouts.items.sidebar')
+        @endguest
+		<!-- End Sidebar -->
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
+		<div class="main-panel">
+			<div class="content" id="app">
+                @yield('content')
+			</div>
+		</div>
+	</div>
+</div>
 
-                    </ul>
+<!--   Core JS Files   -->
+<script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('assets/js/core/jquery.3.2.1.min.js') }}"></script>
+<script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
+<script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
-                            
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
+<!-- jQuery UI -->
+<script src="{{ asset('assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js') }}"></script>
+<script src="{{ asset('assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js') }}"></script>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
+<!-- jQuery Scrollbar -->
+<script src="{{ asset('assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js') }}"></script>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-        </nav>
+<!-- Moment JS -->
+<script src="{{ asset('assets/js/plugin/moment/moment.min.js') }}"></script>
 
-        <main class="py-4">
-            @yield('content')
-        </main>
-    </div>
+<!-- Chart JS -->
+<script src="{{ asset('assets/js/plugin/chart.js') }}"></script>
+
+<!-- jQuery Sparkline -->
+<script src="{{ asset('assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js') }}"></script>
+
+<!-- Chart Circle -->
+<script src="{{ asset('assets/js/plugin/chart-circle/circles.min.js') }}"></script>
+
+<!-- Datatables -->
+<script src="{{ asset('assets/js/plugin/datatables/datatables.min.js') }}"></script>
+
+<!-- Bootstrap Notify -->
+<script src="{{ asset('assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
+
+<!-- Bootstrap Toggle -->
+<script src="{{ asset('assets/js/plugin/bootstrap-toggle/bootstrap-toggle.min.js') }}"></script>
+
+<!-- jQuery Vector Maps -->
+<script src="{{ asset('assets/js/plugin/jqvmap/jquery.vmap.min.js') }}"></script>
+<script src="{{ asset('assets/js/plugin/jqvmap/maps/jquery.vmap.world.js') }}"></script>
+
+<!-- Google Maps Plugin -->
+<script src="{{ asset('assets/js/plugin/gmaps/gmaps.js') }}"></script>
+
+<!-- Sweet Alert -->
+<script src="{{ asset('assets/js/plugin/sweetalert/sweetalert.min.js') }}"></script>
+
+<!-- Azzara JS -->
+<script src="{{ asset('assets/js/ready.min.js') }}"></script>
+
+<!-- Azzara DEMO methods, don't include it in your project! -->
+<script src="{{ asset('assets/js/setting-demo.js') }}"></script>
+<script src="{{ asset('assets/js/demo.js') }}"></script>
 </body>
 </html>
