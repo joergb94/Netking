@@ -47,7 +47,7 @@
 </div>
 
 <!--   Core JS Files   -->
-<script src="{{ asset('js/app.js') }}"></script>
+
 <script src="{{ asset('assets/js/core/jquery.3.2.1.min.js') }}"></script>
 <script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
 <script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
@@ -96,5 +96,7 @@
 <!-- Azzara DEMO methods, don't include it in your project! -->
 <script src="{{ asset('assets/js/setting-demo.js') }}"></script>
 <script src="{{ asset('assets/js/demo.js') }}"></script>
+<script src="{{ asset('js/MasterAjax.js') }}"></script>
+@yield('js')
 </body>
 </html>

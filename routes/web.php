@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\web\GeneralController;
+use App\Http\Controllers\web\CardController;
 use App\Http\Controllers\web\HomeController;
 
 /*
@@ -27,5 +28,11 @@ Route::post('/home/deleteOrResotore',[HomeController::class, 'deleteOrResotore']
 
 //genera 
 Route::get('/getUser', [GeneralController::class, 'get_user']);
+
+//cards
+
+Route::get('/myKepls', [CardController::class, 'index'])->name('myKepls');
+Route::get('/myKepls/create', [CardController::class, 'create']);
+Route::post('/myKepls7create', [CardController::class, 'store']);
 
 

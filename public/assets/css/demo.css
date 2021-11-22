@@ -270,3 +270,33 @@
 		right: -85%;
 	}
 }
+
+
+.mobile-screen{
+	border-radius: 25px;
+	background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden auto;
+    background-attachment: scroll;
+    background-position: center center;
+	min-height: 797px;
+	max-height: 812px;
+    background-image: url(https://images.unsplash.com/photo-1562619371-b67725b6fde2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjExMDAyOH&q=80&fm=jpg&crop=entropy&fit=max&h=900);
+}
+
+.device-case {
+	border: 15px solid black;
+	border-radius: 25px;
+	width: 400px;
+	background-color: black;
+}
+
+.all-screen {
+	height:100vh;
+}
+
+.rounded-div{
+	border-radius:50%;
+    -moz-border-radius:50%;
+    -webkit-border-radius:50%;
+}

@@ -19,6 +19,7 @@ class CreateCardDetailNetworksTable extends Migration
             $table->unsignedBigInteger('network_social_id')->nullable();
             $table->string('mat', 3)->default('CDN');
             $table->string('name', 100)->nullable();
+            $table->string('size')->nullable();
             $table->longText('url')->nullable();
             $table->boolean('active')->default(1);
             $table->timestamps();
