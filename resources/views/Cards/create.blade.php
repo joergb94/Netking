@@ -29,7 +29,7 @@
                   @include('Cards.itemsCreate.cardForm')
                 </div>
                 <div id="menu1" class="container tab-pane fade"><br>
-                  <h3>Networks Data</h3>
+                  @include('Cards.itemsCreate.networkForm')
                 </div>
                 <div id="menu2" class="container tab-pane fade"><br>
                   <h3>Details Data</h3>
@@ -40,6 +40,8 @@
 
         <!-- Modal footer -->
         <div class="modal-footer">
+          <button type="button" class="btn btn-success btn-save" onclick="Cards.prev()">Preview <i
+            class='fas fa-plus'></i></button>
           <button type="button" class="btn btn-success btn-save" onclick="Cards.save('add')">Create <i
               class='fas fa-plus'></i></button>
           <button type="button" class="btn btn-danger" onclick="Cards.close()" >Cancel <i

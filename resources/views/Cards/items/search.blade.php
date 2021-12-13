@@ -1,7 +1,7 @@
 <div class="col-sm-12">
   <div class="row justify-content-between">
     <select class="form-control col-sm-3 search-query" id="typesearch">
-      <option value="name">Name</option>
+      <option value="title">Title</option>
       <option value="id" selected>Id</option>
     </select>
 

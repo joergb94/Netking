@@ -5,7 +5,7 @@
 	<title>Azzara Bootstrap 4 Admin Dashboard</title>
 	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
 	<link rel="icon" href="assets/img/icon.ico" type="image/x-icon"/>
-
+	<meta name="csrf-token" content="{{ csrf_token() }}" />
 	<!-- Fonts and icons -->
 	<script src="{{ asset('assets/js/plugin/webfont/webfont.min.js') }}"></script>
 	<script>
@@ -89,6 +89,7 @@
 
 <!-- Sweet Alert -->
 <script src="{{ asset('assets/js/plugin/sweetalert/sweetalert.min.js') }}"></script>
+<script src="{{asset('js/sweetalert2.js')}}"></script>
 
 <!-- Azzara JS -->
 <script src="{{ asset('assets/js/ready.min.js') }}"></script>

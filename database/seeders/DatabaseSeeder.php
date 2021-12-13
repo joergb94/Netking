@@ -16,5 +16,6 @@ class DatabaseSeeder extends Seeder
         $this->call(DataMenuSeeder::class);
         $this->call(TypeUserSeeder::class);
         $this->call(CardItems::class);
+        $this->call(BakcgroundSeeder::class);
     }
 }

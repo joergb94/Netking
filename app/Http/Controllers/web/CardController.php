@@ -12,13 +12,14 @@ use App\Http\Requests\Cards\CardsIdRequest;
 use App\Http\Requests\Cards\CardsUpdateRequest;
 use App\Http\Requests\Cards\CardsStoreRequest;
 use App\Models\Cards;
+use App\Models\Background_image;
 
 class CardController extends Controller
 {
     public function __construct(CardsRepository $CardsRepository){
         $this->CardsRepository = $CardsRepository;
         $this->menu_id=1;
-        $this->module_name ='Cards';
+        $this->module_name ='Card';
         $this->text_module = ['Created','Updated','Deleted','Restored','Actived','Deactived'];
     }
 
@@ -39,7 +40,61 @@ class CardController extends Controller
     public function create(CardsRequest $request)
     {
         if ($request->ajax()) {
-            return view('Cards.create');
+            $background = Background_image::all();
+            return view('Cards.create',['backgrounds'=>$background]);
+        }
+    }
+
+    public function store(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = $this->CardsRepository->create($request->input(),1);
+            return response()->json(Answer( $data['id'],
+                                        $this->module_name,
+                                        $this->text_module[0],
+                                        "success",
+                                        'green',
+                                        '1'));
+        }
+    }
+    public function edit(Request $request,$id)
+    {
+        if ($request->ajax()) {
+            $data = $this->CardsRepository->show($id);
+            $actual_bg = $data->background_image->description;
+            $background = Background_image::all();
+            return view('Cards.edit',['data'=>$data,'backgrounds'=>$background,'actual_bg'=>$actual_bg]);
+        }
+    }
+    public function update(Request $request, $id)
+    {
+        if ($request->ajax()) {
+            $data = $this->CardsRepository->update($id,1,$request->input());
+            return response()->json(Answer( $data['id'],
+            $this->module_name,
+            $this->text_module[1],
+            "success",
+            'yellow',
+            '1'));
+        }
+    }
+    public function deleteOrResotore(Request $request,$id)
+    {
+        if ($request->ajax()) {
+            $state = $this->CardsRepository->deleteOrResotore($id);
+            return response()->json(Answer( $request['id'],
+            $this->module_name,
+            $this->text_module[$state-1],
+            "success",
+            $state==4?'green':'red',
+            $state==4?'1':'D'));
+        }
+    }
+    public function getBG(Request $request,$id)
+    {
+        if($request->ajax()){
+            $bg = Background_image::find($id);
+            return response()->json($bg);
         }
     }
 }

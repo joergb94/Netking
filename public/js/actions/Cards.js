@@ -8,7 +8,9 @@ $(document).ready(function () {
     event.preventDefault();
     var filter = datasearch();
     getData(1, filter);
+    
   });
+
 
 });
 
@@ -49,7 +51,7 @@ const Cards = {
   },
   edit: function (id) {
     var my_url = url + '/' + id + '/edit';
-    actions.show(my_url, id);
+    actions.show(my_url,'form', 'form');
   },
   save: function (state, id = '') {
     var form = $('#card-form').serialize();
@@ -67,8 +69,8 @@ const Cards = {
 
   delete: function (id) {
     Swal.fire({
-      title: "Do you want to Delete the Category?",
-      text: "The Category will be Eliminated",
+      title: "Do you want to Delete the Card?",
+      text: "The Card will be Eliminated",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -98,5 +100,20 @@ const Cards = {
       }
     })
   },
+  prev: function () {
+    document.getElementById("titlephone").innerHTML = $("#title").val();
+    document.getElementById("subephone").innerHTML = $("#subtitle").val();
+    document.getElementById("longtext").innerHTML = $("#large_text").val();
+    document.getElementById("social").innerHTML = $("#facebook").val() + $("#twitter").val() + $("#spotify").val();
+    background.getBG($('#background option:selected').val());
+  }
+}
+background ={
+  getBG: function (id) {
+    $.get(url + '/background/'+ id)
+    .done(function(data){
+      document.getElementById('mobil-vition').style.backgroundImage="url("+data.description+")"; // specify the image path here = 
+    });
+  }
 }
 

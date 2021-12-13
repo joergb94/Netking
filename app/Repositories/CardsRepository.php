@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Exceptions\GeneralException;
 use App\Models\Card;
 use App\Models\Card_detail;
+use App\Models\Card_detail_network;
 use App\Models\Card_detail_nework;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
@@ -20,9 +21,10 @@ class CardsRepository
      *
      * @param  Providers  $model
      */
-    public function __construct(Card $model)
+    public function __construct(Card $model, Card_detail_network $card_detail_network)
     {
         $this->model = $model;
+        $this->card_detail_network = $card_detail_network;
     }
 
 
@@ -64,9 +66,37 @@ class CardsRepository
     {
         return DB::transaction(function () use ($data,$location) {
             $Card = $this->model::create([
-                'location_id' => $location,
-                'name' => $data['name'],
+                'location' => $location,
+                'title' => $data['title'],
+                'subtitle' => $data['subtitle'],
+                'large_text' => $data['large_text'],
+                'background_image_id' => $data['background']
             ]);
+
+            if(isset($data['facebook']))
+            {
+                $Card_facebook = $this->card_detail_network::create([
+                    'card_id' => $Card->id,
+                    'network_social_id' => 1,
+                    'url' => $data['facebook']
+                ]);
+            }
+            if(isset($data['twitter']))
+            {
+                $Card_facebook = $this->card_detail_network::create([
+                    'card_id' => $Card->id,
+                    'network_social_id' => 2,
+                    'url' => $data['twitter']
+                ]);
+            }
+            if(isset($data['spotify']))
+            {
+                $Card_facebook = $this->card_detail_network::create([
+                    'card_id' => $Card->id,
+                    'network_social_id' => 3,
+                    'url' => $data['spotify']
+                ]);
+            }
 
             if ($Card) {
                 return $Card;
@@ -90,10 +120,35 @@ class CardsRepository
 
         $Card = $this->model->find($Card_id);
         
-        return DB::transaction(function () use ($Card, $data) {
+        return DB::transaction(function () use ($Card, $data,$location) {
             if ($Card->update([
-                'name' => $data['name'],
+                'location' => $location,
+                'title' => $data['title'],
+                'subtitle' => $data['subtitle'],
+                'large_text' => $data['large_text'],
+                'background_image_id' => $data['background']
             ])) {
+                if(isset($data['facebook'])){
+                $Card_network = $this->card_detail_network->where('card_id',$Card->id)
+                ->where('network_social_id',1)->first();
+                $Card_network->update([
+                    'url' => $data['facebook']
+                ]);
+            }
+            if(isset($data['twitter'])){
+                $Card_network = $this->card_detail_network->where('card_id',$Card->id)
+                ->where('network_social_id',2)->first();
+                $Card_network->update([
+                    'url' => $data['twitter']
+                ]);
+            }
+            if(isset($data['spotify'])){
+                $Card_network = $this->card_detail_network->where('card_id',$Card->id)
+                ->where('network_social_id',2)->first();
+                $Card_network->update([
+                    'url' => $data['spotify']
+                ]);
+            }
 
                 return $Card;
             }
@@ -151,5 +206,9 @@ class CardsRepository
         throw new GeneralException(__('Error deleteOrResotore of Card.'));
 
       });
+  }
+  public function show($id){
+    $Card = $this->model->find($id);
+    return $Card;
   }
 }
