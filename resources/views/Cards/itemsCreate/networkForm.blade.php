@@ -1,8 +1,4 @@
-@if ($data[''])
-    @foreach ($collection as $item)
-        
-    @endforeach
-@else
+
 <div class="col-sm-12" id='data-card'>
     <div class="col-sm-12">
         <div class="row">
@@ -25,4 +21,3 @@
         </div>
     </div>
     </div>
-@endif

@@ -12,6 +12,7 @@ use App\Http\Requests\Cards\CardsIdRequest;
 use App\Http\Requests\Cards\CardsUpdateRequest;
 use App\Http\Requests\Cards\CardsStoreRequest;
 use App\Models\Cards;
+use App\Models\User;
 use App\Models\Background_image;
 
 class CardController extends Controller
@@ -41,12 +42,14 @@ class CardController extends Controller
     {
         if ($request->ajax()) {
             $background = Background_image::all();
-            return view('Cards.create',['backgrounds'=>$background]);
+            $user = User::find(Auth::user()->id);
+            return view('Cards.create',['backgrounds'=>$background, 'user'=>$user]);
         }
     }
 
     public function store(Request $request)
-    {
+    {   
+        
         if ($request->ajax()) {
             $data = $this->CardsRepository->create($request->input(),1);
             return response()->json(Answer( $data['id'],
@@ -63,7 +66,11 @@ class CardController extends Controller
             $data = $this->CardsRepository->show($id);
             $actual_bg = $data->background_image->description;
             $background = Background_image::all();
-            return view('Cards.edit',['data'=>$data,'backgrounds'=>$background,'actual_bg'=>$actual_bg]);
+            $user = User::find($data['user_id']);
+            return view('Cards.edit',['data'=>$data,
+                                      'backgrounds'=>$background,
+                                      'actual_bg'=>$actual_bg,
+                                      'user'=>$user]);
         }
     }
     public function update(Request $request, $id)

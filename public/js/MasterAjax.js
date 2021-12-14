@@ -1,10 +1,8 @@
 var url = $('#url').val();
 clearload()
-load_seaction_and_menu(url)
+
 $(document).ready(function () {
-  $(".select2-basic").select2({
-    width: 'resolve'
-  });
+
 
   $(".button-menu-dad").click(function(){
     var location = $(this).val();

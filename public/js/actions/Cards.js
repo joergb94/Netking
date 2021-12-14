@@ -2,8 +2,9 @@
 var url = $('#url').val();
 var baseUrl = $('#baseUrl').val();
 //section for jquery
-$(document).ready(function () {
 
+$(document).ready(function () {
+ 
   $('.search-query').bind("keyup change", function () {
     event.preventDefault();
     var filter = datasearch();
@@ -101,11 +102,36 @@ const Cards = {
     })
   },
   prev: function () {
-    document.getElementById("titlephone").innerHTML = $("#title").val();
+    let twiter,facebook,spotify,instagram,youtube;
+    let largeTitle = $("#title").val();
+    document.getElementById("content-title").innerHTML =  ? `<h1 class="text-color" id="titlephone">${$("#title").val()}</h1>`
+                                                          :`<h1 class="text-color" id="titlephone">${$("#title").val()}</h1>`;;
+ 
     document.getElementById("subephone").innerHTML = $("#subtitle").val();
     document.getElementById("longtext").innerHTML = $("#large_text").val();
-    document.getElementById("social").innerHTML = $("#facebook").val() + $("#twitter").val() + $("#spotify").val();
+    
+
+    twiter =  $("#twitter").val().length > 0 
+              ? ` <a class="btn btn-social-icon btn-twitter" href="${$("#twitter").val()}">
+                  <i class="fa fa-twitter"></i>
+                </a>`:'';
+    
+    facebook =  $("#facebook").val().length > 0 
+                ? ` <a class="btn btn-social-icon btn-facebook" href="${$("#facebook").val()}">
+                        <i class="fa fa-facebook"></i>
+                    </a>`:'';
+
+    spotify =  $("#spotify").val().length > 0 
+                  ? ` <a class="btn btn-social-icon bg-success text-dark"  href="${$("#spotify").val()}">
+                        <i class="fa fa-spotify "></i>
+                    </a>`:'';
+
+  document.getElementById("social").innerHTML = twiter+facebook+spotify;
     background.getBG($('#background option:selected').val());
+  },
+  showColor:function(){
+    let color = $('#colorInput').val()
+    $(".text-color").css({"color": color });
   }
 }
 background ={
@@ -114,6 +140,7 @@ background ={
     .done(function(data){
       document.getElementById('mobil-vition').style.backgroundImage="url("+data.description+")"; // specify the image path here = 
     });
-  }
+  },
+  
 }
 

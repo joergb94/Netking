@@ -8,18 +8,12 @@
 	<meta name="csrf-token" content="{{ csrf_token() }}" />
 	<!-- Fonts and icons -->
 	<script src="{{ asset('assets/js/plugin/webfont/webfont.min.js') }}"></script>
-	<script>
-		WebFont.load({
-			google: {"families":["Open+Sans:300,400,600,700"]},
-			custom: {"families":["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands"], urls: ['../assets/css/fonts.css']},
-			active: function() {
-				sessionStorage.fonts = true;
-			}
-		});
-	</script>
 
+	<script src="https://kit.fontawesome.com/7267d16efc.js" crossorigin="anonymous"></script>
 	<!-- CSS Files -->
 	<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('assets/css/bootstrap-social.css') }}">
+	
 	<link rel="stylesheet" href="{{ asset('assets/css/azzara.min.css') }}">
 
 	<!-- CSS Just for demo purpose, don't include it in your project -->
@@ -62,8 +56,6 @@
 <!-- Moment JS -->
 <script src="{{ asset('assets/js/plugin/moment/moment.min.js') }}"></script>
 
-<!-- Chart JS -->
-<script src="{{ asset('assets/js/plugin/chart.js') }}"></script>
 
 <!-- jQuery Sparkline -->
 <script src="{{ asset('assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js') }}"></script>
@@ -93,11 +85,10 @@
 
 <!-- Azzara JS -->
 <script src="{{ asset('assets/js/ready.min.js') }}"></script>
-
-<!-- Azzara DEMO methods, don't include it in your project! -->
-<script src="{{ asset('assets/js/setting-demo.js') }}"></script>
-<script src="{{ asset('assets/js/demo.js') }}"></script>
 <script src="{{ asset('js/MasterAjax.js') }}"></script>
+
+<!-- colorPlug in -->
+<script src="{{asset('js/jscolor.js')}}"></script>
 @yield('js')
 </body>
 </html>

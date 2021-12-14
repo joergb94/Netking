@@ -21,6 +21,7 @@ class CreateCardsTable extends Migration
             $table->unsignedBigInteger('background_image_id')->default(1);
             $table->unsignedBigInteger('text_style_id')->default(1);
             $table->string('title', 100)->default('Example');
+            $table->string('color')->nullable();
             $table->longText('subtitle')->nullable();
             $table->longText('location')->nullable();
             $table->longText('large_text')->nullable();

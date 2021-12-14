@@ -19,7 +19,7 @@
   <h5 class="dropdown-header text-center bg-success text-white">Options</h5>
   <button class="dropdown-item btn btn-link text-warning btn-detail-{{$Card['id']}}"
     onclick="Cards.detail({{$Card['id']}})" href="#">View Card<i class='fas fa-info-circle'></i></button>
-  <button type="button" class="dropdown-item btn btn-link text-success"
+  <button type="button" class="dropdown-item btn btn-link text-success text-white"
     onclick="Cards.restored({{$Card['id']}})">
     Restore <i class='fas fa-undo'></i>
   </button>

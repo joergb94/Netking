@@ -13,7 +13,7 @@
           </div>
           <div class="form-group">
             <label>Backgroud:</label>
-            <select name="background" id="background" class="form-control">
+            <select name="background" id="background"  class="form-control">
               @forelse ($backgrounds as $item)
                   @if (isset($data['background_image_id']))
                       @if ($item['id'] == $data['background_image_id'])
@@ -28,13 +28,22 @@
                  <option value="">No data</option> 
               @endforelse
             </select>
-          </div><div class="form-group">
+          </div>
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" value ="1" id="customCheck" name="large_text">
+              <label class="custom-control-label" for="customCheck">Large Title</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Color Text:</label>
+            <input onchange="Cards.showColor()"  type="text" id="colorInput" name='color' data-jscolor="" class="form-control">
+          </div>
+          <div class="form-group">
             <label>Location:</label>
             <input type="text" id="ocation" name="location" value="" class="form-control">
           </div>
-          <div class="form-group">
-            <label>Large Text:</label>
-            <input type="text" id="large_text" name="large_text" value="@if(isset($data['large_text'])){{$data['large_text']}}@endif" class="form-control">
-          </div>
  </div>       
-          
+<script>
+    var myPicker = new JSColor('#colorInput', {format:'hex'});
+</script>

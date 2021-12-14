@@ -14,7 +14,7 @@ class Card extends Model
 
     public function users()
     {
-        return $this->hasMany(' App\Models\User','user_id','id');
+        return $this->hasMany('App\Models\User','user_id','id');
     }
 
     public function background_image()
