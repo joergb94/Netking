@@ -22,7 +22,7 @@
                 
                 <h6 class="text-color" id="subephone">@if(isset($data['subtitle'])){{$data['subtitle']}}@endif</h6>
             </div>
-            <p class="text-color" id="longtext">@if(isset($data['large_text'])){{$data['large_text']}}@endif</p>
+           
         </div>
     </div>
     <div class="col-sm-12">

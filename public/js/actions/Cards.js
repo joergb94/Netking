@@ -103,12 +103,13 @@ const Cards = {
   },
   prev: function () {
     let twiter,facebook,spotify,instagram,youtube;
-    let largeTitle = $("#title").val();
-    document.getElementById("content-title").innerHTML =  ? `<h1 class="text-color" id="titlephone">${$("#title").val()}</h1>`
-                                                          :`<h1 class="text-color" id="titlephone">${$("#title").val()}</h1>`;;
+    let largeTitle =$("#largeTitle").val();
+    let color = $('#colorInput').val()
+
+    document.getElementById("content-title").innerHTML = largeTitle > 0? `<h1 class="text-color" id="titlephone">${$("#title").val()}</h1>`
+                                                                       :`<h2 class="text-color" id="titlephone">${$("#title").val()}</h2>`;;
  
     document.getElementById("subephone").innerHTML = $("#subtitle").val();
-    document.getElementById("longtext").innerHTML = $("#large_text").val();
     
 
     twiter =  $("#twitter").val().length > 0 
@@ -127,11 +128,12 @@ const Cards = {
                     </a>`:'';
 
   document.getElementById("social").innerHTML = twiter+facebook+spotify;
-    background.getBG($('#background option:selected').val());
+  background.getBG($('#background option:selected').val());
+  $(".text-color").css({"color": color });
+
   },
   showColor:function(){
-    let color = $('#colorInput').val()
-    $(".text-color").css({"color": color });
+    
   }
 }
 background ={
