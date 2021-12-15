@@ -53,7 +53,7 @@
   <div class="col-sm-4 all-screen">
          <div class="card device-case">
             <div class="mobile-screen" id="mobil-vition">
-            @include('Cards.keypl')
+            @include('Cards.itemsCreate.keyplCreate')
             </div>
          </div>
   </div>

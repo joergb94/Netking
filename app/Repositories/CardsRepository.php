@@ -116,8 +116,7 @@ class CardsRepository
      * @return Provider
      */
     public function update($Card_id,$location, array $data): Card
-    {
-
+    {   $ns = json_decode($data['networks']);
         $Card = $this->model->find($Card_id);
         
         return DB::transaction(function () use ($Card, $data,$location) {

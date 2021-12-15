@@ -35,7 +35,26 @@ function datasearch(answer) {
 
   return data;
 }
+const transactions = {
+  get_data_ns: function(){
+     var  ns = []
+      $('.group-social').each(function(index, elem) {
+            var link = $(this).children('.n-social').val();
+            var nicon = $(this).children('.n-icon').val();
+            var nbutton = $(this).children('.n-button').val();
+            var id = $(this).children('.ns-id').val();
+            var nsDerailId = $(this).children('.ns-detail-id').val();
 
+            ns.push({
+              link:link,
+              ns_id:id,
+              ns_detail_id:nsDerailId,
+            });
+      });
+
+    return JSON.stringify(ns);
+  }
+}
 //section for const js 
 const Cards = {
   close: function (){
@@ -56,6 +75,7 @@ const Cards = {
   },
   save: function (state, id = '') {
     var form = $('#card-form').serialize();
+    form += '&networks='+transactions.get_data_ns();
     console.log(form)
     var my_url = url + '/create';
     var type = "POST";
@@ -104,30 +124,51 @@ const Cards = {
   prev: function () {
     let twiter,facebook,spotify,instagram,youtube;
     let largeTitle =$("#largeTitle").val();
-    let color = $('#colorInput').val()
+    let color = $('#colorInput').val();
+    let shape_image = $('#shape_image').val();
+    let head = $('#head_orientation').val();
+    let social_n = '';
+
+    if(shape_image == 0){
+      $('#imageProfile').removeClass('rounded-circle');
+      $('#imageProfile').addClass('rounded');
+    
+    }else{
+      $('#imageProfile').removeClass('rounded');
+      $('#imageProfile').addClass('rounded-circle');
+    }
+
+    if(head == 0){
+      $('#contend-image').removeClass('col-sm-12');
+      $('#contend-title').removeClass('col-sm-12');
+      $('#contend-image').addClass('col-sm-4');
+      $('#contend-title').addClass('col-sm-8');
+    
+    }else{
+      $('#contend-image').removeClass('col-sm-4');
+      $('#contend-title').removeClass('col-sm-8');
+      $('#contend-image').addClass('col-sm-12');
+      $('#contend-title').addClass('col-sm-12');
+    }
 
     document.getElementById("content-title").innerHTML = largeTitle > 0? `<h1 class="text-color" id="titlephone">${$("#title").val()}</h1>`
                                                                        :`<h2 class="text-color" id="titlephone">${$("#title").val()}</h2>`;;
  
     document.getElementById("subephone").innerHTML = $("#subtitle").val();
     
+   
+    $('.group-social').each(function(index, elem) {
+          var link = $(this).children('.n-social').val();
+          var nicon = $(this).children('.n-icon').val();
+          var nbutton = $(this).children('.n-button').val();
 
-    twiter =  $("#twitter").val().length > 0 
-              ? ` <a class="btn btn-social-icon btn-twitter" href="${$("#twitter").val()}">
-                  <i class="fa fa-twitter"></i>
-                </a>`:'';
-    
-    facebook =  $("#facebook").val().length > 0 
-                ? ` <a class="btn btn-social-icon btn-facebook" href="${$("#facebook").val()}">
-                        <i class="fa fa-facebook"></i>
+          social_n += link.length > 0
+                     ? ` <a class="btn btn-social-icon ${nbutton}" href="${$(this).val()}">
+                      <i class="${nicon}"></i>
                     </a>`:'';
+     });
 
-    spotify =  $("#spotify").val().length > 0 
-                  ? ` <a class="btn btn-social-icon bg-success text-dark"  href="${$("#spotify").val()}">
-                        <i class="fa fa-spotify "></i>
-                    </a>`:'';
-
-  document.getElementById("social").innerHTML = twiter+facebook+spotify;
+  document.getElementById("social").innerHTML = social_n;
   background.getBG($('#background option:selected').val());
   $(".text-color").css({"color": color });
 

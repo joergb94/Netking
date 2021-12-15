@@ -12,6 +12,9 @@ use App\Http\Requests\Cards\CardsIdRequest;
 use App\Http\Requests\Cards\CardsUpdateRequest;
 use App\Http\Requests\Cards\CardsStoreRequest;
 use App\Models\Cards;
+use App\Models\NetworkSocial;
+use App\Models\Cards_style_detail;
+use App\Models\Card_detail_network;
 use App\Models\User;
 use App\Models\Background_image;
 
@@ -43,7 +46,8 @@ class CardController extends Controller
         if ($request->ajax()) {
             $background = Background_image::all();
             $user = User::find(Auth::user()->id);
-            return view('Cards.create',['backgrounds'=>$background, 'user'=>$user]);
+            $ns = NetworkSocial::all();
+            return view('Cards.create',['backgrounds'=>$background, 'user'=>$user, 'ns'=> $ns]);
         }
     }
 
@@ -63,14 +67,29 @@ class CardController extends Controller
     public function edit(Request $request,$id)
     {
         if ($request->ajax()) {
+            $nsInUse =[];
             $data = $this->CardsRepository->show($id);
             $actual_bg = $data->background_image->description;
             $background = Background_image::all();
+            $card_style = Cards_style_detail::where('card_id',$id)->first();
             $user = User::find($data['user_id']);
+            $nsFree = NetworkSocial::all();
+
+            foreach ($nsFree as $ns) {
+                $inUse = Card_detail_network::where('network_social_id',$ns['id'])
+                                    ->where('card_id',$data['id'])
+                                    ->first();
+                array_push($nsInUse,['nsData'=>$ns,'nsUser'=>$inUse]);
+            }
+
+            
             return view('Cards.edit',['data'=>$data,
                                       'backgrounds'=>$background,
                                       'actual_bg'=>$actual_bg,
-                                      'user'=>$user]);
+                                      'user'=>$user,
+                                      'card_style'=> $card_style,
+                                      'ns'=> $nsInUse,
+                                    ]);
         }
     }
     public function update(Request $request, $id)

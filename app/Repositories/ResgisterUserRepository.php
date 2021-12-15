@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Card;
 use App\Models\Card_detail;
 use App\Models\Cards_items;
+use App\Models\Cards_style_detail;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -66,6 +67,23 @@ class ResgisterUserRepository
         });
     }
 
+    public function createCardStyle($card_id){
+
+        return DB::transaction(function () use ($card_id) {
+                $CardStyle =Cards_style_detail::create([
+                    'card_id'=>$card_id,
+                ]);
+          
+        
+            if($CardStyle){
+                    return $CardStyle;
+            }
+              
+            throw new GeneralException(__('There was an error created the Card Style.'));
+
+         });
+    }
+
   
     /**
      * @param array $data
@@ -87,12 +105,13 @@ class ResgisterUserRepository
                 
             if($User){
                 $Card = ResgisterUserRepository::createCard($User);
-
+                
                 if($Card){
                     
                     $CardDeatil = ResgisterUserRepository::createCardDetail($Card);
+                    $CardStyle = ResgisterUserRepository::createCardStyle($Card['id']);
 
-                        if($CardDeatil){
+                        if($CardDeatil && $CardStyle){
                             
                             return $User;
                         }

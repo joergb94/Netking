@@ -1,11 +1,30 @@
  <div class="col-sm-12" id='data-card'>
           <div class="form-group">
+            <label>Image Profile:</label>
+              <div class="input-group mb-3">
+                <input type="file" class="form-control">
+                <div class="input-group-append">
+                  <select class="form-control max-height" id="shape_image"  onchange="Cards.prev()" name="shape_image">
+                    <option value="0">Square</option>
+                    <option value="1" >Rounded</option>
+                  </select>
+                </div>
+            </div> 
+          </div>
+          <div class="form-group">
             <label>Title:</label>
             <input type="text" onchange="Cards.prev()" id="title" name="title" value="@if(isset($data['title'])){{$data['title']}}@endif" class="form-control">
           </div>
           <div class="form-group">
             <label>Subtitle:</label>
             <input type="text" onchange="Cards.prev()" id="subtitle" name="subtitle" value="@if(isset($data['subtitle'])){{$data['subtitle']}}@endif" class="form-control">
+          </div>
+          <div class="form-group">
+            <label>Orientation:</label>
+            <select class="form-control" id="head_orientation"  onchange="Cards.prev()" name="head_orientation">
+                    <option value="0">Vertical</option>
+                    <option value="1" >Horizontal</option>
+            </select>
           </div>
           <div class="form-group">
             <label>Theme:</label>

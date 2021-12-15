@@ -16,9 +16,10 @@ class CreateNetworkSocialsTable extends Migration
         Schema::create('network_socials', function (Blueprint $table) {
             $table->id();
             $table->string('mat', 3)->default('NeS');
-            $table->string('name', 100);
-            $table->string('icon', 100);
-            $table->string('link', 100);
+            $table->string('name');
+            $table->string('icon');
+            $table->string('link');
+            $table->string('btn_network');
             $table->boolean('active')->default(1);
             $table->timestamps();
             $table->softDeletes();

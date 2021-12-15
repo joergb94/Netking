@@ -2,10 +2,10 @@
     <br>
     <div class="col-sm-12">
         <div class="row justify-content-between">
-            <div class="col-sm-12 text-center">
-                <img src="https://www.w3schools.com/bootstrap4/cinqueterre.jpg" class="rounded-circle" alt="Cinque Terre" width="100px" height="100px" id="bgphone"> 
+            <div class="{{$card_style['shape_image']?'col-sm-4':'col-sm-12'}} text-center" id="contend-image">
+                <img src="https://www.w3schools.com/bootstrap4/cinqueterre.jpg" class="{{$card_style['shape_image']?'rounded-circle':'rounded'}}" alt="Cinque Terre" width="100px" height="100px" id="imageProfile"> 
             </div>
-            <div class="col-sm-12 text-center">
+            <div class="{{$card_style['shape_image']?'col-sm-8':'col-sm-12'}} text-center" id="contend-title">
                 <br>
                 <div class="col-sm-12" id='content-title'>
                     @if($data['large_text'])
@@ -25,16 +25,13 @@
            
         </div>
     </div>
-    <div class="col-sm-12">
-    <iframe width="100%" height="315" src="https://www.youtube-nocookie.com/embed/aheVhtnpAF0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    </div>
     <br>
     <div class="row justify-content-between">
         <div class="col-sm-12 text-center" id="social">
            
             @if (isset($data['card_network']))
                 @foreach ($data['card_network'] as $item)
-                      <a class="btn btn-block btn-social btn-twitter">
+                      <a class="btn btn-block btn-social-icon btn-twitter">
                         <span class="fa fa-twitter"></span>
                       </a>
                 @endforeach

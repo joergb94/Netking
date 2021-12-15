@@ -21,9 +21,15 @@ class Card extends Model
     {
         return $this->hasOne('App\Models\Background_image','id','background_image_id');
     }
+
     public function card_network()
     {
         return $this->hasMany('App\Models\Card_detail_network','card_id','id');
+    }
+
+    public function card_styles()
+    {
+        return $this->hasMany('App\Models\Cards_style_detail','card_id','id');
     }
 
   

@@ -2,22 +2,25 @@
 <div class="col-sm-12" id='data-card'>
     <div class="col-sm-12">
         <div class="row">
+            @foreach($ns as $social)
             <div class="col-sm-6">
-                <label for="facebook">Facebook</label>
-                <input type="text" onchange="Cards.prev()" name="facebook" id="facebook" >
+                <label for="{{$social['nsData']['name']}}">{{$social['nsData']['name']}}</label>
+
+                <div class="input-group mb-3 group-social">
+                    <div class="input-group-prepend">
+                        <a class="btn btn-social-icon {{$social['nsData']['btn_network']}}" href="#">
+                            <span class="{{$social['nsData']['icon']}}"></span>
+                        </a>
+                    </div>
+                    <input type="text" class="form-control form-control-sm n-social" onchange="Cards.prev()" value ="{{$social['nsUser']['url']}}"  id="{{$social['nsData']['name']}}" >
+                    <input type="hidden"  class="n-button" value="{{$social['nsData']['btn_network']}}">
+                    <input type="hidden"  class="n-icon" value="{{$social['nsData']['icon']}}">
+                    <input type="hidden"  class="ns-id" value="{{$social['nsData']['id']}}">
+                    <input type="hidden"  class="ns-detail-id" value="{{$social['nsUser']['id']}}">
+                    
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-6">
-                <label for="twitter">Twitter</label>
-                <input name="twitter" onchange="Cards.prev()" id="twitter" class="form-control" >
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-6">
-                <label for="spotify">Spotify</label>
-                <input name="spotify" onchange="Cards.prev()" id="spotify" class="form-control">
-            </div>
+            @endforeach
         </div>
     </div>
     </div>
