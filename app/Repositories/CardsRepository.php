@@ -81,22 +81,6 @@ class CardsRepository
                     'url' => $data['facebook']
                 ]);
             }
-            if(isset($data['twitter']))
-            {
-                $Card_facebook = $this->card_detail_network::create([
-                    'card_id' => $Card->id,
-                    'network_social_id' => 2,
-                    'url' => $data['twitter']
-                ]);
-            }
-            if(isset($data['spotify']))
-            {
-                $Card_facebook = $this->card_detail_network::create([
-                    'card_id' => $Card->id,
-                    'network_social_id' => 3,
-                    'url' => $data['spotify']
-                ]);
-            }
 
             if ($Card) {
                 return $Card;
