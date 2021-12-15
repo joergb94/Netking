@@ -2,10 +2,10 @@
     <br>
     <div class="col-sm-12">
         <div class="row justify-content-between">
-            <div class="{{$card_style['shape_image']?'col-sm-4':'col-sm-12'}} text-center" id="contend-image">
+            <div class="{{$card_style['head_orientation']?'col-sm-4':'col-sm-12'}} text-center" id="contend-image">
                 <img src="https://www.w3schools.com/bootstrap4/cinqueterre.jpg" class="{{$card_style['shape_image']?'rounded-circle':'rounded'}}" alt="Cinque Terre" width="100px" height="100px" id="imageProfile"> 
             </div>
-            <div class="{{$card_style['shape_image']?'col-sm-8':'col-sm-12'}} text-center" id="contend-title">
+            <div class="{{$card_style['head_orientation']?'col-sm-8':'col-sm-12'}} text-center" id="contend-title">
                 <br>
                 <div class="col-sm-12" id='content-title'>
                     @if($data['large_text'])
