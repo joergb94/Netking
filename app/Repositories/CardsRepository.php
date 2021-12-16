@@ -6,7 +6,7 @@ use App\Exceptions\GeneralException;
 use App\Models\Card;
 use App\Models\Card_detail;
 use App\Models\Card_detail_network;
-use App\Models\Card_detail_nework;
+use App\Models\Cards_style_detail;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -70,16 +70,31 @@ class CardsRepository
                 'title' => $data['title'],
                 'subtitle' => $data['subtitle'],
                 'large_text' => $data['large_text'],
-                'background_image_id' => $data['background']
+                'background_image_id' => $data['background'],
+                'color' =>$data['color'],
             ]);
-
-            if(isset($data['facebook']))
+            $Card_style = Cards_style_detail::create([
+                'card_id'=>$Card->id,
+                'shape_image'=>$data['shape_image'],
+                'head_orientation'=>$data['head_orientation'],
+                'shape'=>0,
+                'outline'=>0
+            ]);
+            if(isset($data['networks']))
             {
-                $Card_facebook = $this->card_detail_network::create([
-                    'card_id' => $Card->id,
-                    'network_social_id' => 1,
-                    'url' => $data['facebook']
-                ]);
+                foreach ((array)$data['networks'] as $network) {
+                    $ns = json_decode($network);
+                       foreach ($ns as $key) {
+                        if($key->link != ''){
+                            $Card_facebook = $this->card_detail_network::create([
+                                'card_id' => $Card->id,
+                                'network_social_id' => $key->ns_id,
+                                'url' => $key->link,
+                            ]);
+                        }
+                       }
+                }
+                
             }
 
             if ($Card) {

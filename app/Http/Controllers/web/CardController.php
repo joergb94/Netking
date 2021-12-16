@@ -51,7 +51,7 @@ class CardController extends Controller
         }
     }
 
-    public function store(Request $request)
+    public function store(CardsStoreRequest $request)
     {   
         
         if ($request->ajax()) {

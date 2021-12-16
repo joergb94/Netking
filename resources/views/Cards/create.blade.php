@@ -29,7 +29,7 @@
                   @include('Cards.itemsCreate.cardForm')
                 </div>
                 <div id="menu1" class="container tab-pane fade"><br>
-                  @include('Cards.itemsCreate.networkForm')
+                  @include('Cards.itemsCreate.networkFormCreate')
                 </div>
                 <div id="menu2" class="container tab-pane fade"><br>
                   <h3>Details Data</h3>
