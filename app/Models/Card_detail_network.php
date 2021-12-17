@@ -29,4 +29,9 @@ class Card_detail_network extends Model
    {
        return $query->where('status', $status);
    }
+
+   public function social_network()
+    {
+        return $this->hasOne('App\Models\NetworkSocial','id','network_social_id');
+    }
 }

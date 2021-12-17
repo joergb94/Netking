@@ -115,38 +115,41 @@ class CardsRepository
      * @return Provider
      */
     public function update($Card_id,$location, array $data): Card
-    {   $ns = json_decode($data['networks']);
+    { 
         $Card = $this->model->find($Card_id);
-        
-        return DB::transaction(function () use ($Card, $data,$location) {
+        $Card_style = Cards_style_detail::where('card_id',$Card_id)->first();
+        return DB::transaction(function () use ($Card, $data,$location,$Card_style,$Card_id) {
             if ($Card->update([
                 'location' => $location,
                 'title' => $data['title'],
                 'subtitle' => $data['subtitle'],
                 'large_text' => $data['large_text'],
-                'background_image_id' => $data['background']
+                'background_image_id' => $data['background'],
+                'color' => $data['color']
             ])) {
-                if(isset($data['facebook'])){
-                $Card_network = $this->card_detail_network->where('card_id',$Card->id)
-                ->where('network_social_id',1)->first();
-                $Card_network->update([
-                    'url' => $data['facebook']
+                $Card_style->update([
+                'shape_image'=>$data['shape_image'],
+                'head_orientation'=>$data['head_orientation'],
+                'shape'=>0,
+                'outline'=>0
                 ]);
-            }
-            if(isset($data['twitter'])){
-                $Card_network = $this->card_detail_network->where('card_id',$Card->id)
-                ->where('network_social_id',2)->first();
-                $Card_network->update([
-                    'url' => $data['twitter']
-                ]);
-            }
-            if(isset($data['spotify'])){
-                $Card_network = $this->card_detail_network->where('card_id',$Card->id)
-                ->where('network_social_id',2)->first();
-                $Card_network->update([
-                    'url' => $data['spotify']
-                ]);
-            }
+                if(isset($data['networks']))
+                {
+                    $Card_network = $this->card_detail_network::where('card_id', $Card_id)->delete();
+                    foreach ((array)$data['networks'] as $network) {
+                        $ns = json_decode($network);
+                           foreach ($ns as $key) {
+                            if($key->link != ''){
+                                $Card_facebook = $this->card_detail_network::create([
+                                    'card_id' => $Card->id,
+                                    'network_social_id' => $key->ns_id,
+                                    'url' => $key->link,
+                                ]);
+                            }
+                           }
+                    }
+                    
+                }
 
                 return $Card;
             }

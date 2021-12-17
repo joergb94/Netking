@@ -22,8 +22,18 @@
           <div class="form-group">
             <label>Orientation:</label>
             <select class="form-control" id="head_orientation"  onchange="Cards.prev()" name="head_orientation">
+                    @if (isset($card_style))
+                    @if ($card_style->head_orientation == 1)
                     <option value="0">Vertical</option>
+                    <option value="1" selected>Horizontal</option>
+                    @else
+                    <option value="0" selected>Vertical</option>
                     <option value="1" >Horizontal</option>
+                    @endif
+                    @else
+                    <option value="0" >Vertical</option>
+                    <option value="1" >Horizontal</option>
+                    @endif
             </select>
           </div>
           <div class="form-group">
@@ -52,18 +62,29 @@
           <label>Backgroud:</label>
             <div class="custom-control custom-checkbox">
                 <select  id="largeTitle" onchange="Cards.prev()" name="large_text" class="form-control">
-                  <option value="0" selected>Medium</option>
-                  <option value="1">Big</option>
+                  @if (isset($data))
+                    @if ($data['large_text'] == 1)
+                    <option value="0">Medium</option>
+                    <option value="1" selected>Big</option>
+                    @else
+                    <option value="0" selected>Medium</option>
+                    <option value="1">Big</option>
+                    @endif
+                    @else
+                    <option value="0" selected>Medium</option>
+                    <option value="1">Big</option>
+                    @endif
+                  
                 </select>
             </div>
           </div>
           <div class="form-group">
             <label>Color Text:</label>
-            <input onchange="Cards.prev()"  type="text" id="colorInput" name='color' data-jscolor="" class="form-control">
+            <input onchange="Cards.prev()"  type="text" id="colorInput" name='color' data-jscolor="" class="form-control" value="{{(isset($data['color']))?$data['color']:''}}">
           </div>
           <div class="form-group">
             <label>Location:</label>
-            <input type="text" id="ocation" onchange="Cards.prev()" name="location" value="" class="form-control">
+            <input type="text" id="ocation" onchange="Cards.prev()" name="location" value="{{(isset($data['location']))?$data['location']:''}}" class="form-control">
           </div>
  </div>       
 <script>

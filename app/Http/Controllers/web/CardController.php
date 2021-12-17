@@ -92,7 +92,7 @@ class CardController extends Controller
                                     ]);
         }
     }
-    public function update(Request $request, $id)
+    public function update(CardsStoreRequest $request, $id)
     {
         if ($request->ajax()) {
             $data = $this->CardsRepository->update($id,1,$request->input());
