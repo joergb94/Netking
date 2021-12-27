@@ -74,8 +74,11 @@ const Cards = {
     actions.show(my_url,'form', 'form');
   },
   save: function (state, id = '') {
-    var form = $('#card-form').serialize();
-    form += '&networks='+transactions.get_data_ns();
+    //var form = $('#card-form').serialize();
+    var formData1 = document.getElementById('card-form');
+    var form = new FormData(formData1);
+    form.append('networks', transactions.get_data_ns());
+    //form += '&networks='+transactions.get_data_ns();
     console.log(form)
     var my_url = url + '/create';
     var type = "POST";
@@ -85,7 +88,7 @@ const Cards = {
       var type = "PUT";
     }
 
-    actions.save(type, my_url, state, form);
+    actions.save(type, my_url, state, form,'file');
   },
 
   delete: function (id) {

@@ -20,25 +20,26 @@ use App\Models\Background_image;
 
 class CardController extends Controller
 {
-    public function __construct(CardsRepository $CardsRepository){
+    public function __construct(CardsRepository $CardsRepository)
+    {
         $this->CardsRepository = $CardsRepository;
-        $this->menu_id=1;
-        $this->module_name ='Card';
-        $this->text_module = ['Created','Updated','Deleted','Restored','Actived','Deactived'];
+        $this->menu_id = 1;
+        $this->module_name = 'Card';
+        $this->text_module = ['Created', 'Updated', 'Deleted', 'Restored', 'Actived', 'Deactived'];
     }
 
     public function index(CardsRequest $request)
     {
         $search = trim($request->search);
         $criterion = trim($request->criterion);
-        $status = ($request->status)? $request->status : 1;
-        $location = ($request->location >0)? $request->location : 'all';
-        $data = $this->CardsRepository->getSearchPaginated($criterion,$search,$status);
-        
-        if ($request->ajax()) { 
-            return view('Cards.items.table',['data'=>$data]);
+        $status = ($request->status) ? $request->status : 1;
+        $location = ($request->location > 0) ? $request->location : 'all';
+        $data = $this->CardsRepository->getSearchPaginated($criterion, $search, $status);
+
+        if ($request->ajax()) {
+            return view('Cards.items.table', ['data' => $data]);
         }
-        return view('Cards.index',['data'=>$data,'dm'=>accesUrl(Auth::user(),$this->menu_id)]);
+        return view('Cards.index', ['data' => $data, 'dm' => accesUrl(Auth::user(), $this->menu_id)]);
     }
 
     public function create(CardsRequest $request)
@@ -47,78 +48,97 @@ class CardController extends Controller
             $background = Background_image::all();
             $user = User::find(Auth::user()->id);
             $ns = NetworkSocial::all();
-            return view('Cards.create',['backgrounds'=>$background, 'user'=>$user, 'ns'=> $ns]);
+            return view('Cards.create', ['backgrounds' => $background, 'user' => $user, 'ns' => $ns]);
         }
     }
 
-    public function store(CardsStoreRequest $request)
-    {   
-        
+    public function store(Request $request)
+    {
+
         if ($request->ajax()) {
-            $data = $this->CardsRepository->create($request->input(),1);
-            return response()->json(Answer( $data['id'],
-                                        $this->module_name,
-                                        $this->text_module[0],
-                                        "success",
-                                        'green',
-                                        '1'));
+            dd($request);
+                $nameImg = '';
+                $file_path = '';
+                if($request['image']){
+                    $image = $request->file('image');
+                    $nameImg = time().$image->getClientOriginalName();
+                    $file_path ='/images/card/profile/';
+                    $image->move(public_path().'/images/card/profile/',$nameImg);
+                }else{
+                    $nameImg ='prfile.png';
+                    $file_path ='/images/card/profile/';
+                }          
+            $data = $this->CardsRepository->create($request->input(), 1,$nameImg,$file_path);
+            return response()->json(Answer(
+                $data['id'],
+                $this->module_name,
+                $this->text_module[0],
+                "success",
+                'green',
+                '1'
+            ));
         }
     }
-    public function edit(Request $request,$id)
+    public function edit(Request $request, $id)
     {
         if ($request->ajax()) {
-            $nsInUse =[];
+            $nsInUse = [];
             $data = $this->CardsRepository->show($id);
             $actual_bg = $data->background_image->description;
             $background = Background_image::all();
-            $card_style = Cards_style_detail::where('card_id',$id)->first();
+            $card_style = Cards_style_detail::where('card_id', $id)->first();
             $user = User::find($data['user_id']);
             $nsFree = NetworkSocial::all();
 
             foreach ($nsFree as $ns) {
-                $inUse = Card_detail_network::where('network_social_id',$ns['id'])
-                                    ->where('card_id',$data['id'])
-                                    ->first();
-                array_push($nsInUse,['nsData'=>$ns,'nsUser'=>$inUse]);
+                $inUse = Card_detail_network::where('network_social_id', $ns['id'])
+                    ->where('card_id', $data['id'])
+                    ->first();
+                array_push($nsInUse, ['nsData' => $ns, 'nsUser' => $inUse]);
             }
 
-            
-            return view('Cards.edit',['data'=>$data,
-                                      'backgrounds'=>$background,
-                                      'actual_bg'=>$actual_bg,
-                                      'user'=>$user,
-                                      'card_style'=> $card_style,
-                                      'ns'=> $nsInUse,
-                                    ]);
+
+            return view('Cards.edit', [
+                'data' => $data,
+                'backgrounds' => $background,
+                'actual_bg' => $actual_bg,
+                'user' => $user,
+                'card_style' => $card_style,
+                'ns' => $nsInUse,
+            ]);
         }
     }
     public function update(CardsStoreRequest $request, $id)
     {
         if ($request->ajax()) {
-            $data = $this->CardsRepository->update($id,1,$request->input());
-            return response()->json(Answer( $data['id'],
-            $this->module_name,
-            $this->text_module[1],
-            "success",
-            'yellow',
-            '1'));
+            $data = $this->CardsRepository->update($id, 1, $request->input());
+            return response()->json(Answer(
+                $data['id'],
+                $this->module_name,
+                $this->text_module[1],
+                "success",
+                'yellow',
+                '1'
+            ));
         }
     }
-    public function deleteOrResotore(Request $request,$id)
+    public function deleteOrResotore(Request $request, $id)
     {
         if ($request->ajax()) {
             $state = $this->CardsRepository->deleteOrResotore($id);
-            return response()->json(Answer( $request['id'],
-            $this->module_name,
-            $this->text_module[$state-1],
-            "success",
-            $state==4?'green':'red',
-            $state==4?'1':'D'));
+            return response()->json(Answer(
+                $request['id'],
+                $this->module_name,
+                $this->text_module[$state - 1],
+                "success",
+                $state == 4 ? 'green' : 'red',
+                $state == 4 ? '1' : 'D'
+            ));
         }
     }
-    public function getBG(Request $request,$id)
+    public function getBG(Request $request, $id)
     {
-        if($request->ajax()){
+        if ($request->ajax()) {
             $bg = Background_image::find($id);
             return response()->json($bg);
         }

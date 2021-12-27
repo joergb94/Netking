@@ -62,9 +62,9 @@ class CardsRepository
      * @throws \Throwable
      * @return Providers
      */
-    public function create(array $data,$location): Card
+    public function create(array $data,$location,$nameImg,$file_path): Card
     {
-        return DB::transaction(function () use ($data,$location) {
+        return DB::transaction(function () use ($data,$location,$nameImg,$file_path) {
             $Card = $this->model::create([
                 'location' => $location,
                 'title' => $data['title'],
@@ -72,6 +72,8 @@ class CardsRepository
                 'large_text' => $data['large_text'],
                 'background_image_id' => $data['background'],
                 'color' =>$data['color'],
+                'img_name' => $nameImg,
+                'img_path' => $file_path,
             ]);
             $Card_style = Cards_style_detail::create([
                 'card_id'=>$Card->id,
