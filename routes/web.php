@@ -34,7 +34,7 @@ Route::get('/getUser', [GeneralController::class, 'get_user']);
 Route::get('/myKepls', [CardController::class, 'index'])->name('myKepls');
 Route::get('/myKepls/create', [CardController::class, 'create']);
 Route::get('/myKepls/{id}/edit', [CardController::class, 'edit']);
-Route::put('/myKepls/{id}', [CardController::class, 'update']);
+Route::post('/myKepls/{id}', [CardController::class, 'update']);
 Route::delete('/myKepls/{id}', [CardController::class, 'deleteOrResotore']);
 Route::post('/myKepls/create', [CardController::class, 'store']);
 Route::get('/myKepls/background/{id}', [CardController::class, 'getBG']);

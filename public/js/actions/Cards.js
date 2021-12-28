@@ -85,7 +85,7 @@ const Cards = {
 
     if (state == 'update') {
       var my_url = url + '/' + id;
-      var type = "PUT";
+      var type = "POST";
     }
 
     actions.save(type, my_url, state, form,'file');

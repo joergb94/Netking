@@ -11,7 +11,7 @@ use App\Http\Requests\Cards\CardsRequest;
 use App\Http\Requests\Cards\CardsIdRequest;
 use App\Http\Requests\Cards\CardsUpdateRequest;
 use App\Http\Requests\Cards\CardsStoreRequest;
-use App\Models\Cards;
+use App\Models\Card;
 use App\Models\NetworkSocial;
 use App\Models\Cards_style_detail;
 use App\Models\Card_detail_network;
@@ -52,11 +52,10 @@ class CardController extends Controller
         }
     }
 
-    public function store(Request $request)
+    public function store(CardsStoreRequest $request)
     {
 
         if ($request->ajax()) {
-            dd($request);
                 $nameImg = '';
                 $file_path = '';
                 if($request['image']){
@@ -111,7 +110,19 @@ class CardController extends Controller
     public function update(CardsStoreRequest $request, $id)
     {
         if ($request->ajax()) {
-            $data = $this->CardsRepository->update($id, 1, $request->input());
+                $nameImg = '';
+                $file_path = '';
+                $card = Card::where('id',$id)->first();
+                if($request['image']){
+                    $image = $request->file('image');
+                    $nameImg = time().$image->getClientOriginalName();
+                    $file_path ='/images/card/profile/';
+                    $image->move(public_path().'/images/card/profile/',$nameImg);
+                }else{
+                    $nameImg = $card->img_name;
+                    $file_path = $card->img_path;
+                }  
+            $data = $this->CardsRepository->update($id, 1, $request->input(), $nameImg, $file_path);
             return response()->json(Answer(
                 $data['id'],
                 $this->module_name,

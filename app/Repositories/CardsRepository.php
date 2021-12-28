@@ -116,18 +116,20 @@ class CardsRepository
      * @throws \Throwable
      * @return Provider
      */
-    public function update($Card_id,$location, array $data): Card
+    public function update($Card_id,$location, array $data, $image, $path): Card
     { 
         $Card = $this->model->find($Card_id);
         $Card_style = Cards_style_detail::where('card_id',$Card_id)->first();
-        return DB::transaction(function () use ($Card, $data,$location,$Card_style,$Card_id) {
+        return DB::transaction(function () use ($Card, $data,$location,$Card_style,$Card_id, $image, $path) {
             if ($Card->update([
                 'location' => $location,
                 'title' => $data['title'],
                 'subtitle' => $data['subtitle'],
                 'large_text' => $data['large_text'],
                 'background_image_id' => $data['background'],
-                'color' => $data['color']
+                'color' => $data['color'],
+                'img_name' => $image,
+                'img_path' => $path
             ])) {
                 $Card_style->update([
                 'shape_image'=>$data['shape_image'],
