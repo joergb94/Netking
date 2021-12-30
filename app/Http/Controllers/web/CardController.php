@@ -17,6 +17,7 @@ use App\Models\Cards_style_detail;
 use App\Models\Card_detail_network;
 use App\Models\User;
 use App\Models\Background_image;
+use App\Models\Card;
 
 class CardController extends Controller
 {
@@ -55,7 +56,16 @@ class CardController extends Controller
     {   
         
         if ($request->ajax()) {
-            $data = $this->CardsRepository->create($request->input(),1);
+            if($request['image']){
+                $image = $request->file('image');
+                $nameImg = time().$image->getClientOriginalName();
+                $file_path ='/images/card/profile/';
+                $image->move(public_path().'/images/card/profile/',$nameImg);
+            }else{
+                $nameImg ='clase.png';
+                $file_path ='/images/clases';
+            }
+            $data = $this->CardsRepository->create($request->input(),1,$nameImg,$file_path);
             return response()->json(Answer( $data['id'],
                                         $this->module_name,
                                         $this->text_module[0],
@@ -95,7 +105,17 @@ class CardController extends Controller
     public function update(CardsStoreRequest $request, $id)
     {
         if ($request->ajax()) {
-            $data = $this->CardsRepository->update($id,1,$request->input());
+            $card = Card::where('id',$id)->first();
+            if($request['image']){
+                $image = $request->file('image');
+                $nameImg = time().$image->getClientOriginalName();
+                $file_path ='/images/card/profile/';
+                $image->move(public_path().'/images/card/profile/',$nameImg);
+            }else{
+                $nameImg = $card->img_name;
+                $file_path = $card->img_path;
+            }
+            $data = $this->CardsRepository->update($id,1,$request->input(),$nameImg,$file_path);
             return response()->json(Answer( $data['id'],
             $this->module_name,
             $this->text_module[1],

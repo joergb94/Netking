@@ -2,7 +2,7 @@
           <div class="form-group">
             <label>Image Profile:</label>
               <div class="input-group mb-3">
-                <input type="file" class="form-control">
+                <input type="file" class="form-control" id="image" name="image">
                 <div class="input-group-append">
                   <select class="form-control max-height" id="shape_image"  onchange="Cards.prev()" name="shape_image">
                     <option value="0">Square</option>

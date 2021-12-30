@@ -18,6 +18,7 @@ class TypeUserTable extends Migration
             $table->id();
             $table->string('mat', 3)->default('TyU');
             $table->string('name', 30)->nullable();
+            $table->integer('max_cards')->default(1);
             $table->boolean('active')->default(1);
             $table->timestamps();
             $table->softDeletes();
