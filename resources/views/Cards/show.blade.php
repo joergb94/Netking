@@ -21,18 +21,7 @@
           </li>
           <ul class="list-group ">
             <li class="list-group-item">
-              @forelse($data as $products)
-              <div class="row table table-bordered">
-                <div class="col-sm-4">{{$products['id']}}</div>
-                <div class="col-sm-4">{{$products['code']}}</div>
-                <div class="col-sm-4">{{$products['name']}}</div>
-                <!--<td><a href="">Ver Producto</a></td>-->
-              </div>
-              @empty
-              <div colspan="3" class="text-center no-data">
-                <h1 class="text-info">No data</h1>
-              </div>
-              @endforelse
+              
           </ul>
           </li>
         </ul>

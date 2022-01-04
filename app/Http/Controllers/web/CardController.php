@@ -18,6 +18,7 @@ use App\Models\Card_detail_network;
 use App\Models\User;
 use App\Models\Background_image;
 use App\Models\Card;
+use App\Models\text_style;
 
 class CardController extends Controller
 {
@@ -48,7 +49,8 @@ class CardController extends Controller
             $background = Background_image::all();
             $user = User::find(Auth::user()->id);
             $ns = NetworkSocial::all();
-            return view('Cards.create',['backgrounds'=>$background, 'user'=>$user, 'ns'=> $ns]);
+            $text_styles = text_style::all();
+            return view('Cards.create',['backgrounds'=>$background, 'user'=>$user, 'ns'=> $ns,'text_styles'=>$text_styles]);
         }
     }
 
@@ -84,7 +86,7 @@ class CardController extends Controller
             $card_style = Cards_style_detail::where('card_id',$id)->first();
             $user = User::find($data['user_id']);
             $nsFree = NetworkSocial::all();
-
+            $text_styles = text_style::all();
             foreach ($nsFree as $ns) {
                 $inUse = Card_detail_network::where('network_social_id',$ns['id'])
                                     ->where('card_id',$data['id'])
@@ -99,6 +101,7 @@ class CardController extends Controller
                                       'user'=>$user,
                                       'card_style'=> $card_style,
                                       'ns'=> $nsInUse,
+                                      'text_styles'=>$text_styles
                                     ]);
         }
     }
@@ -122,6 +125,13 @@ class CardController extends Controller
             "success",
             'yellow',
             '1'));
+        }
+    }
+    public function detail(Request $request)
+    {
+        if($request->ajax())
+        {
+            return view('Cards.show');
         }
     }
     public function deleteOrResotore(Request $request,$id)

@@ -83,6 +83,15 @@
             <input onchange="Cards.prev()"  type="text" id="colorInput" name='color' data-jscolor="" class="form-control" value="{{(isset($data['color']))?$data['color']:''}}">
           </div>
           <div class="form-group">
+            <select onchange="Cards.prev()" name="text_style" id="text_style" class="form-control">
+              @forelse ($text_styles as $text_style)
+                  <option value="{{$text_style['id']}}">{{$text_style['name']}}</option>
+              @empty
+                  <option value="">No style</option>
+              @endforelse
+            </select>
+          </div>
+          <div class="form-group">
             <label>Location:</label>
             <input type="text" id="ocation" onchange="Cards.prev()" name="location" value="{{(isset($data['location']))?$data['location']:''}}" class="form-control">
           </div>
