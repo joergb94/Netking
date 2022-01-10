@@ -7,6 +7,7 @@ use App\Models\Card;
 use App\Models\Card_detail;
 use App\Models\Card_detail_network;
 use App\Models\Cards_style_detail;
+use App\Models\CardUserDetail;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -81,6 +82,14 @@ class CardsRepository
                 'head_orientation'=>$data['head_orientation'],
                 'shape'=>0,
                 'outline'=>0
+            ]);
+            $Card_user_Detail = CardUserDetail::create([
+                'card_id' =>$Card->id,
+                'about_me' => $data['description'],
+                'phone' => $data['phone'],
+                'cell_phone' => $data['cellphone'],
+                'business' => $data['business'],
+                'scholarship' => $data['scholarship'],
             ]);
             if(isset($data['networks']))
             {

@@ -19,6 +19,7 @@ use App\Models\User;
 use App\Models\Background_image;
 use App\Models\Card;
 use App\Models\text_style;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class CardController extends Controller
 {
@@ -127,11 +128,12 @@ class CardController extends Controller
             '1'));
         }
     }
-    public function detail(Request $request)
+    public function detail(Request $request,$id)
     {
         if($request->ajax())
         {
-            return view('Cards.show');
+            $card = Card::find($id);
+            return view('Cards.show',['card' => $card]);
         }
     }
     public function deleteOrResotore(Request $request,$id)

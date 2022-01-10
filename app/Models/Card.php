@@ -32,5 +32,8 @@ class Card extends Model
         return $this->hasMany('App\Models\Cards_style_detail','card_id','id');
     }
 
-  
+    public function card_user_details()
+    {
+        return $this->hasOne('App\Models\CardUserDetail','card_id','id');
+    }
 }

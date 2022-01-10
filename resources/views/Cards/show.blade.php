@@ -4,7 +4,7 @@
 
       <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title">Devices</h4>
+        <h4 class="modal-title">Details</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
 
@@ -21,7 +21,7 @@
           </li>
           <ul class="list-group ">
             <li class="list-group-item">
-              
+              {{$card['card_user_details']}}
           </ul>
           </li>
         </ul>
