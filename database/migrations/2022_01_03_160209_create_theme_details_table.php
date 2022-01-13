@@ -20,6 +20,7 @@ class CreateThemeDetailsTable extends Migration
             $table->unsignedBigInteger('text_style_id')->nullable();
             $table->string('template')->nullable();
             $table->timestamps();
+            $table->softDeletes();
             
             $table->foreign('theme_id')->references('id')->on('themes')->onDelete('cascade');
             $table->foreign('text_style_id')->references('id')->on('text_styles')->onDelete('cascade');

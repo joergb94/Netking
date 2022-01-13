@@ -16,7 +16,7 @@ class CreateCardsTable extends Migration
         Schema::create('cards', function (Blueprint $table) {
             $table->id();
             $table->string('mat', 3)->default('Car');
-            $table->unsignedBigInteger('user_id')->default(1);
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('themes_id')->default(1);
             $table->unsignedBigInteger('background_image_id')->default(1);
             $table->unsignedBigInteger('text_style_id')->default(1);

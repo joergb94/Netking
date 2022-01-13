@@ -21,6 +21,7 @@ class CreateMembershipsTable extends Migration
             $table->integer('quantity')->default(1);
             $table->unsignedBigInteger('type_membership_id');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('type_user_id')->references('id')->on('type_users')->onDelete('cascade');

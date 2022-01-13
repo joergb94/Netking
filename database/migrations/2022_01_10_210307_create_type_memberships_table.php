@@ -17,6 +17,7 @@ class CreateTypeMembershipsTable extends Migration
             $table->id();
             $table->string('membership')->default('free');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
