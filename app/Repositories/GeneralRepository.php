@@ -21,25 +21,10 @@ class GeneralRepository {
 
     public function card_max()
     {
-        $membership = Membership::where('user_id',Auth::user()->id)
-            ->where('type_user_id',Auth::user()->type_users->id)
-            ->first();
-        $extra = Membership::where('user_id',Auth::user()->id)
-            ->where('type_membership_id',2)
-            ->get();
-        $extra_quantity = 0;
-        if(isset($extra)){
-            foreach($extra as $item)
-            {
-                $extra_quantity += $item->quantity;
-            }    
-            $total = $membership->quantity + $extra_quantity;
-            $total_cards = Card::where('user_id',Auth::user()->id)->count();
-            $status = ($total_cards >= $total)? false : true;
-            return $status;
-        }
+        $maxCard = Membership::where('user_id',Auth::user()->id)->sum('quantity');
         $total_cards = Card::where('user_id',Auth::user()->id)->count();
-        $status = ($total_cards >= $membership->quantity)? false : true;
+        $status = ($total_cards >= $maxCard)? false : true;
+        
         return $status;
     }
 }
