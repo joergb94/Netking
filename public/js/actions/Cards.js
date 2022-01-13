@@ -66,8 +66,22 @@ const Cards = {
     actions.detail(my_url, id);
   },
   create: function () {
-    var my_url = url + '/create';
-    actions.show(my_url,'form', 'form');
+    $.get(url + '/getCreate/')
+    .done(function(data){
+      if(data)
+      {
+        var my_url = url + '/create';
+        actions.show(my_url,'form', 'form');
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'No puedes crear mas cartas',
+          text: 'Haz alcanzado el limite maximo de cartas para tu tipo de usuario, si deseas tener mas cartas actualiza!',
+          footer: '<a href="">Como actualizo mi cuenta?</a>'
+        })
+      }
+    });
+    
   },
   edit: function (id) {
     var my_url = url + '/' + id + '/edit';

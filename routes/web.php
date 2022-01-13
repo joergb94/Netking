@@ -36,6 +36,7 @@ Route::get('/myKepls/create', [CardController::class, 'create']);
 Route::get('/myKepls/{id}/edit', [CardController::class, 'edit']);
 Route::get('/myKepls/{id}/show', [CardController::class, 'detail']);
 Route::post('/myKepls/{id}', [CardController::class, 'update']);
+Route::get('/myKepls/getCreate', [CardController::class, 'get_create_card']);
 Route::delete('/myKepls/{id}', [CardController::class, 'deleteOrResotore']);
 Route::post('/myKepls/create/card', [CardController::class, 'store']);
 Route::get('/myKepls/background/{id}', [CardController::class, 'getBG']);

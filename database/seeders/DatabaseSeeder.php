@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(BakcgroundSeeder::class);
         $this->call(NetworkSocialSeed::class);
         $this->call(TextStyleSeeder::class);
+        $this->call(TypeMembershipSeeder::class);
        
     }
 }
