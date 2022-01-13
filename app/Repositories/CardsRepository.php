@@ -7,6 +7,7 @@ use App\Models\Card;
 use App\Models\Card_detail;
 use App\Models\Card_detail_network;
 use App\Models\Cards_style_detail;
+use App\Models\CardUserDetail;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -62,9 +63,9 @@ class CardsRepository
      * @throws \Throwable
      * @return Providers
      */
-    public function create(array $data,$location): Card
+    public function create(array $data,$location,$image,$path): Card
     {
-        return DB::transaction(function () use ($data,$location) {
+        return DB::transaction(function () use ($data,$location,$image,$path) {
             $Card = $this->model::create([
                 'location' => $location,
                 'title' => $data['title'],
@@ -72,6 +73,8 @@ class CardsRepository
                 'large_text' => $data['large_text'],
                 'background_image_id' => $data['background'],
                 'color' =>$data['color'],
+                'img_name' => $image,
+                'img_path' => $path,
             ]);
             $Card_style = Cards_style_detail::create([
                 'card_id'=>$Card->id,
@@ -79,6 +82,14 @@ class CardsRepository
                 'head_orientation'=>$data['head_orientation'],
                 'shape'=>0,
                 'outline'=>0
+            ]);
+            $Card_user_Detail = CardUserDetail::create([
+                'card_id' =>$Card->id,
+                'about_me' => $data['description'],
+                'phone' => $data['phone'],
+                'cell_phone' => $data['cellphone'],
+                'business' => $data['business'],
+                'scholarship' => $data['scholarship'],
             ]);
             if(isset($data['networks']))
             {
@@ -114,18 +125,20 @@ class CardsRepository
      * @throws \Throwable
      * @return Provider
      */
-    public function update($Card_id,$location, array $data): Card
+    public function update($Card_id,$location, array $data,$image,$path): Card
     { 
         $Card = $this->model->find($Card_id);
         $Card_style = Cards_style_detail::where('card_id',$Card_id)->first();
-        return DB::transaction(function () use ($Card, $data,$location,$Card_style,$Card_id) {
+        return DB::transaction(function () use ($Card, $data,$location,$Card_style,$Card_id,$image,$path) {
             if ($Card->update([
                 'location' => $location,
                 'title' => $data['title'],
                 'subtitle' => $data['subtitle'],
                 'large_text' => $data['large_text'],
                 'background_image_id' => $data['background'],
-                'color' => $data['color']
+                'color' => $data['color'],
+                'img_name' => $image,
+                'img_path' => $path,
             ])) {
                 $Card_style->update([
                 'shape_image'=>$data['shape_image'],

@@ -32,7 +32,7 @@
                   @include('Cards.itemsCreate.networkFormCreate')
                 </div>
                 <div id="menu2" class="container tab-pane fade"><br>
-                  <h3>Details Data</h3>
+                  @include('Cards.itemsCreate.detailForm')
                 </div>
               </div>
           </form>

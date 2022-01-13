@@ -4,38 +4,42 @@
 
       <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title">Devices</h4>
+        <h4 class="modal-title">Details</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
 
       <!-- Modal body -->
       <div class="modal-body">
-        <ul class="list-group">
-          <li class="list-group-item head-biopy">
-            <div class="row col-sm-12 col-xs-12 text-center">
-              <div class="col-sm-4 col-xs-12">#</div>
-              <div class="col-sm-4 col-xs-12">Code</div>
-              <div class="col-sm-4 col-xs-12">Device</div>
-              <!--<th scope="col">Opciones</th>-->
-            </div>
-          </li>
-          <ul class="list-group ">
-            <li class="list-group-item">
-              @forelse($data as $products)
-              <div class="row table table-bordered">
-                <div class="col-sm-4">{{$products['id']}}</div>
-                <div class="col-sm-4">{{$products['code']}}</div>
-                <div class="col-sm-4">{{$products['name']}}</div>
-                <!--<td><a href="">Ver Producto</a></td>-->
-              </div>
-              @empty
-              <div colspan="3" class="text-center no-data">
-                <h1 class="text-info">No data</h1>
-              </div>
-              @endforelse
-          </ul>
-          </li>
-        </ul>
+        <div class="col-sm-12">
+        <div style="text-align: center">
+          <h2>About me</h2>
+          <p>{{$card['card_user_details']['about_me']}}</p>
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <div style="text-align: center">
+          <h2>Phone</h2>
+          <p>{{$card['card_user_details']['phone']}}</p>
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <div style="text-align: center">
+          <h2>Cell Phone</h2>
+          <p>{{$card['card_user_details']['cell_phone']}}</p>
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <div style="text-align: center">
+          <h2>Business</h2>
+          <p>{{$card['card_user_details']['bsiness']}}</p>
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <div style="text-align: center">
+          <h2>Scolarship</h2>
+          <p>{{$card['card_user_details']['scholarship']}}</p>
+        </div>
+      </div>
       </div>
 
       <!-- Modal footer -->

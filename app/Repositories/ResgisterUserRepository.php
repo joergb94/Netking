@@ -8,6 +8,8 @@ use App\Models\Card;
 use App\Models\Card_detail;
 use App\Models\Cards_items;
 use App\Models\Cards_style_detail;
+use App\Models\Membership;
+use App\Models\Type_membership;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -84,6 +86,22 @@ class ResgisterUserRepository
          });
     }
 
+    public function createMembership($model)
+    {
+        return DB::transaction(function () use ($model){
+            $membership = Membership::create([
+                'user_id' => $model->id,
+                'type_user_id' => $model->type_users->id,
+                'quantity' => $model->type_users->max_cards,
+                'type_membership_id' => 1,
+            ]);
+            if($membership){
+                return $membership;
+            }
+            throw new GeneralException(__('There was an error created the Membership.'));
+        });
+    }
+
   
     /**
      * @param array $data
@@ -110,8 +128,8 @@ class ResgisterUserRepository
                     
                     $CardDeatil = ResgisterUserRepository::createCardDetail($Card);
                     $CardStyle = ResgisterUserRepository::createCardStyle($Card['id']);
-
-                        if($CardDeatil && $CardStyle){
+                    $Membership = ResgisterUserRepository::createMembership($User);
+                        if($CardDeatil && $CardStyle && $Membership){
                             
                             return $User;
                         }

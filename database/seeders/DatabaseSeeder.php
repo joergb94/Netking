@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
         $this->call(CardItems::class);
         $this->call(BakcgroundSeeder::class);
         $this->call(NetworkSocialSeed::class);
+        $this->call(TextStyleSeeder::class);
+        $this->call(TypeMembershipSeeder::class);
        
     }
 }

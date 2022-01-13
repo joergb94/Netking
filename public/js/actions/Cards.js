@@ -66,26 +66,43 @@ const Cards = {
     actions.detail(my_url, id);
   },
   create: function () {
-    var my_url = url + '/create';
-    actions.show(my_url,'form', 'form');
+    $.get(url + '/getCreate/')
+    .done(function(data){
+      if(data)
+      {
+        var my_url = url + '/create';
+        actions.show(my_url,'form', 'form');
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'No puedes crear mas cartas',
+          text: 'Haz alcanzado el limite maximo de cartas para tu tipo de usuario, si deseas tener mas cartas actualiza!',
+          footer: '<a href="">Como actualizo mi cuenta?</a>'
+        })
+      }
+    });
+    
   },
   edit: function (id) {
     var my_url = url + '/' + id + '/edit';
     actions.show(my_url,'form', 'form');
   },
   save: function (state, id = '') {
-    var form = $('#card-form').serialize();
-    form += '&networks='+transactions.get_data_ns();
+    //var form = $('#card-form').serialize();
+    var formData1 = document.getElementById('card-form');
+    var form = new FormData(formData1);
+    form.append('networks', transactions.get_data_ns());
+    //form += '&networks='+transactions.get_data_ns();
     console.log(form)
-    var my_url = url + '/create';
+    var my_url = url + '/create/card';
     var type = "POST";
 
     if (state == 'update') {
       var my_url = url + '/' + id;
-      var type = "PUT";
+      var type = "POST";
     }
 
-    actions.save(type, my_url, state, form);
+    actions.save(type, my_url, state, form,'file');
   },
 
   delete: function (id) {

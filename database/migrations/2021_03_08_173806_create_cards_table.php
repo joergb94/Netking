@@ -25,6 +25,8 @@ class CreateCardsTable extends Migration
             $table->longText('subtitle')->nullable();
             $table->longText('location')->nullable();
             $table->longText('large_text')->nullable();
+            $table->longText('img_name')->nullable();
+            $table->longText('img_path')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
