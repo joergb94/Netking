@@ -53,6 +53,15 @@ const transactions = {
       });
 
     return JSON.stringify(ns);
+  },
+  mode_delete: function(){
+    if($("#idChk-sm").is(':checked')){
+        $('.btn-update').hide();
+        $('.btn-delete').show();
+    }else{
+        $('.btn-delete').hide();
+        $('.btn-update').show();
+    }
   }
 }
 //section for const js 

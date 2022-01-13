@@ -8,6 +8,7 @@
       <div class="col-sm-6">
         <h4 class="card-title mb-0">
           Cards  <i class='fa fa-qrcode'></i>
+
         </h4>
       </div>
       <!--col-->

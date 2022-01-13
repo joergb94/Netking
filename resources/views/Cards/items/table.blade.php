@@ -7,11 +7,12 @@
               @forelse($data as $Card)
               <div class="col-sm-3">
                   <div class="card"  id="Card{{$Card->id}}" >
-                    <div class="card-header text-center">
-                      {{ $Card->title }}
-                    </div>
-                    <div class="card-body text-center">
-                      {{ $Card->subtitle }}
+
+                    <div class="card-body text-center container-btn">
+                    <button class="btn btn-warning btn-show-{{$Card['id']}} btn-circle top-right btn-update" data-toggle="tooltip" title="Editar Keypl!" onclick="Cards.edit({{$Card['id']}})"><i class='fas fa-edit'></i></button>
+                       <button type="button" class="btn btn-danger btn-circle top-right btn-delete" style="display:none" onclick="Cards.delete({{$Card['id']}})" > <i class="fa fa-trash"></i></button>
+                        <h4>{{ $Card->title }}</h4>
+                        {{ $Card->subtitle }}
                     </div> 
                     <div class="card-footer text-center">
                         @include('Cards.items.buttons', ['Card' => $Card])
