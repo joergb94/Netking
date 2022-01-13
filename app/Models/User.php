@@ -67,4 +67,9 @@ class User extends Authenticatable
         //changed 'active' to 'status'
         return $query->where('active', $status);
     }
+
+    public function membership()
+    {
+        return $this->hasMany('App\Models\Membership','user_id','id');
+    }
 }
