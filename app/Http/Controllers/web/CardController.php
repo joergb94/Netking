@@ -143,10 +143,30 @@ class CardController extends Controller
     }
     public function detail(Request $request, $id)
     {
-        if ($request->ajax()) {
-            $card = Card::find($id);
-            return view('Cards.show', ['card' => $card]);
-        }
+            $nsInUse = [];
+            $data = $this->CardsRepository->show($id);
+            $actual_bg = $data->background_image->description;
+            $background = Background_image::all();
+            $card_style = Cards_style_detail::where('card_id', $id)->first();
+            $user = User::find($data['user_id']);
+            $nsFree = NetworkSocial::all();
+            $text_styles = text_style::all();
+            foreach ($nsFree as $ns) {
+                $inUse = Card_detail_network::where('network_social_id', $ns['id'])
+                    ->where('card_id', $data['id'])
+                    ->first();
+                array_push($nsInUse, ['nsData' => $ns, 'nsUser' => $inUse]);
+            }
+            return view('Cards.card', [
+                'data' => $data,
+                'backgrounds' => $background,
+                'actual_bg' => $actual_bg,
+                'user' => $user,
+                'card_style' => $card_style,
+                'ns' => $nsInUse,
+                'text_styles' => $text_styles
+            ]);
+
     }
     public function deleteOrResotore(Request $request, $id)
     {

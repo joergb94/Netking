@@ -4,11 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class Type_user_detail extends Model
+class Type_user_detail extends Model implements Auditable
 {
     protected $guarded=[];
     use SoftDeletes;
+    use \OwenIt\Auditing\Auditable;
 
     public function type_users()
     {

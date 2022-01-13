@@ -23,6 +23,7 @@ class CreateCardUserDetailsTable extends Migration
             $table->string('business')->nullable();
             $table->string('scholarship')->nullable();
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('card_id')->references('id')->on('cards')->onDelete('cascade');
         });

@@ -25,17 +25,19 @@ Auth::routes();
 //home 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::post('/home/deleteOrResotore',[HomeController::class, 'deleteOrResotore']);
+Route::get('/Kepls/background/{id}', [CardController::class, '']);
+
 
 
 //genera 
-Route::get('/getUser', [GeneralController::class, 'get_user']);
+Route::get('/Kepls/{id}', [CardController::class, 'detail']);
+
 
 //cards
 
 Route::get('/myKepls', [CardController::class, 'index'])->name('myKepls');
 Route::get('/myKepls/create', [CardController::class, 'create']);
 Route::get('/myKepls/{id}/edit', [CardController::class, 'edit']);
-Route::get('/myKepls/{id}/show', [CardController::class, 'detail']);
 Route::post('/myKepls/{id}', [CardController::class, 'update']);
 Route::get('/myKepls/getCreate', [CardController::class, 'get_create_card']);
 Route::delete('/myKepls/{id}', [CardController::class, 'deleteOrResotore']);
