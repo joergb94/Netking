@@ -35,7 +35,8 @@ class TypeUserSeeder extends Seeder
 
                 //User 
                   ['type_user_id'=> 3,'data_menu_id'=> 1,'active'=> 1,], 
-                  ['type_user_id'=> 3,'data_menu_id'=> 3,'active'=> 1,], 
+                  ['type_user_id'=> 3,'data_menu_id'=> 3,'active'=> 1,],
+                  ['type_user_id'=> 3,'data_menu_id'=> 4,'active'=> 1,],  
                 ];
       
             foreach($tu_prof as $tu_prof){

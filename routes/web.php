@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\web\GeneralController;
 use App\Http\Controllers\web\CardController;
 use App\Http\Controllers\web\HomeController;
+use App\Http\Controllers\web\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +41,9 @@ Route::get('/myKepls/getCreate', [CardController::class, 'get_create_card']);
 Route::delete('/myKepls/{id}', [CardController::class, 'deleteOrResotore']);
 Route::post('/myKepls/create/card', [CardController::class, 'store']);
 Route::get('/myKepls/background/{id}', [CardController::class, 'getBG']);
+
+//profile
+Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
 
 
 
