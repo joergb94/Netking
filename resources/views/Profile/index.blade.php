@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('style')
+    
+@endsection
 @section('content')
 <div class="page-inner">
 <div class="card" id="index_blade">
@@ -18,10 +20,15 @@
       <!--col-->
     </div>
     <!--row-->
-
+    <div class="row">
+      <br>
+      <div class="col-sm-12">
+        @include('Profile.items.profilePicture')
+      </div>
+    </div>
     </br>
     <div class="col-sm-12">
-     
+     @include('Profile.items.profileBody')
     </div>
    
     <div id="loading" style="display:none" class="col-sm-12 text-center">
