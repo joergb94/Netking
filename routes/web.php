@@ -46,6 +46,9 @@ Route::get('/myKepls/background/{id}', [CardController::class, 'getBG']);
 
 //profile
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+Route::get('/profile/{id}/show', [ProfileController::class, 'show_membership']);
+Route::post('/profile/{id}/purchase', [ProfileController::class, 'purchase']);
+Route::post('/profile/{id}/purchase_extra', [ProfileController::class, 'purchase_extra']);
 
 
 

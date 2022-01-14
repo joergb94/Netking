@@ -16,6 +16,8 @@ class CreateTypeMembershipsTable extends Migration
         Schema::create('type_memberships', function (Blueprint $table) {
             $table->id();
             $table->string('membership')->default('free');
+            $table->longText('description')->nullable();
+            $table->integer('quantity')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
