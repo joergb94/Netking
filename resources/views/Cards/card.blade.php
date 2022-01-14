@@ -4,50 +4,170 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <title>Card</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+	<!-- Fonts and icons -->
+	<script src="{{ asset('assets/js/plugin/webfont/webfont.min.js') }}"></script>
+
+	<script src="https://kit.fontawesome.com/7267d16efc.js" crossorigin="anonymous"></script>
+	<!-- CSS Files -->
+	<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('assets/css/bootstrap-social.css') }}">
+	<link rel="stylesheet" href="{{ asset('assets/css/azzara.min.css') }}">
+
+	<!-- CSS Just for demo purpose, don't include it in your project -->
+	<link rel="stylesheet" href="{{ asset('assets/css/demo.css') }}">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?famil">
 </head>
-<body style ="background-image: url('img_girl.jpg')";>
-<div class="col-sm-12">
-    <br>
-    <div class="col-sm-12">
-        <div class="row justify-content-between">
-            <div class="{!!($card_style['head_orientation'] == 0)?'col-sm-4':'col-sm-12'!!} text-center" id="contend-image">
-                <img src="{{(isset($data['img_name']))? $data['img_path'].$data['img_name']:'https://www.w3schools.com/bootstrap4/cinqueterre.jpg'}}" class="{{$card_style['shape_image']?'rounded-circle':'rounded'}}" alt="Cinque Terre" width="100px" height="100px" id="imageProfile"> 
-            </div>
-            <div class="{!!($card_style['head_orientation'] == 0)?'col-sm-8':'col-sm-12'!!} text-center" id="contend-title">
-                <br>
-                <div class="col-sm-12" id='content-title'>
-                    @if($data['large_text'])
-                        <h1 class="text-color" id="titlephone" style="color:{!!$data['color']!!}">@if(isset($data['title'])){{$data['title']}}@endif</h1>
-                    @else
-                        <h2 class="text-color" id="titlephone" style="color:{!!$data['color']!!}">@if(isset($data['title'])){{$data['title']}}@endif</h2>
-                    @endif 
-                </div>
-                @if($data['large_text'])
-                    <p class="text-color" id="namephone" style="color:{!!$data['color']!!}">{{$user['name']}}</p>
-                @else
-                    <h2 class="text-color" id="namephone" style="color:{!!$data['color']!!}">{{$user['name']}}</h2>
-                @endif
+
+<style>
+    body, html {
+            
+        height: 100vh;
+        width: 100%; 
+        overflow-y: scroll;
+    }
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 1px grey; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: {!!$data['color']!!};
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: {!!$data['color']!!}; 
+}
+@media only screen and (max-width:  768px) {
+    body, html  {
+        /* The image used */
+        background-image: url('{{$actual_bg}}');
+
+        /* Full height */
+         height: 100vh;
+        
+        /* Center and scale the image nicely */
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+
+        color: white;
+        font-weight: bold;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 2;
+        padding: 20px;
+        text-align: center;
+        }
+}
+.bg-image {
+    display:none;
+}
+
+@media only screen and (min-width:  768px) {
+    
+    .bg-image {
+        /* The image used */
+        background-image: url('{{$actual_bg}}');
+        display:block;
+        /* Add the blur effect */
+        filter: blur(10px);
+        -webkit-filter: blur(10px);
+        
+        /* Full height */
+        height: 100%; 
+
+        /* Center and scale the image nicely */
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        }
+}
+.bg { 
+        height: 100%;
+    }
+@media only screen and (min-width:  768px) {
+    .bg {
+        /* The image used */
+        background-image: url('{{$actual_bg}}');
+        overflow-y: scroll;
+        /* Full height */
+        height: 100%;
+        overflow-y: scroll;
+        /* Center and scale the image nicely */
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+
+        color: white;
+        font-weight: bold;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 2;
+        width: 80%;
+        padding: 20px;
+        text-align: center;
+        }
+}
+</style>
+
+<body>
+    <div class="bg-image"></div>
+    <div class="col-sm-12 col-md-12 col-lg-4 mx-auto d-block bg">
+            <br>
+            <div class="col-sm-12">
+                <div class="row justify-content-between">
+                    <div class="{{($card_style['head_orientation'] == 0)?'col-4':'col-12'}} text-center" id="contend-image">
+                        <img src="{{(isset($data['img_name']))? $data['img_path'].$data['img_name']:'https://www.w3schools.com/bootstrap4/cinqueterre.jpg'}}" class="{{$card_style['shape_image']?'rounded-circle':'rounded'}}" alt="Cinque Terre" width="100px" height="100px" id="imageProfile"> 
+                    </div>
+                    <div class="{{($card_style['head_orientation'] == 0)?'col-8':'col-12'}} text-center" id="contend-title">
+                        <br>
+                        <div class="col-12" id='content-title'>
+                            @if($data['large_text'])
+                                <h1 class="text-color" id="titlephone" style="color:{!!$data['color']!!}">@if(isset($data['title'])){{$data['title']}}@endif</h1>
+                            @else
+                                <h2 class="text-color" id="titlephone" style="color:{!!$data['color']!!}">@if(isset($data['title'])){{$data['title']}}@endif</h2>
+                            @endif 
+                        </div>
+                        @if($data['large_text'])
+                            <p class="text-color" id="namephone" style="color:{!!$data['color']!!}">{{$user['name']}}</p>
+                        @else
+                            <h2 class="text-color" id="namephone" style="color:{!!$data['color']!!}">{{$user['name']}}</h2>
+                        @endif
+                        
+                        <h6 class="text-color" id="subephone" style="color:{!!$data['color']!!}">@if(isset($data['subtitle'])){{$data['subtitle']}}@endif</h6>
+                    </div>
                 
-                <h6 class="text-color" id="subephone" style="color:{!!$data['color']!!}">@if(isset($data['subtitle'])){{$data['subtitle']}}@endif</h6>
+                </div>
             </div>
-           
-        </div>
+            <br>
+            <div class="row justify-content-between">
+                <div class="col-12 text-center mx-auto d-block" id="social">
+                    @if (isset($data['card_network']))
+                        @foreach ($data['card_network'] as $item)
+                        <a class="btn btn-social-icon {{$item['social_network']['btn_network']}}" href="{{$item['url']}}">
+                            <span class="{{$item['social_network']['icon']}"></span>
+                        </a>
+                        @endforeach
+                    @endif
+                </div>
+            </div>
+            
     </div>
-    <br>
-    <div class="row justify-content-between">
-        <div class="col-sm-12 text-center" id="social">
-            @if (isset($data['card_network']))
-                @foreach ($data['card_network'] as $item)
-                 <a class="btn btn-social-icon {{$item['social_network']['btn_network']}}" href="{{$item['url']}}">
-                    <i class="{{$item['social_network']['icon']}}"></i>
-                  </a>
-                @endforeach
-            @endif
-        </div>
-    </div>
-</div>
+
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
