@@ -12,28 +12,30 @@
         <div class="modal-body">
           <div class="row">
           @forelse ($memberships as $membership)
+          @if ($membership->id != 2)
           <div class="col-sm-4">
-          <div class="card">
-            <div class="card-header">
-              {{$membership->membership}}
-            </div>
-            <div class="card-body">
-              <blockquote class="blockquote mb-0">
-                <p>{!!$membership->description !!}</p>
-                <footer class="blockquote-footer">Cantidad de tarjetas: {{$membership->quantity}} </footer>
-              </blockquote>
-            </div>
-            <div class="card-footer">
-                @if ($membership->id == 2)
-                <button type="button" class="btn btn-success" onclick="Profile.purchase_extra({{$membership->id}})">Comprar membresia <i
-                    class='fas fa-window-close'></i></button>
-                @else
-                <button type="button" class="btn btn-success" onclick="Profile.purchase({{$membership->id}})">Comprar membresia <i
-                    class='fas fa-window-close'></i></button>
-                @endif
+            <div class="card">
+              <div class="card-header">
+                {{$membership->membership}}
               </div>
-          </div>
-          </div>
+              <div class="card-body">
+                <blockquote class="blockquote mb-0">
+                  <p>{!!$membership->description !!}</p>
+                  <footer class="blockquote-footer">Cantidad de tarjetas: {{$membership->quantity}} </footer>
+                </blockquote>
+              </div>
+              <div class="card-footer">
+                  @if ($membership->id == 2)
+                  <button type="button" class="btn btn-success" onclick="Profile.purchase_extra({{$membership->id}})">Comprar membresia <i
+                      class='fas fa-window-close'></i></button>
+                  @else
+                  <button type="button" class="btn btn-success" onclick="Profile.purchase({{$membership->id}})">Comprar membresia <i
+                      class='fas fa-window-close'></i></button>
+                  @endif
+                </div>
+            </div>
+            </div>
+          @endif
           @empty
               
           @endforelse
