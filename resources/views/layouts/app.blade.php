@@ -11,7 +11,7 @@
 
 	<script src="https://kit.fontawesome.com/7267d16efc.js" crossorigin="anonymous"></script>
 	<!-- CSS Files -->
-	<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/app.css') }}">
 	<link rel="stylesheet" href="{{ asset('assets/css/bootstrap-social.css') }}">
 	
 	<link rel="stylesheet" href="{{ asset('assets/css/azzara.min.css') }}">
@@ -44,11 +44,7 @@
 	</div>
 </div>
 @yield('modal')
-<!--   Core JS Files   -->
-
-<script src="{{ asset('assets/js/core/jquery.3.2.1.min.js') }}"></script>
-<script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
-<script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
+<script src="{{ asset('js/app.js') }}"></script>
 
 <!-- jQuery UI -->
 <script src="{{ asset('assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js') }}"></script>
