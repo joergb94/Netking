@@ -17,6 +17,7 @@ class CreateCardDetailsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('card_id')->nullable();
             $table->unsignedBigInteger('card_item_id')->nullable();
+            $table->unsignedBigInteger('type_card_detail_id')->nullable();
             $table->string('mat', 3)->default('CaD');
             $table->string('name', 100)->nullable();
             $table->integer('order')->default(0);
@@ -28,6 +29,7 @@ class CreateCardDetailsTable extends Migration
              //foreing key 
              $table->foreign('card_id')->references('id')->on('cards')->onDelete('cascade');
              $table->foreign('card_item_id')->references('id')->on('cards_items')->onDelete('cascade');  
+             $table->foreign('type_card_detail_id')->references('id')->on('type_card_details')->onDelete('cascade');  
         });
     }
 
