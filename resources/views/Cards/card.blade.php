@@ -33,10 +33,7 @@
         width: 10px;
     }
 
-/* Track */
-::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 1px grey; 
-}
+
  
 /* Handle */
 ::-webkit-scrollbar-thumb {
@@ -165,7 +162,6 @@
                     @endif
                 </div>
             </div>
-            
     </div>
 
     
