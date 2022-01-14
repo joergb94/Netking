@@ -154,27 +154,32 @@ const Cards = {
     let head = $('#head_orientation').val();
     let social_n = '';
 
-    if(shape_image == 0){
-      $('#imageProfile').removeClass('rounded-circle');
-      $('#imageProfile').addClass('rounded');
-    
-    }else{
-      $('#imageProfile').removeClass('rounded');
-      $('#imageProfile').addClass('rounded-circle');
-    }
+      if(shape_image.length > 0){
+          if(shape_image == 1){
 
-    if(head == 0){
-      $('#contend-image').removeClass('col-sm-12');
-      $('#contend-title').removeClass('col-sm-12');
-      $('#contend-image').addClass('col-sm-4');
-      $('#contend-title').addClass('col-sm-8');
-    
-    }else{
-      $('#contend-image').removeClass('col-sm-4');
-      $('#contend-title').removeClass('col-sm-8');
-      $('#contend-image').addClass('col-sm-12');
-      $('#contend-title').addClass('col-sm-12');
-    }
+            $('#imageProfile').removeClass('rounded-circle');
+            $('#imageProfile').addClass('rounded');
+          
+          }else{
+            $('#imageProfile').removeClass('rounded');
+            $('#imageProfile').addClass('rounded-circle');
+          }
+      }
+      if(head.length > 0){
+        if(head == 1){
+          $('#contend-image').removeClass('col-sm-12');
+          $('#contend-title').removeClass('col-sm-12');
+          $('#contend-image').addClass('col-sm-4');
+          $('#contend-title').addClass('col-sm-8');
+        
+        }else{
+          $('#contend-image').removeClass('col-sm-4');
+          $('#contend-title').removeClass('col-sm-8');
+          $('#contend-image').addClass('col-sm-12');
+          $('#contend-title').addClass('col-sm-12');
+        }
+      }
+      
 
     document.getElementById("content-title").innerHTML = largeTitle > 0? `<h1 class="text-color" id="titlephone">${$("#title").val()}</h1>`
                                                                        :`<h2 class="text-color" id="titlephone">${$("#title").val()}</h2>`;;

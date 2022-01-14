@@ -29,7 +29,7 @@
                   @include('Cards.itemsCreate.cardForm')
                 </div>
                 <div id="network" class="container tab-pane fade"><br>
-                  @include('Cards.itemsCreate.networkFormCreate')
+                  @include('Cards.itemsCreate.networkForm')
                 </div>
                 <div id="detail" class="container tab-pane fade"><br>
                   @include('Cards.itemsCreate.detailForm')
@@ -53,7 +53,7 @@
   <div class="col-sm-4 all-screen">
          <div class="card device-case">
             <div class="mobile-screen" id="mobil-vition">
-            @include('Cards.itemsCreate.keyplCreate')
+            @include('Cards.itemsCreate.keypl')
             </div>
          </div>
   </div>

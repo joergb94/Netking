@@ -521,7 +521,9 @@ ul {
 	transition-duration: 0.4s;
 	transform: scale(0);
   }
-  
+  label .full{
+	width: 100%;
+  }
   label img {
 	height: 100px;
 	width: 100px;
@@ -544,5 +546,20 @@ ul {
 	/* box-shadow: 0 0 5px #333; */
 	z-index: -1;
   }
+
+  .image-form{
+	   max-width: 40px;
+	   max-height: 40px;
+   }
   
+  .image-form-1{
+		max-width: 80px;
+		max-height: 300px;
+   }
+
+  .image-form-0{
+		max-width: 300px;
+		max-height: 60px;
+	}
+
 
