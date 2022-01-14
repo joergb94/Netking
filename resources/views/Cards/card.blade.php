@@ -1,25 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Card</title>
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>Azzara Bootstrap 4 Admin Dashboard</title>
+	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+	<link rel="icon" href="assets/img/icon.ico" type="image/x-icon"/>
+	<meta name="csrf-token" content="{{ csrf_token() }}" />
 	<!-- Fonts and icons -->
 	<script src="{{ asset('assets/js/plugin/webfont/webfont.min.js') }}"></script>
 
 	<script src="https://kit.fontawesome.com/7267d16efc.js" crossorigin="anonymous"></script>
 	<!-- CSS Files -->
-	<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/app.css') }}">
 	<link rel="stylesheet" href="{{ asset('assets/css/bootstrap-social.css') }}">
+	
 	<link rel="stylesheet" href="{{ asset('assets/css/azzara.min.css') }}">
 
 	<!-- CSS Just for demo purpose, don't include it in your project -->
 	<link rel="stylesheet" href="{{ asset('assets/css/demo.css') }}">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?famil">
+	<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Sans:wght@300&family=Island+Moments&family=M+PLUS+1p&family=Playfair+Display:ital@1&family=Pushster&family=Roboto+Mono:wght@200&family=Roboto:wght@100&family=Shizuru&display=swap" rel="stylesheet">
+
 </head>
 
 <style>
@@ -127,10 +129,10 @@
             <br>
             <div class="col-sm-12">
                 <div class="row justify-content-between">
-                    <div class="{{($card_style['head_orientation'] == 0)?'col-4':'col-12'}} text-center" id="contend-image">
+                    <div class="{{($card_style['head_orientation'] == 1)?'col-4':'col-12'}} text-center" id="contend-image">
                         <img src="{{(isset($data['img_name']))? $data['img_path'].$data['img_name']:'https://www.w3schools.com/bootstrap4/cinqueterre.jpg'}}" class="{{$card_style['shape_image']?'rounded-circle':'rounded'}}" alt="Cinque Terre" width="100px" height="100px" id="imageProfile"> 
                     </div>
-                    <div class="{{($card_style['head_orientation'] == 0)?'col-8':'col-12'}} text-center" id="contend-title">
+                    <div class="{{($card_style['head_orientation'] == 1)?'col-8':'col-12'}} text-center" id="contend-title">
                         <br>
                         <div class="col-12" id='content-title'>
                             @if($data['large_text'])
@@ -153,18 +155,18 @@
             <br>
             <div class="row justify-content-between">
                 <div class="col-12 text-center mx-auto d-block" id="social">
-                    @if (isset($data['card_network']))
+                   @if (isset($data['card_network']))
                         @foreach ($data['card_network'] as $item)
                         <a class="btn btn-social-icon {{$item['social_network']['btn_network']}}" href="{{$item['url']}}">
-                            <span class="{{$item['social_network']['icon']}"></span>
+                            <span class="{{$item['social_network']['icon']}}"></span>
                         </a>
                         @endforeach
                     @endif
                 </div>
-            </div>
+            </div> 
     </div>
 
     
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+   
 </body>
 </html>

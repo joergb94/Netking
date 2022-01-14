@@ -1,4 +1,4 @@
- <div class="col-sm-12" id='data-card'>
+<div class="col-sm-12" id='data-card'>
           <div class="form-group">
             <h3>Forma de imagen:</h3>
               <div class="col-sm-12">
@@ -7,7 +7,7 @@
                           <div class="col-sm-6">
                               <ul>
                                 <li>
-                                  <input type="checkbox" class="image-shapes shape1"  value="1"  id="myCheckbox1" checked disabled/>
+                                  <input type="checkbox" class="image-shapes shape1"  value="1"  id="myCheckbox1" {!! $card_style['shape_image']  == 1?'checked disabled':''!!}/>
                                   <label for="myCheckbox1"><img class="rounded" src="{{asset('img/shape.jpg')}}" /></label>
                                 </li>
                               </ul>
@@ -15,14 +15,14 @@
                           <div class="col-sm-6">
                             <ul>
                               <li>
-                                <input type="checkbox" class="image-shapes shape0"  value="0" id="myCheckbox2" />
+                                <input type="checkbox" class="image-shapes shape0"  value="0" id="myCheckbox2" {!! $card_style['shape_image']  == 0?'checked disabled':''!!} />
                                 <label for="myCheckbox2"><img class="rounded-circle" src="{{asset('img/shape.jpg')}}" /></label>
                               </li>
                             </ul>
                           </div>
                       </div>
                     </div>
-                      <input type="hidden" name="shape_image" onchange="Cards.prev()" id="shape_image"  value="1">
+                      <input type="hidden" name="shape_image" onchange="Cards.prev()" id="shape_image"  value="{{$card_style['shape_image']}}">
               </div>
           </div>
           <div class="form-group">
@@ -33,7 +33,7 @@
                           <div class="col-sm-6">
                               <ul>
                                 <li>
-                                  <input type="checkbox" class="head_orientation orientation0"  value="0"  id="myCheckbox3" checked disabled />
+                                  <input type="checkbox" class="head_orientation orientation0"  value="0"  id="myCheckbox3" {!! $card_style['head_orientation']  == 0?'checked disabled':''!!}/>
                                   <label for="myCheckbox3">
                                     <div class="col-12">
                                       <div class="row">
@@ -56,7 +56,7 @@
                           <div class="col-sm-6">
                             <ul>
                               <li>
-                                <input type="checkbox" class="head_orientation orientation1"  value="1" id="myCheckbox4" />
+                                <input type="checkbox" class="head_orientation orientation1"  value="1" id="myCheckbox4" {!! $card_style['head_orientation']  == 1?'checked disabled':''!!} />
                                 <label for="myCheckbox4">
                                   <div class="col-12">
                                     <br>
@@ -80,7 +80,7 @@
                           </div>
                       </div>
                     </div>
-                    <input type="hidden" id="head_orientation"  onchange="Cards.prev()" name="head_orientation"  value="0">
+                    <input type="hidden" id="head_orientation"  onchange="Cards.prev()" name="head_orientation"  value="{{$card_style['head_orientation']}}">
               </div>
           </div>
           <div class="form-group">
@@ -94,23 +94,6 @@
           <div class="form-group">
             <label>Subtitle:</label>
             <input type="text" onchange="Cards.prev()" id="subtitle" name="subtitle" value="{{isset($data['subtitle'])?$data['subtitle']:''}}" class="form-control">
-          </div>
-          <div class="form-group">
-            <label>Orientation:</label>
-            <select class="form-control" id="head_orientation"  onchange="Cards.prev()" name="head_orientation">
-                    @if (isset($card_style))
-                    @if ($card_style->head_orientation == 1)
-                    <option value="0">Vertical</option>
-                    <option value="1" selected>Horizontal</option>
-                    @else
-                    <option value="0" selected>Vertical</option>
-                    <option value="1" >Horizontal</option>
-                    @endif
-                    @else
-                    <option value="0" >Vertical</option>
-                    <option value="1" >Horizontal</option>
-                    @endif
-            </select>
           </div>
           <div class="form-group">
             <label>Theme:</label>
@@ -172,7 +155,7 @@
             <input type="text" id="ocation" onchange="Cards.prev()" name="location" value="{{(isset($data['location']))?$data['location']:''}}" class="form-control">
           </div>
  </div>       
- <script>
+<script>
     var myPicker = new JSColor('#colorInput', {format:'hex'});
 
      $('.image-shapes').click(function(){

@@ -168,8 +168,6 @@ class CardController extends Controller
                     'text_styles' => $text_styles
                 ]);
 
-            }else{
-                return view('errors.404');
             }
           
            

@@ -8,7 +8,7 @@
             <div class="col-sm-12 text-center" id="contend-title">
                 <br>
                 <div class="col-sm-12" id='content-title'>
-                        <h2 class="text-color" id="titlephone">@if(isset($data['title'])){{$data['title']}}@endif</h2>
+                        <h2 class="text-color" id="titlephone"></h2>
                 </div>
                     <p class="text-color" id="namephone">{{$user['name']}}</p>
              
