@@ -15,7 +15,10 @@ class Card_detail_network extends Model implements Auditable
 
     protected $guarded=[];
 
-
+    public function social_network()
+    {
+        return $this->hasOne('App\Models\NetworkSocial','id','network_social_id');
+    }
     /**
     * @return bool
     */
@@ -34,9 +37,4 @@ class Card_detail_network extends Model implements Auditable
    {
        return $query->where('status', $status);
    }
-
-   public function social_network()
-    {
-        return $this->hasOne('App\Models\NetworkSocial','id','network_social_id');
-    }
 }

@@ -15,10 +15,10 @@
                     <a class="nav-link active" data-toggle="tab" href="#home">Principal Data</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#menu1">Networks Data</a>
+                    <a class="nav-link" data-toggle="tab" href="#networks">Networks Data</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#menu2">Details Data</a>
+                    <a class="nav-link" data-toggle="tab" href="#detail">Details Data</a>
                   </li>
                 </ul>
   
@@ -27,10 +27,10 @@
                   <div id="home" class="container tab-pane active"><br>
                     @include('Cards.itemsCreate.cardForm')
                   </div>
-                  <div id="menu1" class="container tab-pane fade"><br>
+                  <div id="networks" class="container tab-pane fade"><br>
                     @include('Cards.itemsCreate.networkForm')
                   </div>
-                  <div id="menu2" class="container tab-pane fade"><br>
+                  <div id="detail" class="container tab-pane fade"><br>
                     @include('Cards.itemsCreate.detailForm')
                   </div>
                 </div>
