@@ -1,16 +1,22 @@
  <div class="col-sm-12" id='data-card'>
           <div class="form-group">
+              <div class="col-sm-12">
+                <ul>
+                  <li>
+                    <input type="checkbox" class="image-shapes shape1"  value="1"  id="myCheckbox1" checked disabled/>
+                    <label for="myCheckbox1"><img class="rounded" src="{{asset('img/shape.jpg')}}" /></label>
+                  </li>
+                  <li>
+                    <input type="checkbox" class="image-shapes shape0"  value="0" id="myCheckbox2" />
+                    <label for="myCheckbox2"><img class="rounded-circle" src="{{asset('img/shape.jpg')}}" /></label>
+                  </li>
+                </ul>
+                <input type="hidden" name="" onchange="Cards.prev()" id="shape_image"  value="1">
+              </div>
+          </div>
+          <div class="form-group">
             <label>Image Profile:</label>
-              <div class="input-group mb-3">
-                <input type="file" class="form-control" id="image" name="image">
-                <div class="input-group-append">
-                  <select class="form-control max-height" id="shape_image"  onchange="Cards.prev()" name="shape_image">
-                    <option value="0">Square</option>
-                    <option value="1" >Rounded</option>
-                  </select>
-                </div>
-                 
-            </div> 
+              <input type="file" class="form-control-file border" id="image" name="image">
           </div>
           <div class="form-group">
             <label>Title:</label>
@@ -99,4 +105,25 @@
  </div>       
 <script>
     var myPicker = new JSColor('#colorInput', {format:'hex'});
+
+     $('.image-shapes').click(function(){
+         let shape = $(this).val();
+         console.log(shape);
+
+         let checDisabled1 = shape != 1? document.getElementById("myCheckbox1")
+                                    : document.getElementById("myCheckbox2");
+
+        let checDisabled2 = shape == 1? document.getElementById("myCheckbox1")
+                                    : document.getElementById("myCheckbox2");
+         
+         
+                                    checDisabled1.disabled = false;
+                                    checDisabled2.disabled = true;
+
+        $('#shape_image').trigger("change").val(shape);
+
+        $(".image-shapes").prop("checked", false);
+        $(".shape"+shape).prop("checked", true);
+     });
+
 </script>
