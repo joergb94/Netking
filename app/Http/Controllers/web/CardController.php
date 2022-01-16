@@ -12,6 +12,7 @@ use App\Http\Requests\Cards\CardsIdRequest;
 use App\Http\Requests\Cards\CardsUpdateRequest;
 use App\Http\Requests\Cards\CardsStoreRequest;
 use App\Models\Cards;
+use App\Models\Cards_items;
 use App\Models\NetworkSocial;
 use App\Models\Cards_style_detail;
 use App\Models\Card_detail_network;
@@ -55,7 +56,8 @@ class CardController extends Controller
                 $user = User::find(Auth::user()->id);
                 $ns = NetworkSocial::all();
                 $text_styles = text_style::all();
-                return view('Cards.create', ['backgrounds' => $background, 'user' => $user, 'ns' => $ns, 'text_styles' => $text_styles]);
+                $cardItems = Cards_items::all();
+                return view('Cards.create', ['cardItems'=>$cardItems,'backgrounds' => $background, 'user' => $user, 'ns' => $ns, 'text_styles' => $text_styles]);
             }
         }
     }

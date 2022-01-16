@@ -34,93 +34,91 @@
     ::-webkit-scrollbar {
         width: 10px;
     }
-
-
  
-/* Handle */
-::-webkit-scrollbar-thumb {
-    background: {!!$data['color']!!};
-}
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: {!!$data['color']!!};
+    }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: {!!$data['color']!!}; 
-}
-@media only screen and (max-width:  768px) {
-    body, html  {
-        /* The image used */
-        background-image: url('{{$actual_bg}}');
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: {!!$data['color']!!}; 
+    }
+    @media only screen and (max-width:  768px) {
+        body, html  {
+            /* The image used */
+            background-image: url('{{$actual_bg}}');
 
-        /* Full height */
-         height: 100vh;
-        
-        /* Center and scale the image nicely */
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
+            /* Full height */
+            height: 100vh;
+            
+            /* Center and scale the image nicely */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
 
-        color: white;
-        font-weight: bold;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 2;
-        padding: 20px;
-        text-align: center;
-        }
-}
-.bg-image {
-    display:none;
-}
-
-@media only screen and (min-width:  768px) {
-    
+            color: white;
+            font-weight: bold;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            padding: 20px;
+            text-align: center;
+            }
+    }
     .bg-image {
-        /* The image used */
-        background-image: url('{{$actual_bg}}');
-        display:block;
-        /* Add the blur effect */
-        filter: blur(10px);
-        -webkit-filter: blur(10px);
-        
-        /* Full height */
-        height: 100%; 
+        display:none;
+    }
 
-        /* Center and scale the image nicely */
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        }
-}
-.bg { 
+    @media only screen and (min-width:  768px) {
+        
+        .bg-image {
+            /* The image used */
+            background-image: url('{{$actual_bg}}');
+            display:block;
+            /* Add the blur effect */
+            filter: blur(10px);
+            -webkit-filter: blur(10px);
+            
+            /* Full height */
+            height: 100%; 
+
+            /* Center and scale the image nicely */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            }
+    }
+    .bg { 
         height: 100%;
     }
-@media only screen and (min-width:  768px) {
-    .bg {
-        /* The image used */
-        background-image: url('{{$actual_bg}}');
-        overflow-y: scroll;
-        /* Full height */
-        height: 100%;
-        overflow-y: scroll;
-        /* Center and scale the image nicely */
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
+    @media only screen and (min-width:  768px) {
+        .bg {
+            /* The image used */
+            background-image: url('{{$actual_bg}}');
+            overflow-y: scroll;
+            /* Full height */
+            height: 100%;
+            overflow-y: scroll;
+            /* Center and scale the image nicely */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
 
-        color: white;
-        font-weight: bold;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 2;
-        width: 80%;
-        padding: 20px;
-        text-align: center;
-        }
-}
+            color: white;
+            font-weight: bold;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            width: 80%;
+            padding: 20px;
+            text-align: center;
+            }
+    }
 </style>
 
 <body>

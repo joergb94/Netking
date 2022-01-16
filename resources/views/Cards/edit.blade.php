@@ -9,32 +9,12 @@
   
           <!-- Modal body -->
           <div class="modal-body">
-            <form id="card-form">
-                <ul class="nav nav-tabs" role="tablist">
-                  <li class="nav-item">
-                    <a class="nav-link active" data-toggle="tab" href="#home">Principal Data</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#networks">Networks Data</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#detail">Details Data</a>
-                  </li>
-                </ul>
-  
-                <!-- Tab panes -->
-                <div class="tab-content">
-                  <div id="home" class="container tab-pane active"><br>
-                    @include('Cards.itemsUpdate.cardForm')
-                  </div>
-                  <div id="networks" class="container tab-pane fade"><br>
-                    @include('Cards.itemsUpdate.networkForm')
-                  </div>
-                  <div id="detail" class="container tab-pane fade"><br>
-                    @include('Cards.itemsUpdate.detailForm')
-                  </div>
-                </div>
-            </form>
+            @foreach($cardItems as $ci)
+              <button type="button" class="btn btn-primary btn-block">Full-Width Button</button>
+              <div class="col-sm-12" id="">
+                 @include('Cards.itemsUpdate.TypeForms.form{{$ci->id}}')
+              </div>
+            @endforeach
           </div>
   
           <!-- Modal footer -->
