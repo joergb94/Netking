@@ -16,11 +16,16 @@ class CardItems extends Seeder
     {
         $card_items = [
             ['mat'=> 'CaI','name'=> 'Header','active'=> 1,],
-            ['mat'=> 'CaI','name'=> 'About me','active'=> 1,], 
-            ['mat'=> 'CaI','name'=> 'Videos','active'=> 1,],       ];
+            ['mat'=> 'CaI','name'=> 'Links','active'=> 1,], 
+            ['mat'=> 'CaI','name'=> 'Video de Youtube','active'=> 1,], 
+            ['mat'=> 'CaI','name'=> 'Video de Tiktok','active'=> 1,], 
+            ['mat'=> 'CaI','name'=> 'Publicacion de Facebook','active'=> 1,],     
+            ['mat'=> 'CaI','name'=> 'Publicacion de Twiter','active'=> 1,],     
+            ['mat'=> 'CaI','name'=> 'Archivo PDF','active'=> 1,],     
+            ['mat'=> 'CaI','name'=> 'Contacto (email)','active'=> 1,],];
 
-        foreach($card_items as $card_item){
-                DB::table('cards_items')->insert($card_items);
-        }
+    
+        DB::table('cards_items')->insert($card_items);
+
     }
 }

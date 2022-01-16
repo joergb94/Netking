@@ -118,7 +118,7 @@
             </select>
           </div>
           <div class="form-group">
-          <label>Backgroud:</label>
+            <label>Backgroud:</label>
             <div class="custom-control custom-checkbox">
                 <select  id="largeTitle" onchange="Cards.prev()" name="large_text" class="form-control">
                   @if (isset($data))
