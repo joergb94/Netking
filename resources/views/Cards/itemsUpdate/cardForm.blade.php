@@ -88,14 +88,6 @@
               <input type="file" class="form-control-file border" id="image" name="image">
           </div>
           <div class="form-group">
-            <label>Title:</label>
-            <input type="text" onchange="Cards.prev()" id="title" name="title" value="{{isset($data['title'])?$data['title']:''}}" class="form-control">
-          </div>
-          <div class="form-group">
-            <label>Subtitle:</label>
-            <input type="text" onchange="Cards.prev()" id="subtitle" name="subtitle" value="{{isset($data['subtitle'])?$data['subtitle']:''}}" class="form-control">
-          </div>
-          <div class="form-group">
             <label>Theme:</label>
             <input type="text" onchange="Cards.prev()" id="theme" name="theme" value="" class="form-control">
           </div>
@@ -118,7 +110,7 @@
             </select>
           </div>
           <div class="form-group">
-            <label>Backgroud:</label>
+            <label>Size Text Header:</label>
             <div class="custom-control custom-checkbox">
                 <select  id="largeTitle" onchange="Cards.prev()" name="large_text" class="form-control">
                   @if (isset($data))
@@ -142,6 +134,7 @@
             <input onchange="Cards.prev()"  type="text" id="colorInput" name='color' data-jscolor="" class="form-control" value="{{(isset($data['color']))?$data['color']:''}}">
           </div>
           <div class="form-group">
+          <label>Text Style:</label>
             <select onchange="Cards.prev()" name="text_style" id="text_style" class="form-control">
               @forelse ($text_styles as $text_style)
                   <option value="{{$text_style['id']}}">{{$text_style['name']}}</option>

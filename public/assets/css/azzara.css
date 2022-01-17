@@ -312,7 +312,7 @@ body {
   height: 100vh; }
 
 .main-header {
-  background: #ffffff;
+  background: #FFBF2F;
   min-height: 55px;
   width: 100%;
   position: fixed;
@@ -977,7 +977,7 @@ body {
 .main-header[data-background-color] .logo-header {
   background-color: rgba(31, 30, 30, 0.12) !important; }
   .main-header[data-background-color] .logo-header .navbar-toggler .navbar-toggler-icon {
-    color: #ffffff !important; }
+    color: #FFBF2F !important; }
   .main-header[data-background-color] .logo-header .more {
     color: #ffffff !important; }
 .main-header[data-background-color] .navbar-header .nav-search .input-group {
@@ -1037,9 +1037,9 @@ body {
     background: #177dff !important; }
 
 .main-header[data-background-color="purple"] {
-  background: #716aca !important; }
+  background: #FFBF2F !important; }
   .main-header[data-background-color="purple"] .navbar-header {
-    background: #716aca !important; }
+    background: #FFBF2F !important; }
 
 .main-header[data-background-color="light-blue"] {
   background: #36a3f7 !important; }

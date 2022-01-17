@@ -10,13 +10,33 @@
 
         <!-- Modal body -->
         <div class="modal-body">
-            @foreach($cardItems as $ci)
-              <button type="button" class="btn btn-primary btn-block"   onclick="$('#div-{{$ci->id}}').slideToggle('slow');" >{{$ci->name}}</button>
-              <div class="col-sm-12" style="display:none" id="div-{{$ci->id}}">
-                <br>
-                 @include('Cards.itemsUpdate.TypeForms.form'.$ci->id,['data' => $ci])
-              </div>
-            @endforeach
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                  <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#General">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#styleK">Menu 1</a>
+                  </li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                  <div id="General" class="container tab-pane active"><br>
+                      @foreach($cardItems as $ci)
+                        <button type="button" class="btn btn-primary btn-block"   onclick="$('#div-{{$ci->id}}').slideToggle('slow');" >{{$ci->name}}</button>
+                          <div class="col-sm-12" style="display:none" id="div-{{$ci->id}}">
+                          <br>
+                          @include('Cards.itemsUpdate.TypeForms.form'.$ci->id,['data' => $ci])
+                        </div>
+                        <br>
+                      @endforeach
+                  </div>
+                  <div id="styleK" class="container tab-pane fade"><br>
+                        @include('Cards.itemsCreate.cardForm')
+                  </div>
+                </div>
+          
         </div>
 
         <!-- Modal footer -->

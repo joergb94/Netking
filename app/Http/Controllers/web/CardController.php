@@ -13,6 +13,7 @@ use App\Http\Requests\Cards\CardsUpdateRequest;
 use App\Http\Requests\Cards\CardsStoreRequest;
 use App\Models\Cards;
 use App\Models\Cards_items;
+use App\Models\Card_detail;
 use App\Models\NetworkSocial;
 use App\Models\Cards_style_detail;
 use App\Models\Card_detail_network;
@@ -93,13 +94,16 @@ class CardController extends Controller
     {
         if ($request->ajax()) {
             $nsInUse = [];
+            $cardItemsDetail =[];
             $data = $this->CardsRepository->show($id);
             $actual_bg = $data->background_image->description;
             $background = Background_image::all();
             $card_style = Cards_style_detail::where('card_id', $id)->first();
             $user = User::find($data['user_id']);
             $nsFree = NetworkSocial::all();
+            $cardItems = Cards_items::all();
             $text_styles = text_style::all();
+
             foreach ($nsFree as $ns) {
                 $inUse = Card_detail_network::where('network_social_id', $ns['id'])
                     ->where('card_id', $data['id'])
@@ -107,8 +111,18 @@ class CardController extends Controller
                 array_push($nsInUse, ['nsData' => $ns, 'nsUser' => $inUse]);
             }
 
-
+            foreach ($cardItems as $ci) {
+                $card_detail = Card_detail::where('card_item_id', $ci['id'])
+                    ->where('card_id', $data['id'])
+                    ->first();
+                if($card_detail){
+                    array_push($cardItemsDetail, ['item' => $ci, 'card_detail' => $card_detail]);
+                }
+               
+            }
+         
             return view('Cards.edit', [
+                'cardItems'=>$cardItemsDetail,
                 'data' => $data,
                 'backgrounds' => $background,
                 'actual_bg' => $actual_bg,
@@ -148,20 +162,35 @@ class CardController extends Controller
         
             if(Card::where('id',$idStr[0])->exists()){
                 $nsInUse = [];
+                $cardItemsDetail =[];
                 $data = $this->CardsRepository->show($idStr[0]);
                 $actual_bg = $data->background_image->description;
                 $card_style = Cards_style_detail::where('card_id', $idStr[0])->first();
                 $user = User::find($data['user_id']);
                 $nsFree = NetworkSocial::all();
                 $text_styles = text_style::all();
+                $cardItems = Cards_items::all();
+                $text_styles = text_style::all();
+    
                 foreach ($nsFree as $ns) {
                     $inUse = Card_detail_network::where('network_social_id', $ns['id'])
                         ->where('card_id', $data['id'])
                         ->first();
                     array_push($nsInUse, ['nsData' => $ns, 'nsUser' => $inUse]);
                 }
+    
+                foreach ($cardItems as $ci) {
+                    $card_detail = Card_detail::where('card_item_id', $ci['id'])
+                        ->where('card_id', $data['id'])
+                        ->first();
+                    if($card_detail){
+                        array_push($cardItemsDetail, ['item' => $ci, 'card_detail' => $card_detail]);
+                    }
+                   
+                }
 
                 return view('Cards.card', [
+                    'cardItems'=>$cardItemsDetail,
                     'data' => $data,
                     'actual_bg' => $actual_bg,
                     'user' => $user,
@@ -203,6 +232,60 @@ class CardController extends Controller
         if ($request->ajax()) {
             $status = $this->GeneralRepository->card_max();
             return response()->json($status);
+        }
+    }
+
+    public function update_card_item(Request $request,$id)
+    {
+        if ($request->ajax()) {
+            $card_item = Card_detail::find($id);
+            $card_item->update([
+                    'name'=>$request->name,
+                    'description'=>$request->description,
+             ]);
+           
+            if(Card::where('id',$card_item['card_id'])->exists()){
+                        $nsInUse = [];
+                        $cardItemsDetail =[];
+                        $background = Background_image::all();
+                        $data = $this->CardsRepository->show($card_item['card_id']);
+                        $actual_bg = $data->background_image->description;
+                        $card_style = Cards_style_detail::where('card_id', $card_item['card_id'])->first();
+                        $user = User::find($data['user_id']);
+                        $nsFree = NetworkSocial::all();
+                        $text_styles = text_style::all();
+                        $cardItems = Cards_items::all();
+                        $text_styles = text_style::all();
+            
+                        foreach ($nsFree as $ns) {
+                            $inUse = Card_detail_network::where('network_social_id', $ns['id'])
+                                ->where('card_id', $data['id'])
+                                ->first();
+                            array_push($nsInUse, ['nsData' => $ns, 'nsUser' => $inUse]);
+                        }
+            
+                        foreach ($cardItems as $ci) {
+                            $card_detail = Card_detail::where('card_item_id', $ci['id'])
+                                ->where('card_id', $data['id'])
+                                ->first();
+                            if($card_detail){
+                                array_push($cardItemsDetail, ['item' => $ci, 'card_detail' => $card_detail]);
+                            }
+                        
+                        }
+        
+                        return view('Cards.itemsUpdate.keypl', [
+                            'cardItems'=>$cardItemsDetail,
+                            'data' => $data,
+                            'backgrounds' => $background,
+                            'actual_bg' => $actual_bg,
+                            'user' => $user,
+                            'card_style' => $card_style,
+                            'ns' => $nsInUse,
+                            'text_styles' => $text_styles
+                        ]);
+        
+            }
         }
     }
 }

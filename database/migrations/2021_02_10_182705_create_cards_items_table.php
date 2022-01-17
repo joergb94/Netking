@@ -17,6 +17,8 @@ class CreateCardsItemsTable extends Migration
             $table->id();
             $table->string('mat', 3)->default('CaI');
             $table->string('name', 100);
+            $table->string('icon', 100);
+            $table->string('style', 100);
             $table->boolean('active')->default(1);
             $table->timestamps();
             $table->softDeletes();

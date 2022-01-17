@@ -284,6 +284,18 @@
     background-image: url(https://images.unsplash.com/photo-1562619371-b67725b6fde2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjExMDAyOH&q=80&fm=jpg&crop=entropy&fit=max&h=900);
 }
 
+.mobile-screen-loadig{
+	border-radius: 25px;
+	background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden auto;
+    background-attachment: scroll;
+    background-position: center center;
+	min-height: 797px;
+	max-height: 812px;
+    background-image: url('../img/shape.jpg');
+}
+
 .device-case {
 	border: 15px solid black;
 	border-radius: 25px;
