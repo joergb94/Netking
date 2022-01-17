@@ -23,8 +23,8 @@
                 <div class="tab-content">
                   <div id="General" class="container tab-pane active"><br>
                       @foreach($cardItems as $ci)
-                        <button type="button" class="btn {{$ci['item']->style}} btn-block"   onclick="$('#div-{{$ci['card_detail']->id}}').slideToggle('slow');" ><h2>{{$ci['item']->name}} <i class="{{$ci['item']->icon}}"></i></h2></button>
-                          <div class="col-sm-12" style="display:none" id="div-{{$ci['card_detail']->id}}">
+                        <button type="button" class="btn {{$ci['item']->style}} btn-block"   onclick="transactions.toggle({{$ci['card_detail']->id}})" ><h2>{{$ci['item']->name}} <i class="{{$ci['item']->icon}}"></i></h2></button>
+                          <div class="col-sm-12 divs-data" style="display:none" id="div-{{$ci['card_detail']->id}}">
                           <br>
                           @include('Cards.itemsUpdate.TypeForms.form'.$ci['item']->id,['data' => $ci['card_detail']])
                         </div>
@@ -39,8 +39,6 @@
   
           <!-- Modal footer -->
           <div class="modal-footer">
-            <button type="button" class="btn btn-success btn-save" onclick="Cards.prev()">Preview <i
-              class='fas fa-plus'></i></button>
             <button type="button" class="btn btn-success btn-save" onclick="Cards.save('update',{{$data['id']}})">Update <i
                 class='fas fa-plus'></i></button>
             <button type="button" class="btn btn-danger" onclick="Cards.close()" >Cancel <i
@@ -51,9 +49,7 @@
     </div>
     <div class="col-sm-4 all-screen mx-auto d-block">
            <div class="card device-case">
-              <div class="mobile-screen" id="mobil-vition" style="background-image: url({{$actual_bg}})">
-                @include('Cards.itemsUpdate.keypl')
-              </div>
+              @include('Cards.itemsUpdate.keypl')
               <div class="mobile-screen-loadig bg-warning" id="loading-mobil-vition" style="display:none">
                   <div class="container text-center">
                     <br><br>

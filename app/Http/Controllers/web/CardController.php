@@ -108,7 +108,7 @@ class CardController extends Controller
                 $inUse = Card_detail_network::where('network_social_id', $ns['id'])
                     ->where('card_id', $data['id'])
                     ->first();
-                array_push($nsInUse, ['nsData' => $ns, 'nsUser' => $inUse]);
+                array_push($nsInUse, ['nsData' => $ns, 'nsUser' => $inUse,'card_id'=>$id]);
             }
 
             foreach ($cardItems as $ci) {
@@ -285,6 +285,65 @@ class CardController extends Controller
                             'text_styles' => $text_styles
                         ]);
         
+            }
+        }
+    }
+
+    public function update_asinc(Request $request, $id)
+    {
+        if ($request->ajax()) {
+            $card = Card::where('id', $id)->first();
+            if ($request['image']) {
+                $image = $request->file('image');
+                $nameImg = time() . $image->getClientOriginalName();
+                $file_path = '/images/card/profile/';
+                $image->move(public_path() . '/images/card/profile/', $nameImg);
+            } else {
+                $nameImg = $card->img_name;
+                $file_path = $card->img_path;
+            }
+            $data = $this->CardsRepository->update_asinc($id, $request->input(), $nameImg, $file_path);
+            if(Card::where('id',$data['id'])->exists()){
+                $nsInUse = [];
+                $cardItemsDetail =[];
+                $background = Background_image::all();
+                $data = $this->CardsRepository->show($data['id']);
+                $actual_bg = $data->background_image->description;
+                $card_style = Cards_style_detail::where('card_id', $data['id'])->first();
+                $user = User::find($data['user_id']);
+                $nsFree = NetworkSocial::all();
+                $text_styles = text_style::all();
+                $cardItems = Cards_items::all();
+                $text_styles = text_style::all();
+    
+                foreach ($nsFree as $ns) {
+                    $inUse = Card_detail_network::where('network_social_id', $ns['id'])
+                        ->where('card_id', $data['id'])
+                        ->first();
+                    array_push($nsInUse, ['nsData' => $ns, 'nsUser' => $inUse]);
+                }
+    
+                foreach ($cardItems as $ci) {
+                    $card_detail = Card_detail::where('card_item_id', $ci['id'])
+                        ->where('card_id', $data['id'])
+                        ->first();
+                    if($card_detail){
+                        array_push($cardItemsDetail, ['item' => $ci, 'card_detail' => $card_detail]);
+                    }
+                
+                }
+
+                return view('Cards.itemsUpdate.keypl', [
+                    'cardItems'=>$cardItemsDetail,
+                    'data' => $data,
+                    'backgrounds' => $background,
+                    'actual_bg' => $actual_bg,
+                    'user' => $user,
+                    'card_style' => $card_style,
+                    'ns' => $nsInUse,
+                    'text_styles' => $text_styles
+                ]);
+
             }
         }
     }

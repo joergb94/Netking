@@ -171,6 +171,51 @@ class CardsRepository
         });
     }
 
+    public function update_asinc($Card_id, array $data,$image,$path)
+    { 
+        $Card = $this->model->find($Card_id);
+        $Card_style = Cards_style_detail::where('card_id',$Card_id)->first();
+        return DB::transaction(function () use ($Card, $data,$Card_style,$Card_id,$image,$path) {
+            if ($Card->update([
+                'location' => $data['location']?$data['location']:null,
+                'large_text' => $data['large_text']?$data['large_text']:null,
+                'background_image_id' =>$data['background'],
+                'color' => $data['color']?$data['color']:'#fff',
+                'img_name' => $image?$image:null,
+                'img_path' => $path?$path:null,
+            ])) {
+                $Card_style->update([
+                'shape_image'=>$data['shape_image']?$data['shape_image']:0,
+                'head_orientation'=>$data['head_orientation']?$data['head_orientation']:0,
+                'shape'=>0,
+                'outline'=>0
+                ]);
+
+                if(isset($data['networks']))
+                {
+                    $Card_network = $this->card_detail_network::where('card_id', $Card_id)->delete();
+                    foreach ((array)$data['networks'] as $network) {
+                        $ns = json_decode($network);
+                           foreach ($ns as $key) {
+                            if($key->link != ''){
+                                $Card_facebook = $this->card_detail_network::create([
+                                    'card_id' => $Card->id,
+                                    'network_social_id' => $key->ns_id,
+                                    'url' => $key->link,
+                                ]);
+                            }
+                           }
+                    }
+                    
+                }
+
+                return $Card;
+            }
+
+            throw new GeneralException(__('There was an error updating the Card.'));
+        });
+    }
+
     /*
      * @param Providers $Provider
      * @param      $status

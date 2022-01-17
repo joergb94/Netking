@@ -14,7 +14,7 @@
                             <span class="{{$social['nsData']['icon']}}"></span>
                         </a>
                     </div>
-                    <input type="text" class="form-control form-control-sm n-social" onchange="Cards.prev()" value ="{{isset($social['nsUser'])?$social['nsUser']['url']:''}}"  id="{{$social['nsData']['name']}}" >
+                    <input type="text" class="form-control form-control-sm n-social" onchange="Cards.save_asinc({{$social['card_id']}})" value ="{{isset($social['nsUser'])?$social['nsUser']['url']:''}}"  id="{{$social['nsData']['name']}}" >
                     <input type="hidden"  class="n-button" value="{{$social['nsData']['btn_network']}}">
                     <input type="hidden"  class="n-icon" value="{{$social['nsData']['icon']}}">
                     <input type="hidden"  class="ns-id" value="{{$social['nsData']['id']}}">
