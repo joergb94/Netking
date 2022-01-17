@@ -1,5 +1,8 @@
 @extends('layouts.app')
-
+@section('style')
+<script async src="https://www.tiktok.com/embed.js"></script>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+@endsection
 @section('content')
 <div class="page-inner">
 <div class="card" id="index_blade">

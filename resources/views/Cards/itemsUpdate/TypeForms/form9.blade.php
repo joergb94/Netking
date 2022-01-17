@@ -1,12 +1,18 @@
 <div class="card">
-  <div class="card-header">Agregar Play list de Spotify</div>
+  <div class="card-header">Contacto</div>
   <div class="card-body">
-    <form id="facebook-form">
-        <div class="form-group">
-            <label for="email">Link de Spotify:</label>
-            <textarea class="form-control" rows="5" id="comment"></textarea>
+    <form id="contact-form">
+    <div class="form-group">
+            <label for="email">Titulo:</label>
+            <input type="email" class="form-control" placeholder="Enter email" value="{{$data->name}}" id="name{{$data->id}}">
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <div class="form-group">
+            <label for="email">Email address:</label>
+            <input type="email" class="form-control" placeholder="Enter email" value="{{$data->description}}" id="description{{$data->id}}">
+        </div>
+        <div class="form-group text-center">
+            <button type="button" class="btn btn-primary" onclick="Cards.save_item({{$data->id}},{{$data->card_item_id}})">Guardar</button>
+        </div>
     </form>
   </div>
 </div>

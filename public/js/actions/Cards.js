@@ -61,6 +61,27 @@ const transactions = {
         $('.btn-delete').hide();
         $('.btn-update').show();
     }
+  },
+  take_data_item: function(id,Type){
+    switch(Type) {
+      case 3:
+        let url =$("#description"+id).val();
+        let arrayUrl  = url.split('/');
+        let log = arrayUrl.length;
+
+        form = {
+          name:arrayUrl[log - 1],
+          description:$("#description"+id).val(),
+        };
+        break;
+      default:
+        form = {
+          name:$("#name"+id).val(),
+          description:$("#description"+id).val(),
+        };
+    }
+
+    return form
   }
 }
 //section for const js 
@@ -203,8 +224,32 @@ const Cards = {
   $(".text-color").css({"color": color });
 
   },
-  showColor:function(){
-    
+  save_item:function(id,Type){
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+    let form =transactions.take_data_item(id,Type);
+    $('#mobil-vition').hide();
+    $('#loading-mobil-vition').show();
+
+    $.ajax({
+      type: "POST",
+      url: url+'/updateItem/'+id,
+      data: form,
+      dataType: 'text',
+      success: function (data) {
+        $("#mobil-vition").empty().html(data);
+        $('#loading-mobil-vition').hide();
+        $('#mobil-vition').show();
+      },
+      error: function (data) {
+        $('.btn-save').prop("disabled", false);
+        console.log('Error:', data.responseText);
+        $("#mobil-vition").empty().html(data.responseText);
+      }
+    });
   }
 }
 background ={

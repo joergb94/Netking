@@ -15,14 +15,15 @@ class CardItems extends Seeder
     public function run()
     {
         $card_items = [
-            ['mat'=> 'CaI','name'=> 'Header','active'=> 1,],
-            ['mat'=> 'CaI','name'=> 'Links','active'=> 1,], 
-            ['mat'=> 'CaI','name'=> 'Video de Youtube','active'=> 1,], 
-            ['mat'=> 'CaI','name'=> 'Video de Tiktok','active'=> 1,], 
-            ['mat'=> 'CaI','name'=> 'Publicacion de Facebook','active'=> 1,],     
-            ['mat'=> 'CaI','name'=> 'Publicacion de Twiter','active'=> 1,],     
-            ['mat'=> 'CaI','name'=> 'Archivo PDF','active'=> 1,],     
-            ['mat'=> 'CaI','name'=> 'Contacto (email)','active'=> 1,],];
+            ['name'=> 'Header','icon'=> 'fa fa-heading','style'=> 'bg-secondary','active'=> 1,],
+            ['name'=> 'Links','icon'=> 'fa fa-link','style'=> 'bg-dark text-white','active'=> 1,], 
+            ['name'=> 'Video de Youtube','icon'=> 'fa fa-youtube','style'=> 'bg-danger text-white','active'=> 1,], 
+            ['name'=> 'Video de Tiktok','icon'=> 'fab fa-tiktok','style'=> 'bg-tiktok text-dark','active'=> 1,], 
+            ['name'=> 'Publicacion de Facebook','icon'=> 'fa fa-facebook','style'=> 'btn-facebook','active'=> 1,],     
+            ['name'=> 'Publicacion de Twiter','icon'=> 'fa fa-twitter','style'=> 'btn-twitter','active'=> 1,],     
+            ['name'=> 'Play list de Spotify','icon'=> 'fa fa-spotify','style'=> 'bg-success text-dark','active'=> 1,],     
+            ['name'=> 'Archivo PDF','icon'=> 'fa fa-file','style'=> 'bg-dark','active'=> 1,],     
+            ['name'=> 'Contacto (email)','icon'=> 'fa fa-envelope','style'=> 'bg-dark','active'=> 1,],];
 
     
         DB::table('cards_items')->insert($card_items);
