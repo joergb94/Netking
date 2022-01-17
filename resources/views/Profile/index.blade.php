@@ -6,7 +6,7 @@
     <div class="row">
       <div class="col-sm-6">
         <h4 class="card-title mb-0">
-          Profile  <i class='fa fa-qrcode'></i>
+          Profile  <i class='fa fa-user'></i>
 
         </h4>
       </div>
