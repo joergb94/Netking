@@ -71,4 +71,49 @@ class ProfileController extends Controller
             ));
         }
     }
+
+    public function edit(Request $request)
+    {
+        if($request->ajax())
+        {
+            $user = Auth::user();
+            return response()->json(['user'=>$user]);
+        }
+    }
+
+    public function update(Request $request,$id)
+    {
+       if($request->ajax())
+       {
+        $user = User::find($id);
+        if ($request['image']) {
+            $image = $request->file('image');
+            $nameImg = $image->getClientOriginalName();
+            $file_path = '/images/user/profile/';
+            $image->move(public_path() . '/images/user/profile/', $nameImg);
+        } else {
+            $nameImg = $user->img_name;
+            $file_path = $user->img_path;
+        }
+        $data = $this->repository->update($request->input(),$id,$nameImg,$file_path);
+        $membership = Membership::where('user_id',$id)->with('type_memberships')->get();
+        return response()->json(['user'=>$data,'memberships'=>$membership,'answer'=>Answer(
+            $data['id'],
+            $this->module_name,
+            $this->text_module[1],
+            "success",
+            'yellow',
+            '1'
+        )]);
+       }
+    }
+    public function get_user(Request $request,$id)
+    {
+        if($request->ajax())
+        {
+            $membership = Membership::where('user_id',$id)->with('type_memberships')->get();
+            $user = User::find($id);
+            return response()->json(['user'=>$user,'memberships'=>$membership]);
+        }
+    }
 }

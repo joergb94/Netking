@@ -13,4 +13,9 @@ class Membership extends Model implements Auditable
     use \OwenIt\Auditing\Auditable;
     use SoftDeletes;
     protected $guarded=[];
+
+    public function type_memberships()
+    {
+        return $this->belongsTo('App\Models\Type_membership','type_membership_id','id');
+    }
 }
