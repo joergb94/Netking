@@ -92,8 +92,8 @@ class ProfileController extends Controller
             $file_path = '/images/user/profile/';
             $image->move(public_path() . '/images/user/profile/', $nameImg);
         } else {
-            $nameImg = $user->img_name;
-            $file_path = $user->img_path;
+            $nameImg = $user->image;
+            $file_path = $user->path;
         }
         $data = $this->repository->update($request->input(),$id,$nameImg,$file_path);
         $membership = Membership::where('user_id',$id)->with('type_memberships')->get();
