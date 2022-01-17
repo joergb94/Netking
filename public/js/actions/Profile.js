@@ -115,6 +115,7 @@ const Profile = {
           shake(document.getElementById('card'));
           $("#cardBody").empty();
           $("#cardFooter").empty();
+          $("#profile-picture").attr("src",`${data.user.path}${data.user.image}`);
           $("#cardBody").html(bodyCancel(data.user,data.memberships))
           messages(data.answer);
         },
