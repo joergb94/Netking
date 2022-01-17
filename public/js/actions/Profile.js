@@ -82,6 +82,7 @@ const Profile = {
   edit: function () {
     var my_url = url + '/edit';
     $.get(my_url).done(function (data){
+      $("#button-edit").hide()
       shake(document.getElementById('card'));
       $("#cardBody").empty();
       $("#cardBody").html(bodyCard(data.user));
@@ -113,6 +114,7 @@ const Profile = {
         processData: false,
         success: function (data) {
           shake(document.getElementById('card'));
+          $("#button-edit").show()
           $("#cardBody").empty();
           $("#cardFooter").empty();
           $("#profile-picture").attr("src",`${data.user.path}${data.user.image}`);
@@ -191,6 +193,7 @@ const Profile = {
   cancel: function(id) {
     $.get(`${url}/${id}/user`).done(function(data){
       shake(document.getElementById('card'));
+      $("#button-edit").show()
       $("#cardBody").empty();
       $("#cardFooter").empty();
       $("#cardBody").html(bodyCancel(data.user,data.memberships))

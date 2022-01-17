@@ -1,6 +1,6 @@
 <div class="row" style="padding-top: 3%; padding-bottom: 10%">
     <div class="card col-sm-12" id="card" >
-        <button class="btn btn-warning btn-circle top-right btn-update" data-toggle="tooltip" title="Editar Keypl!" onclick="Profile.edit()" ><i class='fas fa-edit'></i></button>
+        <button class="btn btn-warning btn-circle top-right btn-update" id="button-edit" data-toggle="tooltip" title="Editar Perfil!" onclick="Profile.edit()" ><i class='fas fa-edit'></i></button>
         <div class="card-header">
           Detalles de usuario
         </div>
