@@ -82,6 +82,10 @@ const transactions = {
     }
 
     return form
+  },
+  toggle: function(id){
+    $(".divs-data").hide();
+    $("#div-"+id).show();
   }
 }
 //section for const js 
@@ -117,7 +121,6 @@ const Cards = {
     actions.show(my_url,'form', 'form');
   },
   save: function (state, id = '') {
-    //var form = $('#card-form').serialize();
     var formData1 = document.getElementById('card-form');
     var form = new FormData(formData1);
     form.append('networks', transactions.get_data_ns());
@@ -167,63 +170,7 @@ const Cards = {
       }
     })
   },
-  prev: function () {
-    let twiter,facebook,spotify,instagram,youtube;
-    let largeTitle =$("#largeTitle").val();
-    let color = $('#colorInput').val();
-    let shape_image = $('#shape_image').val();
-    let head = $('#head_orientation').val();
-    let social_n = '';
 
-      if(shape_image.length > 0){
-          if(shape_image == 1){
-
-            $('#imageProfile').removeClass('rounded-circle');
-            $('#imageProfile').addClass('rounded');
-          
-          }else{
-            $('#imageProfile').removeClass('rounded');
-            $('#imageProfile').addClass('rounded-circle');
-          }
-      }
-      if(head.length > 0){
-        if(head == 1){
-          $('#contend-image').removeClass('col-sm-12');
-          $('#contend-title').removeClass('col-sm-12');
-          $('#contend-image').addClass('col-sm-4');
-          $('#contend-title').addClass('col-sm-8');
-        
-        }else{
-          $('#contend-image').removeClass('col-sm-4');
-          $('#contend-title').removeClass('col-sm-8');
-          $('#contend-image').addClass('col-sm-12');
-          $('#contend-title').addClass('col-sm-12');
-        }
-      }
-      
-
-    document.getElementById("content-title").innerHTML = largeTitle > 0? `<h1 class="text-color" id="titlephone">${$("#title").val()}</h1>`
-                                                                       :`<h2 class="text-color" id="titlephone">${$("#title").val()}</h2>`;;
- 
-    document.getElementById("subephone").innerHTML = $("#subtitle").val();
-    
-   
-    $('.group-social').each(function(index, elem) {
-          var link = $(this).children('.n-social').val();
-          var nicon = $(this).children('.n-icon').val();
-          var nbutton = $(this).children('.n-button').val();
-
-          social_n += link.length > 0
-                     ? ` <a class="btn btn-social-icon ${nbutton}" href="${$(this).val()}">
-                      <i class="${nicon}"></i>
-                    </a>`:'';
-     });
-
-  document.getElementById("social").innerHTML = social_n;
-  background.getBG($('#background option:selected').val());
-  $(".text-color").css({"color": color });
-
-  },
   save_item:function(id,Type){
     $.ajaxSetup({
       headers: {
@@ -250,9 +197,44 @@ const Cards = {
         $("#mobil-vition").empty().html(data.responseText);
       }
     });
+  },
+  save_asinc:function(id){
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+
+    var formData1 = document.getElementById('card-form-style');
+    var form = new FormData(formData1);
+    form.append('networks', transactions.get_data_ns());
+
+    $('#mobil-vition').hide();
+    $('#loading-mobil-vition').show();
+
+    $.ajax({
+      type: "POST",
+      url: url+'/update_asinc/'+id,
+      data: form,
+      async: true,
+      cache:false,
+      processData: false, 
+      contentType: false, 
+      dataType: 'text',
+      success: function (data) {
+        $("#mobil-vition").empty().html(data);
+        $('#loading-mobil-vition').hide();
+        $('#mobil-vition').show();
+      },
+      error: function (data) {
+        $('.btn-save').prop("disabled", false);
+        console.log('Error:', data.responseText);
+        $("#mobil-vition").empty().html(data.responseText);
+      }
+    });
   }
 }
-background ={
+const background ={
   getBG: function (id) {
     $.get(url + '/background/'+ id)
     .done(function(data){
