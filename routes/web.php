@@ -49,6 +49,9 @@ Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
 Route::get('/profile/{id}/show', [ProfileController::class, 'show_membership']);
 Route::post('/profile/{id}/purchase', [ProfileController::class, 'purchase']);
 Route::post('/profile/{id}/purchase_extra', [ProfileController::class, 'purchase_extra']);
+Route::get('/profile/edit', [ProfileController::class, 'edit']);
+Route::post('/profile/update/{id}', [ProfileController::class, 'update']);
+Route::get('/profile/{id}/user', [ProfileController::class, 'get_user']);
 
 
 

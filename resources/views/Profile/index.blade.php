@@ -1,7 +1,4 @@
 @extends('layouts.app')
-@section('style')
-    
-@endsection
 @section('content')
 <div class="page-inner">
 <div class="card" id="index_blade">
