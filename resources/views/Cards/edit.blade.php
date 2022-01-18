@@ -3,7 +3,7 @@
         <div class="col-sm-12">
           <!-- Modal Header -->
           <div class="modal-header">
-            <h4 class="modal-title">Create Keypl</h4>
+            <h4 class="modal-title">Edit Keypl</h4>
             <button type="button" class="close" onclick="Cards.close()">&times;</button>
           </div>
    

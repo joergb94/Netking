@@ -9,8 +9,7 @@
     <div class="row">
       <div class="col-sm-6">
         <h4 class="card-title mb-0">
-          Cards  <i class='fa fa-qrcode'></i>
-
+          My Keypls <i class="fas fa-id-card"></i>
         </h4>
       </div>
       <!--col-->
