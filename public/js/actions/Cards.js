@@ -95,6 +95,10 @@ const transactions = {
               item_data:frameHeight,
             };
        break;
+       case 8:
+          var formData1 = document.getElementById(`file-form-${id}`);
+              form = new FormData(formData1);
+       break;
       default:
         form = {
           name:$("#name"+id).val(),
@@ -200,11 +204,20 @@ const Cards = {
     $('#mobil-vition').hide();
     $('#loading-mobil-vition').show();
 
+     if(Type == 8){
+        var my_url = url+'/updateItemfile/'+id;
+     }else{
+        var my_url = url+'/updateItem/'+id;
+     }
+
     $.ajax({
       type: "POST",
-      url: url+'/updateItem/'+id,
+      url: my_url,
       data: form,
       dataType: 'text',
+      contentType: false,
+      cache: false,
+      processData: false,
       success: function (data) {
         $("#mobil-vition").empty().html(data);
         $('#loading-mobil-vition').hide();

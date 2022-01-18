@@ -44,6 +44,7 @@ Route::delete('/myKepls/{id}', [CardController::class, 'deleteOrResotore']);
 Route::post('/myKepls/create/card', [CardController::class, 'store']);
 Route::get('/myKepls/background/{id}', [CardController::class, 'getBG']);
 Route::post('/myKepls/updateItem/{id}', [CardController::class, 'update_card_item']);
+Route::post('/myKepls/updateItemfile/{id}', [CardController::class, 'update_card_item_file']);
 Route::post('/myKepls/create/item', [CardController::class, 'create_item']);
 Route::post('/myKepls/update_asinc/{id}', [CardController::class, 'update_asinc']);
 
