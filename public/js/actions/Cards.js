@@ -83,7 +83,18 @@ const transactions = {
             name:arrayUrl2[log2 - 1],
             description:$("#description"+id).val(),
           };
-          break;
+       break;
+       case 5:
+      
+            var Element = document.querySelector(`#datasrc${id} iframe`);
+            var frameSrc = Element.getAttribute('src');
+            var frameHeight = Element.getAttribute('height');
+            form = {
+              name:frameSrc,
+              description:$("#description"+id).val(),
+              item_data:frameHeight,
+            };
+       break;
       default:
         form = {
           name:$("#name"+id).val(),

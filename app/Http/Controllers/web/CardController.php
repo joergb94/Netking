@@ -244,6 +244,7 @@ class CardController extends Controller
             $card_item->update([
                     'name'=>$request->name,
                     'description'=>$request->description,
+                    'item_data'=>$request->item_data?$request->item_data:NULL,
              ]);
            
             if(Card::where('id',$card_item['card_id'])->exists()){

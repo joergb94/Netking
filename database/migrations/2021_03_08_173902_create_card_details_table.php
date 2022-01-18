@@ -18,7 +18,7 @@ class CreateCardDetailsTable extends Migration
             $table->unsignedBigInteger('card_id')->nullable();
             $table->unsignedBigInteger('card_item_id')->nullable();
             $table->string('mat', 3)->default('CaD');
-            $table->string('name', 100)->default('Example');
+            $table->longText('name')->default('Example');
             $table->integer('order')->default(0);
             $table->longText('description')->default('ExampleDescription');
             $table->json('item_data')->nullable();
