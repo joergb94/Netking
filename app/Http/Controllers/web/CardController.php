@@ -248,45 +248,33 @@ class CardController extends Controller
              ]);
            
             if(Card::where('id',$card_item['card_id'])->exists()){
-                        $nsInUse = [];
-                        $cardItemsDetail =[];
-                        $background = Background_image::all();
-                        $data = $this->CardsRepository->show($card_item['card_id']);
-                        $actual_bg = $data->background_image->description;
-                        $card_style = Cards_style_detail::where('card_id', $card_item['card_id'])->first();
-                        $user = User::find($data['user_id']);
-                        $nsFree = NetworkSocial::all();
-                        $text_styles = text_style::all();
-                        $cardItems = Cards_items::all();
-                        $text_styles = text_style::all();
-            
-                        foreach ($nsFree as $ns) {
-                            $inUse = Card_detail_network::where('network_social_id', $ns['id'])
-                                ->where('card_id', $data['id'])
-                                ->first();
-                            array_push($nsInUse, ['nsData' => $ns, 'nsUser' => $inUse]);
-                        }
-            
-                        foreach ($cardItems as $ci) {
-                            $card_detail = Card_detail::where('card_item_id', $ci['id'])
-                                ->where('card_id', $data['id'])
-                                ->first();
-                            if($card_detail){
-                                array_push($cardItemsDetail, ['item' => $ci, 'card_detail' => $card_detail]);
-                            }
-                        
-                        }
         
-                        return view('Cards.itemsUpdate.keypl', [
-                            'cardItems'=>$cardItemsDetail,
-                            'data' => $data,
-                            'backgrounds' => $background,
-                            'actual_bg' => $actual_bg,
-                            'user' => $user,
-                            'card_style' => $card_style,
-                            'ns' => $nsInUse,
-                            'text_styles' => $text_styles
-                        ]);
+                return view('Cards.itemsUpdate.keypl', 
+                            $this->CardsRepository->get_data_keypl($card_item['card_id']));
+        
+            }
+        }
+    }
+    public function update_card_item_file(Request $request,$id)
+    {
+        if ($request->ajax()) {
+            $detail = Card_detail::find($id);
+            if ($request['file']) {
+                $image = $request->file('file');
+                $nameImg = time() . $image->getClientOriginalName();
+                $file_path = '/images/keypls/';
+                $image->move(public_path() . '/images/keypls/', $nameImg);
+                $full_path = $file_path.$nameImg;
+            } else {
+                $full_path = $detail->description;
+            }
+
+            $card_item = $this->CardsRepository->update_card_detail_item($id,['name'=> $request->name,
+                                                                                'description'=>$file_path.$nameImg]);
+
+            if(Card::where('id',$card_item['card_id'])->exists()){
+                       
+                return view('Cards.itemsUpdate.keypl',$this->CardsRepository->get_data_keypl($card_item['card_id']));
         
             }
         }
