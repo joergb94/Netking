@@ -1,3 +1,3 @@
 <div class="row justify-content-between">
-<iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fesponjaray%2Fposts%2F6874807259227572&show_text=true&width=500" width="500" height="498" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+    {!!$ci['card_detail']['description']!!}
 </div>

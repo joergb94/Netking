@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('style')
-<script async src="https://www.tiktok.com/embed.js"></script>
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
 @endsection
 @section('content')
 <div class="page-inner">
@@ -54,7 +53,9 @@
 <input id="url" type="hidden" value="{{ \Request::url() }}">
 <input id="baseUrl" type="hidden" value="{{ \Request::root() }}">
 @endsection
-
+@section('modal')
+    @include('Cards.items.modal')
+@endsection
 @section('js')
   <script src="{{asset('js/actions/Cards.js')}}"></script>
 @endsection

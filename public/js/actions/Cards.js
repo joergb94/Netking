@@ -74,6 +74,16 @@ const transactions = {
           description:$("#description"+id).val(),
         };
         break;
+      case 7:
+          let url2 =$("#description"+id).val();
+          let arrayUrl2  = url2.split('/');
+          let log2 = arrayUrl2.length;
+  
+          form = {
+            name:arrayUrl2[log2 - 1],
+            description:$("#description"+id).val(),
+          };
+          break;
       default:
         form = {
           name:$("#name"+id).val(),
@@ -136,7 +146,6 @@ const Cards = {
 
     actions.save(type, my_url, state, form,'file');
   },
-
   delete: function (id) {
     Swal.fire({
       title: "Do you want to Delete the Card?",
@@ -170,7 +179,6 @@ const Cards = {
       }
     })
   },
-
   save_item:function(id,Type){
     $.ajaxSetup({
       headers: {
@@ -220,7 +228,7 @@ const Cards = {
       cache:false,
       processData: false, 
       contentType: false, 
-      dataType: 'text',
+      datatype: "html",
       success: function (data) {
         $("#mobil-vition").empty().html(data);
         $('#loading-mobil-vition').hide();
@@ -230,6 +238,38 @@ const Cards = {
         $('.btn-save').prop("disabled", false);
         console.log('Error:', data.responseText);
         $("#mobil-vition").empty().html(data.responseText);
+      }
+    });
+  },
+  modal_item:function(id){
+    $('#keypls_id').val(id);
+    $("#myModalBloque").modal('show');
+  },
+  modal_close:function(){
+    $("#myModalBloque").modal('hide');
+  },
+  add_item:function(id){
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+    let form ={
+      card_id:$("#keypls_id").val(),
+      card_item_id:id,
+    };
+    
+    $.ajax({
+      type: "POST",
+      url: url+'/create/item',
+      data: form,
+      dataType: 'text',
+      success: function (data) {
+        $("#contenedor-divs").after(data);
+      },
+      error: function (data) {
+        console.log('Error:', data.responseText);
+    
       }
     });
   }

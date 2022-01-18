@@ -42,10 +42,12 @@ class CardController extends Controller
         $location = ($request->location > 0) ? $request->location : 'all';
         $data = $this->CardsRepository->getSearchPaginated($criterion, $search, $status);
         $sts = $this->GeneralRepository->card_max();
+        $items = Cards_items::all();
+
         if ($request->ajax()) {
             return view('Cards.items.table', ['data' => $data, 'status' => $status]);
         }
-        return view('Cards.index', ['data' => $data, 'dm' => accesUrl(Auth::user(), $this->menu_id), 'status' => $sts]);
+        return view('Cards.index', ['data' => $data,'items'=>$items, 'dm' => accesUrl(Auth::user(), $this->menu_id), 'status' => $sts]);
     }
 
     public function create(CardsRequest $request)
@@ -346,5 +348,28 @@ class CardController extends Controller
 
             }
         }
+    }
+
+    public function create_item(Request $request)
+    { 
+        if($request->ajax()){
+
+            $cd = Card_detail::create([
+                'card_id'=>$request->card_id,
+                'card_item_id'=>$request->card_item_id,
+                'name'=>'Example',
+                'description'=>'Example',
+            ]);
+
+            if($cd){
+                $data['item'] = Cards_items::find($cd['card_item_id']);
+                $data['card_detail'] = Card_detail::find($cd['id']);
+                return view('Cards.addItem',['data'=>$data]);
+    
+            }else{
+                return response()->json($cd);
+            }
+            
+        }    
     }
 }

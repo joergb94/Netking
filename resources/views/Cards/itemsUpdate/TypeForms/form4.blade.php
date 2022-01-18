@@ -8,7 +8,7 @@
         </div>
         <div class="form-group">
             <label for="email">Codigo de Tiktok:</label>
-            <textarea class="form-control" rows="5" id="link_videoT">{{$data->description}}</textarea>
+            <textarea class="form-control" rows="5" id="description{{$data->id}}">{{$data->description}}</textarea>
         </div>
         <div class="form-group text-center">
             <button type="button" class="btn btn-primary" onclick="Cards.save_item({{$data->id}},{{$data->card_item_id}})">Guardar</button>
