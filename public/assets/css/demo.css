@@ -587,4 +587,13 @@ ul {
 		background-color:#979b9b !important;
 	}
 	
+	.btn-rounded {
+		border-radius: 35px;
+	}
+	
+	.btn-fab {
+		height: 50px;
+		width: 53px;
+		border-radius: 50%;
+	}
 
