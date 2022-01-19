@@ -25,12 +25,17 @@
                       <div class="col-sm-12" id="contenedor-divs">
                           <br>
                           @foreach($cardItems as $ci)
-                            <button type="button" class="btn {{$ci['item']->style}} btn-block"   onclick="transactions.toggle({{$ci['card_detail']->id}})" ><h2>{{$ci['item']->name}} <i class="{{$ci['item']->icon}}"></i></h2></button>
+                              <div class="btn-group col-sm-12" id="btn-group-{{$ci['card_detail']->id}}">
+                                  <button type="button" class="btn {{$ci['item']->style}} btn-block"   onclick="transactions.toggle({{$ci['card_detail']->id}})" >
+                                    <h2>{{$ci['item']->name}} <i class="{{$ci['item']->icon}}"></i></h2>
+                                 </button>
+                                <button type="button" class="btn {{$ci['item']->style}} delete" id="btn-delete-{{$ci['card_detail']->id}}" style="display:none"  onclick="Cards.delete_item({{$ci['card_detail']->id}},{{$data['id']}})"<i class="fas fa-trash"></i></button>
+                              </div>
                               <div class="col-sm-12 divs-data" style="display:none" id="div-{{$ci['card_detail']->id}}">
-                              <br>
+                              <br class="br-">
                               @include('Cards.itemsUpdate.TypeForms.form'.$ci['item']->id,['data' => $ci['card_detail']])
                             </div>
-                            <br>
+                            <br class="br-{{$ci['card_detail']->id}}">
                           @endforeach
                       </div>
                      <button type="button" class="btn btn-light btn-block"    onclick="Cards.modal_item({{$data['id']}})"><h2>Agregar Bloque <i class="fa fa-plus"></i></h2></button>

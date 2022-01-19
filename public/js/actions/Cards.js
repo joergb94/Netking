@@ -84,7 +84,7 @@ const transactions = {
             description:$("#description"+id).val(),
           };
        break;
-       case 5:
+      case 5:
       
             var Element = document.querySelector(`#datasrc${id} iframe`);
             var frameSrc = Element.getAttribute('src');
@@ -95,7 +95,7 @@ const transactions = {
               item_data:frameHeight,
             };
        break;
-       case 8:
+      case 8:
           var formData1 = document.getElementById(`file-form-${id}`);
               form = new FormData(formData1);
        break;
@@ -109,8 +109,64 @@ const transactions = {
     return form
   },
   toggle: function(id){
-    $(".divs-data").hide();
+    $(".divs-data").hide()
+    $(".delete").hide();
     $("#div-"+id).show();
+    $("#btn-delete-"+id).show();
+  },
+  delete_item_detail: function(id){
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+    $.ajax({
+      type: "DELETE",
+      url: url+'/delete/item/'+id,
+      success: function (data) {
+          document.getElementById("btn-group-"+data).remove();
+          document.getElementById("div-"+data).remove();
+          document.getElementsByClassName('bt-'+data).remove();
+      },
+      error: function (data) {
+
+      }
+    });
+  },
+  update_keypl: function(id){
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+
+    var formData1 = document.getElementById('card-form-style');
+    var form = new FormData(formData1);
+    form.append('networks', transactions.get_data_ns());
+
+    $('#mobil-vition').hide();
+    $('#loading-mobil-vition').show();
+
+    $.ajax({
+      type: "POST",
+      url: url+'/update_asinc/'+id,
+      data: form,
+      async: true,
+      cache:false,
+      processData: false, 
+      contentType: false, 
+      datatype: "html",
+      success: function (data) {
+        $("#mobil-vition").empty().html(data);
+        $('#loading-mobil-vition').hide();
+        $('#mobil-vition').show();
+      },
+      error: function (data) {
+        $('.btn-save').prop("disabled", false);
+        console.log('Error:', data.responseText);
+        $("#mobil-vition").empty().html(data.responseText);
+      }
+    });
   }
 }
 //section for const js 
@@ -296,6 +352,23 @@ const Cards = {
     
       }
     });
+  },
+  delete_item:function(id,card){
+      Swal.fire({
+        title: "Desea Eliminar este Bloque?",
+        text: "El bloque sera eliminado",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, Eliminalo!'
+      }).then((result) => {
+        if (result.value) {
+          transactions.delete_item_detail(id);
+          transactions.update_keypl(card);
+        }
+      })
+    
   }
 }
 const background ={
