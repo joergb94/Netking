@@ -89,6 +89,40 @@
               <input type="file" onchange="Cards.save_asinc({{$data['id']}})" class="form-control-file border" id="image" name="image">
           </div>
           <div class="form-group">
+            <h3>Forma de los bloaques:</h3>
+              <div class="col-sm-12">
+                    <div class="col-sm-12 mx-auto d-block">
+                      <div class="row">
+                          <div class="col-sm-4">
+                              <ul>
+                                <li>
+                                  <input type="checkbox" class="div-shapes shapeDiv1" onchange="Cards.save_asinc({{$data['id']}})"  value="1"  id="myCheckbox5" />
+                                  <label for="myCheckbox5"><img class="rounded" src="{{asset('img/shape.jpg')}}" /></label>
+                                </li>
+                              </ul>
+                          </div>
+                          <div class="col-sm-4">
+                            <ul>
+                              <li>
+                                <input type="checkbox" class="div-shapes shapeDiv0" onchange="Cards.save_asinc({{$data['id']}})" value="0" id="myCheckbox6"  />
+                                <label for="myCheckbox6"><img class="img-thumbnail" src="{{asset('img/shape.jpg')}}" /></label>
+                              </li>
+                            </ul>
+                          </div>
+                          <div class="col-sm-4">
+                            <ul>
+                              <li>
+                                <input type="checkbox" class="div-shapes shapeDiv2" onchange="Cards.save_asinc({{$data['id']}})" value="2" id="myCheckbox7"  />
+                                <label for="myCheckbox7"><img class="rounded-circle" src="{{asset('img/shape.jpg')}}" /></label>
+                              </li>
+                            </ul>
+                          </div>
+                      </div>
+                    </div>
+                      <input type="hidden" name="div_image" onchange="Cards.save_asinc({{$data['id']}})" id="shape_image"  value="{{$card_style['shape_image']}}">
+              </div>
+          </div>
+          <div class="form-group">
             <label>Theme:</label>
             <input type="text" onchange="Cards.save_asinc({{$data['id']}})" id="theme" name="theme" value="" class="form-control">
           </div>

@@ -323,18 +323,31 @@ class CardsRepository
 
 
   public function update_card_detail_item($id,$data){
-    $card_item = Card_detail::find($id);
+        $card_item = Card_detail::find($id);
 
-    return DB::transaction(function () use ($card_item,$data) {
-        if($card_item->update([
-                'name'=>$data['name'],
-                'description'=>$data['description'],
-        ])){
-            return $card_item;
-        }
-        throw new GeneralException(__('Error update of keypl detail.'));
+        return DB::transaction(function () use ($card_item,$data) {
+            if($card_item->update([
+                    'name'=>$data['name'],
+                    'description'=>$data['description'],
+            ])){
+                return $card_item;
+            }
+            throw new GeneralException(__('Error update of keypl detail.'));
 
-    });
-  }
+        });
+
+   }
+   
+
+  public function delete_item($id){
+        return DB::transaction(function () use ($id) {
+            $card_item = Card_detail::find($id)->delete();
+            $b=3;
+            return $id;
+
+            throw new GeneralException(__('Error update of keypl detail.'));
+
+        });
+    }
 
 }

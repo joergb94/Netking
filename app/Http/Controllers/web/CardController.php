@@ -240,6 +240,7 @@ class CardController extends Controller
     public function update_card_item(Request $request,$id)
     {
         if ($request->ajax()) {
+        
             $card_item = Card_detail::find($id);
             $card_item->update([
                     'name'=>$request->name,
@@ -255,6 +256,7 @@ class CardController extends Controller
             }
         }
     }
+
     public function update_card_item_file(Request $request,$id)
     {
         if ($request->ajax()) {
@@ -360,5 +362,10 @@ class CardController extends Controller
             }
             
         }    
+    }
+
+    public function delete_item(Request $request,$id){
+        $data_id = $this->CardsRepository->delete_item($id);
+        return response()->json($data_id);
     }
 }
