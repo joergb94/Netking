@@ -10,6 +10,7 @@ use App\Models\CardUserDetail;
 use App\Models\Membership;
 use App\Models\Type_membership;
 use App\Models\Type_user;
+use Carbon\Carbon;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -35,14 +36,25 @@ class GeneralRepository {
         if($status)
         {
             $change = Membership::where('user_id',$id)
-                ->whereNotIn('type_membership_id',[2])
                 ->first();
             $num_cards = Type_membership::find($new_membership);
-               return DB::transaction(function () use ($change, $new_membership,$num_cards){
+            if($new_membership != 1){
+                $actual_date = Carbon::now();
+                $date_end = Carbon::now()->addMonth(1);
+                $date_renovation = $date_end;
+            }else{
+                $actual_date = Carbon::now();
+                $date_end = NULL;
+                $date_renovation = NULL;
+            }
+               return DB::transaction(function () use ($change, $new_membership,$num_cards,$actual_date,$date_end,$date_renovation){
                     if(
                         $change->update([
                             'quantity' => $num_cards->quantity,
-                            'type_membership_id' => $new_membership
+                            'type_membership_id' => $new_membership,
+                            'date_start' => $actual_date,
+                            'date_end' => $date_end,
+                            'date_renovation' => $date_renovation
                         ])
                     ){
                         return true;
@@ -71,5 +83,19 @@ class GeneralRepository {
                     throw new GeneralException(__('There was an error updating the Membership.'));
                 });
         }
+    }
+    public function cancel_membership($id_membership)
+    {
+        $change = Membership::where('user_id',$id_membership)
+        ->whereNotIn('type_membership_id',[2])
+        ->first();
+        return DB::transaction(function () use ($change) {
+            if($change->udpdate([
+                'date_renovation' => NULL
+            ])){
+                return $change;
+            }
+            throw new GeneralException(__('There was an error canceling the Membership.'));
+        });
     }
 }

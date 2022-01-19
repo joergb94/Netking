@@ -20,6 +20,9 @@ class CreateMembershipsTable extends Migration
             $table->unsignedBigInteger('type_user_id');
             $table->integer('quantity')->default(1);
             $table->unsignedBigInteger('type_membership_id');
+            $table->date('date_start')->nullable();
+            $table->date('date_end')->nullable();
+            $table->date('date_renovation')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
