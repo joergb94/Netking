@@ -36,6 +36,7 @@ class GeneralRepository {
         if($status)
         {
             $change = Membership::where('user_id',$id)
+                ->whereNotIn('type_membership_id',[2])
                 ->first();
             $num_cards = Type_membership::find($new_membership);
             if($new_membership != 1){
@@ -97,5 +98,36 @@ class GeneralRepository {
             }
             throw new GeneralException(__('There was an error canceling the Membership.'));
         });
+    }
+
+    public function renovate_membership()
+    {
+        $memberships = Membership::whereNotIn('type_membership_id',[1])->get();
+        $today = Carbon::now();
+        foreach ($memberships as $membership) {
+            if($membership->date_end == $today && $membership->date_renovation != NULL){
+                if($this->renovate_petition())
+                {
+                    $date_end = Carbon::now()->addMonth(1);
+                    $date_renovation = $date_end;
+                    return DB::transaction(function () use ($today,$date_end,$date_renovation,$membership){
+                        if(
+                            $membership->update([
+                                'date_start' => $today,
+                                'date_end' => $date_end,
+                                'date_renovation' => $date_renovation
+                            ])
+                        ){
+                            return true;
+                        }
+                        throw new GeneralException(__('There was an error updating the Membership.'));
+                    });
+                }
+            }
+        }
+    }
+    public function renovate_petition()
+    {
+        return true;
     }
 }
