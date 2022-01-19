@@ -63,6 +63,7 @@ const transactions = {
     }
   },
   take_data_item: function(id,Type){
+    var form;
     switch(Type) {
       case 3:
         let url =$("#description"+id).val();
@@ -73,7 +74,18 @@ const transactions = {
           name:arrayUrl[log - 1],
           description:$("#description"+id).val(),
         };
-        break;
+      break;
+      case 5:
+      
+        var Element = document.querySelector(`#datasrc${id} iframe`);
+        var frameSrc = Element.getAttribute('src');
+        var frameHeight = Element.getAttribute('height');
+        form = {
+          name:frameSrc,
+          description:$("#description"+id).val(),
+          item_data:frameHeight,
+        };
+      break;
       case 7:
           let url2 =$("#description"+id).val();
           let arrayUrl2  = url2.split('/');
@@ -84,25 +96,14 @@ const transactions = {
             description:$("#description"+id).val(),
           };
        break;
-      case 5:
-      
-            var Element = document.querySelector(`#datasrc${id} iframe`);
-            var frameSrc = Element.getAttribute('src');
-            var frameHeight = Element.getAttribute('height');
-            form = {
-              name:frameSrc,
-              description:$("#description"+id).val(),
-              item_data:frameHeight,
-            };
-       break;
       case 8:
           var formData1 = document.getElementById(`file-form-${id}`);
               form = new FormData(formData1);
        break;
       default:
         form = {
-          name:$("#name"+id).val(),
-          description:$("#description"+id).val(),
+            name:$("#name"+id).val(),
+            description:$("#description"+id).val(),
         };
     }
 
@@ -250,7 +251,7 @@ const Cards = {
       }
     })
   },
-  save_item:function(id,Type){
+  save_item_file:function(id,Type){
     $.ajaxSetup({
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -259,12 +260,7 @@ const Cards = {
     let form =transactions.take_data_item(id,Type);
     $('#mobil-vition').hide();
     $('#loading-mobil-vition').show();
-
-     if(Type == 8){
-        var my_url = url+'/updateItemfile/'+id;
-     }else{
-        var my_url = url+'/updateItem/'+id;
-     }
+    var my_url = url+'/updateItemfile/'+id;
 
     $.ajax({
       type: "POST",
@@ -274,6 +270,35 @@ const Cards = {
       contentType: false,
       cache: false,
       processData: false,
+      success: function (data) {
+        $("#mobil-vition").empty().html(data);
+        $('#loading-mobil-vition').hide();
+        $('#mobil-vition').show();
+      },
+      error: function (data) {
+        $('.btn-save').prop("disabled", false);
+        console.log('Error:', data.responseText);
+        $("#mobil-vition").empty().html(data.responseText);
+      }
+    });
+  },
+  save_item:function(id,Type){
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+    let form =transactions.take_data_item(id,Type);
+    $('#mobil-vition').hide();
+    $('#loading-mobil-vition').show();
+    var my_url = url+'/updateItem/'+id;
+     
+
+    $.ajax({
+      type: "POST",
+      url: my_url,
+      data: form,
+      dataType: 'text',
       success: function (data) {
         $("#mobil-vition").empty().html(data);
         $('#loading-mobil-vition').hide();
