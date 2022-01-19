@@ -14,7 +14,7 @@
             </div>
         </div>
         <div class="form-group text-center">
-            <button type="button" class="btn btn-primary" onclick="Cards.save_item({{$data->id}},{{$data->card_item_id}})">Guardar</button>
+            <button type="button" class="btn btn-primary" onclick="Cards.save_item_file({{$data->id}},{{$data->card_item_id}})">Guardar</button>
         </div>
     </form>
   </div>

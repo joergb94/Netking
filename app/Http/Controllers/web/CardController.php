@@ -238,9 +238,8 @@ class CardController extends Controller
     }
 
     public function update_card_item(Request $request,$id)
-    {
+    {   
         if ($request->ajax()) {
-        
             $card_item = Card_detail::find($id);
             $card_item->update([
                     'name'=>$request->name,
