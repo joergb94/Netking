@@ -116,4 +116,10 @@ class ProfileController extends Controller
             return response()->json(['user'=>$user,'memberships'=>$membership]);
         }
     }
+
+    public function renovate(Request $request)
+    {
+        $data = $this->generalRepository->renovate_membership();
+        return response()->json($data);
+    }
 }
