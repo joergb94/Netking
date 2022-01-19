@@ -23,6 +23,7 @@ class CreateMembershipsTable extends Migration
             $table->date('date_start')->nullable();
             $table->date('date_end')->nullable();
             $table->date('date_renovation')->nullable();
+            $table->boolean('active')->default(1);
             $table->timestamps();
             $table->softDeletes();
 

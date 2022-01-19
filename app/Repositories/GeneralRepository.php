@@ -104,27 +104,45 @@ class GeneralRepository {
     {
         $memberships = Membership::whereNotIn('type_membership_id',[1])->get();
         $today = Carbon::now();
+        $data = [];
         foreach ($memberships as $membership) {
-            if($membership->date_end == $today && $membership->date_renovation != NULL){
+            if($today->eq($membership->date_end) == false && $membership->date_renovation != NULL){
                 if($this->renovate_petition())
                 {
                     $date_end = Carbon::now()->addMonth(1);
                     $date_renovation = $date_end;
-                    return DB::transaction(function () use ($today,$date_end,$date_renovation,$membership){
+                   $mbr = DB::transaction(function () use ($today,$date_end,$date_renovation,$membership){
                         if(
                             $membership->update([
                                 'date_start' => $today,
                                 'date_end' => $date_end,
-                                'date_renovation' => $date_renovation
+                                'date_renovation' => $date_renovation,
+                                'active' => 1,
                             ])
                         ){
-                            return true;
+                            return $membership;
+                        }
+                        throw new GeneralException(__('There was an error updating the Membership.'));
+                    });
+                }else{
+                    $mbr =   DB::transaction(function () use ($membership){
+                        if(
+                            $membership->update([
+                               'active' => 0
+                            ])
+                        ){
+                            return $membership;
                         }
                         throw new GeneralException(__('There was an error updating the Membership.'));
                     });
                 }
+                array_push($data,$mbr);
+            }else{
+                $data = 'conio el else';
             }
+            
         }
+        return $data;
     }
     public function renovate_petition()
     {

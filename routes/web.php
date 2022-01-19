@@ -57,6 +57,7 @@ Route::post('/profile/{id}/purchase_extra', [ProfileController::class, 'purchase
 Route::get('/profile/edit', [ProfileController::class, 'edit']);
 Route::post('/profile/update/{id}', [ProfileController::class, 'update']);
 Route::get('/profile/{id}/user', [ProfileController::class, 'get_user']);
+Route::get('/profile/renovate', [ProfileController::class, 'renovate']);
 
 
 
