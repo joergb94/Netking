@@ -69,5 +69,12 @@
               </div>
            </div>
     </div>
-  </div>
-  
+</div>
+<script>
+   $('.link-keypl').miniPreview({
+    width: 256,
+    height: 144,
+    scale: .25,
+    prefetch: 'pageload'
+  });
+</script>

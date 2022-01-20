@@ -79,6 +79,8 @@
 <!-- Google Maps Plugin -->
 <script src="{{ asset('assets/js/plugin/gmaps/gmaps.js') }}"></script>
 
+<script src="{{ asset('assets/js/plugin/gmaps/gmaps.js') }}"></script>
+
 <!-- Sweet Alert -->
 <script src="{{ asset('assets/js/plugin/sweetalert/sweetalert.min.js') }}"></script>
 <script src="{{asset('js/sweetalert2.js')}}"></script>
