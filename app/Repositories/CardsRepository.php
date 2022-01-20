@@ -288,7 +288,7 @@ class CardsRepository
     $user = User::find($data['user_id']);
     $nsFree = NetworkSocial::all();
     $text_styles = text_style::all();
-    $cardItems = Cards_items::all();
+    $cardItems = Card_detail::where('card_id',$id)->get();
     $text_styles = text_style::all();
 
     foreach ($nsFree as $ns) {
@@ -299,11 +299,9 @@ class CardsRepository
     }
 
     foreach ($cardItems as $ci) {
-        $card_detail = Card_detail::where('card_item_id', $ci['id'])
-            ->where('card_id', $data['id'])
-            ->first();
+        $card_item = Cards_items::where('id', $ci['card_item_id'])->first();
         if($card_detail){
-            array_push($cardItemsDetail, ['item' => $ci, 'card_detail' => $card_detail]);
+            array_push($cardItemsDetail, ['item' => $card_item, 'card_detail' => $ci]);
         }
     
     }
