@@ -29,7 +29,7 @@
                                   <button type="button" class="btn {{$ci['item']->style}} btn-block"   onclick="transactions.toggle({{$ci['card_detail']->id}})" >
                                     <h2>{{$ci['item']->name}} <i class="{{$ci['item']->icon}}"></i></h2>
                                  </button>
-                                <button type="button" class="btn {{$ci['item']->style}} delete" id="btn-delete-{{$ci['card_detail']->id}}" style="display:none"  onclick="Cards.delete_item({{$ci['card_detail']->id}},{{$data['id']}})"<i class="fas fa-trash"></i></button>
+                                <button type="button" class="btn {{$ci['item']->style}} delete" id="btn-delete-{{$ci['card_detail']->id}}" style="display:none"  onclick="Cards.delete_item({{$ci['card_detail']->id}},{{$data['id']}})"><i class="fa fa-trash"></i></button>
                               </div>
                               <div class="col-sm-12 divs-data" style="display:none" id="div-{{$ci['card_detail']->id}}">
                               <br class="br-">
