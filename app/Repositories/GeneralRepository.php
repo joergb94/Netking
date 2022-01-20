@@ -100,7 +100,7 @@ class GeneralRepository {
         });
     }
 
-    public function renovate_membership()
+    public function renovate_membership_cron()
     {
         $memberships = Membership::whereNotIn('type_membership_id',[1])->whereNotIn('active',[0])->get();
         $today = Carbon::now();
@@ -152,6 +152,29 @@ class GeneralRepository {
             array_push($data,$mbr);
         }
         return $data;
+    }
+    public function renovate($membership_id)
+    {
+        $membership = Membership::find($membership_id);
+        if($this->renovate_petition())
+        {
+            $today = Carbon::now();
+            $date_end = Carbon::now()->addMonth(1);
+            $date_renovation = $date_end;
+            return DB::transaction(function () use ($today,$date_end,$date_renovation,$membership){
+                if(
+                    $membership->update([
+                        'date_start' => $today,
+                        'date_end' => $date_end,
+                        'date_renovation' => $date_renovation,
+                        'active' => 1,
+                    ])
+                ){
+                    return $membership;
+                }
+                throw new GeneralException(__('There was an error updating the Membership.'));
+            });
+        }
     }
     public function renovate_petition()
     {

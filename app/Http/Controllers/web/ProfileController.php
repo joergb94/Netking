@@ -117,9 +117,9 @@ class ProfileController extends Controller
         }
     }
 
-    public function renovate(Request $request)
+    public function renovate(Request $request,$id)
     {
-        $data = $this->generalRepository->renovate_membership();
+        $data = $this->generalRepository->renovate($id);
         return response()->json($data);
     }
 }
