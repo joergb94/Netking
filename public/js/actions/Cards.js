@@ -11,6 +11,7 @@ $(document).ready(function () {
     getData(1, filter);
     
   });
+  
 
 });
 
@@ -397,12 +398,9 @@ const Cards = {
   }
 }
 const background ={
-  getBG: function (id) {
-    $.get(url + '/background/'+ id)
-    .done(function(data){
-      document.getElementById('mobil-vition').style.backgroundImage="url("+data.description+")"; // specify the image path here = 
-    });
-  },
-  
+  linkPreview: function(){
+
+
+  }
 }
 
