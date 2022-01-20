@@ -88,7 +88,7 @@ class GeneralRepository {
     public function cancel_membership($id_membership)
     {
         $change = Membership::where('user_id',$id_membership)
-        ->whereNotIn('type_membership_id',[2])
+        ->whereNotIn('type_membership_id',[1])
         ->first();
         return DB::transaction(function () use ($change) {
             if($change->udpdate([
@@ -102,7 +102,7 @@ class GeneralRepository {
 
     public function renovate_membership()
     {
-        $memberships = Membership::whereNotIn('type_membership_id',[1])->get();
+        $memberships = Membership::whereNotIn('type_membership_id',[1])->whereNotIn('active',[0])->get();
         $today = Carbon::now();
         $data = [];
         foreach ($memberships as $membership) {
@@ -137,10 +137,19 @@ class GeneralRepository {
                     });
                 }
                 array_push($data,$mbr);
-            }else{
-                $data = 'conio el else';
+            }elseif($today->eq($membership->date_end) == false && $membership->date_renovation == NULL){
+                $mbr =   DB::transaction(function () use ($membership){
+                    if(
+                        $membership->update([
+                           'active' => 0
+                        ])
+                    ){
+                        return $membership;
+                    }
+                    throw new GeneralException(__('There was an error updating the Membership.'));
+                });
             }
-            
+            array_push($data,$mbr);
         }
         return $data;
     }
