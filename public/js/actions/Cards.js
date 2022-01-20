@@ -395,6 +395,27 @@ const Cards = {
         }
       })
     
+  },
+  send_email:function(id){
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      });
+
+       var form = $("#keypls-fom-"+id).serialize();
+      $.ajax({
+        type: "GET",
+        url: baseUrl+'/contactUs/'+id,
+        data: form,
+        success: function (data) {
+          console.log(data);
+        },
+        error: function (data) {
+          console.log(data);
+
+        }
+      });
   }
 }
 const background ={

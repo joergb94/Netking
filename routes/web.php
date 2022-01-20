@@ -2,9 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\web\GeneralController;
+use App\Http\Controllers\web\contacUsController;
 use App\Http\Controllers\web\CardController;
 use App\Http\Controllers\web\HomeController;
 use App\Http\Controllers\web\ProfileController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -20,11 +23,12 @@ use App\Http\Controllers\web\ProfileController;
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::get('/contactUs/{id}',[contacUsController::class, 'send_mail']);
 Auth::routes();
 //home 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::post('/home/deleteOrResotore',[HomeController::class, 'deleteOrResotore']);
+Route::post('/contactUs',[HomeController::class, 'deleteOrResotore']);
 Route::get('/Kepls/background/{id}', [CardController::class, '']);
 
 
