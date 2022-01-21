@@ -33,7 +33,7 @@
         overflow-y: scroll;
     }
     ::-webkit-scrollbar {
-        width: 10px;
+        width: 5px;
     }
  
     /* Handle */
@@ -45,11 +45,16 @@
     ::-webkit-scrollbar-thumb:hover {
         background: {!!$data['color']!!}; 
     }
-    @media only screen and (max-width:  768px) {
+    @media only screen and (max-width:  767px) {
         body, html  {
-            /* The image used */
-            background-image: url('{{$actual_bg}}');
-
+            @if($card_style['background_color'])
+                /* The color used */
+                background-color: #000000;
+             
+            @else
+                /* The image used */
+                background-image: url('{{$actual_bg}}');
+            @endif
             /* Full height */
             height: 100vh;
             
@@ -76,12 +81,15 @@
     @media only screen and (min-width:  768px) {
         
         .bg-image {
-            /* The image used */
-            background-image: url('{{$actual_bg}}');
+            @if($card_style['background_color'])
+                /* The color used */
+                background-color: #000000;
+             
+            @else
+                /* The image used */
+                background-image: url('{{$actual_bg}}');
+            @endif
             display:block;
-            /* Add the blur effect */
-            filter: blur(10px);
-            -webkit-filter: blur(10px);
             
             /* Full height */
             height: 100%; 
@@ -97,12 +105,9 @@
     }
     @media only screen and (min-width:  768px) {
         .bg {
-            /* The image used */
-            background-image: url('{{$actual_bg}}');
             overflow-y: scroll;
             /* Full height */
             height: 100%;
-            overflow-y: scroll;
             /* Center and scale the image nicely */
             background-position: center;
             background-repeat: no-repeat;

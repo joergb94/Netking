@@ -16,6 +16,7 @@ class CreateCardsStyleDetailsTable extends Migration
         Schema::create('cards_style_details', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('card_id')->nullable();
+            $table->boolean('background_color')->default(0);
             $table->boolean('shape_image')->default(0);
             $table->boolean('head_orientation')->default(0);
             $table->boolean('shape')->default(0);

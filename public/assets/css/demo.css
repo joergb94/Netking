@@ -591,9 +591,35 @@ ul {
 		border-radius: 35px;
 	}
 	
+	.btn-fab-r {
+
+		height: 60px;
+		max-height: 100px;
+
+		width: 64px;
+		max-width: 100px;
+
+		border-radius: 50%;
+	}
+
 	.btn-fab {
 		height: 50px;
 		width: 53px;
 		border-radius: 50%;
 	}
+	.div-rounded {
+		border-radius: 35px;
+	}
+
+	.size-c {
+		height: 100px;
+		width: 100%;
+	}
+
+	.size-q {
+		height: 100px;
+		width: 100%;
+	}
+
+
 
