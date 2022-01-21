@@ -300,7 +300,7 @@ class CardsRepository
 
     foreach ($cardItems as $ci) {
         $card_item = Cards_items::where('id', $ci['card_item_id'])->first();
-        if($card_detail){
+        if($card_item){
             array_push($cardItemsDetail, ['item' => $card_item, 'card_detail' => $ci]);
         }
     
