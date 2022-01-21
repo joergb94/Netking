@@ -2,6 +2,7 @@
 
 use App\Models\Data_menu;
 use App\Models\Type_user_detail;
+use App\Models\Membership;
 use Illuminate\Support\Facades\Auth;
 
 if (!function_exists('accesUrl')) {
@@ -23,12 +24,15 @@ if (!function_exists('accesUrl')) {
                                     ->orderBy('bam.prioridad')->get();
               
         
-           
+          $memberships = Membership::where('user_id',$user->id)
+                         ->where('active',1)
+                         ->exists();
+          $data_member = ($memberships == true)? true : false;
           $data_menu=$menuU;
           $type_user = $user->type_user_id;
         
         }else{
-          
+           $data_member = false;
            $data_menu=[];
            $type_user =0;
         }
@@ -39,6 +43,7 @@ if (!function_exists('accesUrl')) {
           'access'=>$access,
           'type_user'=>$type_user,
           'user'=>Auth::user(),
+          'data_member'=>$data_member
         ];  
    
       return $menu;
