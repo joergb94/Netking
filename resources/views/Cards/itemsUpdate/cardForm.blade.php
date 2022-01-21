@@ -89,37 +89,52 @@
               <input type="file" onchange="Cards.save_asinc({{$data['id']}})" class="form-control-file border" id="image" name="image">
           </div>
           <div class="form-group">
-            <h3>Forma de los bloaques:</h3>
+            <h3>Forma de los Bloques:</h3>
               <div class="col-sm-12">
-                    <div class="col-sm-12 mx-auto d-block">
-                      <div class="row">
-                          <div class="col-sm-4">
-                              <ul>
-                                <li>
-                                  <input type="checkbox" class="div-shapes shapeDiv1" onchange="Cards.save_asinc({{$data['id']}})"  value="1"  id="myCheckbox5" />
-                                  <label for="myCheckbox5"><img class="rounded" src="{{asset('img/shape.jpg')}}" /></label>
+
+                <ul class="col-sm-12 mx-auto d-block list-group">
+                              <li class="list-group-item col-12">
+                                    <input type="checkbox" class="div-shapes shapeDiv1" onchange="Cards.save_asinc({{$data['id']}})"  value="1"  id="myCheckbox5" />
+                                    <label class="col-12" for="myCheckbox5">
+                                      <div class="col-12 text-center bg-secondary text-dark size-q">
+                                              <h6>Example keypls</h6>
+                                      </div>
+                                  </label>
+                              </li>
+                                <li class="list-group-item col-12">
+                                  <input type="checkbox" class="div-shapes shapeDiv2" onchange="Cards.save_asinc({{$data['id']}})" value="2" id="myCheckbox7"  />
+                                  <label class="col-12" for="myCheckbox7">
+                                      <div class="col-12 div-rounded text-center bg-secondary text-dark size-c">
+                                            <h6>Example keypls</h6>
+                                      </div>
+                                  </label>
                                 </li>
-                              </ul>
-                          </div>
-                          <div class="col-sm-4">
-                            <ul>
-                              <li>
-                                <input type="checkbox" class="div-shapes shapeDiv0" onchange="Cards.save_asinc({{$data['id']}})" value="0" id="myCheckbox6"  />
-                                <label for="myCheckbox6"><img class="img-thumbnail" src="{{asset('img/shape.jpg')}}" /></label>
-                              </li>
+
                             </ul>
-                          </div>
-                          <div class="col-sm-4">
-                            <ul>
+                   
+                            <input type="hidden" name="divs_shape" onchange="Cards.save_asinc({{$data['id']}})" id="divs_shape"  value="{{$card_style['shape_image']}}">
+              </div>
+          </div>
+          <div class="form-group">
+            <h3>Forma de los Botones:</h3>
+              <div class="col-sm-12">
+
+                            <ul class="col-sm-12 mx-auto d-block">
                               <li>
-                                <input type="checkbox" class="div-shapes shapeDiv2" onchange="Cards.save_asinc({{$data['id']}})" value="2" id="myCheckbox7"  />
-                                <label for="myCheckbox7"><img class="rounded-circle" src="{{asset('img/shape.jpg')}}" /></label>
+                                <input type="checkbox" class="buttons_shape shapeButton2" onchange="Cards.save_asinc({{$data['id']}})" value="2" id="myCheckbox10"  />
+                                <label for="myCheckbox10"><button type="button" class="btn btn-fab-r bg-secondary text-dark text-center">Basic</button></label>
                               </li>
+                              <li>
+                                <input type="checkbox" class="buttons_shape shapeButton0" onchange="Cards.save_asinc({{$data['id']}})" value="0" id="myCheckbox9"  />
+                                <label for="myCheckbox9"><button type="button" class="btn btn-rounded bg-secondary text-dark">Basic</button></label>
+                              </li>
+                              <li>
+                                  <input type="checkbox" class="buttons_shape shapeButton1" onchange="Cards.save_asinc({{$data['id']}})"  value="1"  id="myCheckbox8" />
+                                  <label for="myCheckbox8"><button type="button" class="btn bg-secondary text-dark">Basic</button></label>
+                                </li>
                             </ul>
-                          </div>
-                      </div>
-                    </div>
-                      <input type="hidden" name="div_image" onchange="Cards.save_asinc({{$data['id']}})" id="shape_image"  value="{{$card_style['shape_image']}}">
+                   
+                      <input type="hidden" name="buttons_shape" onchange="Cards.save_asinc({{$data['id']}})" id="divs_shape"  value="{{$card_style['shape_image']}}">
               </div>
           </div>
           <div class="form-group">
@@ -169,7 +184,7 @@
             <input onchange="Cards.save_asinc({{$data['id']}})"  type="text" id="colorInput" name='color' data-jscolor="" class="form-control" value="{{(isset($data['color']))?$data['color']:''}}">
           </div>
           <div class="form-group">
-          <label>Text Style:</label>
+            <label>Text Style:</label>
             <select onchange="Cards.save_asinc({{$data['id']}})" name="text_style" id="text_style" class="form-control">
               @forelse ($text_styles as $text_style)
                   <option value="{{$text_style['id']}}">{{$text_style['name']}}</option>

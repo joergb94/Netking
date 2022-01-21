@@ -360,7 +360,7 @@ const Cards = {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       }
     });
-    let form ={
+    var form ={
       card_id:$("#keypls_id").val(),
       card_item_id:id,
     };
@@ -372,6 +372,7 @@ const Cards = {
       dataType: 'text',
       success: function (data) {
         $("#contenedor-divs").after(data);
+        transactions.update_keypl(form.card_id);
       },
       error: function (data) {
         console.log('Error:', data.responseText);

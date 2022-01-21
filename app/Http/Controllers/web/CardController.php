@@ -103,7 +103,7 @@ class CardController extends Controller
             $card_style = Cards_style_detail::where('card_id', $id)->first();
             $user = User::find($data['user_id']);
             $nsFree = NetworkSocial::all();
-            $cardItems = Cards_items::all();
+            $cardItems = Card_detail::where('card_id', $data['id'])->get();
             $text_styles = text_style::all();
 
             foreach ($nsFree as $ns) {
@@ -114,11 +114,9 @@ class CardController extends Controller
             }
 
             foreach ($cardItems as $ci) {
-                $card_detail = Card_detail::where('card_item_id', $ci['id'])
-                    ->where('card_id', $data['id'])
-                    ->first();
-                if($card_detail){
-                    array_push($cardItemsDetail, ['item' => $ci, 'card_detail' => $card_detail]);
+                $card_item = Cards_items::where('id', $ci['card_item_id'])->first();
+                if($card_item){
+                    array_push($cardItemsDetail, ['item' => $card_item, 'card_detail' => $ci]);
                 }
                
             }
