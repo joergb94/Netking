@@ -185,12 +185,15 @@ class CardsRepository
                 'location' => $data['location']?$data['location']:null,
                 'large_text' => $data['large_text']?$data['large_text']:null,
                 'background_image_id' =>$data['background'],
+                'background_image_color' =>$data['background_image_color']?$data['background_image_color']:'#000000',
                 'color' => $data['color']?$data['color']:'#fff',
                 'img_name' => $image?$image:null,
                 'img_path' => $path?$path:null,
             ])) {
                 $Card_style->update([
                 'shape_image'=>$data['shape_image']?$data['shape_image']:0,
+                'divs_shape'=>$data['divs_shape']?$data['divs_shape']:0,
+                'buttons_shape'=>$data['buttons_shape']?$data['buttons_shape']:0,
                 'head_orientation'=>$data['head_orientation']?$data['head_orientation']:0,
                 'shape'=>0,
                 'outline'=>0
