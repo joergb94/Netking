@@ -34,7 +34,7 @@ Route::get('/Kepls/background/{id}', [CardController::class, '']);
 
 
 //genera 
-Route::get('/Kepls/{id}', [CardController::class, 'detail']);
+Route::get('/Keypls/{id}', [CardController::class, 'detail']);
 
 
 //cards

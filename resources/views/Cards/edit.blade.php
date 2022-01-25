@@ -20,7 +20,7 @@
                 </ul>
 
                 <!-- Tab panes -->
-                <div class="tab-content">
+                <div class="tab-content scroll">
                   <div id="General" class="container tab-pane active">
                       <div class="col-sm-12" id="contenedor-divs">
                           <br>
@@ -56,7 +56,7 @@
   
         </div>
     </div>
-    <div class="col-sm-4 all-screen mx-auto d-block">
+    <div class="col-sm-4 all-screen mx-auto d-block sticky">
            <div class="card device-case">
               @include('Cards.itemsUpdate.keypl')
               <div class="mobile-screen-loadig bg-warning" id="loading-mobil-vition" style="display:none">

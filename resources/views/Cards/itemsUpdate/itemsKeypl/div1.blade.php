@@ -6,18 +6,20 @@
                         <br>
                         <div class="col-12" id='content-title'>
                             @if($data['large_text'])
-                                <h1 class="text-color" id="titlephone" style="color:{!!$data['color']!!}">@if(isset($ci['card_detail']['name'])){{$ci['card_detail']['name']}}@endif</h1>
+                                <h1 class="text-color" id="titlephone" style="color:{!!$data['color']!!}; font-family:{{$text_font->name}};">
+                                @if(isset($ci['card_detail']['name'])){{$ci['card_detail']['name']}}@endif
+                            </h1>
                             @else
-                                <h2 class="text-color" id="titlephone" style="color:{!!$data['color']!!}">@if(isset($ci['card_detail']['name'])){{$ci['card_detail']['name']}}@endif</h2>
+                                <h2 class="text-color" id="titlephone" style="color:{!!$data['color']!!};font-family:{{$text_font->name}};">@if(isset($ci['card_detail']['name'])){{$ci['card_detail']['name']}}@endif</h2>
                             @endif 
                         </div>
                         @if($data['large_text'])
-                            <p class="text-color" id="namephone" style="color:{!!$data['color']!!}">{{$user['name']}}</p>
+                            <p class="text-color" id="namephone" style="color:{!!$data['color']!!};font-family:{{$text_font->name}};">{{$user['name']}}</p>
                         @else
-                            <h2 class="text-color" id="namephone" style="color:{!!$data['color']!!}">{{$user['name']}}</h2>
+                            <h2 class="text-color" id="namephone" style="color:{!!$data['color']!!};font-family:{{$text_font->name}};">{{$user['name']}}</h2>
                         @endif
                         
-                        <h6 class="text-color" id="subephone" style="color:{!!$data['color']!!}">@if(isset($ci['card_detail']['description'])){{$ci['card_detail']['description']}}@endif</h6>
+                        <h6 class="text-color" id="subephone" style="color:{!!$data['color']!!};font-family:{{$text_font->name}};">@if(isset($ci['card_detail']['description'])){{$ci['card_detail']['description']}}@endif</h6>
                     </div>
                 
 </div>
