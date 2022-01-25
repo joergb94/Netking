@@ -94,7 +94,7 @@
 
                 <ul class="col-sm-12 mx-auto d-block list-group">
                               <li class="list-group-item col-12">
-                                    <input type="checkbox" class="div-shapes shapeDiv1" onchange="Cards.save_asinc({{$data['id']}})"  value="0"  id="myCheckbox5" />
+                                    <input type="checkbox" class="div-shapes shapeDiv0" onchange="Cards.save_asinc({{$data['id']}})"  value="0"  id="myCheckbox5" {!! $card_style['divs_shape']  == 0?'checked disabled':''!!}/>
                                     <label class="col-12" for="myCheckbox5">
                                       <div class="col-12 text-center bg-secondary text-dark size-q">
                                               <h6>Example keypls</h6>
@@ -102,7 +102,7 @@
                                   </label>
                               </li>
                                 <li class="list-group-item col-12">
-                                  <input type="checkbox" class="div-shapes shapeDiv0" onchange="Cards.save_asinc({{$data['id']}})" value="1" id="myCheckbox6"  />
+                                  <input type="checkbox" class="div-shapes shapeDiv1" onchange="Cards.save_asinc({{$data['id']}})" value="1" id="myCheckbox6"  {!! $card_style['divs_shape']  == 1?'checked disabled':''!!}/>
                                   <label class="col-12" for="myCheckbox6">
                                       <div class="col-12 div-rounded text-center bg-secondary text-dark size-c">
                                             <h6>Example keypls</h6>
@@ -112,30 +112,86 @@
 
                             </ul>
                    
-                            <input type="hidden" name="divs_shape" onchange="Cards.save_asinc({{$data['id']}})" id="div-shapes"  value="{{$card_style['shape_image']}}">
+                            <input type="hidden" name="divs_shape" onchange="Cards.save_asinc({{$data['id']}})" id="div-shapes"  value="{{$card_style['divs_shape']}}">
               </div>
           </div>
           <div class="form-group">
             <h3>Forma de los Botones:</h3>
               <div class="col-sm-12">
-
-                            <ul class="col-sm-12 mx-auto d-block">
-                              <li>
-                                <input type="checkbox" class="buttons_shape shapeButton1" onchange="Cards.save_asinc({{$data['id']}})" value="1" id="myCheckboxButtons1"  />
-                                <label for="myCheckbox10"><button type="button" class="btn btn-fab-r bg-secondary text-dark text-center">Basic</button></label>
-                              </li>
-                              <li>
-                                <input type="checkbox" class="buttons_shape shapeButton2" onchange="Cards.save_asinc({{$data['id']}})" value="2" id="myCheckboxButtons2"  />
-                                <label for="myCheckbox9"><button type="button" class="btn btn-rounded bg-secondary text-dark">Basic</button></label>
-                              </li>
-                              <li>
-                                  <input type="checkbox" class="buttons_shape shapeButton3" onchange="Cards.save_asinc({{$data['id']}})"  value="3"  id="myCheckboxButtons3" />
-                                  <label for="myCheckbox8"><button type="button" class="btn bg-secondary text-dark">Basic</button></label>
+                <div class="row">
+                            <div class="col-sm-4" hidden>
+                                <ul>
+                                  <li>
+                                    <input type="checkbox" class="buttons_shape shapeButton1" onchange="Cards.save_asinc({{$data['id']}})" value="1" id="myCheckbox7"  {!! $card_style['buttons_shape']  == 1?'checked disabled':''!!} />
+                                    <label for="myCheckbox7"><button type="button" class="btn btn-fab-r bg-secondary text-dark text-center">Basic</button></label>
+                                  </li>
+                                </ul>
+                            </div>
+                            <div class="col-sm-6">
+                              <ul>
+                                <li>
+                                  <input type="checkbox" class="buttons_shape shapeButton2" onchange="Cards.save_asinc({{$data['id']}})" value="2" id="myCheckbox8"  {!! $card_style['buttons_shape']  == 2?'checked disabled':''!!} />
+                                  <label for="myCheckbox8"><button type="button" class="btn btn-rounded btn-block bg-secondary text-dark">Basic</button></label>
                                 </li>
-                            </ul>
-                   
-                      <input type="hidden" name="buttons_shape" onchange="Cards.save_asinc({{$data['id']}})" id="divs_shape"  value="{{$card_style['shape_image']}}">
+                              </ul>
+                            </div>
+                            <div class="col-sm-6">
+                              <ul>
+                                  <li>
+                                    <input type="checkbox" class="buttons_shape shapeButton3" onchange="Cards.save_asinc({{$data['id']}})"  value="3"  id="myCheckbox9" {!! $card_style['buttons_shape']  == 3?'checked disabled':''!!} />
+                                    <label for="myCheckbox9"><button type="button" class="btn bg-secondary btn-block text-dark" >Basic</button></label>
+                                  </li>
+                              </ul>
+                            </div>
+                </div>
+                      <input type="hidden" name="buttons_shape" onchange="Cards.save_asinc({{$data['id']}})" id="buttons_shape"  value="{{$card_style['buttons_shape']}}">
               </div>
+          </div>
+          <div class="form-group">
+                <div class="row">
+                <div class="col-sm-6">
+                  <label>Color Text:</label>
+                  <input onchange="Cards.save_asinc({{$data['id']}})"  type="text" id="colorInput" name='color' data-jscolor="" class="form-control" value="{{(isset($data['color']))?$data['color']:''}}">
+                </div>
+                <div class="col-sm-6">
+                  <label>Backgroud Color:</label>
+                  <input onchange="Cards.save_asinc({{$data['id']}})"  type="text" id="background_image_color" name='background_image_color' data-jscolor="" class="form-control" value="{{(isset($data['background_image_color']))?$data['background_image_color']:''}}">
+                </div>
+                </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-sm-6">
+                <label>Size Text Header:</label>
+                <div class="custom-control custom-checkbox">
+                    <select  id="largeTitle" onchange="Cards.save_asinc({{$data['id']}})" name="large_text" class="form-control">
+                      @if (isset($data))
+                        @if ($data['large_text'] == 1)
+                        <option value="0">Medium</option>
+                        <option value="1" selected>Big</option>
+                        @else
+                        <option value="0" selected>Medium</option>
+                        <option value="1">Big</option>
+                        @endif
+                        @else
+                        <option value="0" selected>Medium</option>
+                        <option value="1">Big</option>
+                        @endif
+                      
+                    </select>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <label>Text Style:</label>
+                <select onchange="Cards.save_asinc({{$data['id']}})" name="text_style_id" id="text_style" class="form-control">
+                  @forelse ($text_styles as $text_style)
+                      <option value="{{$text_style['id']}}">{{$text_style['name']}}</option>
+                  @empty
+                      <option value="">No style</option>
+                  @endforelse
+                </select>
+              </div>
+            </div>
           </div>
           <div class="form-group">
             <label>Theme:</label>
@@ -156,44 +212,6 @@
                   @endif
               @empty
                  <option value="">No data</option> 
-              @endforelse
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Size Text Header:</label>
-            <div class="custom-control custom-checkbox">
-                <select  id="largeTitle" onchange="Cards.save_asinc({{$data['id']}})" name="large_text" class="form-control">
-                  @if (isset($data))
-                    @if ($data['large_text'] == 1)
-                    <option value="0">Medium</option>
-                    <option value="1" selected>Big</option>
-                    @else
-                    <option value="0" selected>Medium</option>
-                    <option value="1">Big</option>
-                    @endif
-                    @else
-                    <option value="0" selected>Medium</option>
-                    <option value="1">Big</option>
-                    @endif
-                  
-                </select>
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Color Text:</label>
-            <input onchange="Cards.save_asinc({{$data['id']}})"  type="text" id="colorInput" name='color' data-jscolor="" class="form-control" value="{{(isset($data['color']))?$data['color']:''}}">
-          </div>
-          <div class="form-group">
-            <label>Backgroud Color:</label>
-            <input onchange="Cards.save_asinc({{$data['id']}})"  type="text" id="background_image_color" name='background_image_color' data-jscolor="" class="form-control" value="{{(isset($data['background_image_color']))?$data['background_image_color']:''}}">
-          </div>
-          <div class="form-group">
-            <label>Text Style:</label>
-            <select onchange="Cards.save_asinc({{$data['id']}})" name="text_style" id="text_style" class="form-control">
-              @forelse ($text_styles as $text_style)
-                  <option value="{{$text_style['id']}}">{{$text_style['name']}}</option>
-              @empty
-                  <option value="">No style</option>
               @endforelse
             </select>
           </div>
@@ -221,7 +239,6 @@
         $(".image-shapes").prop("checked", false);
         $(".shape"+shape).prop("checked", true);
      });
-    
 
      $('.head_orientation').click(function(){
          let orientation = $(this).val();
@@ -241,16 +258,14 @@
      
      });
 
-      
-
      $('.div-shapes').click(function(){
          let divs = $(this).val();
 
          let checDisabled5 = document.getElementById("myCheckbox5")
-                              checDisabled3.disabled = divs == 0 ?true:false;
+                              checDisabled5.disabled = divs == 0 ?true:false;
 
         let checDisabled6 = document.getElementById("myCheckbox6")
-                              checDisabled4.disabled = divs == 1 ?true:false;
+                              checDisabled6.disabled = divs == 1 ?true:false;
                             
                                     
 
@@ -258,6 +273,19 @@
 
         $(".div-shapes").prop("checked", false);
         $(".shapeDiv"+divs).prop("checked", true);
+     
+     });
+      
+     $('.buttons_shape').click(function(){
+         let buttons = $(this).val();
+        console.log(buttons);  
+
+        $('#buttons_shape').val(buttons);
+        $(".buttons_shape").prop("checked", false);
+        $(".buttons_shape").prop("disabled", false);
+ 
+        $(".shapeButton"+buttons).prop("checked", true);
+        $(".shapeButton"+buttons).prop("disabled", true);
      
      });
 </script>

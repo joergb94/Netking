@@ -32,6 +32,7 @@ class CardController extends Controller
         $this->menu_id = 3;
         $this->module_name = 'Card';
         $this->text_module = ['Created', 'Updated', 'Deleted', 'Restored', 'Actived', 'Deactived'];
+        $this->buttons = ['','btn-fab-r','btn-rounded',''];
     }
 
     public function index(CardsRequest $request)
@@ -95,42 +96,9 @@ class CardController extends Controller
     public function edit(Request $request, $id)
     {
         if ($request->ajax()) {
-            $nsInUse = [];
-            $cardItemsDetail =[];
-            $data = $this->CardsRepository->show($id);
-            $actual_bg = $data->background_image->description;
-            $background = Background_image::all();
-            $card_style = Cards_style_detail::where('card_id', $id)->first();
-            $user = User::find($data['user_id']);
-            $nsFree = NetworkSocial::all();
-            $cardItems = Card_detail::where('card_id', $data['id'])->get();
-            $text_styles = text_style::all();
 
-            foreach ($nsFree as $ns) {
-                $inUse = Card_detail_network::where('network_social_id', $ns['id'])
-                    ->where('card_id', $data['id'])
-                    ->first();
-                array_push($nsInUse, ['nsData' => $ns, 'nsUser' => $inUse,'card_id'=>$id]);
-            }
 
-            foreach ($cardItems as $ci) {
-                $card_item = Cards_items::where('id', $ci['card_item_id'])->first();
-                if($card_item){
-                    array_push($cardItemsDetail, ['item' => $card_item, 'card_detail' => $ci]);
-                }
-               
-            }
-         
-            return view('Cards.edit', [
-                'cardItems'=>$cardItemsDetail,
-                'data' => $data,
-                'backgrounds' => $background,
-                'actual_bg' => $actual_bg,
-                'user' => $user,
-                'card_style' => $card_style,
-                'ns' => $nsInUse,
-                'text_styles' => $text_styles
-            ]);
+            return view('Cards.edit', $this->CardsRepository->get_data_keypl($id));
         }
     }
     public function update(CardsStoreRequest $request, $id)
@@ -161,43 +129,9 @@ class CardController extends Controller
     {       $idStr =explode("?", $id);
         
             if(Card::where('id',$idStr[0])->exists()){
-                $nsInUse = [];
-                $cardItemsDetail =[];
-                $data = $this->CardsRepository->show($idStr[0]);
-                $actual_bg = $data->background_image->description;
-                $card_style = Cards_style_detail::where('card_id', $idStr[0])->first();
-                $user = User::find($data['user_id']);
-                $nsFree = NetworkSocial::all();
-                $text_styles = text_style::all();
-                $cardItems = Cards_items::all();
-                $text_styles = text_style::all();
+              
     
-                foreach ($nsFree as $ns) {
-                    $inUse = Card_detail_network::where('network_social_id', $ns['id'])
-                        ->where('card_id', $data['id'])
-                        ->first();
-                    array_push($nsInUse, ['nsData' => $ns, 'nsUser' => $inUse]);
-                }
-    
-                foreach ($cardItems as $ci) {
-                    $card_detail = Card_detail::where('card_item_id', $ci['id'])
-                        ->where('card_id', $data['id'])
-                        ->first();
-                    if($card_detail){
-                        array_push($cardItemsDetail, ['item' => $ci, 'card_detail' => $card_detail]);
-                    }
-                   
-                }
-
-                return view('Cards.card', [
-                    'cardItems'=>$cardItemsDetail,
-                    'data' => $data,
-                    'actual_bg' => $actual_bg,
-                    'user' => $user,
-                    'card_style' => $card_style,
-                    'ns' => $nsInUse,
-                    'text_styles' => $text_styles
-                ]);
+                return view('Cards.card',$this->CardsRepository->get_data_keypl($idStr[0]));
 
             }
           
@@ -294,45 +228,8 @@ class CardController extends Controller
             }
             $data = $this->CardsRepository->update_asinc($id, $request->input(), $nameImg, $file_path);
             if(Card::where('id',$data['id'])->exists()){
-                $nsInUse = [];
-                $cardItemsDetail =[];
-                $background = Background_image::all();
-                $data = $this->CardsRepository->show($data['id']);
-                $actual_bg = $data->background_image->description;
-                $card_style = Cards_style_detail::where('card_id', $data['id'])->first();
-                $user = User::find($data['user_id']);
-                $nsFree = NetworkSocial::all();
-                $text_styles = text_style::all();
-                $cardItems = Cards_items::all();
-                $text_styles = text_style::all();
-    
-                foreach ($nsFree as $ns) {
-                    $inUse = Card_detail_network::where('network_social_id', $ns['id'])
-                        ->where('card_id', $data['id'])
-                        ->first();
-                    array_push($nsInUse, ['nsData' => $ns, 'nsUser' => $inUse]);
-                }
-    
-                foreach ($cardItems as $ci) {
-                    $card_detail = Card_detail::where('card_item_id', $ci['id'])
-                        ->where('card_id', $data['id'])
-                        ->first();
-                    if($card_detail){
-                        array_push($cardItemsDetail, ['item' => $ci, 'card_detail' => $card_detail]);
-                    }
-                
-                }
-
-                return view('Cards.itemsUpdate.keypl', [
-                    'cardItems'=>$cardItemsDetail,
-                    'data' => $data,
-                    'backgrounds' => $background,
-                    'actual_bg' => $actual_bg,
-                    'user' => $user,
-                    'card_style' => $card_style,
-                    'ns' => $nsInUse,
-                    'text_styles' => $text_styles
-                ]);
+   
+                return view('Cards.itemsUpdate.keypl',$this->CardsRepository->get_data_keypl($data['id']));
 
             }
         }

@@ -49,7 +49,7 @@
         body, html  {
             @if($card_style['background_color'])
                 /* The color used */
-                background-color: #000000;
+                background-color: {!!$data["background_image_color"]!!};
              
             @else
                 /* The image used */
@@ -83,7 +83,7 @@
         .bg-image {
             @if($card_style['background_color'])
                 /* The color used */
-                background-color: #000000;
+                background-color: {!!$data["background_image_color"]!!};
              
             @else
                 /* The image used */

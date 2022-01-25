@@ -31,6 +31,7 @@ class CardsRepository
     {
         $this->model = $model;
         $this->card_detail_network = $card_detail_network;
+        $this->buttons = ['','btn-fab-r','btn-rounded',''];
     }
 
 
@@ -177,13 +178,14 @@ class CardsRepository
     }
 
     public function update_asinc($Card_id, array $data,$image,$path)
-    { 
+    {  
         $Card = $this->model->find($Card_id);
         $Card_style = Cards_style_detail::where('card_id',$Card_id)->first();
         return DB::transaction(function () use ($Card, $data,$Card_style,$Card_id,$image,$path) {
             if ($Card->update([
                 'location' => $data['location']?$data['location']:null,
                 'large_text' => $data['large_text']?$data['large_text']:null,
+                'text_style_id'=>$data['text_style_id']?$data['text_style_id']:1,
                 'background_image_id' =>$data['background'],
                 'background_image_color' =>$data['background_image_color']?$data['background_image_color']:'#000000',
                 'color' => $data['color']?$data['color']:'#fff',
@@ -282,44 +284,46 @@ class CardsRepository
 
   public function get_data_keypl($id){
 
-    $nsInUse = [];
-    $cardItemsDetail =[];
-    $background = Background_image::all();
-    $data = $this->model->find($id);
-    $actual_bg = $data->background_image->description;
-    $card_style = Cards_style_detail::where('card_id', $id)->first();
-    $user = User::find($data['user_id']);
-    $nsFree = NetworkSocial::all();
-    $text_styles = text_style::all();
-    $cardItems = Card_detail::where('card_id',$id)->get();
-    $text_styles = text_style::all();
+            $nsInUse = [];
+            $cardItemsDetail =[];
+            $data = $this->model->find($id);
+            $actual_bg = $data->background_image->description;
+            $background = Background_image::all();
+            $card_style = Cards_style_detail::where('card_id', $id)->first();
+            $btn_shape = $this->buttons[$card_style->buttons_shape];
+            $user = User::find($data['user_id']);
+            $nsFree = NetworkSocial::all();
+            $cardItems = Card_detail::where('card_id', $data['id'])->get();
+            $text_styles = text_style::all();
+            $text_font = text_style::find($data['text_style_id']);
 
-    foreach ($nsFree as $ns) {
-        $inUse = Card_detail_network::where('network_social_id', $ns['id'])
-            ->where('card_id', $data['id'])
-            ->first();
-        array_push($nsInUse, ['nsData' => $ns, 'nsUser' => $inUse]);
-    }
+            foreach ($nsFree as $ns) {
+                $inUse = Card_detail_network::where('network_social_id', $ns['id'])
+                    ->where('card_id', $data['id'])
+                    ->first();
+                array_push($nsInUse, ['nsData' => $ns, 'nsUser' => $inUse,'card_id'=>$id]);
+            }
 
-    foreach ($cardItems as $ci) {
-        $card_item = Cards_items::where('id', $ci['card_item_id'])->first();
-        if($card_item){
-            array_push($cardItemsDetail, ['item' => $card_item, 'card_detail' => $ci]);
-        }
-    
-    }
-
-
-    return [
-        'cardItems'=>$cardItemsDetail,
-        'data' => $data,
-        'backgrounds' => $background,
-        'actual_bg' => $actual_bg,
-        'user' => $user,
-        'card_style' => $card_style,
-        'ns' => $nsInUse,
-        'text_styles' => $text_styles
-    ];
+            foreach ($cardItems as $ci) {
+                $card_item = Cards_items::where('id', $ci['card_item_id'])->first();
+                if($card_item){
+                    array_push($cardItemsDetail, ['item' => $card_item, 'card_detail' => $ci]);
+                }
+               
+            }
+         
+            return  [
+                        'cardItems'=>$cardItemsDetail,
+                        'data' => $data,
+                        'backgrounds' => $background,
+                        'actual_bg' => $actual_bg,
+                        'user' => $user,
+                        'card_style' => $card_style,
+                        'ns' => $nsInUse,
+                        'text_styles' => $text_styles,
+                        'btn_shape'=>$btn_shape, 
+                        'text_font'=>$text_font,
+                    ];
   }
 
 
