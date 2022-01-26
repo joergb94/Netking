@@ -42,6 +42,7 @@ Route::get('/Keypls/{id}', [CardController::class, 'detail']);
 Route::get('/myKepls', [CardController::class, 'index'])->name('myKepls');
 Route::get('/myKepls/create', [CardController::class, 'create']);
 Route::get('/myKepls/{id}/edit', [CardController::class, 'edit']);
+Route::get('/myKepls/{id}/show_qr', [CardController::class, 'show_qr']);
 Route::post('/myKepls/{id}', [CardController::class, 'update']);
 Route::get('/myKepls/getCreate', [CardController::class, 'get_create_card']);
 Route::delete('/myKepls/{id}', [CardController::class, 'deleteOrResotore']);

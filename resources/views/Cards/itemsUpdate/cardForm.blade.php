@@ -288,4 +288,6 @@
         $(".shapeButton"+buttons).prop("disabled", true);
      
      });
+
+     QR.show({{$data['id']}});
 </script>

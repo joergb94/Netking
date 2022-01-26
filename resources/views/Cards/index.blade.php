@@ -54,7 +54,11 @@
 @endsection
 @section('modal')
     @include('Cards.items.modal')
+    <div id="show_blade2" style="display:none">
+      <div id="card_show2"></div>
+    </div>
 @endsection
 @section('js')
+
   <script src="{{asset('js/actions/Cards.js')}}"></script>
 @endsection

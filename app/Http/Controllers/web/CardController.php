@@ -138,7 +138,15 @@ class CardController extends Controller
            
 
     }
-
+    public function show_qr(Request $request, $id)
+    {
+        if ($request->ajax()) {
+            $data = $this->CardsRepository->show($id);
+            
+            return view('Cards.show',['data'=>$data]);
+        }
+    }
+   
     public function deleteOrResotore(Request $request, $id)
     {
         if ($request->ajax()) {
