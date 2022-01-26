@@ -191,6 +191,7 @@ class CardsRepository
                 'color' => $data['color']?$data['color']:'#fff',
                 'img_name' => $image?$image:null,
                 'img_path' => $path?$path:null,
+                'img_base_64'=>$data['img_base_64']?$data['img_base_64']:$Card['img_base_64']
             ])) {
                 $Card_style->update([
                 'shape_image'=>$data['shape_image']?$data['shape_image']:0,
