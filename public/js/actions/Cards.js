@@ -176,6 +176,8 @@ const Cards = {
   close: function (){
     $("#show_blade").hide();
     $("#index_blade").show();
+    var filter = datasearch();
+    getData(1, filter);
   },
   QR: function (id) {
     var my_url = url + '/' + id + '/show_qr';
@@ -193,7 +195,7 @@ const Cards = {
           icon: 'error',
           title: 'No puedes crear mas cartas',
           text: 'Haz alcanzado el limite maximo de cartas para tu tipo de usuario, si deseas tener mas cartas actualiza!',
-          footer: '<a href="">Como actualizo mi cuenta?</a>'
+          footer: '<a href="'+baseUrl+'/profile">Como actualizo mi cuenta?</a>'
         })
       }
     });
