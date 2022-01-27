@@ -66,6 +66,10 @@ const transactions = {
   take_data_item: function(id,Type){
     var form;
     switch(Type) {
+      case 1:
+        var formData1 = document.getElementById(`file-form-${id}`);
+            form = new FormData(formData1);
+     break;
       case 3:
         let url =$("#description"+id).val();
         let arrayUrl  = url.split('/');
@@ -144,6 +148,7 @@ const transactions = {
 
     var formData1 = document.getElementById('card-form-style');
     var form = new FormData(formData1);
+    form.append('img_base_64',qr);
     form.append('networks', transactions.get_data_ns());
 
     $('#mobil-vition').hide();
@@ -169,7 +174,44 @@ const transactions = {
         $("#mobil-vition").empty().html(data.responseText);
       }
     });
-  }
+  },
+  save_asinc_theme:function(id){
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+    var formData1 = document.getElementById('card-form-style');
+    var qr = $('#qr_img').attr('src');
+    var form = new FormData(formData1);
+    console.log(qr)
+    form.append('img_base_64',qr);
+    form.append('networks', transactions.get_data_ns());
+
+    $('#data-card').hide();
+    $('#loading-data-card').show();
+
+    $.ajax({
+      type: "POST",
+      url: url+'/update_asinc_theme/'+id,
+      data: form,
+      async: true,
+      cache:false,
+      processData: false, 
+      contentType: false, 
+      datatype: "html",
+      success: function (data) {
+        $("#data-card").empty().html(data);
+        $('#loading-data-card').hide();
+        $('#data-card').show();
+      },
+      error: function (data) {
+        $('.btn-save').prop("disabled", false);
+        console.log('Error:', data.responseText);
+        $("#data-card").empty().html(data.responseText);
+      }
+    });
+  },
 }
 //section for const js 
 const Cards = {
@@ -343,6 +385,45 @@ const Cards = {
         $("#mobil-vition").empty().html(data);
         $('#loading-mobil-vition').hide();
         $('#mobil-vition').show();
+  
+      },
+      error: function (data) {
+        $('.btn-save').prop("disabled", false);
+        console.log('Error:', data.responseText);
+        $("#mobil-vition").empty().html(data.responseText);
+      }
+    });
+  },
+  save_asinc_theme:function(id){
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+    var formData1 = document.getElementById('card-form-style');
+    var qr = $('#qr_img').attr('src');
+    var form = new FormData(formData1);
+    console.log(qr)
+    form.append('img_base_64',qr);
+    form.append('networks', transactions.get_data_ns());
+
+    $('#mobil-vition').hide();
+    $('#loading-mobil-vition').show();
+
+    $.ajax({
+      type: "POST",
+      url: url+'/update_asinc/'+id,
+      data: form,
+      async: true,
+      cache:false,
+      processData: false, 
+      contentType: false, 
+      datatype: "html",
+      success: function (data) {
+        $("#mobil-vition").empty().html(data);
+        $('#loading-mobil-vition').hide();
+        $('#mobil-vition').show();
+        transactions.save_asinc_theme(id);
       },
       error: function (data) {
         $('.btn-save').prop("disabled", false);
@@ -421,7 +502,8 @@ const Cards = {
 
         }
       });
-  }
+  },
+
 }
 const QR ={
       show:function(id){

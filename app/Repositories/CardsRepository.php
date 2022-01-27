@@ -7,6 +7,7 @@ use App\Models\Card;
 use App\Models\User;
 use App\Models\NetworkSocial;
 use App\Models\text_style;
+use App\Models\Themes;
 use App\Models\Card_detail;
 use App\Models\Cards_items;
 use App\Models\Card_detail_network;
@@ -181,9 +182,11 @@ class CardsRepository
     {  
         $Card = $this->model->find($Card_id);
         $Card_style = Cards_style_detail::where('card_id',$Card_id)->first();
+        
         return DB::transaction(function () use ($Card, $data,$Card_style,$Card_id,$image,$path) {
             if ($Card->update([
                 'location' => $data['location']?$data['location']:null,
+                'themes_id' => $data['theme']?$data['theme']:$Card['themes_id'],
                 'large_text' => $data['large_text']?$data['large_text']:null,
                 'text_style_id'=>$data['text_style_id']?$data['text_style_id']:1,
                 'background_image_id' =>$data['background'],
@@ -291,6 +294,7 @@ class CardsRepository
                 $data = $this->model->find($id);
                 $actual_bg = $data->background_image->description;
                 $background = Background_image::all();
+                $themes = Themes::all();
                 $card_style = Cards_style_detail::where('card_id', $id)->first();
                 $btn_shape = $this->buttons[$card_style->buttons_shape];
                 $user = User::find($data['user_id']);
@@ -325,6 +329,7 @@ class CardsRepository
                             'text_styles' => $text_styles,
                             'btn_shape'=>$btn_shape, 
                             'text_font'=>$text_font,
+                            'themes'=>$themes,
                         ];
     }
 
@@ -336,6 +341,7 @@ class CardsRepository
                 if($card_item->update([
                         'name'=>$data['name'],
                         'description'=>$data['description'],
+                        'item_data'=>$data['item_data'],
                 ])){
                     return $card_item;
                 }

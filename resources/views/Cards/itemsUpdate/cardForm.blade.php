@@ -195,7 +195,21 @@
           </div>
           <div class="form-group">
             <label>Theme:</label>
-            <input type="text" onchange="Cards.save_asinc({{$data['id']}})" id="theme" name="theme" value="" class="form-control">
+            <select  id="theme" name="theme" onchange="Cards.save_asinc_theme({{$data['id']}})" class="form-control">
+              @forelse ($themes as $theme)
+                  @if (isset($data['themes_id']))
+                      @if ($theme['id'] == $data['themes_id'])
+                      <option value="{{$theme['id']}}" selected>{{$theme['name']}}</option>
+                      @else
+                      <option value="{{$theme['id']}}">{{$theme['name']}}</option>
+                      @endif
+                  @else
+                  <option value="{{$theme['id']}}">{{$theme['name']}}</option>
+                  @endif
+              @empty
+                 <option value="">No data</option> 
+              @endforelse
+            </select>
           </div>
           <div class="form-group">
             <label>Backgroud:</label>
@@ -220,8 +234,7 @@
             <input type="text" id="ocation" onchange="Cards.save_asinc({{$data['id']}})" name="location" value="{{(isset($data['location']))?$data['location']:''}}" class="form-control">
           </div>
   </form>
- </div>       
-<script>
+  <script>
     var myPicker = new JSColor('#colorInput', {format:'hex'});
     var myPicker2 = new JSColor('#background_image_color', {format:'hex'});
 
@@ -288,6 +301,5 @@
         $(".shapeButton"+buttons).prop("disabled", true);
      
      });
-
-     QR.show({{$data['id']}});
 </script>
+ </div>       

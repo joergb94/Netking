@@ -53,6 +53,7 @@ Route::post('/myKepls/updateItemfile/{id}', [CardController::class, 'update_card
 Route::post('/myKepls/create/item', [CardController::class, 'create_item']);
 Route::delete('/myKepls/delete/item/{id}', [CardController::class, 'delete_item']);
 Route::post('/myKepls/update_asinc/{id}', [CardController::class, 'update_asinc']);
+Route::post('/myKepls/update_asinc_theme/{id}', [CardController::class, 'update_theme']);
 
 //profile
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
