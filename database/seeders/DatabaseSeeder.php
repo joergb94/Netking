@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(NetworkSocialSeed::class);
         $this->call(TextStyleSeeder::class);
         $this->call(TypeMembershipSeeder::class);
+        $this->call(ThemeSeed::class);
        
     }
 }

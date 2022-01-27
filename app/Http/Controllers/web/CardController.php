@@ -92,6 +92,7 @@ class CardController extends Controller
             }
         }
     }
+
     public function edit(Request $request, $id)
     {
         if ($request->ajax()) {
@@ -233,7 +234,15 @@ class CardController extends Controller
                 $nameImg = $card->img_name;
                 $file_path = $card->img_path;
             }
-            $data = $this->CardsRepository->update_asinc($id, $request->input(), $nameImg, $file_path);
+
+            dd($request->input());
+            if($request->theme){
+                $data = $this->CardsRepository->update_asinc($id, $request->input(), $nameImg, $file_path);
+            }else{
+
+                $data = $this->CardsRepository->update_asinc($id, $request->input(), $nameImg, $file_path);
+            }
+           
             if(Card::where('id',$data['id'])->exists()){
    
                 return view('Cards.itemsUpdate.keypl',$this->CardsRepository->get_data_keypl($data['id']));
