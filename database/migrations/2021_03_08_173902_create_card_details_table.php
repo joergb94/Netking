@@ -21,7 +21,7 @@ class CreateCardDetailsTable extends Migration
             $table->longText('name')->default('Example');
             $table->integer('order')->default(0);
             $table->longText('description')->default('ExampleDescription');
-            $table->json('item_data')->nullable();
+            $table->longText('item_data')->nullable();
             $table->integer('size')->default(12);
             $table->boolean('active')->default(1);
             $table->timestamps();

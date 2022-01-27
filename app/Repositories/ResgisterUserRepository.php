@@ -31,9 +31,11 @@ class ResgisterUserRepository
     }
     public function createCard($data){
         return DB::transaction(function () use ($data) {
-            
+            $cardsNo = Card::where('user_id',$data['id'])->count();
+            $no = $cardsNo + 1;
             $Card =Card::create([
                 'user_id'=>$data['id'],
+                'title'=>'Keypl'.$no,
             ]);
 
             if($Card){

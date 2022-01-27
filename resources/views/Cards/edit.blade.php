@@ -30,7 +30,7 @@
                                  </button>
                                 <button type="button" class="btn {{$ci['item']->style}} delete" id="btn-delete-{{$ci['card_detail']->id}}" style="display:none"  onclick="Cards.delete_item({{$ci['card_detail']->id}},{{$data['id']}})"><i class="fa fa-trash"></i></button>
                               </div>
-                              <div class="col-sm-12 divs-data" id="div-{{$ci['card_detail']->id}}">
+                              <div class="col-sm-12 divs-data" id="div-{{$ci['card_detail']->id}}" style="display:none">
                               <br class="br-">
                               @include('Cards.itemsUpdate.TypeForms.form'.$ci['item']->id,['data' => $ci['card_detail']])
                             </div>
@@ -43,6 +43,12 @@
                   </div>
                   <div id="styleK" class="container tab-pane fade"><br>
                         @include('Cards.itemsUpdate.cardForm')
+                        <div id="loading-data-card" class="container text-center" style="display:none">
+                          <br><br>
+                          <div class="spinner-grow text-dark"></div>
+                          <div class="spinner-grow text-dark"></div>
+                          <div class="spinner-grow text-dark"></div>
+                        </div>
                   </div>
                   <div class="col-sm-12"  style="display:none" >
                       <div id="qrcode" class="mx-auto d-block"></div>
@@ -70,4 +76,6 @@
            </div>
     </div>
 </div>
-
+<script>
+  QR.show({{$data['id']}});
+</script>

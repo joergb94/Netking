@@ -13,6 +13,8 @@ use App\Http\Requests\Cards\CardsIdRequest;
 use App\Http\Requests\Cards\CardsUpdateRequest;
 use App\Http\Requests\Cards\CardsStoreRequest;
 use App\Models\Cards;
+use App\Models\Theme;
+use App\Models\Theme_detail;
 use App\Models\Cards_items;
 use App\Models\Card_detail;
 use App\Models\NetworkSocial;
@@ -99,6 +101,15 @@ class CardController extends Controller
 
 
             return view('Cards.edit', $this->CardsRepository->get_data_keypl($id));
+        }
+    }
+
+    public function update_theme(Request $request, $id)
+    {
+        if ($request->ajax()) {
+
+
+            return view('Cards.itemsUpdate.cardForm', $this->CardsRepository->get_data_keypl($id));
         }
     }
     public function update(CardsStoreRequest $request, $id)
@@ -200,18 +211,23 @@ class CardController extends Controller
     {
         if ($request->ajax()) {
             $detail = Card_detail::find($id);
+    
             if ($request['file']) {
                 $image = $request->file('file');
                 $nameImg = time() . $image->getClientOriginalName();
                 $file_path = '/images/keypls/';
                 $image->move(public_path() . '/images/keypls/', $nameImg);
                 $full_path = $file_path.$nameImg;
-            } else {
+            } else if($detail->description) {
                 $full_path = $detail->description;
+            }else{
+                $full_path = 'img/profile.png';
             }
+            $dataItem =$detail['card_item_id'] == 1
+                        ?['name'=> $request->name,'description'=>$request->description, 'item_data'=>$full_path]
+                        :['name'=> $request->name,'description'=>$file_path.$nameImg, 'item_data'=>$full_path];
 
-            $card_item = $this->CardsRepository->update_card_detail_item($id,['name'=> $request->name,
-                                                                                'description'=>$file_path.$nameImg]);
+            $card_item = $this->CardsRepository->update_card_detail_item($id,$dataItem);
 
             if(Card::where('id',$card_item['card_id'])->exists()){
                        
@@ -235,11 +251,27 @@ class CardController extends Controller
                 $file_path = $card->img_path;
             }
 
-            dd($request->input());
-            if($request->theme){
-                $data = $this->CardsRepository->update_asinc($id, $request->input(), $nameImg, $file_path);
-            }else{
+            if(strlen($request['theme']) > 0 && $request['theme'] != $card['themes_id']){
+                $theme = Theme_detail::find($request['theme']);
+                $dataTheme =  [
+                    'shape_image' => $theme['shape_image'],
+                    'head_orientation' => $theme['head_orientation'],
+                    'divs_shape' => $theme['divs_shape'],
+                    'buttons_shape' => $theme['buttons_shape'],
+                    'color' => $theme['color'],
+                    'background_image_color' =>$theme['background_image_color'],
+                    'large_text' => $theme['large_text'],
+                    'text_style_id' => $theme['text_style_id'],
+                    'theme' => $request['theme'],
+                    'background' => $theme['background_image_id'],
+                    'location' => $request['location'],
+                    'img_base_64' =>$request['img_base_64'],
+                    'networks' =>$request['networks']
+                ];
 
+                $data = $this->CardsRepository->update_asinc($id,$dataTheme,$nameImg, $file_path);
+            }else{
+               
                 $data = $this->CardsRepository->update_asinc($id, $request->input(), $nameImg, $file_path);
             }
            
