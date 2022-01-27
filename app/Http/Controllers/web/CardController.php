@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\CardsRepository;
 use App\Repositories\GeneralRepository;
+use App\Repositories\ResgisterUserRepository;
 use App\Http\Requests\Cards\CardsRequest;
 use App\Http\Requests\Cards\CardsIdRequest;
 use App\Http\Requests\Cards\CardsUpdateRequest;
@@ -25,10 +26,11 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class CardController extends Controller
 {
-    public function __construct(CardsRepository $CardsRepository, GeneralRepository $GeneralRepository)
+    public function __construct(CardsRepository $CardsRepository, GeneralRepository $GeneralRepository,ResgisterUserRepository $ResgisterUserRepository)
     {
         $this->CardsRepository = $CardsRepository;
         $this->GeneralRepository = $GeneralRepository;
+        $this->ResgisterUserRepository = $ResgisterUserRepository;
         $this->menu_id = 3;
         $this->module_name = 'Card';
         $this->text_module = ['Created', 'Updated', 'Deleted', 'Restored', 'Actived', 'Deactived'];
@@ -56,12 +58,9 @@ class CardController extends Controller
         if ($request->ajax()) {
             $status = $this->GeneralRepository->card_max();
             if ($status) {
-                $background = Background_image::all();
-                $user = User::find(Auth::user()->id);
-                $ns = NetworkSocial::all();
-                $text_styles = text_style::all();
-                $cardItems = Cards_items::all();
-                return view('Cards.create', ['cardItems'=>$cardItems,'backgrounds' => $background, 'user' => $user, 'ns' => $ns, 'text_styles' => $text_styles]);
+                $User = User::find(Auth::user()->id);
+                $data = $this->ResgisterUserRepository->create_only_card($User);
+                return view('Cards.edit', $this->CardsRepository->get_data_keypl($data['id']));
             }
         }
     }
@@ -93,6 +92,7 @@ class CardController extends Controller
             }
         }
     }
+
     public function edit(Request $request, $id)
     {
         if ($request->ajax()) {
@@ -234,7 +234,15 @@ class CardController extends Controller
                 $nameImg = $card->img_name;
                 $file_path = $card->img_path;
             }
-            $data = $this->CardsRepository->update_asinc($id, $request->input(), $nameImg, $file_path);
+
+            dd($request->input());
+            if($request->theme){
+                $data = $this->CardsRepository->update_asinc($id, $request->input(), $nameImg, $file_path);
+            }else{
+
+                $data = $this->CardsRepository->update_asinc($id, $request->input(), $nameImg, $file_path);
+            }
+           
             if(Card::where('id',$data['id'])->exists()){
    
                 return view('Cards.itemsUpdate.keypl',$this->CardsRepository->get_data_keypl($data['id']));

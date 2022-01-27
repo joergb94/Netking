@@ -143,4 +143,25 @@ class ResgisterUserRepository
     }
     
 
+    public function create_only_card($User){
+
+        return DB::transaction(function () use ($User) {
+            $Card = ResgisterUserRepository::createCard($User);
+                    
+            if($Card){
+                
+                $CardDeatil = ResgisterUserRepository::createCardDetail($Card);
+                $CardStyle = ResgisterUserRepository::createCardStyle($Card['id']);
+
+                    if($CardDeatil && $CardStyle){
+                        
+                        return $Card;
+                    }
+                    
+            }
+
+            throw new GeneralException(__('There was an error created the User.'));
+        });
+    }
+
 }

@@ -24,10 +24,6 @@ class DataMenuSeeder extends Seeder
       foreach($menus as $menu){
             DB::table('data_menus')->insert($menu);
                         }
-
-            DB::table('themes')->insert(['name'=>'theme1']);
-            DB::table('text_styles')->insert(['name'=>'text1']);
-            DB::table('background_images')->insert(['name'=>'image1']);
         
     }
 }
