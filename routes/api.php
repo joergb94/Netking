@@ -6,6 +6,7 @@ use App\Http\Controllers\ApiAuth\RegisterApiController;
 use App\Http\Controllers\ApiAuth\LogoutApiController;
 use App\Http\Controllers\ApiAuth\LoginApiController;
 use App\Http\Controllers\Api\HomeApiController;
+use App\Http\Controllers\Api\CardController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -28,3 +29,6 @@ Route::post('mobile/test',[LoginApiController::class, 'test']);
 
 //home
 Route::get('mobile/home', [HomeApiController::class, 'index']);
+
+Route::get('card/item', [CardController::class, 'card_item']);
+Route::get('card/{id}', [CardController::class, 'get_data_keypl']);
