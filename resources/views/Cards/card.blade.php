@@ -130,13 +130,15 @@
 <body>
     <div class="bg-image"></div>
     <div class="col-sm-12 col-md-12 col-lg-4 mx-auto d-block bg">
-        @foreach($cardItems as $ci)
-            <br>
-            <div class="col-12" id="div-{{$ci['card_detail']->id}}">
-                @include('Cards.itemsUpdate.itemsKeypl.div'.$ci['item']->id)
-            </div>
-            <br>
-        @endforeach
+        <br>
+        <div class="row justify-content-between">
+            @foreach($cardItems as $ci)
+                <div class="col-12" id="div-{{$ci['card_detail']->id}}">
+                    @include('Cards.itemsUpdate.itemsKeypl.div'.$ci['item']->id)
+                    <br>
+                </div>
+            @endforeach
+        </div>
     </div>
 
 </body>

@@ -31,9 +31,11 @@ class ResgisterUserRepository
     }
     public function createCard($data){
         return DB::transaction(function () use ($data) {
-            
+            $cardsNo = Card::where('user_id',$data['id'])->count();
+            $no = $cardsNo + 1;
             $Card =Card::create([
                 'user_id'=>$data['id'],
+                'title'=>'Keypl'.$no,
             ]);
 
             if($Card){
@@ -142,5 +144,26 @@ class ResgisterUserRepository
         });
     }
     
+
+    public function create_only_card($User){
+
+        return DB::transaction(function () use ($User) {
+            $Card = ResgisterUserRepository::createCard($User);
+                    
+            if($Card){
+                
+                $CardDeatil = ResgisterUserRepository::createCardDetail($Card);
+                $CardStyle = ResgisterUserRepository::createCardStyle($Card['id']);
+
+                    if($CardDeatil && $CardStyle){
+                        
+                        return $Card;
+                    }
+                    
+            }
+
+            throw new GeneralException(__('There was an error created the User.'));
+        });
+    }
 
 }

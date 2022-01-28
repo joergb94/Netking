@@ -42,6 +42,7 @@ Route::get('/Keypls/{id}', [CardController::class, 'detail']);
 Route::get('/myKepls', [CardController::class, 'index'])->name('myKepls');
 Route::get('/myKepls/create', [CardController::class, 'create']);
 Route::get('/myKepls/{id}/edit', [CardController::class, 'edit']);
+Route::get('/myKepls/{id}/show_qr', [CardController::class, 'show_qr']);
 Route::post('/myKepls/{id}', [CardController::class, 'update']);
 Route::get('/myKepls/getCreate', [CardController::class, 'get_create_card']);
 Route::delete('/myKepls/{id}', [CardController::class, 'deleteOrResotore']);
@@ -52,6 +53,7 @@ Route::post('/myKepls/updateItemfile/{id}', [CardController::class, 'update_card
 Route::post('/myKepls/create/item', [CardController::class, 'create_item']);
 Route::delete('/myKepls/delete/item/{id}', [CardController::class, 'delete_item']);
 Route::post('/myKepls/update_asinc/{id}', [CardController::class, 'update_asinc']);
+Route::post('/myKepls/update_asinc_theme/{id}', [CardController::class, 'update_theme']);
 
 //profile
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile');

@@ -4,50 +4,35 @@
 
       <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title">Details</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">QR Keypl</h4>
+        <button type="button" class="close btn btn-outline-danger" data-dismiss="modal">&times;</button>
       </div>
 
       <!-- Modal body -->
       <div class="modal-body">
-        <div class="col-sm-12">
-        <div style="text-align: center">
-          <h2>About me</h2>
-          <p>{{$card['card_user_details']['about_me']}}</p>
-        </div>
-      </div>
-      <div class="col-sm-12">
-        <div style="text-align: center">
-          <h2>Phone</h2>
-          <p>{{$card['card_user_details']['phone']}}</p>
-        </div>
-      </div>
-      <div class="col-sm-12">
-        <div style="text-align: center">
-          <h2>Cell Phone</h2>
-          <p>{{$card['card_user_details']['cell_phone']}}</p>
-        </div>
-      </div>
-      <div class="col-sm-12">
-        <div style="text-align: center">
-          <h2>Business</h2>
-          <p>{{$card['card_user_details']['bsiness']}}</p>
-        </div>
-      </div>
-      <div class="col-sm-12">
-        <div style="text-align: center">
-          <h2>Scolarship</h2>
-          <p>{{$card['card_user_details']['scholarship']}}</p>
-        </div>
-      </div>
-      </div>
-
-      <!-- Modal footer -->
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel <i
-            class='fas fa-window-close'></i></button>
+          <div class="row">
+              <div class="col-sm-12">
+                  <div id="qrcode" class="mx-auto d-block"></div>
+              </div>
+              <div class="col-sm-12">
+                <br>
+                  <button type="button" id="button_link"  class="btn btn-secondary text-dark btn-block" onclick="QR.copy_link()" value="{{ \Request::root() }}/Keypls/{{$data->id}}"><strong>Copiar </strong> {{ \Request::root() }}/Keypls/{{$data->id}} 
+                      <i id="iconCopyB" class="fa fa-copy"></i> 
+                      <i id="iconCopyA" style="display:none;" class="fa fa-clipboard-check text-white"></i>
+                    </button>
+                <br>
+                <button type="button"  class="btn btn-gray text-white btn-block" onclick="QR.download({{$data->id}})" ><strong>Descargar</strong> QR 
+                    <i id="iconDB" class="fa fa-file-download"></i>
+                    <i  id="iconDA" style="display:none;" class="fa fa-file-download text-dark"></i>
+                </button>
+                <br>
+              </div>
+          </div>
       </div>
 
     </div>
   </div>
 </div>
+<script>
+     QR.show({{$data->id}});  
+</script>

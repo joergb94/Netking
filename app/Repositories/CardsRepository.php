@@ -7,6 +7,7 @@ use App\Models\Card;
 use App\Models\User;
 use App\Models\NetworkSocial;
 use App\Models\text_style;
+use App\Models\Themes;
 use App\Models\Card_detail;
 use App\Models\Cards_items;
 use App\Models\Card_detail_network;
@@ -181,9 +182,11 @@ class CardsRepository
     {  
         $Card = $this->model->find($Card_id);
         $Card_style = Cards_style_detail::where('card_id',$Card_id)->first();
+        
         return DB::transaction(function () use ($Card, $data,$Card_style,$Card_id,$image,$path) {
             if ($Card->update([
                 'location' => $data['location']?$data['location']:null,
+                'themes_id' => $data['theme']?$data['theme']:$Card['themes_id'],
                 'large_text' => $data['large_text']?$data['large_text']:null,
                 'text_style_id'=>$data['text_style_id']?$data['text_style_id']:1,
                 'background_image_id' =>$data['background'],
@@ -191,6 +194,7 @@ class CardsRepository
                 'color' => $data['color']?$data['color']:'#fff',
                 'img_name' => $image?$image:null,
                 'img_path' => $path?$path:null,
+                'img_base_64'=>$data['img_base_64']?$data['img_base_64']:$Card['img_base_64']
             ])) {
                 $Card_style->update([
                 'shape_image'=>$data['shape_image']?$data['shape_image']:0,
@@ -275,84 +279,89 @@ class CardsRepository
         throw new GeneralException(__('Error deleteOrResotore of Card.'));
 
       });
-  }
-  public function show($id){
-    $Card = $this->model->find($id);
-    return $Card;
-  }
+    }
+    public function show($id)
+    {
+        $Card = $this->model->find($id);
+        return $Card;
+    }
 
+    public function get_data_keypl($id)
+    {
 
-  public function get_data_keypl($id){
+                $nsInUse = [];
+                $cardItemsDetail =[];
+                $data = $this->model->find($id);
+                $actual_bg = $data->background_image->description;
+                $background = Background_image::all();
+                $themes = Themes::all();
+                $card_style = Cards_style_detail::where('card_id', $id)->first();
+                $btn_shape = $this->buttons[$card_style->buttons_shape];
+                $user = User::find($data['user_id']);
+                $nsFree = NetworkSocial::all();
+                $cardItems = Card_detail::where('card_id', $data['id'])->get();
+                $text_styles = text_style::all();
+                $text_font = text_style::find($data['text_style_id']);
 
-            $nsInUse = [];
-            $cardItemsDetail =[];
-            $data = $this->model->find($id);
-            $actual_bg = $data->background_image->description;
-            $background = Background_image::all();
-            $card_style = Cards_style_detail::where('card_id', $id)->first();
-            $btn_shape = $this->buttons[$card_style->buttons_shape];
-            $user = User::find($data['user_id']);
-            $nsFree = NetworkSocial::all();
-            $cardItems = Card_detail::where('card_id', $data['id'])->get();
-            $text_styles = text_style::all();
-            $text_font = text_style::find($data['text_style_id']);
-
-            foreach ($nsFree as $ns) {
-                $inUse = Card_detail_network::where('network_social_id', $ns['id'])
-                    ->where('card_id', $data['id'])
-                    ->first();
-                array_push($nsInUse, ['nsData' => $ns, 'nsUser' => $inUse,'card_id'=>$id]);
-            }
-
-            foreach ($cardItems as $ci) {
-                $card_item = Cards_items::where('id', $ci['card_item_id'])->first();
-                if($card_item){
-                    array_push($cardItemsDetail, ['item' => $card_item, 'card_detail' => $ci]);
+                foreach ($nsFree as $ns) {
+                    $inUse = Card_detail_network::where('network_social_id', $ns['id'])
+                        ->where('card_id', $data['id'])
+                        ->first();
+                    array_push($nsInUse, ['nsData' => $ns, 'nsUser' => $inUse,'card_id'=>$id]);
                 }
-               
-            }
-         
-            return  [
-                        'cardItems'=>$cardItemsDetail,
-                        'data' => $data,
-                        'backgrounds' => $background,
-                        'actual_bg' => $actual_bg,
-                        'user' => $user,
-                        'card_style' => $card_style,
-                        'ns' => $nsInUse,
-                        'text_styles' => $text_styles,
-                        'btn_shape'=>$btn_shape, 
-                        'text_font'=>$text_font,
-                    ];
-  }
 
+                foreach ($cardItems as $ci) {
+                    $card_item = Cards_items::where('id', $ci['card_item_id'])->first();
+                    if($card_item){
+                        array_push($cardItemsDetail, ['item' => $card_item, 'card_detail' => $ci]);
+                    }
+                
+                }
+            
+                return  [
+                            'cardItems'=>$cardItemsDetail,
+                            'data' => $data,
+                            'backgrounds' => $background,
+                            'actual_bg' => $actual_bg,
+                            'user' => $user,
+                            'card_style' => $card_style,
+                            'ns' => $nsInUse,
+                            'text_styles' => $text_styles,
+                            'btn_shape'=>$btn_shape, 
+                            'text_font'=>$text_font,
+                            'themes'=>$themes,
+                        ];
+    }
 
-  public function update_card_detail_item($id,$data){
-        $card_item = Card_detail::find($id);
+    public function update_card_detail_item($id,$data)
+    {
+            $card_item = Card_detail::find($id);
 
-        return DB::transaction(function () use ($card_item,$data) {
-            if($card_item->update([
-                    'name'=>$data['name'],
-                    'description'=>$data['description'],
-            ])){
-                return $card_item;
-            }
-            throw new GeneralException(__('Error update of keypl detail.'));
+            return DB::transaction(function () use ($card_item,$data) {
+                if($card_item->update([
+                        'name'=>$data['name'],
+                        'description'=>$data['description'],
+                        'item_data'=>$data['item_data'],
+                ])){
+                    return $card_item;
+                }
+                throw new GeneralException(__('Error update of keypl detail.'));
 
-        });
+            });
 
-   }
+    }
    
 
-  public function delete_item($id){
-        return DB::transaction(function () use ($id) {
-            $card_item = Card_detail::find($id)->delete();
-            $b=3;
-            return $id;
+    public function delete_item($id)
+    {
+            return DB::transaction(function () use ($id) {
+                $card_item = Card_detail::find($id)->delete();
+                $b=3;
+                return $id;
 
-            throw new GeneralException(__('Error update of keypl detail.'));
+                throw new GeneralException(__('Error update of keypl detail.'));
 
-        });
+            });
     }
 
 }

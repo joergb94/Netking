@@ -9,7 +9,7 @@
         <div class="form-group">
             <label for="PDF">Agregar Archivo PDF:</label>
             <div class="custom-file mb-3">
-              <input type="file" class="custom-file-input" id="description{{$data->id}}" value="{{$data->description}}" name="file">
+              <input type="file" class="custom-file-input custom-file-input-file" id="description{{$data->id}}" value="{{$data->item_data}}" name="file">
               <label class="custom-file-label" for="PDF">Choose file</label>
             </div>
         </div>
@@ -23,7 +23,7 @@
 
 <script>
 // Add the following code if you want the name of the file appear on select
-  $(".custom-file-input").on("change", function() {
+  $(".custom-file-input-file").on("change", function() {
     var fileName = $(this).val().split("\\").pop();
     $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
   });

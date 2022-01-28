@@ -66,6 +66,10 @@ const transactions = {
   take_data_item: function(id,Type){
     var form;
     switch(Type) {
+      case 1:
+        var formData1 = document.getElementById(`file-form-${id}`);
+            form = new FormData(formData1);
+     break;
       case 3:
         let url =$("#description"+id).val();
         let arrayUrl  = url.split('/');
@@ -116,6 +120,10 @@ const transactions = {
     $("#div-"+id).show();
     $("#btn-delete-"+id).show();
   },
+  all_toggle: function(){
+    $(".divs-data").hide();
+    $(".delete").hide();
+  },
   delete_item_detail: function(id){
     $.ajaxSetup({
       headers: {
@@ -143,7 +151,9 @@ const transactions = {
     });
 
     var formData1 = document.getElementById('card-form-style');
+    var qr = $('#qr_img').attr('src');
     var form = new FormData(formData1);
+    form.append('img_base_64',qr);
     form.append('networks', transactions.get_data_ns());
 
     $('#mobil-vition').hide();
@@ -162,6 +172,8 @@ const transactions = {
         $("#mobil-vition").empty().html(data);
         $('#loading-mobil-vition').hide();
         $('#mobil-vition').show();
+        $(".divs-data").hide();
+        $(".delete").hide();
       },
       error: function (data) {
         $('.btn-save').prop("disabled", false);
@@ -169,17 +181,56 @@ const transactions = {
         $("#mobil-vition").empty().html(data.responseText);
       }
     });
-  }
+  },
+  save_asinc_theme:function(id){
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+    var formData1 = document.getElementById('card-form-style');
+    var qr = $('#qr_img').attr('src');
+    var form = new FormData(formData1);
+    console.log(qr)
+    form.append('img_base_64',qr);
+    form.append('networks', transactions.get_data_ns());
+
+    $('#data-card').hide();
+    $('#loading-data-card').show();
+
+    $.ajax({
+      type: "POST",
+      url: url+'/update_asinc_theme/'+id,
+      data: form,
+      async: true,
+      cache:false,
+      processData: false, 
+      contentType: false, 
+      datatype: "html",
+      success: function (data) {
+        $("#data-card").empty().html(data);
+        $('#loading-data-card').hide();
+        $('#data-card').show();
+      },
+      error: function (data) {
+        $('.btn-save').prop("disabled", false);
+        console.log('Error:', data.responseText);
+        $("#data-card").empty().html(data.responseText);
+      }
+    });
+  },
 }
 //section for const js 
 const Cards = {
   close: function (){
     $("#show_blade").hide();
     $("#index_blade").show();
+    var filter = datasearch();
+    getData(1, filter);
   },
-  detail: function (id) {
-    var my_url = url + '/' + id + '/show';
-    actions.detail(my_url, id);
+  QR: function (id) {
+    var my_url = url + '/' + id + '/show_qr';
+    actions.show(my_url,false,false,true);
   },
   create: function () {
     $.get(url + '/getCreate/')
@@ -193,7 +244,7 @@ const Cards = {
           icon: 'error',
           title: 'No puedes crear mas cartas',
           text: 'Haz alcanzado el limite maximo de cartas para tu tipo de usuario, si deseas tener mas cartas actualiza!',
-          footer: '<a href="">Como actualizo mi cuenta?</a>'
+          footer: '<a href="'+baseUrl+'/profile">Como actualizo mi cuenta?</a>'
         })
       }
     });
@@ -318,9 +369,11 @@ const Cards = {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       }
     });
-
     var formData1 = document.getElementById('card-form-style');
+    var qr = $('#qr_img').attr('src');
     var form = new FormData(formData1);
+    console.log(qr)
+    form.append('img_base_64',qr);
     form.append('networks', transactions.get_data_ns());
 
     $('#mobil-vition').hide();
@@ -339,6 +392,45 @@ const Cards = {
         $("#mobil-vition").empty().html(data);
         $('#loading-mobil-vition').hide();
         $('#mobil-vition').show();
+  
+      },
+      error: function (data) {
+        $('.btn-save').prop("disabled", false);
+        console.log('Error:', data.responseText);
+        $("#mobil-vition").empty().html(data.responseText);
+      }
+    });
+  },
+  save_asinc_theme:function(id){
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+    var formData1 = document.getElementById('card-form-style');
+    var qr = $('#qr_img').attr('src');
+    var form = new FormData(formData1);
+    console.log(qr)
+    form.append('img_base_64',qr);
+    form.append('networks', transactions.get_data_ns());
+
+    $('#mobil-vition').hide();
+    $('#loading-mobil-vition').show();
+
+    $.ajax({
+      type: "POST",
+      url: url+'/update_asinc/'+id,
+      data: form,
+      async: true,
+      cache:false,
+      processData: false, 
+      contentType: false, 
+      datatype: "html",
+      success: function (data) {
+        $("#mobil-vition").empty().html(data);
+        $('#loading-mobil-vition').hide();
+        $('#mobil-vition').show();
+        transactions.save_asinc_theme(id);
       },
       error: function (data) {
         $('.btn-save').prop("disabled", false);
@@ -417,12 +509,41 @@ const Cards = {
 
         }
       });
-  }
+  },
+
 }
-const background ={
-  linkPreview: function(){
+const QR ={
+      show:function(id){
+          var qrcode = new QRCode("qrcode");
+          var data = $('#baseUrl').val()+'/Keypls/'+id;
+          qrcode.makeCode(data);
+      },
+      copy_link:function(){
+        var origen = document.getElementById('button_link');
+        var copyFrom = document.createElement("textarea");
+        copyFrom.textContent = origen.value;
+        var body = document.getElementsByTagName('body')[0];
+        body.appendChild(copyFrom);
+        copyFrom.select();
+        document.execCommand('copy');
+        body.removeChild(copyFrom);
+        document.execCommand('paste');
+        $('#iconCopyB').hide(500);
+        $('#iconCopyA').show(500);
+        $('#iconCopyA').hide(500);
+        $('#iconCopyB').show(500);
 
-
+      },
+      download:function(id){
+        const linkSource = $('#qr_img').attr('src');
+        const downloadLink = document.createElement("a");
+        downloadLink.href = linkSource;
+        downloadLink.download = 'Keypl'+id+'.jpg';
+        downloadLink.click();
+        $('#iconDB').hide(500);
+        $('#iconDA').show(500);
+        $('#iconDA').hide(500);
+        $('#iconDB').show(500);
+      }
+      
   }
-}
-

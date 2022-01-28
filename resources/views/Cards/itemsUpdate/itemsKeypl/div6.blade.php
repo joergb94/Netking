@@ -1,4 +1,4 @@
-<div class="row justify-content-between">
+
   <div class="col-12 mx-auto d-block {!! $card_style['divs_shape']  == 1?'div-rounded':''!!}">
     <blockquote class="twitter-tweet">
       <p lang="en" dir="ltr">twit</p>&mdash; keypls 
@@ -7,4 +7,3 @@
       </blockquote>
       <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
   </div>
-</div>
