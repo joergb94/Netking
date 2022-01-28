@@ -47,8 +47,8 @@ class CardsRepository
     {
       
               $rg = (strlen($criterion) > 0 &&  strlen($search) > 0) 
-              ? $this->model->where($criterion, 'like', '%'. $search . '%')
-              : $this->model->where('id','>',0);
+              ? $this->model->where($criterion, 'like', '%'. $search . '%')->where('user_id',Auth::user()->id)
+              : $this->model->where('id','>',0)->where('user_id',Auth::user()->id);
 
               switch ($status) {
                   case 1:
