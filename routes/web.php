@@ -40,6 +40,7 @@ Route::get('/Keypls/{id}', [CardController::class, 'detail']);
 //cards
 
 Route::get('/myKepls', [CardController::class, 'index'])->name('myKepls');
+Route::get('/myKepls/generatQR', [CardController::class, 'qrGenerator']);
 Route::get('/myKepls/create', [CardController::class, 'create']);
 Route::get('/myKepls/{id}/edit', [CardController::class, 'edit']);
 Route::get('/myKepls/{id}/show_qr', [CardController::class, 'show_qr']);

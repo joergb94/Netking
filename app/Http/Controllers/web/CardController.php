@@ -67,6 +67,12 @@ class CardController extends Controller
         }
     }
 
+    public function qrGenerator(CardsRequest $request)
+    {
+ 
+            return view('Cards.qrGenerator',['dm' => accesUrl(Auth::user(), $this->menu_id)]);
+
+    }
     public function store(CardsStoreRequest $request)
     {
 
