@@ -120,6 +120,10 @@ const transactions = {
     $("#div-"+id).show();
     $("#btn-delete-"+id).show();
   },
+  all_toggle: function(){
+    $(".divs-data").hide();
+    $(".delete").hide();
+  },
   delete_item_detail: function(id){
     $.ajaxSetup({
       headers: {
@@ -147,6 +151,7 @@ const transactions = {
     });
 
     var formData1 = document.getElementById('card-form-style');
+    var qr = $('#qr_img').attr('src');
     var form = new FormData(formData1);
     form.append('img_base_64',qr);
     form.append('networks', transactions.get_data_ns());
@@ -167,6 +172,8 @@ const transactions = {
         $("#mobil-vition").empty().html(data);
         $('#loading-mobil-vition').hide();
         $('#mobil-vition').show();
+        $(".divs-data").hide();
+        $(".delete").hide();
       },
       error: function (data) {
         $('.btn-save').prop("disabled", false);

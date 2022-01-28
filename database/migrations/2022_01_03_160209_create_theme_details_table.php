@@ -28,7 +28,7 @@ class CreateThemeDetailsTable extends Migration
             $table->boolean('head_orientation')->default(0);
             $table->boolean('shape')->default(0);
             $table->boolean('outline')->default(0);
-            $table->integer('buttons_shape')->default(1);
+            $table->integer('buttons_shape')->default(2);
             $table->integer('divs_shape')->default(1);
             $table->timestamps();
             $table->softDeletes();

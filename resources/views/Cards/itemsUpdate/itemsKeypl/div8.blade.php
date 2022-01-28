@@ -1,4 +1,4 @@
-<div class="row justify-content-between">
+
     <div class="col-12 text-center mx-auto d-block">
         <a href="{{$ci['card_detail']['description']}}" class="btn btn-gray {{$btn_shape}} text-white btn-block" download>
             <div class="col-12">
@@ -6,4 +6,4 @@
             </div>
         </a>
     </div>
-</div>
+
