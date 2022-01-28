@@ -1,4 +1,4 @@
-<div class="row justify-content-between">
+
   <div class="col-12 text-center mx-auto d-block ">
     <div class="card {!! $card_style['divs_shape']  == 1?'div-rounded':''!!} text-dark">
       <div class="card-header"> <h3 style="font-family:{{$text_font->name}};">{{$ci['card_detail']['name']}}</h3></div>
@@ -19,4 +19,3 @@
       </div>
     </div>
   </div>
-</div>

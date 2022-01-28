@@ -1,4 +1,4 @@
-<div class="row justify-content-between">
+<div class="col-12">
     <iframe 
         class="{!! $card_style['divs_shape']  == 1?'div-rounded':''!!}" 
         width="100%" 

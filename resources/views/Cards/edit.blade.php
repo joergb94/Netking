@@ -11,10 +11,10 @@
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" role="tablist">
                   <li class="nav-item">
-                    <a class="nav-link active" data-toggle="tab" href="#General">General</a>
+                    <a class="nav-link active" data-toggle="tab" href="#General"  onclick="transactions.all_toggle()" >General</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#styleK">Style</a>
+                    <a class="nav-link" data-toggle="tab" href="#styleK"  onclick="transactions.all_toggle()" >Style</a>
                   </li>
                 </ul>
 
