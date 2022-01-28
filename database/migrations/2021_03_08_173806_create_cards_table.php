@@ -20,7 +20,7 @@ class CreateCardsTable extends Migration
             $table->unsignedBigInteger('themes_id')->default(1);
             $table->unsignedBigInteger('background_image_id')->default(1);
             $table->unsignedBigInteger('text_style_id')->default(1);
-            $table->longText('background_image_color')->default('#000000');
+            $table->longText('background_image_color')->nullable();
             $table->string('title', 100)->default('Example');
             $table->string('color')->nullable();
             $table->longText('subtitle')->nullable();
