@@ -67,6 +67,12 @@ class CardController extends Controller
         }
     }
 
+    public function qrGenerator(CardsRequest $request)
+    {
+ 
+            return view('Cards.qrGenerator',['dm' => accesUrl(Auth::user(), $this->menu_id)]);
+
+    }
     public function store(CardsStoreRequest $request)
     {
 
@@ -264,6 +270,7 @@ class CardController extends Controller
                     'text_style_id' => $theme['text_style_id'],
                     'theme' => $request['theme'],
                     'background' => $theme['background_image_id'],
+                    'background_color' => $theme['background_color'],
                     'location' => $request['location'],
                     'img_base_64' =>$request['img_base_64'],
                     'networks' =>$request['networks']

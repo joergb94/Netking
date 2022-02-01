@@ -5,6 +5,7 @@ use App\Http\Controllers\web\GeneralController;
 use App\Http\Controllers\web\contacUsController;
 use App\Http\Controllers\web\CardController;
 use App\Http\Controllers\web\HomeController;
+use App\Http\Controllers\web\WelcomeController;
 use App\Http\Controllers\web\ProfileController;
 
 
@@ -20,9 +21,8 @@ use App\Http\Controllers\web\ProfileController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
+
 Route::get('/contactUs/{id}',[contacUsController::class, 'send_mail']);
 Auth::routes();
 //home 
@@ -40,6 +40,7 @@ Route::get('/Keypls/{id}', [CardController::class, 'detail']);
 //cards
 
 Route::get('/myKepls', [CardController::class, 'index'])->name('myKepls');
+Route::get('/myKepls/generatQR', [CardController::class, 'qrGenerator']);
 Route::get('/myKepls/create', [CardController::class, 'create']);
 Route::get('/myKepls/{id}/edit', [CardController::class, 'edit']);
 Route::get('/myKepls/{id}/show_qr', [CardController::class, 'show_qr']);

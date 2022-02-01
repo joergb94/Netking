@@ -85,9 +85,43 @@
               </div>
           </div>
           <div class="form-group">
-            <label>Image Profile:</label>
-              <input type="file" onchange="Cards.save_asinc({{$data['id']}})" class="form-control-file border" id="image" name="image">
+            <h3>Fondo del Keypl:</h3>
+              <div class="col-sm-12">
+                    <div class="col-sm-12 mx-auto d-block">
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <ul>
+                                <li>
+                                  <input type="checkbox" class="type-background background0" onchange="Cards.save_asinc({{$data['id']}})"  value="0"  id="myCheckbox11" {!! $card_style['background_color'] == 0?'checked disabled':''!!}/>
+                                  <label for="myCheckbox11">
+                                      <h1><i style="font-size: 100px;" class="fa fa-image"></i></h1>
+                                    </label>
+                                </li>
+                              </ul>
+                          </div>
+                          <div class="col-sm-6">
+                            <ul>
+                              <li>
+                                <input type="checkbox" class="type-background background1" onchange="Cards.save_asinc({{$data['id']}})" value="1" id="myCheckbox12" {!! $card_style['background_color']  == 1?'checked disabled':''!!} />
+                                <label for="myCheckbox12"><i style="font-size: 100px;" class="fas fa-brush"></i></label>
+                              </li>
+                            </ul>
+                          </div>
+                      </div>
+                    </div>
+                      <input type="hidden" name="background_color" onchange="Cards.save_asinc({{$data['id']}})" id="type-background"  value="{{$card_style['background_color']}}">
+              </div>
           </div>
+          <div class="form-group background-forms background-form1" @if($card_style['background_color'] == 0) style="display:none" @endif>
+                  <label>Backgroud Color:</label>
+                  <input onchange="Cards.save_asinc({{$data['id']}})"  type="text" id="background_image_color" name='background_image_color' data-jscolor="" class="form-control" value="{{(isset($data['background_image_color']))?$data['background_image_color']:''}}">
+                  <br>
+          </div>
+          <div class="form-group background-forms background-form0" @if($card_style['background_color'] == 1) style="display:none" @endif>
+            <label>Cargar Imagen:</label>
+              <input type="file" onchange="Cards.save_asinc({{$data['id']}})" class="form-control-file border" id="image" name="image">
+            <br>
+            </div>
           <div class="form-group">
             <h3>Forma de los Bloques:</h3>
               <div class="col-sm-12">
@@ -96,7 +130,7 @@
                               <li class="list-group-item col-12">
                                     <input type="checkbox" class="div-shapes shapeDiv0" onchange="Cards.save_asinc({{$data['id']}})"  value="0"  id="myCheckbox5" {!! $card_style['divs_shape']  == 0?'checked disabled':''!!}/>
                                     <label class="col-12" for="myCheckbox5">
-                                      <div class="col-12 text-center bg-secondary text-dark size-q">
+                                      <div class="col-12 text-center bg-keypl text-dark size-q">
                                               <h6>Example keypls</h6>
                                       </div>
                                   </label>
@@ -104,7 +138,7 @@
                                 <li class="list-group-item col-12">
                                   <input type="checkbox" class="div-shapes shapeDiv1" onchange="Cards.save_asinc({{$data['id']}})" value="1" id="myCheckbox6"  {!! $card_style['divs_shape']  == 1?'checked disabled':''!!}/>
                                   <label class="col-12" for="myCheckbox6">
-                                      <div class="col-12 div-rounded text-center bg-secondary text-dark size-c">
+                                      <div class="col-12 div-rounded text-center bg-keypl text-dark size-c">
                                             <h6>Example keypls</h6>
                                       </div>
                                   </label>
@@ -123,7 +157,7 @@
                                 <ul>
                                   <li>
                                     <input type="checkbox" class="buttons_shape shapeButton1" onchange="Cards.save_asinc({{$data['id']}})" value="1" id="myCheckbox7"  {!! $card_style['buttons_shape']  == 1?'checked disabled':''!!} />
-                                    <label for="myCheckbox7"><button type="button" class="btn btn-fab-r bg-secondary text-dark text-center">Basic</button></label>
+                                    <label for="myCheckbox7"><button type="button" class="btn btn-fab-r bg-keypl text-dark text-center">Basic</button></label>
                                   </li>
                                 </ul>
                             </div>
@@ -131,7 +165,7 @@
                               <ul>
                                 <li>
                                   <input type="checkbox" class="buttons_shape shapeButton2" onchange="Cards.save_asinc({{$data['id']}})" value="2" id="myCheckbox8"  {!! $card_style['buttons_shape']  == 2?'checked disabled':''!!} />
-                                  <label for="myCheckbox8"><button type="button" class="btn btn-rounded btn-block bg-secondary text-dark">Basic</button></label>
+                                  <label for="myCheckbox8"><button type="button" class="btn btn-rounded btn-block bg-keypl text-dark">Basic</button></label>
                                 </li>
                               </ul>
                             </div>
@@ -139,7 +173,7 @@
                               <ul>
                                   <li>
                                     <input type="checkbox" class="buttons_shape shapeButton3" onchange="Cards.save_asinc({{$data['id']}})"  value="3"  id="myCheckbox9" {!! $card_style['buttons_shape']  == 3?'checked disabled':''!!} />
-                                    <label for="myCheckbox9"><button type="button" class="btn bg-secondary btn-block text-dark" >Basic</button></label>
+                                    <label for="myCheckbox9"><button type="button" class="btn bg-keypl btn-block text-dark" >Basic</button></label>
                                   </li>
                               </ul>
                             </div>
@@ -148,16 +182,9 @@
               </div>
           </div>
           <div class="form-group">
-                <div class="row">
-                <div class="col-sm-6">
+     
                   <label>Color Text:</label>
                   <input onchange="Cards.save_asinc({{$data['id']}})"  type="text" id="colorInput" name='color' data-jscolor="" class="form-control" value="{{(isset($data['color']))?$data['color']:''}}">
-                </div>
-                <div class="col-sm-6">
-                  <label>Backgroud Color:</label>
-                  <input onchange="Cards.save_asinc({{$data['id']}})"  type="text" id="background_image_color" name='background_image_color' data-jscolor="" class="form-control" value="{{(isset($data['background_image_color']))?$data['background_image_color']:''}}">
-                </div>
-                </div>
           </div>
           <div class="form-group">
             <div class="row">
@@ -301,5 +328,22 @@
         $(".shapeButton"+buttons).prop("disabled", true);
      
      });
+
+     $('.type-background').click(function(){
+         let buttons = $(this).val();
+        console.log(buttons);  
+
+        $('#type-background').val(buttons);
+        $(".type-background").prop("checked", false);
+        $(".type-background").prop("disabled", false);
+ 
+        $(".background"+buttons).prop("checked", true);
+        $(".background"+buttons).prop("disabled", true);
+        $(".background-forms").hide();
+        $(".background-form"+buttons).show();
+        
+     
+     });
+      
 </script>
  </div>       
