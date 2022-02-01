@@ -13,8 +13,7 @@
 	<!-- CSS Files -->
 	<link rel="stylesheet" href="{{ asset('css/app.css') }}">
 	<link rel="stylesheet" href="{{ asset('assets/css/bootstrap-social.css') }}">
-	
-	<link rel="stylesheet" href="{{ asset('assets/css/azzara.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('assets/css/azzara.css') }}">
 
 	<!-- CSS Just for demo purpose, don't include it in your project -->
 	<link rel="stylesheet" href="{{ asset('assets/css/demo.css') }}">
@@ -28,12 +27,6 @@
 		<!--Main header-->
         @include('layouts.items.main-header')
 		<!--End Main header-->
-		
-		<!-- Sidebar -->
-        @guest 
-        @else
-            @include('layouts.items.sidebar')
-        @endguest
 		<!-- End Sidebar -->
 
 		<div class="main-panel">
@@ -57,29 +50,14 @@
 <!-- Moment JS -->
 <script src="{{ asset('assets/js/plugin/moment/moment.min.js') }}"></script>
 
-
-<!-- jQuery Sparkline -->
-<script src="{{ asset('assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js') }}"></script>
-
-<!-- Chart Circle -->
-<script src="{{ asset('assets/js/plugin/chart-circle/circles.min.js') }}"></script>
-
-<!-- Datatables -->
-<script src="{{ asset('assets/js/plugin/datatables/datatables.min.js') }}"></script>
-
 <!-- Bootstrap Notify -->
 <script src="{{ asset('assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
 
 <!-- Bootstrap Toggle -->
 <script src="{{ asset('assets/js/plugin/bootstrap-toggle/bootstrap-toggle.min.js') }}"></script>
 
-<!-- jQuery Vector Maps -->
-<script src="{{ asset('assets/js/plugin/jqvmap/jquery.vmap.min.js') }}"></script>
-<script src="{{ asset('assets/js/plugin/jqvmap/maps/jquery.vmap.world.js') }}"></script>
-
 <!-- Google Maps Plugin -->
 <script src="{{ asset('assets/js/plugin/gmaps/gmaps.js') }}"></script>
-
 <script src="{{ asset('assets/js/plugin/gmaps/gmaps.js') }}"></script>
 
 <!-- Sweet Alert -->

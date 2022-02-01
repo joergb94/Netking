@@ -22,14 +22,12 @@ function datasearch(answer) {
         search: $('#search').val(),
         type: $('#typesearch').val(),
         order: answer['order'],
-        status: answer['status'],
 
       }
       :{
         search: $('#search').val(),
         criterion: $('#typesearch').val(),
         order: $('#orderbysearch').val(),
-        status: $('#statusearch').val(),
 
       };
 
@@ -156,7 +154,7 @@ const transactions = {
     form.append('img_base_64',qr);
     form.append('networks', transactions.get_data_ns());
 
-    $('#mobil-vition').hide();
+    $('#case-mobile').hide();
     $('#loading-mobil-vition').show();
 
     $.ajax({
@@ -169,16 +167,16 @@ const transactions = {
       contentType: false, 
       datatype: "html",
       success: function (data) {
-        $("#mobil-vition").empty().html(data);
+        $("#case-mobile").empty().html(data);
         $('#loading-mobil-vition').hide();
-        $('#mobil-vition').show();
+        $('#case-mobile').show();
         $(".divs-data").hide();
         $(".delete").hide();
       },
       error: function (data) {
         $('.btn-save').prop("disabled", false);
         console.log('Error:', data.responseText);
-        $("#mobil-vition").empty().html(data.responseText);
+        $("#case-mobile").empty().html(data.responseText);
       }
     });
   },
@@ -310,7 +308,7 @@ const Cards = {
       }
     });
     let form =transactions.take_data_item(id,Type);
-    $('#mobil-vition').hide();
+    $('#case-mobile').hide();
     $('#loading-mobil-vition').show();
     var my_url = url+'/updateItemfile/'+id;
 
@@ -323,14 +321,14 @@ const Cards = {
       cache: false,
       processData: false,
       success: function (data) {
-        $("#mobil-vition").empty().html(data);
+        $("#case-mobile").empty().html(data);
         $('#loading-mobil-vition').hide();
-        $('#mobil-vition').show();
+        $('#case-mobile').show();
       },
       error: function (data) {
         $('.btn-save').prop("disabled", false);
         console.log('Error:', data.responseText);
-        $("#mobil-vition").empty().html(data.responseText);
+        $("#case-mobile").empty().html(data.responseText);
       }
     });
   },
@@ -341,7 +339,7 @@ const Cards = {
       }
     });
     let form =transactions.take_data_item(id,Type);
-    $('#mobil-vition').hide();
+    $('#case-mobile').hide();
     $('#loading-mobil-vition').show();
     var my_url = url+'/updateItem/'+id;
      
@@ -352,14 +350,14 @@ const Cards = {
       data: form,
       dataType: 'text',
       success: function (data) {
-        $("#mobil-vition").empty().html(data);
+        $("#case-mobile").empty().html(data);
         $('#loading-mobil-vition').hide();
-        $('#mobil-vition').show();
+        $('#case-mobile').show();
       },
       error: function (data) {
         $('.btn-save').prop("disabled", false);
         console.log('Error:', data.responseText);
-        $("#mobil-vition").empty().html(data.responseText);
+        $("#case-mobile").empty().html(data.responseText);
       }
     });
   },
@@ -376,7 +374,7 @@ const Cards = {
     form.append('img_base_64',qr);
     form.append('networks', transactions.get_data_ns());
 
-    $('#mobil-vition').hide();
+    $('#case-mobile').hide();
     $('#loading-mobil-vition').show();
 
     $.ajax({
@@ -389,15 +387,15 @@ const Cards = {
       contentType: false, 
       datatype: "html",
       success: function (data) {
-        $("#mobil-vition").empty().html(data);
+        $("#case-mobile").empty().html(data);
         $('#loading-mobil-vition').hide();
-        $('#mobil-vition').show();
+        $('#case-mobile').show();
   
       },
       error: function (data) {
         $('.btn-save').prop("disabled", false);
         console.log('Error:', data.responseText);
-        $("#mobil-vition").empty().html(data.responseText);
+        $("#case-mobile").empty().html(data.responseText);
       }
     });
   },
@@ -414,7 +412,7 @@ const Cards = {
     form.append('img_base_64',qr);
     form.append('networks', transactions.get_data_ns());
 
-    $('#mobil-vition').hide();
+    $('#case-mobile').hide();
     $('#loading-mobil-vition').show();
 
     $.ajax({
@@ -427,15 +425,15 @@ const Cards = {
       contentType: false, 
       datatype: "html",
       success: function (data) {
-        $("#mobil-vition").empty().html(data);
+        $("#case-mobile").empty().html(data);
         $('#loading-mobil-vition').hide();
-        $('#mobil-vition').show();
+        $('#case-mobile').show();
         transactions.save_asinc_theme(id);
       },
       error: function (data) {
         $('.btn-save').prop("disabled", false);
         console.log('Error:', data.responseText);
-        $("#mobil-vition").empty().html(data.responseText);
+        $("#case-mobile").empty().html(data.responseText);
       }
     });
   },

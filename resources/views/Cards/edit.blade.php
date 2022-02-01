@@ -63,9 +63,11 @@
           </div>
     </div>
     <div class="col-sm-4 all-screen mx-auto d-block sticky">
-           <div class="card device-case">
+           <div class="card device-case" id="case-mobile">
               @include('Cards.itemsUpdate.keypl')
-              <div class="mobile-screen-loadig bg-warning" id="loading-mobil-vition" style="display:none">
+           </div>    
+           <div class="card device-case" id="loading-mobil-vition" style="display:none">
+           <div class="mobile-screen-loadig bg-warning">
                   <div class="container text-center">
                     <br><br>
                     <div class="spinner-grow text-dark"></div>
@@ -73,7 +75,7 @@
                     <div class="spinner-grow text-dark"></div>
                   </div>
               </div>
-           </div>
+            </div>
     </div>
 </div>
 <script>
