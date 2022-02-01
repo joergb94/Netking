@@ -34,6 +34,6 @@ class CardController extends Controller
     public function get_data_keypl(Request $request,$id)
     {
         $data = $this->repository->get_data_keypl($id);
-        return response()->json($data);
+        return response()->json($data,200);
     }
 }
