@@ -202,7 +202,8 @@ class CardsRepository
                 'buttons_shape'=>$data['buttons_shape']?$data['buttons_shape']:0,
                 'head_orientation'=>$data['head_orientation']?$data['head_orientation']:0,
                 'shape'=>0,
-                'outline'=>0
+                'outline'=>0,
+                'background_color'=>strlen($data['background_color']) > 0?$data['background_color']:1
                 ]);
 
                 if(isset($data['networks']))
@@ -292,7 +293,7 @@ class CardsRepository
                 $nsInUse = [];
                 $cardItemsDetail =[];
                 $data = $this->model->find($id);
-                $actual_bg = $data->background_image->description;
+                $actual_bg = $data->img_path.$data->img_name;
                 $background = Background_image::all();
                 $themes = Themes::all();
                 $card_style = Cards_style_detail::where('card_id', $id)->first();
@@ -317,7 +318,7 @@ class CardsRepository
                     }
                 
                 }
-            
+     
                 return  [
                             'cardItems'=>$cardItemsDetail,
                             'data' => $data,

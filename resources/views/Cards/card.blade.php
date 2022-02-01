@@ -47,7 +47,7 @@
     }
     @media only screen and (max-width:  767px) {
         body, html  {
-            @if($card_style['background_color'])
+            @if($card_style['background_color'] == 1)
                 /* The color used */
                 background-color: {!!$data["background_image_color"]!!};
              
@@ -81,7 +81,7 @@
     @media only screen and (min-width:  768px) {
         
         .bg-image {
-            @if($card_style['background_color'])
+            @if($card_style['background_color'] == 1)
                 /* The color used */
                 background-color: {!!$data["background_image_color"]!!};
              

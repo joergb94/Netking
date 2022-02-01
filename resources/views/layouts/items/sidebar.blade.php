@@ -20,20 +20,20 @@
 					</div>
 					<ul class="nav">
 						@forelse($dm['data_menu'] as $menu)
-						@if ($menu->id == 4)
+							@if ($menu->id == 4)
 						
-						@else
-						<li id="menu{{ $menu->id }}" class="nav-item">
-							<a href="{{ $menu->link }}" class="nav-link">
-								<i style="color:red;"
-									class="{{ $menu->icon }}"></i>{{ $menu->name }}</a>
-						</li>
-						@endif
-                @empty
-                    <li class="nav-item active">
-                        Sin Accessos
-                    </li>
-                @endforelse
+							@else
+							<li id="menu{{ $menu->id }}" class="nav-item">
+								<a href="{{ $menu->link }}" class="nav-link">
+									<i style="color:red;"
+										class="{{ $menu->icon }}"></i>{{ $menu->name }}</a>
+							</li>
+							@endif
+						@empty
+							<li class="nav-item active">
+								Sin Accessos
+							</li>
+						@endforelse
 						
 					</ul>
 				</div>

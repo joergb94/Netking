@@ -2,28 +2,11 @@
 			<!-- Logo Header -->
 			<div class="logo-header">
 				
-				<a href="#" class="logo">
+				<a href="/" class="logo">
 					<div class="col-sm-12 text-center">
-						<h1 class="text-white">
-							<strong>Keypl's</strong>
-						</h1>
+						<img class="img-fluid" src="{{asset('img/logo.png')}}" alt="">
 					</div>
-					
 				</a>
-				@guest
-				@else
-					<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon">
-							<i class="fa fa-bars"></i>
-						</span>
-					</button>
-					<button class="topbar-toggler more"><i class="fa fa-ellipsis-v"></i></button>
-					<div class="navbar-minimize">
-						<button class="btn btn-minimize btn-rounded">
-							<i class="fa fa-bars"></i>
-						</button>
-					</div>
-				@endguest
 				
 			</div>
 			<!-- End Logo Header -->
@@ -33,16 +16,16 @@
                 @guest
                 <div class="container-fluid">
 					<ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
-					@if (Route::has('login'))
-                        <li class="nav-item dropdown hidden-caret">
-							<a class="nav-link ropdown-toggle profile-pic" aria-expanded="false" href="{{ route('login') }}">{{ __('Login') }} </a>
-						</li>
-					@endif
-					@if (Route::has('register'))
-                        <li class="nav-item dropdown hidden-caret">
-							<a class="nav-link ropdown-toggle profile-pic" aria-expanded="false"  href="{{ route('register') }}">{{ __('Register') }}</a>
-						</li>
-					@endif
+						@if (Route::has('login'))
+							<li class="nav-item dropdown hidden-caret">
+								<a class="nav-link ropdown-toggle profile-pic" aria-expanded="false" href="{{ route('login') }}">{{ __('Login') }} </a>
+							</li>
+						@endif
+						@if (Route::has('register'))
+							<li class="nav-item dropdown hidden-caret">
+								<a class="nav-link ropdown-toggle profile-pic" aria-expanded="false"  href="{{ route('register') }}">{{ __('Register') }}</a>
+							</li>
+						@endif
 					</ul>
 				</div>
                 @else
@@ -61,20 +44,20 @@
 					</div>
 					<ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
 						@forelse($dm['data_menu'] as $menu)
-                    @if ($menu->id == 4)
-						
-					@else
-					<li id="menu{{ $menu->id }}" class="nav-item">
-                        <a href="{{ $menu->link }}" class="nav-link">
-                            <i style="color:red;"
-                                class="{{ $menu->icon }}"></i>{{ $menu->name }}</a>
-                    </li>
-					@endif
-                @empty
-                    <li class="nav-item active">
-                        Sin Accessos
-                    </li>
-                @endforelse
+							@if ($menu->id == 4)
+								
+							@else
+							<li id="menu{{ $menu->id }}" class="nav-item">
+								<a href="{{ $menu->link }}" class="nav-link">
+									<i style="color:red;"
+										class="{{ $menu->icon }}"></i>{{ $menu->name }}</a>
+							</li>
+							@endif
+						@empty
+							<li class="nav-item active">
+								Sin Accessos
+							</li>
+						@endforelse
 						<li class="nav-item dropdown hidden-caret">
 							<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
 								<div class="avatar-sm">
