@@ -21,7 +21,7 @@ class contacUsController extends Controller
             $dataTo = Card_detail::find($id);
             Mail::to($dataTo->description)->send($mail);
 
-            return "listo";
+            return response()->json(['flag'=>true]);
         }
     }
 }
