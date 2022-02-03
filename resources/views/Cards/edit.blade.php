@@ -45,6 +45,9 @@
                         @include('Cards.itemsUpdate.cardForm')
                         <div id="loading-data-card" class="container text-center" style="display:none">
                           <br><br>
+                          <div class="col-12">
+                            <img class ="mx-auto d-block" src="{{asset('img/loading.png')}}" alt="load" width="100px" height="100px">
+                          </div>
                           <div class="spinner-grow text-dark"></div>
                           <div class="spinner-grow text-dark"></div>
                           <div class="spinner-grow text-dark"></div>
@@ -70,6 +73,9 @@
            <div class="mobile-screen-loadig bg-warning">
                   <div class="container text-center">
                     <br><br>
+                      <div class="col-12">
+                            <img class ="mx-auto d-block" src="{{asset('img/loading.png')}}" alt="load" width="100px" height="100px">
+                      </div>
                     <div class="spinner-grow text-dark"></div>
                     <div class="spinner-grow text-dark"></div>
                     <div class="spinner-grow text-dark"></div>

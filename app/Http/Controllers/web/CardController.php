@@ -256,10 +256,10 @@ class CardController extends Controller
                 $file_path = '/images/keypls/';
                 $image->move(public_path() . '/images/keypls/', $nameImg);
                 $full_path = $file_path.$nameImg;
-            } else if($detail->description) {
-                $full_path = $detail->description;
+            } else if($detail->item_data) {
+                $full_path = strlen($detail->item_data) > 0?$detail->item_data:'img/profile.jpg';
             }else{
-                $full_path = 'img/profile.png';
+                $full_path = 'img/profile.jpg';
             }
             $dataItem =$detail['card_item_id'] == 1
                         ?['name'=> $request->name,'description'=>$request->description, 'item_data'=>$full_path]
