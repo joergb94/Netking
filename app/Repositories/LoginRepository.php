@@ -33,7 +33,10 @@ class LoginRepository
             'email' => ['The provided credentials are incorrect.'],
         ]);
        }
-       return response()->json(['token'=>$user->createToken($request->device_name)->plainTextToken,'user'=>$user->name]);
+       return [
+        'token'=>$user->createToken('cel')->plainTextToken,
+        'user'=>$user->name
+       ];
     }
 
 }
