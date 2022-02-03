@@ -347,9 +347,10 @@ class CardsRepository
                         'item_data'=>$data['item_data'],
                 ])){
                     if($card_item->card_item_id == 1){
+                        $lastCard = $this->model->find($card_item->card_id);
                         $Card = $this->model->find($card_item->card_id)
                                 ->update([
-                                            'title' =>$data['name'],
+                                            'title' =>strlen($data['name']) > 0?$data['name']:$lastCard->title,
                                             'subtitle' =>$data['description']
                                         ]);
 
