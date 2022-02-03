@@ -33,14 +33,10 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index(Request $request)
-    {   
-       if(!$request->ajax()) return view('home',['dm'=>accesUrl(Auth::user(),1)]);
-
-            $search = trim($request->search);
-            $criterion = trim($request->criterion);
-            $status = ($request->status)? $request->status : 1;
-
-        return response()->json($this->HomeRepository->getSearchPaginated($criterion, $search, $status));
+    {    
+        $search = trim($request->search);
+        $data = $this->HomeRepository->getSearchPaginated($search);
+       if(!$request->ajax()) return view('home.index',['dm'=>accesUrl(Auth::user(),1),'data'=>$data]);
     }
 
     public function deleteOrResotore(Request $request){

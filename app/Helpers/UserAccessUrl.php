@@ -3,6 +3,7 @@
 use App\Models\Data_menu;
 use App\Models\Type_user_detail;
 use App\Models\Membership;
+use App\Models\Type_membership;
 use Illuminate\Support\Facades\Auth;
 
 if (!function_exists('accesUrl')) {
@@ -27,6 +28,11 @@ if (!function_exists('accesUrl')) {
           $memberships = Membership::where('user_id',$user->id)
                          ->where('active',1)
                          ->exists();
+          $membershipsD = Membership::where('user_id',$user->id)
+                         ->where('active',1)
+                         ->first(); 
+                         
+          $type_membership = Type_membership::find($membershipsD['type_membership_id']);        
           $data_member = ($memberships == true)? true : false;
           $data_menu=$menuU;
           $type_user = $user->type_user_id;
@@ -43,7 +49,9 @@ if (!function_exists('accesUrl')) {
           'access'=>$access,
           'type_user'=>$type_user,
           'user'=>Auth::user(),
-          'data_member'=>$data_member
+          'data_member'=>$data_member,
+          'type_membership'=>$type_membership,
+          
         ];  
    
       return $menu;

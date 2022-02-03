@@ -118,6 +118,7 @@ class CardController extends Controller
             return view('Cards.itemsUpdate.cardForm', $this->CardsRepository->get_data_keypl($id));
         }
     }
+
     public function update(CardsStoreRequest $request, $id)
     {
         if ($request->ajax()) {
@@ -146,15 +147,46 @@ class CardController extends Controller
     {       $idStr =explode("?", $id);
         
             if(Card::where('id',$idStr[0])->exists()){
-              
+                if (Auth::guest()){
+                    $this->CardsRepository->create_views($id,2);
+
+                    }else{
+                        $user = Auth::user();
+                        $check = Card::find($id);
+                        if($user->id !==  $check->user_id){
+                            $this->CardsRepository->create_views($id,2);
+                        }
+                   }
     
                 return view('Cards.card',$this->CardsRepository->get_data_keypl($idStr[0]));
 
-            }
-          
-           
+            }  
 
     }
+
+    public function detail_qr(Request $request, $id)
+    {       $idStr =explode("?", $id);
+        
+            if(Card::where('id',$idStr[0])->exists()){
+
+                
+                if (Auth::guest()){
+                    $this->CardsRepository->create_views($id,1);
+
+                    }else{
+                        $user = Auth::user();
+                        $check = Card::find($id);
+                        if($user->id !==  $check->user_id){
+                            $this->CardsRepository->create_views($id,1);
+                        }
+                   }
+    
+                return view('Cards.card',$this->CardsRepository->get_data_keypl($idStr[0]));
+
+            }  
+
+    }
+    
     public function show_qr(Request $request, $id)
     {
         if ($request->ajax()) {

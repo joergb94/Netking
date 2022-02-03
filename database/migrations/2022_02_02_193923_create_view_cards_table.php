@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFriendsTable extends Migration
+class CreateViewCardsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,17 @@ class CreateFriendsTable extends Migration
      */
     public function up()
     {
-        Schema::create('friends', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('mat', 3)->default('Fri');
+        Schema::create('view_cards', function (Blueprint $table) {
+            $table->id();
+            $table->string('mat', 3)->default('VC');
             $table->unsignedBigInteger('user_id')->nullable();
-            $table->unsignedBigInteger('user_friend_id')->nullable();
-            $table->boolean('active')->default(1);
+            $table->unsignedBigInteger('card_id')->nullable();
+            $table->integer('type')->default(1);
             $table->timestamps();
-            $table->softDeletes();
 
             //foreing key 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');  
-            $table->foreign('user_friend_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('card_id')->references('id')->on('cards')->onDelete('cascade');  
         });
     }
 
@@ -35,6 +34,6 @@ class CreateFriendsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('friends');
+        Schema::dropIfExists('view_cards');
     }
 }
