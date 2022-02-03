@@ -73,5 +73,61 @@
 								</div>
 							</div>
 						</div>
+						<div class="col-sm-12">
+							<div id="index_table">
+								<div class="row">
+									<!--table section-->
+									<div class="col">
+									<div class="col-sm-12">
+											<div class="row">
+											@forelse($data['keypls'] as $Card)
+											<div class="col-sm-3">
+												<div class="card"  id="Card{{$Card->id}}" >
+ 
+													<div class="card-body text-center container-btn">
+														<img src="{{(isset($Card->img))? $Card->img:asset('img/profile.jpg')}}" alt="{{ $Card->title }}"  width="100px" height="100px">
+														<h4>{{ $Card->title }}</h4>
+														{{ $Card->subtitle }}
+													</div> 
+													<div class="card-footer text-center">
+														@include('Cards.items.buttons', ['Card' => $Card])
+													</div>
+												</div>
+											</div>
+											@empty
+											<div class="col-sm-12">
+												<div class="card text-center">
+													<br>
+													<h1 class="text-warning">
+													No Keypls
+													</h1>
+													<br>
+												</div>
+											</div>
+											@endforelse
+											</div>
+									</div>
+									</div>
+									<!--pagination section-->
+									<div class="col-sm-12">
+									<div class="row">
+										<div class="col-7">
+										<div class="float-left">
+											{!! $data['keypls']->total() !!} {{ trans_choice('Keypl|Keypls', $data['keypls']->total()) }}
+										</div>
+										</div>
+										<!--col-->
+										<div class="col-5">
+										<div class="float-right">
+											{!! $data['keypls']->render() !!}
+										</div>
+										</div>
+										<!--col-->
+									</div>
+									<!--row-->
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 		
