@@ -500,7 +500,8 @@ const Cards = {
         url: baseUrl+'/contactUs/'+id,
         data: form,
         success: function (data) {
-          console.log(data);
+          messages({title:'Listo!',text:'Correo Enviado',type:'success'});
+          location.reload();
         },
         error: function (data) {
           console.log(data);
