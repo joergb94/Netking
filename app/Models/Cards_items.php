@@ -15,11 +15,6 @@ class Cards_items extends Model implements Auditable
 
     protected $guarded=[];
     
-    public function data_menu()
-    {
-        return $this->hasMany(' App\Models\Type_user_detail','data_menu_id','id');
-    }
-
      /**
      * @return bool
      */

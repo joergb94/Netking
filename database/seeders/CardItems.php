@@ -24,7 +24,8 @@ class CardItems extends Seeder
             ['name'=> 'Play list de Spotify','icon'=> 'fa fa-spotify','style'=> 'bg-success text-dark','active'=> 1,],     
             ['name'=> 'Archivo PDF','icon'=> 'fa fa-file','style'=> 'btn-gray text-white','active'=> 1,],     
             ['name'=> 'Contacto (email)','icon'=> 'fa fa-envelope','style'=> 'bg-info text-white','active'=> 1,],
-            ['name'=> 'Link','icon'=> 'fa fa-link','style'=> 'bg-dark text-white','active'=> 1,],];
+            ['name'=> 'Link','icon'=> 'fa fa-link','style'=> 'bg-dark text-white','active'=> 1,],
+        ];
 
            
         DB::table('cards_items')->insert($card_items);

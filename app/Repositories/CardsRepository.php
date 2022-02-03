@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Exceptions\GeneralException;
 use App\Models\Card;
+use App\Models\ViewCards;
 use App\Models\User;
 use App\Models\NetworkSocial;
 use App\Models\text_style;
@@ -28,9 +29,10 @@ class CardsRepository
      *
      * @param  Providers  $model
      */
-    public function __construct(Card $model, Card_detail_network $card_detail_network)
+    public function __construct(Card $model, Card_detail_network $card_detail_network,ViewCards $view_cards)
     {
         $this->model = $model;
+        $this->views = $view_cards;
         $this->card_detail_network = $card_detail_network;
         $this->buttons = ['','btn-fab-r','btn-rounded',''];
     }
@@ -344,7 +346,22 @@ class CardsRepository
                         'description'=>$data['description'],
                         'item_data'=>$data['item_data'],
                 ])){
-                    return $card_item;
+                    if($card_item->card_item_id == 1){
+                        $Card = $this->model->find($card_item->id)
+                                ->update([
+                                            'title' =>$data['name'],
+                                            'subtitle' =>$data['description']
+                                        ]);
+
+                        if($Card){
+                            return $card_item;
+                        }else{
+                            throw new GeneralException(__('Error update of keypl detail.'));
+                        }
+                    }else{
+                        return $card_item;  
+                    }
+                    
                 }
                 throw new GeneralException(__('Error update of keypl detail.'));
 
@@ -363,6 +380,38 @@ class CardsRepository
                 throw new GeneralException(__('Error update of keypl detail.'));
 
             });
+    }
+
+    public function create_views($id,$data)
+    {
+            return DB::transaction(function () use ($id,$data) {
+                $cardData = $this->model->find($id);
+                $views = $this->views::create([
+                        'user_id'=>$cardData['user_id'],
+                        'card_id'=>$id,
+                        'type'=>$data,
+                ]);
+
+                if($views){
+
+                    $qr = $this->views->where('card_id',$id)->where('type',1)->count();
+                    $link = $this->views->where('card_id',$id)->where('type',2)->count();
+
+                    $Card = $this->model->find($id)->update([
+                        'scan_qr'=>$qr,
+                        'get_link'=>$link,
+                    ]);
+
+                    if($Card){
+                        return $Card;
+                    }
+
+
+                }
+                throw new GeneralException(__('Error update of keypl detail.'));
+
+            });
+
     }
 
 }
