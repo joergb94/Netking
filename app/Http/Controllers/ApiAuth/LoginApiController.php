@@ -15,7 +15,8 @@ class LoginApiController extends Controller
 
     function loginDevice(Request $request) 
     {
-        return $this->LoginRepository->login($request);
+        $data = $this->LoginRepository->login($request);
+        return response()->json($data, 201);
     }
 
     function test(Request $request){
