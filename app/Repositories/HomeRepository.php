@@ -28,13 +28,22 @@ class HomeRepository
     }
 
     public function keypls($search){
-            $data = $this->card->select(DB::raw("(scan_qr + get_link) as views"),'id','title', 'subtitle');
+            $user = Auth::user();
+
+            $card_details =Card_detail::where('card_item_id',1)->get(); 
+
+            $data = $this->card->select(DB::raw("(SELECT card_details.item_data FROM card_details
+                                                        WHERE card_details.card_id = cards.id
+                                                        AND card_details.card_item_id = 1
+                                                        LIMIT 1) as img"),
+                                        DB::raw("(scan_qr + get_link) as views"),
+                                        'id','title', 'subtitle');
             if(strlen($search) > 0) {
 
                     $data->where('title', 'like', '%'. $search . '%');
             }
-          
-            $rg = $data->orderBy('views', 'desc')->paginate(10);
+        
+            $rg =$data->where('user_id','!=',$user->id)->orderBy('views', 'desc')->paginate(10);
 
             return $rg;
 
