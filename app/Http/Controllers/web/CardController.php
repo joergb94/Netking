@@ -13,7 +13,7 @@ use App\Http\Requests\Cards\CardsIdRequest;
 use App\Http\Requests\Cards\CardsUpdateRequest;
 use App\Http\Requests\Cards\CardsStoreRequest;
 use App\Models\Cards;
-use App\Models\Theme;
+use App\Models\Themes;
 use App\Models\Theme_detail;
 use App\Models\Cards_items;
 use App\Models\Card_detail;
@@ -58,12 +58,10 @@ class CardController extends Controller
     public function create(CardsRequest $request)
     {
         if ($request->ajax()) {
-            $status = $this->GeneralRepository->card_max();
-            if ($status) {
-                $User = User::find(Auth::user()->id);
-                $data = $this->ResgisterUserRepository->create_only_card($User);
-                return view('Cards.edit', $this->CardsRepository->get_data_keypl($data['id']));
-            }
+
+                $themes = Themes::all();
+                return view('Cards.create',['themes'=>$themes]);
+            
         }
     }
 
@@ -75,29 +73,11 @@ class CardController extends Controller
     }
     public function store(CardsStoreRequest $request)
     {
-
-        if ($request->ajax()) {
-            $status = $this->GeneralRepository->card_max();
-            if ($status) {
-                if ($request['image']) {
-                    $image = $request->file('image');
-                    $nameImg = time() . $image->getClientOriginalName();
-                    $file_path = '/images/card/profile/';
-                    $image->move(public_path() . '/images/card/profile/', $nameImg);
-                } else {
-                    $nameImg = 'clase.png';
-                    $file_path = '/images/clases';
-                }
-                $data = $this->CardsRepository->create($request->input(), 1, $nameImg, $file_path);
-                return response()->json(Answer(
-                    $data['id'],
-                    $this->module_name,
-                    $this->text_module[0],
-                    "success",
-                    'green',
-                    '1'
-                ));
-            }
+        $status = $this->GeneralRepository->card_max();
+        if ($status) {
+            $User = User::find(Auth::user()->id);
+            $data = $this->ResgisterUserRepository->create_only_card($User);
+            return view('Cards.create', $this->CardsRepository->get_data_keypl($data['id']));
         }
     }
 
