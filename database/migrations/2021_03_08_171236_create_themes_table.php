@@ -18,6 +18,7 @@ class CreateThemesTable extends Migration
             $table->string('mat', 3)->default('The');
             $table->string('name', 100)->nullable();
             $table->longText('description')->nullable();
+            $table->longText('image')->nullable();
             $table->boolean('active')->default(1);
             $table->timestamps();
             $table->softDeletes();

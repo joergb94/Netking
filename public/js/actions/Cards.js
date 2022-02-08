@@ -231,22 +231,26 @@ const Cards = {
     actions.show(my_url,false,false,true);
   },
   create: function () {
-    $.get(url + '/getCreate/')
-    .done(function(data){
-      if(data)
-      {
+   
         var my_url = url + '/create';
         actions.show(my_url,'form', 'form');
-      } else {
-        Swal.fire({
-          icon: 'error',
-          title: 'No puedes crear mas cartas',
-          text: 'Haz alcanzado el limite maximo de cartas para tu tipo de usuario, si deseas tener mas cartas actualiza!',
-          footer: '<a href="'+baseUrl+'/profile">Como actualizo mi cuenta?</a>'
-        })
-      }
-    });
+     
     
+  },
+  create_card:function (theme) {
+    Swal.fire({
+      title: "Desea usar este tema pasa su keypl?",
+      text: "El Tema sera aplicado",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, aplicalo!'
+    }).then((result) => {
+      if (result.value) {
+        
+      }
+    })
   },
   edit: function (id) {
     var my_url = url + '/' + id + '/edit';

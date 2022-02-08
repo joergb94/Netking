@@ -18,8 +18,9 @@ class ThemeSeed extends Seeder
         $data2 = ['#808080','#ffffff','#000033','#0d0033','#333300'];
         $data3 = [1,0,1,0,1];
 
-        for ($i=0; $i < 5; $i++) { 
-            DB::table('themes')->insert(['name'=>'theme'.$i]);
+        for ($i=0; $i < 4; $i++) { 
+            $name = $i+1;
+            DB::table('themes')->insert(['name'=>'theme'.$name,'image'=>'templates/theme'.$name.'.png']);
             DB::table('theme_details')->insert(['theme_id'=>$i+1,
                                                 'color'=>$data[$i],
                                                 'background_image_color'=>$data2[$i],
