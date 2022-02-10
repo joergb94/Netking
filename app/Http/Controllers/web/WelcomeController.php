@@ -15,4 +15,13 @@ class WelcomeController extends Controller
             return view('welcome',['dm'=>accesUrl(Auth::user(),1)]);
         } 
     }
+
+    public function checkedData(RequestUserCreate $request){
+        if ($request->ajax()) {
+
+            $themes = Themes::all();
+            return view('Cards.create',['themes'=>$themes]);
+        
+        }
+    }
 }

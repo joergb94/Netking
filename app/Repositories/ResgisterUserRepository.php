@@ -124,19 +124,11 @@ class ResgisterUserRepository
             ]);
                 
             if($User){
-                $Card = ResgisterUserRepository::createCard($User);
-                
-                if($Card){
-                    
-                    $CardDeatil = ResgisterUserRepository::createCardDetail($Card);
-                    $CardStyle = ResgisterUserRepository::createCardStyle($Card['id']);
                     $Membership = ResgisterUserRepository::createMembership($User);
-                        if($CardDeatil && $CardStyle && $Membership){
+                        if($Membership){
                             
                             return $User;
-                        }
-                        
-                }
+                        }   
     
             }
 

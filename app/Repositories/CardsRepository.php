@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Exceptions\GeneralException;
+use App\Repositories\ResgisterUserRepository;
 use App\Models\Card;
 use App\Models\ViewCards;
 use App\Models\User;
@@ -29,11 +30,12 @@ class CardsRepository
      *
      * @param  Providers  $model
      */
-    public function __construct(Card $model, Card_detail_network $card_detail_network,ViewCards $view_cards)
+    public function __construct(Card $model, Card_detail_network $card_detail_network,ViewCards $view_cards,ResgisterUserRepository $ResgisterUserRepository)
     {
         $this->model = $model;
         $this->views = $view_cards;
         $this->card_detail_network = $card_detail_network;
+        $this->ResgisterUserRepository = $ResgisterUserRepository;
         $this->buttons = ['','btn-fab-r','btn-rounded',''];
     }
 
@@ -72,53 +74,61 @@ class CardsRepository
      * @throws \Throwable
      * @return Providers
      */
-    public function create(array $data,$location,$image,$path): Card
+    public function create(array $data,$image,$path)
     {
-        return DB::transaction(function () use ($data,$location,$image,$path) {
-            $Card = $this->model::create([
-                'location' => $location,
-                'title' => $data['title'],
-                'subtitle' => $data['subtitle'],
-                'large_text' => $data['large_text'],
-                'background_image_id' => $data['background'],
-                'color' =>$data['color'],
-                'img_name' => $image,
-                'img_path' => $path,
-            ]);
-            $Card_style = Cards_style_detail::create([
-                'card_id'=>$Card->id,
-                'shape_image'=>$data['shape_image'],
-                'head_orientation'=>$data['head_orientation'],
-                'shape'=>0,
-                'outline'=>0
-            ]);
-            $Card_user_Detail = CardUserDetail::create([
-                'card_id' =>$Card->id,
-                'about_me' => $data['description'],
-                'phone' => $data['phone'],
-                'cell_phone' => $data['cellphone'],
-                'business' => $data['business'],
-                'scholarship' => $data['scholarship'],
-            ]);
-            if(isset($data['networks']))
-            {
-                foreach ((array)$data['networks'] as $network) {
-                    $ns = json_decode($network);
-                       foreach ($ns as $key) {
-                        if($key->link != ''){
-                            $Card_facebook = $this->card_detail_network::create([
-                                'card_id' => $Card->id,
-                                'network_social_id' => $key->ns_id,
-                                'url' => $key->link,
-                            ]);
-                        }
-                       }
-                }
-                
-            }
+        return DB::transaction(function () use ($data,$image,$path) {
+            $no = $this->model::where('user_id',$data['user_id'])->count();
 
-            if ($Card) {
-                return $Card;
+            $Card = $this->model::create([
+                'user_id' => $data['user_id'],
+                'title' =>'Keypl'.($no+1),
+                'location' => $data['location']?$data['location']:null,
+                'themes_id' => $data['theme']?$data['theme']:1,
+                'large_text' => $data['large_text']?$data['large_text']:null,
+                'text_style_id'=>$data['text_style_id']?$data['text_style_id']:1,
+                'background_image_id' =>$data['background'],
+                'background_image_color' =>$data['background_image_color']?$data['background_image_color']:'#000000',
+                'color' => $data['color']?$data['color']:'#fff',
+                'img_name' => $image?$image:null,
+                'img_path' => $path?$path:null,
+                'img_base_64'=>$data['img_base_64']?$data['img_base_64']:NUll
+            ]);
+            if($Card) {
+                    $Card_style = Cards_style_detail::create([
+                        'card_id'=>$Card->id,
+                        'shape_image'=>$data['shape_image']?$data['shape_image']:0,
+                        'divs_shape'=>$data['divs_shape']?$data['divs_shape']:0,
+                        'buttons_shape'=>$data['buttons_shape']?$data['buttons_shape']:0,
+                        'head_orientation'=>$data['head_orientation']?$data['head_orientation']:0,
+                        'shape'=>0,
+                        'outline'=>0,
+                        'background_color'=>strlen($data['background_color']) > 0?$data['background_color']:1
+                    ]);
+
+                    if($Card_style){
+
+                            $CardDeatil = $this->ResgisterUserRepository->createCardDetail($Card);
+                            if(isset($data['networks']))
+                            {
+                                foreach ((array)$data['networks'] as $network) {
+                                    $ns = json_decode($network);
+                                    foreach ($ns as $key) {
+                                        if($key->link != ''){
+                                            $Card_facebook = $this->card_detail_network::create([
+                                                'card_id' => $Card->id,
+                                                'network_social_id' => $key->ns_id,
+                                                'url' => $key->link,
+                                            ]);
+                                        }
+                                    }
+                                }
+                                
+                            }
+        
+                            return $Card;
+                    }
+
+                throw new GeneralException(__('There was an error created the Card Style.'));
             }
 
             throw new GeneralException(__('There was an error created the Card.'));

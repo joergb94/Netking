@@ -33,6 +33,20 @@ function datasearch(answer) {
 
   return data;
 }
+
+function returnsubmod(data){
+   if(data == false){
+      Swal.fire({
+        icon: 'error',
+        title: 'No puedes crear mas cartas',
+        text: 'Haz alcanzado el limite maximo de cartas para tu tipo de usuario, si deseas tener mas cartas actualiza!',
+        footer: '<a href="'+baseUrl+'/profile">Como actualizo mi cuenta?</a>'
+      });
+   }else{
+      var my_url = url + '/' + data['id'] + '/edit';
+      actions.show(my_url,'form', 'form');
+   }
+}
 const transactions = {
   get_data_ns: function(){
      var  ns = []
@@ -231,11 +245,21 @@ const Cards = {
     actions.show(my_url,false,false,true);
   },
   create: function () {
-   
-        var my_url = url + '/create';
-        actions.show(my_url,'form', 'form');
-     
-    
+      $.get(url + '/getCreate/')
+      .done(function(data){
+        if(data)
+        {
+          var my_url = url + '/create';
+          actions.show(my_url,'form', 'form');
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'No puedes crear mas cartas',
+            text: 'Haz alcanzado el limite maximo de cartas para tu tipo de usuario, si deseas tener mas cartas actualiza!',
+            footer: '<a href="'+baseUrl+'/profile">Como actualizo mi cuenta?</a>'
+          })
+        }
+      });
   },
   create_card:function (theme) {
     Swal.fire({
@@ -248,7 +272,11 @@ const Cards = {
       confirmButtonText: 'Si, aplicalo!'
     }).then((result) => {
       if (result.value) {
-        
+        var state = result.value;
+        var form = {theme:theme}; 
+        var my_url = url + '/create';
+        var type = "POST";
+        actions.save(type, my_url, state, form,'submod');
       }
     })
   },
