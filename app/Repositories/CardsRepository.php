@@ -425,4 +425,10 @@ class CardsRepository
 
     }
 
+    public function get_keypls($user){
+        $rg = $this->model->where('id','>',0)->where('user_id',$user->id);
+        $Card = $rg->orderBy('id', 'desc')->get();
+        return $Card;
+    }
+
 }

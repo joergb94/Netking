@@ -21,6 +21,11 @@ class CardController extends Controller
        $this->repository = $repository;
     }
 
+    public function get_keypls(Request $request){
+        $data = $this->repository->get_keypls($request->user());
+        return response()->json($data,200);
+    }
+
     public function card_item(Request $request)
     {
         $data = [];
