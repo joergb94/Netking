@@ -32,3 +32,4 @@ Route::get('mobile/home', [HomeApiController::class, 'index']);
 
 Route::get('card/item', [CardController::class, 'card_item']);
 Route::get('card/{id}', [CardController::class, 'get_data_keypl']);
+Route::get('keypl', [CardController::class, 'get_keypls'])->middleware('auth:sanctum');
