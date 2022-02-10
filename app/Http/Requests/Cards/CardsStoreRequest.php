@@ -26,13 +26,7 @@ class CardsStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'shape_image' => 'required',
-            'title'=> 'required',
-            'subtitle' => 'required',
-            'head_orientation' => 'required',
-            'background'=> 'required',
-            'large_text' => 'required',
-            'location' => 'required'
+            'theme' => 'required',
         ];
     }
 }

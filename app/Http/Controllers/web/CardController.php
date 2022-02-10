@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\web;
 
 use App\Http\Controllers\Controller;
+use App\Exceptions\GeneralException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\CardsRepository;
@@ -12,7 +13,6 @@ use App\Http\Requests\Cards\CardsRequest;
 use App\Http\Requests\Cards\CardsIdRequest;
 use App\Http\Requests\Cards\CardsUpdateRequest;
 use App\Http\Requests\Cards\CardsStoreRequest;
-use App\Models\Cards;
 use App\Models\Themes;
 use App\Models\Theme_detail;
 use App\Models\Cards_items;
@@ -40,27 +40,53 @@ class CardController extends Controller
     }
 
     public function index(CardsRequest $request)
-    {
-        $search = trim($request->search);
-        $criterion = trim($request->criterion);
-        $status = ($request->status) ? $request->status : 1;
-        $location = ($request->location > 0) ? $request->location : 'all';
-        $data = $this->CardsRepository->getSearchPaginated($criterion, $search, $status);
-        $sts = $this->GeneralRepository->card_max();
-        $items = Cards_items::all();
-
-        if ($request->ajax()) {
-            return view('Cards.items.table', ['data' => $data, 'status' => $status]);
+    {   
+        $cards = Card::where('user_id',Auth::user()->id)->withTrashed()->count();
+        if($cards > 0){
+            $search = trim($request->search);
+            $criterion = trim($request->criterion);
+            $status = ($request->status) ? $request->status : 1;
+            $location = ($request->location > 0) ? $request->location : 'all';
+            $data = $this->CardsRepository->getSearchPaginated($criterion, $search, $status);
+            $sts = $this->GeneralRepository->card_max();
+            $items = Cards_items::all();
+    
+            if ($request->ajax()) {
+                return view('Cards.items.table', ['data' => $data, 'status' => $status]);
+            }
+            return view('Cards.index', ['data' => $data,'items'=>$items, 'dm' => accesUrl(Auth::user(), $this->menu_id), 'status' => $sts]);
+        }else{
+            return redirect('/MyFirstKeypl');
         }
-        return view('Cards.index', ['data' => $data,'items'=>$items, 'dm' => accesUrl(Auth::user(), $this->menu_id), 'status' => $sts]);
+       
     }
 
+
+    public function create_first(CardsRequest $request)
+    {
+        $cards = Card::where('user_id',Auth::user()->id)->withTrashed()->count();
+        if($cards == 0){
+            $items = Cards_items::all();
+            $themes = Themes::all();
+            return view('firstCard.index',['themes'=>$themes,'items'=>$items,'dm' => accesUrl(Auth::user(), $this->menu_id),'quantityCards'=>$cards]);
+        }else{
+            return redirect('/myKepls');
+        }
+       
+            
+    }
+
+    public function edit_first(Request $request, $id){
+        if ($request->ajax()) {
+                return view('firstCard.edit', $this->CardsRepository->get_data_keypl($id));
+        }
+    }
     public function create(CardsRequest $request)
     {
         if ($request->ajax()) {
-
+                $cards = Card::where('user_id',Auth::user()->id)->withTrashed()->count();
                 $themes = Themes::all();
-                return view('Cards.create',['themes'=>$themes]);
+                return view('Cards.create',['themes'=>$themes,'quantityCards'=>$cards]);
             
         }
     }
@@ -72,21 +98,38 @@ class CardController extends Controller
 
     }
     public function store(CardsStoreRequest $request)
-    {
+    {   
         $status = $this->GeneralRepository->card_max();
         if ($status) {
-            $User = User::find(Auth::user()->id);
-            $data = $this->ResgisterUserRepository->create_only_card($User);
-            return view('Cards.create', $this->CardsRepository->get_data_keypl($data['id']));
+            $theme = Theme_detail::find($request['theme']);
+            $data =  [
+                'user_id'=>Auth::user()->id,
+                'shape_image' => $theme['shape_image'],
+                'head_orientation' => $theme['head_orientation'],
+                'divs_shape' => $theme['divs_shape'],
+                'buttons_shape' => $theme['buttons_shape'],
+                'color' => $theme['color'],
+                'background_image_color' =>$theme['background_image_color'],
+                'large_text' => $theme['large_text'],
+                'text_style_id' => $theme['text_style_id'],
+                'theme' => $request['theme'],
+                'background' => $theme['background_image_id'],
+                'background_color' => $theme['background_color'],
+                'location' => $request['location'],
+                'img_base_64' =>$request['img_base_64'],
+                'networks' =>$request['networks']
+            ];
+            $result = $this->CardsRepository->create($data,null,null);
+            return $result;
+        }else{
+            return response()->json($status);
         }
     }
 
     public function edit(Request $request, $id)
     {
         if ($request->ajax()) {
-
-
-            return view('Cards.edit', $this->CardsRepository->get_data_keypl($id));
+                return view('Cards.edit', $this->CardsRepository->get_data_keypl($id));
         }
     }
 
@@ -287,7 +330,6 @@ class CardController extends Controller
                     'img_base_64' =>$request['img_base_64'],
                     'networks' =>$request['networks']
                 ];
-
                 $data = $this->CardsRepository->update_asinc($id,$dataTheme,$nameImg, $file_path);
             }else{
                

@@ -220,7 +220,7 @@
               </div>
             </div>
           </div>
-          <div class="form-group">
+          <div class="form-group" style="display:none">
             <label>Theme:</label>
             <select  id="theme" name="theme" onchange="Cards.save_asinc_theme({{$data['id']}})" class="form-control">
               @forelse ($themes as $theme)
@@ -238,7 +238,7 @@
               @endforelse
             </select>
           </div>
-          <div class="form-group">
+          <div class="form-group" style="display:none">
             <label>Backgroud:</label>
             <select name="background" id="background" onchange="Cards.save_asinc({{$data['id']}})" class="form-control">
               @forelse ($backgrounds as $item)
