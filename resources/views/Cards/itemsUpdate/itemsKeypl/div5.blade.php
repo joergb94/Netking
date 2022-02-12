@@ -17,10 +17,10 @@
 
     </style>
     <div class="col-12">
-        <div class="col-12 bg-white text-center mx-auto d-block {!! $card_style['divs_shape']  == 1?'div-rounded':''!!}">
+        <div class="col-12 bg-white text-center mx-auto d-block {!! $card_style['divs_shape']  == 1?'div-rounded':''!!} {{$theme_shape}}">
             <iframe 
                 id ="facebookFrame{{$ci['card_detail']['id']}}"
-                class="mx-auto d-block col-12"
+                class="mx-auto d-block col-12 "
                 src="{{$ci['card_detail']['name']}}" 
                 scrolling="no" 
                 frameborder="0" 

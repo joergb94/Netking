@@ -130,15 +130,7 @@
 <body>
     <div class="bg-image"></div>
     <div class="col-sm-12 col-md-12 col-lg-4 mx-auto d-block bg">
-        <br>
-        <div class="row justify-content-between">
-            @foreach($cardItems as $ci)
-                <div class="col-12" id="div-{{$ci['card_detail']->id}}">
-                    @include('Cards.itemsUpdate.itemsKeypl.div'.$ci['item']->id)
-                    <br>
-                </div>
-            @endforeach
-        </div>
+        @include('Cards.itemsUpdate.themes.theme'.$data['themes_id'])
     </div>
     <input id="baseUrl" type="hidden" value="{{ \Request::root() }}">
 </body>
