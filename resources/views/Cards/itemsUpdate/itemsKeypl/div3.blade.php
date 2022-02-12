@@ -1,6 +1,6 @@
-<div class="col-12">
+<div class="col-12 theme{{$data['themes_id']}}-padding">
     <iframe 
-        class="{!! $card_style['divs_shape']  == 1?'div-rounded':''!!}" 
+        class="{{$theme_shape}} {!! $card_style['divs_shape']  == 1?'div-rounded':''!!}" 
         width="100%" 
         height="315" 
         src="https://www.youtube.com/embed/{{$ci['card_detail']['name']}}" 

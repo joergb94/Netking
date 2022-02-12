@@ -220,7 +220,7 @@
               </div>
             </div>
           </div>
-          <div class="form-group" style="display:none">
+          <div class="form-group">
             <label>Theme:</label>
             <select  id="theme" name="theme" onchange="Cards.save_asinc_theme({{$data['id']}})" class="form-control">
               @forelse ($themes as $theme)
