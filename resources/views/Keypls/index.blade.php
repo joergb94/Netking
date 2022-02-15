@@ -131,7 +131,7 @@
     <div class="bg-image"></div>
     <div class="col-sm-12 col-md-12 col-lg-4 mx-auto d-block bg">
         <div class="col-12">
-            @include('Cards.itemsUpdate.themes.theme'.$data['themes_id'])
+            @include('Keypls.itemsUpdate.themes.theme'.$data['themes_id'])
         </div>
     </div>
     <input id="baseUrl" type="hidden" value="{{ \Request::root() }}">
