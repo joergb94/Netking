@@ -556,23 +556,26 @@ ul {
 	  }
 
 	.theme1-col-12{
-		max-height: 250px !important;
+		max-height: 320px !important;
+		margin-top: 25px;
 	}
 
 	.theme1-col-6{
 		max-height: 250px !important;
+		margin-top: 25px;
 	}
 
 	.theme1-col{
 		max-height: 150px !important;
+		margin-top: 25px;
 	}
 
 	.theme1-padding{
-		margin-top: 50px;
+
 	}
 
 	.theme1-padding-frame{
-		margin-top: 25px;
+		
 	}
 	
 	.theme2-col{
@@ -596,7 +599,8 @@ ul {
 	}
 
 	.theme3-padding-btn{
-		margin-top: 5px;
+		margin-right:25px;
+		margin-bottom:15px;
 	}
 
 	.theme3-shape1{
@@ -618,13 +622,15 @@ ul {
 	}
 
 	.theme3-shape4{
-		max-height: 64px !important;
-		width: 64px !important;
+		max-height: 70px !important;
+		width: 70px !important;
 		border-radius: 50% !important;
+		margin-left: 5px;
+		margin-right: 5px;
 	}
 
 	.theme3-float{
-		right: 35% !important;
+		left:10% !important;
 	}
 
 	
