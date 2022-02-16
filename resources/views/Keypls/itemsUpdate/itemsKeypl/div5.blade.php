@@ -24,7 +24,7 @@
             }
     </style>
  
-        <div id ="facebookDiv{{$ci['card_detail']['id']}}" class="col-12 theme{{$data['themes_id']}}-padding {{$theme_shape}} {{$theme_shape}}">
+        <div id ="facebookDiv{{$ci['card_detail']['id']}}" class="col-12 theme{{$data['themes_id']}}-padding {{$theme_shape}}">
             <iframe 
                 class="{!! $card_style['divs_shape']  == 1?'div-rounded':''!!}"
                 width="100%"
