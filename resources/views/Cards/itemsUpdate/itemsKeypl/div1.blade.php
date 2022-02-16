@@ -2,12 +2,12 @@
     
                     @if($data['themes_id'] == 3)
                     <div class="row no-margin">
-                        <div class="col-sm-12"  id="contend-image">
-                            <img src="{{(isset($ci['card_detail']['item_data']))? $ci['card_detail']['item_data']:asset('img/profile.jpg')}}" class="{{$theme_shape}} theme3-float" alt="Cinque Terre" id="imageProfile"> 
+                        <div class="col-sm-12 theme3-float"  id="contend-image">
+                            <img src="{{(isset($ci['card_detail']['item_data']))? $ci['card_detail']['item_data']:asset('img/profile.jpg')}}" class="{{$theme_shape}} mx-auto d-block" alt="Cinque Terre" id="imageProfile"> 
                         </div>
-                        <div class="col-sm-12" id="contend-title">
+                        <div class="col-12 theme3-float" id="contend-title">
                       
-                                <div class="col-6 text-center" style="left:40%;">
+                                <div class="col-12 text-center">
                                     @if($data['large_text'])
                                         <h1 class="text-color" id="titlephone" style="color:{!!$data['color']!!}; font-family:{{$text_font->name}};">
                                         @if(isset($ci['card_detail']['name'])){{$ci['card_detail']['name']}}@endif

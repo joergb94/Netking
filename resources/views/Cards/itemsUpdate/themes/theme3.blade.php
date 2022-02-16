@@ -28,7 +28,6 @@
                 @if(isset($cardItems[4]))
                 <div class="col-10 no-margin" id="div-{{$cardItems[4]['card_detail']->id}}">
                         @include('Cards.itemsUpdate.itemsKeypl.div'.$cardItems[4]['item']->id,['ci' => $cardItems[4],'template'=>250,'theme_shape'=>'theme3-shape3'])
-        
                 </div>
                 @endif
                 @if(isset($cardItems[5]))
@@ -39,23 +38,26 @@
                 <div class="col-12  no-margin">
                     <div class="row">
                         <div class="col-6  no-margin">
+                            <div class="row">
                                 @if(isset($cardItems[6]))
                                     <div class="col-12" id="div-{{$cardItems[6]['card_detail']->id}}">
-                                            @include('Cards.itemsUpdate.itemsKeypl.div'.$cardItems[6]['item']->id,['ci' => $cardItems[6],'template'=>250,'theme_shape'=>'theme3-shape4'])
+                                            @include('Cards.itemsUpdate.itemsKeypl.div'.$cardItems[6]['item']->id,['ci' => $cardItems[6],'template'=>250,'theme_shape'=>'theme3-shape4 float-right'])
                             
                                     </div>
                                 @endif
                                 @if(isset($cardItems[7]))
                                     <div class="col-12" id="div-{{$cardItems[7]['card_detail']->id}}">
-                                            @include('Cards.itemsUpdate.itemsKeypl.div'.$cardItems[7]['item']->id,['ci' => $cardItems[7],'template'=>250,'theme_shape'=>'theme3-shape4 float-right'])
+                                            @include('Cards.itemsUpdate.itemsKeypl.div'.$cardItems[7]['item']->id,['ci' => $cardItems[7],'template'=>250,'theme_shape'=>'theme3-shape4 float-left'])
                             
                                     </div>
                                 @endif
+                           </div>
                         </div>
                         <div class="col-6  no-margin">
                                 @if(isset($cardItems[8]))
                                     <div class="col-12" id="div-{{$cardItems[2]['card_detail']->id}}">
-                                            @include('Cards.itemsUpdate.itemsKeypl.div'.$cardItems[2]['item']->id,['ci' => $cardItems[2],'template'=>250,'theme_shape'=>'theme3-shape2 float-left'])
+                                            <br>
+                                            @include('Cards.itemsUpdate.itemsKeypl.div'.$cardItems[2]['item']->id,['ci' => $cardItems[2],'template'=>250,'theme_shape'=>'theme3-shape2 float-right'])
                             
                                     </div>
                                 @endif
