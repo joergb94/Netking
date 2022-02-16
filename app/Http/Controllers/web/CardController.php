@@ -181,7 +181,7 @@ class CardController extends Controller
                         }
                    }
     
-                return view('Cards.card',$this->CardsRepository->get_data_keypl($idStr[0]));
+                return view('Keypls.index',$this->CardsRepository->get_data_keypl($idStr[0]));
 
             }  
 
