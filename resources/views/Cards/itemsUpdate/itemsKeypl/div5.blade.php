@@ -1,6 +1,5 @@
 <style>
-                #facebookDiv{{$ci['card_detail']['id']}} {
-                
+                  #facebookDiv{{$ci['card_detail']['id']}} {
                     border:none;
                     overflow:hidden;
                     height:auto;

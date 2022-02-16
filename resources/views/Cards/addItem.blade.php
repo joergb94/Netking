@@ -1,5 +1,4 @@
 
-<div class="col-sm-12">
 <div class="btn-group col-sm-12" id="btn-group-{{$data['card_detail']->id}}">
     <button type="button" class="btn {{$data['item']->style}} btn-block"   onclick="transactions.toggle({{$data['card_detail']->id}})" >
         <h2>{{$data['item']->name}} <i class="{{$data['item']->icon}}"></i></h2>
@@ -10,5 +9,4 @@
     <br class="br-{{$data['card_detail']->id}}">
     @include('Cards.itemsUpdate.TypeForms.form'.$data['item']->id,['data' => $data['card_detail']])
 </div>
-<br class="">
-</div>
+<br class="br-{{$data['card_detail']->id}}">

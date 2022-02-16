@@ -493,7 +493,7 @@ const Cards = {
       data: form,
       dataType: 'text',
       success: function (data) {
-        $("#contenedor-divs").after(data);
+        $("#contenedor-divs").append(data);
         transactions.update_keypl(form.card_id);
       },
       error: function (data) {

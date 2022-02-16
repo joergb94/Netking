@@ -557,31 +557,28 @@ ul {
 
 	.theme1-col-12{
 		max-height: 320px !important;
-		margin-top: 25px;
 	}
 
 	.theme1-col-6{
-		max-height: 250px !important;
-		margin-top: 25px;
+		max-height: 450px !important;
 	}
 
 	.theme1-col{
 		max-height: 150px !important;
-		margin-top: 25px;
 	}
 
 	.theme1-padding{
-
+		margin-top: 25px;
 	}
 
 	.theme1-padding-frame{
-		
+		margin-top: 25px;
 	}
 	
 	.theme2-col{
 		padding-right: 10px;
 		padding-left: 10px;
-		height: 25vh;
+		height: 300px !important;
 	}
 
 	.theme2-padding{

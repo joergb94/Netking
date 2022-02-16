@@ -37,6 +37,13 @@ class CardsRepository
         $this->card_detail_network = $card_detail_network;
         $this->ResgisterUserRepository = $ResgisterUserRepository;
         $this->buttons = ['','btn-fab-r','btn-rounded',''];
+        $this->orderTheme =  [
+                                [1,2],
+                                [1,4],
+                                [1,2],
+                                [5,6],
+                                [1,2],
+                            ];
     }
 
 
@@ -66,7 +73,29 @@ class CardsRepository
               $Card = $rg->orderBy('id', 'desc')->paginate(10);
                     return $Card;
     }
+    public function createCardDetail($id,$data){
 
+        $datos = Cards_items::whereIn('id',[1,2])->get();
+        return DB::transaction(function () use ($id,$data,$datos) {
+                $theme_id = $data['theme']?$data['theme']:1;
+
+                    foreach ($datos  as $i => $detail) {
+                        $Card =Card_detail::create([
+                            'card_id'=>$id,
+                            'card_item_id' =>$detail['id'],
+                            'order'=>$this->orderTheme[$theme_id][$i],
+                        ]);
+                    }
+                
+                    if(Card_detail::where('card_id',$id)->count() > 0){
+                            return true;
+                    }
+
+                    throw new GeneralException(__('There was an error created the Card.'));
+
+
+        });
+    }
     /**
      * @param array $data
      *
@@ -107,7 +136,7 @@ class CardsRepository
 
                     if($Card_style){
 
-                            $CardDeatil = $this->ResgisterUserRepository->createCardDetail($Card);
+                            $CardDeatil = CardsRepository::createCardDetail($Card['id'],$data);
                             if(isset($data['networks']))
                             {
                                 foreach ((array)$data['networks'] as $network) {
@@ -312,7 +341,8 @@ class CardsRepository
                 $btn_shape = $this->buttons[$card_style->buttons_shape];
                 $user = User::find($data['user_id']);
                 $nsFree = NetworkSocial::all();
-                $cardItems = Card_detail::where('card_id', $data['id'])->get();
+                $cardItems = Card_detail::where('card_id', $data['id'])->orderBy('order', 'asc')->get();
+         
                 $text_styles = text_style::all();
                 $text_font = text_style::find($data['text_style_id']);
 
@@ -326,7 +356,7 @@ class CardsRepository
                 foreach ($cardItems as $ci) {
                     $card_item = Cards_items::where('id', $ci['card_item_id'])->first();
                     if($card_item){
-                        array_push($cardItemsDetail, ['item' => $card_item, 'card_detail' => $ci]);
+                        array_push($cardItemsDetail, ['item' =>$card_item, 'card_detail' => $ci]);
                     }
                 
                 }
@@ -431,4 +461,46 @@ class CardsRepository
         return $Card;
     }
 
+    public function get_order($id){
+       
+       $order = Card_detail::where('card_id',$id)->orderBy('order', 'DESC')->get();
+       $orderMax = Card_detail::where('card_id',$id)->count();
+       $orderInuser = [];
+       $orderFree = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+       $result =  [];
+       foreach ($order as $o) {
+
+            array_push($orderInuser,$o['order']);
+          
+       }
+
+       foreach ($orderFree as $value){
+                if(in_array($value, $orderInuser) == false){
+                    array_push($result,$value);
+                }
+       }
+       $dato = count($result) > 0? $result[0]:($orderMax+1);
+       return $dato;
+    }
+    public function create_item($data){
+        
+        return DB::transaction(function () use ($data) {
+           
+            $cd = Card_detail::create([
+                'card_id'=>$data['card_id'],
+                'card_item_id'=>$data['card_item_id'],
+                'name'=>'Example',
+                'description'=>'Example',
+                'order'=>CardsRepository::get_order($data['card_id']),
+            ]);   
+
+            if($cd){
+                    return $cd;
+            }   
+
+            throw new GeneralException(__('Error create of keypl detail.'));
+
+        });
+
+    }
 }

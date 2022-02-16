@@ -31,11 +31,11 @@
                                 <button type="button" class="btn {{$ci['item']->style}} delete" id="btn-delete-{{$ci['card_detail']->id}}" style="display:none"  onclick="Cards.delete_item({{$ci['card_detail']->id}},{{$data['id']}})"><i class="fa fa-trash"></i></button>
                               </div>
                               <div class="col-sm-12 divs-data" id="div-{{$ci['card_detail']->id}}" style="display:none">
-                              <br class="br-">
-                              @include('Cards.itemsUpdate.TypeForms.form'.$ci['item']->id,['data' => $ci['card_detail']])
-                            </div>
-                            <br class="br-{{$ci['card_detail']->id}}">
-                          @endforeach
+                                <br class="br-">
+                                @include('Cards.itemsUpdate.TypeForms.form'.$ci['item']->id,['data' => $ci['card_detail']])
+                              </div>
+                              <br class="br-{{$ci['card_detail']->id}}">
+                          @endforeach 
                       </div>
                       <div class="col-sm-12">
                         <button type="button" class="btn btn-light btn-block"    onclick="Cards.modal_item({{$data['id']}})"><h2>Agregar Bloque <i class="fa fa-plus"></i></h2></button>

@@ -23,15 +23,8 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Sans:wght@300&family=Island+Moments&family=M+PLUS+1p&family=Playfair+Display:ital@1&family=Pushster&family=Roboto+Mono:wght@200&family=Roboto:wght@100&family=Shizuru&display=swap" rel="stylesheet">
-</head>
 
 <style>
-    body, html {
-            
-        height: 100vh;
-        width: 100%; 
-        overflow-y: scroll;
-    }
     ::-webkit-scrollbar {
         width: 5px;
     }
@@ -45,7 +38,6 @@
     ::-webkit-scrollbar-thumb:hover {
         background: {!!$data['color']!!}; 
     }
-    @media only screen and (max-width:  767px) {
         body, html  {
             @if($card_style['background_color'] == 1)
                 /* The color used */
@@ -57,57 +49,9 @@
             @endif
             /* Full height */
             height: 100vh;
-            
-            /* Center and scale the image nicely */
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-
-            color: white;
-            font-weight: bold;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 2;
-            padding: 20px;
-            text-align: center;
-            }
-    }
-    .bg-image {
-        display:none;
-    }
-
-    @media only screen and (min-width:  768px) {
-        
-        .bg-image {
-            @if($card_style['background_color'] == 1)
-                /* The color used */
-                background-color: {!!$data["background_image_color"]!!};
-             
-            @else
-                /* The image used */
-                background-image: url('{{$actual_bg}}');
-            @endif
-            display:block;
-            
-            /* Full height */
-            height: 100%; 
-
-            /* Center and scale the image nicely */
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            }
-    }
-    .bg { 
-        height: 100%;
-    }
-    @media only screen and (min-width:  768px) {
-        .bg {
+            width: 100%; 
             overflow-y: scroll;
-            /* Full height */
-            height: 100%;
+            
             /* Center and scale the image nicely */
             background-position: center;
             background-repeat: no-repeat;
@@ -120,11 +64,11 @@
             left: 50%;
             transform: translate(-50%, -50%);
             z-index: 2;
-            width: 80%;
             padding: 20px;
             text-align: center;
             }
     }
+
 </style>
 
 <body>

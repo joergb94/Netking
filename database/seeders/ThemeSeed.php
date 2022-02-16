@@ -16,7 +16,7 @@ class ThemeSeed extends Seeder
     {
         $data = ['#ff0000','#ff8000','#ffff00','#40ff00','#00bfff'];
         $data2 = ['#808080','#ffffff','#000033','#0d0033','#333300'];
-        $data3 = [1,0,1,0,1];
+        $data3 = [1,1,0,1,1];
 
         for ($i=0; $i < 4; $i++) { 
             $name = $i+1;

@@ -49,7 +49,7 @@ class CardController extends Controller
             $location = ($request->location > 0) ? $request->location : 'all';
             $data = $this->CardsRepository->getSearchPaginated($criterion, $search, $status);
             $sts = $this->GeneralRepository->card_max();
-            $items = Cards_items::all();
+            $items = Cards_items::whereNotIn('id',[1,2])->get();
     
             if ($request->ajax()) {
                 return view('Cards.items.table', ['data' => $data, 'status' => $status]);
@@ -347,14 +347,8 @@ class CardController extends Controller
     public function create_item(Request $request)
     { 
         if($request->ajax()){
-
-            $cd = Card_detail::create([
-                'card_id'=>$request->card_id,
-                'card_item_id'=>$request->card_item_id,
-                'name'=>'Example',
-                'description'=>'Example',
-            ]);
-
+            
+            $cd = $this->CardsRepository->create_item($request->input());
             if($cd){
                 $data['item'] = Cards_items::find($cd['card_item_id']);
                 $data['card_detail'] = Card_detail::find($cd['id']);
