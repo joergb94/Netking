@@ -50,6 +50,16 @@ class HomeRepository
         
     }
 
+    public function keyplsViews($user){
+            $views =[];
+            $keypls = $this->card->where('user_id',$user->id)->get();
+            foreach ($keypls as $key => $value) {
+                array_push($views, $this->views->where('card_id',$value->id)->count());
+            }
+
+            return $views;
+    }
+
           /**
      * @param int    $paged
      * @param string $orderBy
@@ -61,9 +71,10 @@ class HomeRepository
     {
                     $user = Auth::user();
                     $data['cards'] = $this->card->where('user_id',$user->id)->count();
-                    $data['qr_views'] = $this->views->where('user_id',$user->id)->count();
-                    $data['link_views'] = $this->views->where('user_id',$user->id)->count();
+                    $data['qr_views'] = $this->views->where('user_id',$user->id)->where('type',1)->count();
+                    $data['link_views'] = $this->views->where('user_id',$user->id)->where('type',2)->count();
                     $data['keypls'] = HomeRepository::keypls($search);
+                    $data['kyepls_views']=HomeRepository::keyplsViews($user);
             return $data;
     }
 
