@@ -10,7 +10,7 @@
                 @endif
                 @foreach($cardItems as $key => $ci)
                     @if($key > 0)
-                     <div class="col-4 theme2-col theme2-padding" id="div-{{$ci['card_detail']->id}}">
+                     <div class="col-6 theme2-col theme2-padding" id="div-{{$ci['card_detail']->id}}">
                         @include('Keypls.itemsUpdate.itemsKeypl.div'.$ci['item']->id,['ci' => $ci,'template'=>250,'theme_shape'=>'theme2-shape'])
                      </div>
                     @endif
