@@ -77,7 +77,6 @@
 							<div id="index_table">
 								<div class="row">
 									<!--table section-->
-									<div class="col">
 									<div class="col-sm-12">
 											<div class="row">
 											@forelse($data['keypls'] as $Card)
@@ -106,7 +105,6 @@
 											</div>
 											@endforelse
 											</div>
-									</div>
 									</div>
 									<!--pagination section-->
 									<div class="col-sm-12">

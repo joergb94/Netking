@@ -43,5 +43,4 @@ function data_load(){
       });
 }
 
-
   
