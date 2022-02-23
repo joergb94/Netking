@@ -13,7 +13,7 @@
               <textarea class="form-control" rows="5" id="comment" name="description"></textarea>
             </div>
             <div class="form-group text-center">
-                <button type="button"  onclick="Cards.send_email({{$ci['card_detail']['id']}})" class="btn btn-primary {{$btn_shape}}">Guardar</button>
+                <button type="button"  onclick="Cards.send_email({{$ci['card_detail']['id']}})" class="btn {{$card_style['button_style'] == 0? 'keypl-btn ':'keypl-btn-full'}} {{$btn_shape}}">Guardar</button>
             </div>
         </form>
       </div>

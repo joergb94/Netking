@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Exceptions\GeneralException;
 use App\Repositories\ResgisterUserRepository;
 use App\Models\Card;
+use App\Models\Friends;
 use App\Models\ViewCards;
 use App\Models\User;
 use App\Models\NetworkSocial;
@@ -30,10 +31,11 @@ class CardsRepository
      *
      * @param  Providers  $model
      */
-    public function __construct(Card $model, Card_detail_network $card_detail_network,ViewCards $view_cards,ResgisterUserRepository $ResgisterUserRepository)
+    public function __construct(Card $model,Friends $Friends, Card_detail_network $card_detail_network,ViewCards $view_cards,ResgisterUserRepository $ResgisterUserRepository)
     {
         $this->model = $model;
         $this->views = $view_cards;
+        $this->Friends = $Friends;
         $this->card_detail_network = $card_detail_network;
         $this->ResgisterUserRepository = $ResgisterUserRepository;
         $this->buttons = ['','btn-fab-r','btn-rounded',''];
@@ -244,7 +246,8 @@ class CardsRepository
                 'head_orientation'=>$data['head_orientation']?$data['head_orientation']:0,
                 'shape'=>0,
                 'outline'=>0,
-                'background_color'=>strlen($data['background_color']) > 0?$data['background_color']:1
+                'background_color'=>strlen($data['background_color']) > 0?$data['background_color']:1,
+                'button_style'=>strlen($data['button_style']) > 0?$data['button_style']:0
                 ]);
 
                 if(isset($data['networks']))
@@ -334,6 +337,11 @@ class CardsRepository
                 $nsInUse = [];
                 $cardItemsDetail =[];
                 $data = $this->model->find($id);
+                $friend = Auth::guest()?''
+                        :$this->Friends::where('card_id',$id)
+                              ->where('user_friend_id',Auth::user()->id)
+                              ->where('user_id',$data['user_id'])
+                              ->exists();
                 $actual_bg = $data->img_path.$data->img_name;
                 $background = Background_image::all();
                 $themes = Themes::all();
@@ -373,6 +381,7 @@ class CardsRepository
                             'btn_shape'=>$btn_shape, 
                             'text_font'=>$text_font,
                             'themes'=>$themes,
+                            'friend'=>$friend,
                         ];
     }
 

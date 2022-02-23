@@ -637,6 +637,16 @@ ul {
 	}
 
 	.theme4-padding{
-		margin-top: 25px;
+		margin-top: 25px  !important;
+	}
+	
+
+	.button-padding{
+		 margin-bottom: 25px  !important;
+	}
+
+	.button-form-size{
+		width: 100px;
+		height: 64px;
 	}
 	

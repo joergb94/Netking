@@ -1,3 +1,4 @@
+
 <div class="col-12 theme{{$data['themes_id']}}-padding">
     
                     @if($data['themes_id'] == 3)
@@ -21,6 +22,15 @@
                     </div>
                     @else
                     <div class="row justify-content-between ">
+                        <div class="col-12 col-sm-12">
+                            <button type="button" class="btn {{$card_style['button_style'] == 0? 'keypl-btn ':'keypl-btn-full'}} btn-sm float-right" id="btn-follow">
+                               @if($friend) 
+                                    <span >following <i class="fas fa-user-check"></i></span>
+                               @else
+                                    <span >follow <i class="fas fa-user-plus"></i></span>
+                               @endif
+                            </button>
+                        </div>
                         <div class="{{($card_style['head_orientation'] == 1)?'col-4':'col-12'}} text-center" id="contend-image">
                             <img src="{{(isset($ci['card_detail']['item_data']))? $ci['card_detail']['item_data']:asset('img/profile.jpg')}}" class="{{$card_style['shape_image'] == 0?'rounded-circle':'rounded'}}" alt="Cinque Terre" width="100px" height="100px" id="imageProfile"> 
                         </div>
@@ -28,9 +38,9 @@
                             <br>
                             <div class="col-12" id='content-title'>
                                 @if($data['large_text'])
-                                    <h1 class="text-color" id="titlephone" style="color:{!!$data['color']!!}; font-family:{{$text_font->name}};">
-                                    @if(isset($ci['card_detail']['name'])){{$ci['card_detail']['name']}}@endif
-                                </h1>
+                                        <h1 class="text-color" id="titlephone" style="color:{!!$data['color']!!}; font-family:{{$text_font->name}};">
+                                            @if(isset($ci['card_detail']['name'])){{$ci['card_detail']['name']}}@endif
+                                        </h1>
                                 @else
                                     <h2 class="text-color" id="titlephone" style="color:{!!$data['color']!!};font-family:{{$text_font->name}};">@if(isset($ci['card_detail']['name'])){{$ci['card_detail']['name']}}@endif</h2>
                                 @endif 

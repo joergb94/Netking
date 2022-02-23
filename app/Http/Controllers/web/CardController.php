@@ -7,6 +7,7 @@ use App\Exceptions\GeneralException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\CardsRepository;
+use App\Repositories\FriendsRepository;
 use App\Repositories\GeneralRepository;
 use App\Repositories\ResgisterUserRepository;
 use App\Http\Requests\Cards\CardsRequest;
@@ -28,9 +29,10 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class CardController extends Controller
 {
-    public function __construct(CardsRepository $CardsRepository, GeneralRepository $GeneralRepository,ResgisterUserRepository $ResgisterUserRepository)
+    public function __construct(CardsRepository $CardsRepository, FriendsRepository $FriendsRepository, GeneralRepository $GeneralRepository,ResgisterUserRepository $ResgisterUserRepository)
     {
         $this->CardsRepository = $CardsRepository;
+        $this->FriendsRepository = $FriendsRepository;
         $this->GeneralRepository = $GeneralRepository;
         $this->ResgisterUserRepository = $ResgisterUserRepository;
         $this->menu_id = 3;
@@ -328,7 +330,8 @@ class CardController extends Controller
                     'background_color' => $theme['background_color'],
                     'location' => $request['location'],
                     'img_base_64' =>$request['img_base_64'],
-                    'networks' =>$request['networks']
+                    'networks' =>$request['networks'],
+                    'button_style'=>$request['button_style'],
                 ];
                 $data = $this->CardsRepository->update_asinc($id,$dataTheme,$nameImg, $file_path);
             }else{
@@ -364,5 +367,10 @@ class CardController extends Controller
     public function delete_item(Request $request,$id){
         $data_id = $this->CardsRepository->delete_item($id);
         return response()->json($data_id);
+    }
+
+    public function friendship(Request $request,$id){
+        $data = $this->FriendsRepository->create($id);
+        return response()->json('<span >following <i class="fas fa-user-check"></i></span>');
     }
 }

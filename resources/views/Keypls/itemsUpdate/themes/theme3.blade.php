@@ -1,5 +1,10 @@
 
        <div class="row justify-content-between">
+                <div class="col-12 col-sm-12">
+                            <button type="button" class="btn {{$card_style['button_style'] == 0? 'keypl-btn ':'keypl-btn-full'}} btn-sm float-right">
+                            <span >follow <i class="fas fa-user-plus"></i></span>
+                            </button>
+                </div>
                 @if(isset($cardItems[0]))
           
                     <div class="col-6 no-margin" id="div-{{$cardItems[0]['card_detail']->id}}">

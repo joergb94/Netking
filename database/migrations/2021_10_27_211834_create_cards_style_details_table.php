@@ -20,7 +20,8 @@ class CreateCardsStyleDetailsTable extends Migration
             $table->boolean('shape_image')->default(0);
             $table->boolean('head_orientation')->default(0);
             $table->boolean('shape')->default(0);
-            $table->boolean('outline')->default(0);
+            $table->boolean('outline')->default(0); 
+            $table->boolean('button_style')->default(0);
             $table->integer('buttons_shape')->default(2);
             $table->integer('divs_shape')->default(1);
             $table->timestamps();

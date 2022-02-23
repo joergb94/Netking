@@ -25,20 +25,15 @@
 	<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Sans:wght@300&family=Island+Moments&family=M+PLUS+1p&family=Playfair+Display:ital@1&family=Pushster&family=Roboto+Mono:wght@200&family=Roboto:wght@100&family=Shizuru&display=swap" rel="stylesheet">
 
 <style>
-    ::-webkit-scrollbar {
+    ::-webkit-scrollbar 
+    {
         width: 5px;
     }
- 
-    /* Handle */
-    ::-webkit-scrollbar-thumb {
-        background: {!!$data['color']!!};
-    }
 
-    /* Handle on hover */
-    ::-webkit-scrollbar-thumb:hover {
-        background: {!!$data['color']!!}; 
-    }
-        body, html  {
+    /* Handle */
+   
+    body, html  
+    {
             @if($card_style['background_color'] == 1)
                 /* The color used */
                 background-color: {!!$data["background_image_color"]!!};
@@ -68,7 +63,45 @@
             text-align: center;
             }
     }
+        .keypl-btn-social
+        {
+            color: {!!$data['color']!!};
+        }
+            
+        .keypl-btn-social:hover 
+        {
+            background: {!!$data['color']!!};
+            color: white;
+        }
 
+        .keypl-text-social
+        {
+            color: {!!$data['color']!!};
+        }
+            
+        .keypl-text-social:hover 
+        {
+            color: white;
+        }
+
+
+          .keypl-btn 
+        {
+            border-color: {!!$data['color']!!};
+            color: {!!$data['color']!!};
+        }
+            
+        .keypl-btn:hover 
+        {
+            background: {!!$data['color']!!};
+            color: white;
+        }
+
+        .keypl-btn-full 
+        {
+            background: {!!$data['color']!!};
+            color: white;
+        }
 </style>
 
 <body>
@@ -79,36 +112,10 @@
         </div>
     </div>
     <input id="baseUrl" type="hidden" value="{{ \Request::root() }}">
+    <input id="url" type="hidden" value="{{ \Request::url() }}">
 </body>
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
 <script src="{{ asset('js/MasterAjax.js') }}"></script>
-<script>
-    const Cards = {
- 
-        send_email:function(id){
-            $.ajaxSetup({
-                headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            var baseUrl = $('#baseUrl').val();
-            var form = $("#keypls-fom-"+id).serialize();
-            $.ajax({
-                type: "GET",
-                url: baseUrl+'/contactUs/'+id,
-                data: form,
-                success: function (data) {
-                messages({title:'Listo!',text:'Correo Enviado',type:'success'});
-                location.reload();
-                },
-                error: function (data) {
-                console.log(data);
-
-                }
-            });
-        },
-
-}
-</script>
+<script src="{{ asset('js/actions/Keypl.js') }}"></script>
 </html>
