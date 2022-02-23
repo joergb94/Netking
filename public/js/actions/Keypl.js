@@ -40,7 +40,7 @@ const Keypl = {
             }
         });
         var url = $('#url').val();
-
+        
         $.ajax({
             type: "Post",
             url: url+'/follow',
