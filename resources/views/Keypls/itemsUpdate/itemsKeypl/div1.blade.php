@@ -23,7 +23,7 @@
                     @else
                     <div class="row justify-content-between ">
                         <div class="col-12 col-sm-12">
-                            <button type="button" class="btn {{$card_style['button_style'] == 0? 'keypl-btn ':'keypl-btn-full'}} btn-sm float-right" id="btn-follow">
+                            <button type="button" class="btn {{$card_style['button_style'] == 0? 'keypl-btn ':'keypl-btn-full'}} btn-sm float-right" value="{{$friend?1:0}}" id="btn-follow">
                                @if($friend) 
                                     <span >following <i class="fas fa-user-check"></i></span>
                                @else

@@ -93,6 +93,35 @@ class FriendsRepository
         });
     }
 
+    public function delete_item($id)
+    {       
+        $cardData = $this->cards->find($id);
+        
+        return DB::transaction(function () use ($cardData) {
+                    $Bval = Friends::withTrashed()
+                                    ->where('card_id',$cardData['id'])
+                                    ->where('user_id',Auth::user()->id)
+                                    ->first()
+                                    ->trashed();
+                if($Bval){
+                    $friend = $this->model::withTrashed()->where('card_id',$cardData['id'])
+                                    ->where('user_friend_id',$cardData['user_id'])
+                                    ->where('user_id',Auth::user()->id)
+                                    ->restore();
+                    $b=4;
+                }else{
+                    $friend = $this->model::where('card_id',$cardData['id'])
+                                    ->where('user_friend_id',$cardData['user_id'])
+                                    ->where('user_id',Auth::user()->id)
+                                    ->delete();
+                    $b=3;
+                }
+                return $b;
+
+                throw new GeneralException(__('Error update of keypl detail.'));
+
+        });
+    }
     /**
      * @param Providers  $Provider
      * @param array $data

@@ -15,6 +15,7 @@ use App\Http\Requests\Cards\CardsIdRequest;
 use App\Http\Requests\Cards\CardsUpdateRequest;
 use App\Http\Requests\Cards\CardsStoreRequest;
 use App\Models\Themes;
+use App\Models\Friends;
 use App\Models\Theme_detail;
 use App\Models\Cards_items;
 use App\Models\Card_detail;
@@ -370,7 +371,25 @@ class CardController extends Controller
     }
 
     public function friendship(Request $request,$id){
-        $data = $this->FriendsRepository->create($id);
-        return response()->json('<span >following <i class="fas fa-user-check"></i></span>');
+        $cardData = Card::find($id);
+        $friends = Friends::withTrashed()
+                            ->where('card_id',$cardData['id'])
+                            ->where('user_id',Auth::user()->id)
+                            ->first();
+
+         $validateFollow = isset($friends)?true:false;                
+
+        if($validateFollow == false){
+            $data = $this->FriendsRepository->create($id);
+            return response()->json('<span >following <i class="fas fa-user-check"></i></span>');
+        }else{
+            
+           $data = $this->FriendsRepository->delete_item($id);
+           if($data == 3){
+            return response()->json('<span class="d-none d-md-block d-lg-block d-xl-block" >follow <i class="fas fa-user-plus"></i></span>');
+           }
+           return response()->json('<span >following <i class="fas fa-user-check"></i></span>');
+        }
+        
     }
 }
