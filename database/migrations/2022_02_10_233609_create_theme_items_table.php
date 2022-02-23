@@ -16,6 +16,7 @@ class CreateThemeItemsTable extends Migration
         Schema::create('theme_items', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('theme_id')->nullable();
+            $table->unsignedBigInteger('item_id')->nullable();
             $table->longText('name')->nullable();
             $table->integer('order')->default(0);
             $table->longText('description')->nullable();
@@ -25,6 +26,7 @@ class CreateThemeItemsTable extends Migration
             $table->timestamps();
             
             $table->foreign('theme_id')->references('id')->on('themes')->onDelete('cascade');
+            $table->foreign('item_id')->references('id')->on('cards_items')->onDelete('cascade');
             
         });
     }

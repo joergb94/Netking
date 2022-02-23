@@ -32,6 +32,8 @@ class CreateCardsItemsTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('cards_items');
+        Schema::enableForeignKeyConstraints();
     }
 }
