@@ -28,7 +28,8 @@ Route::get('/register/checkedData', [RegisterController::class, 'checkedData']);
 Route::get('/contactUs/{id}',[contacUsController::class, 'send_mail']);
    //genera 
 Route::get('/Keypls/qr/{id}', [CardController::class, 'detail_qr']);
-Route::get('/Keypls/{id}', [CardController::class, 'detail']); 
+Route::get('/Keypls/{id}', [CardController::class, 'detail']);
+Route::post('/Keypls/{id}/viewDetail', [CardController::class, 'view_card_details_link']); 
 
 
 Auth::routes();
@@ -36,7 +37,7 @@ Auth::routes();
 Route::group(['middleware'=>['auth']], function(){
 
         Route::post('/Keypls/{id}/follow', [CardController::class, 'friendship']); 
-        
+       
         //home 
         Route::get('/home', [HomeController::class, 'index'])->name('home');
         Route::post('/home/deleteOrResotore',[HomeController::class, 'deleteOrResotore']);

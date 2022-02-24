@@ -9,6 +9,7 @@ use App\Models\Friends;
 use App\Models\ViewCards;
 use App\Models\User;
 use App\Models\NetworkSocial;
+use App\Models\ViewCardDetail;
 use App\Models\text_style;
 use App\Models\Themes;
 use App\Models\Card_detail;
@@ -31,10 +32,11 @@ class CardsRepository
      *
      * @param  Providers  $model
      */
-    public function __construct(Card $model,Friends $Friends, Card_detail_network $card_detail_network,ViewCards $view_cards,ResgisterUserRepository $ResgisterUserRepository)
+    public function __construct(Card $model, ViewCardDetail $ViewCardDetail ,Friends $Friends, Card_detail_network $card_detail_network,ViewCards $view_cards,ResgisterUserRepository $ResgisterUserRepository)
     {
         $this->model = $model;
         $this->views = $view_cards;
+        $this->ViewCardDetail = $ViewCardDetail;
         $this->Friends = $Friends;
         $this->card_detail_network = $card_detail_network;
         $this->ResgisterUserRepository = $ResgisterUserRepository;
@@ -510,6 +512,35 @@ class CardsRepository
             throw new GeneralException(__('Error create of keypl detail.'));
 
         });
+
+    }
+
+    public function create_views_details($data)
+    {
+            return DB::transaction(function () use ($data) {
+               
+                $cardDetailData = Card_detail::find($data['id']);
+                $cardData = $this->model::find($cardDetailData['card_id']);
+                $views = $this->ViewCardDetail::create([
+                        'user_id'=>$cardData['user_id'],
+                        'card_id'=>$cardData['id'],
+                        'card_detail_id'=>$data['id'],
+                        'card_detail_network_id'=>$data['social']?$data['social']:NULL,
+                ]);
+         
+                if($views){
+
+                    if($data['id'] && $data['social']){
+                        return [ 'result'=>Card_detail_network::find($data['social']), 'check' =>true];
+                    }else{
+                        return[ 'result'=>$cardDetailData, 'check' =>false];
+                    }
+
+
+                }
+                throw new GeneralException(__('Error update of keypl detail.'));
+
+            });
 
     }
 }

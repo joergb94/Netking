@@ -18,6 +18,7 @@ use App\Models\Themes;
 use App\Models\Friends;
 use App\Models\Theme_detail;
 use App\Models\Cards_items;
+use App\Models\ViewCardDetail;
 use App\Models\Card_detail;
 use App\Models\NetworkSocial;
 use App\Models\Cards_style_detail;
@@ -391,5 +392,11 @@ class CardController extends Controller
            return response()->json('<span >following <i class="fas fa-user-check"></i></span>');
         }
         
+    }
+
+    public function view_card_details_link(Request $request,$id){
+   
+            $data = $this->CardsRepository->create_views_details($request);
+            return response()->json($data);
     }
 }
