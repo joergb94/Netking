@@ -2,6 +2,19 @@ $( document ).ready(function() {
     $("#btn-follow").click(function() {
         Keypl.friend();
       });
+
+      $(".btn-link-keypl").click(function() {
+        var set = $(this).val();
+        var button = $(this);
+        Keypl.get_link(set,button);
+      });
+
+      $('.btn-link-keyp-social').click(function(){
+        var social = $(this).val();
+        var set = $('#cutom-social-token'+ set).val();
+        var button = $(this);
+        Keypl.get_link(set,button,social);
+      });
 })
 
 const Cards = {
@@ -23,8 +36,7 @@ const Cards = {
             location.reload();
             },
             error: function (data) {
-            console.log(data);
-
+           
             }
         });
     },
@@ -49,10 +61,34 @@ const Keypl = {
                 messages({title:'Listo!',text:'Ahora sigues a este usuario',type:'success'});
             },
             error: function (data) {
-            console.log(data);
 
             }
         });
     },
-
+    get_link:function(id,button,social =""){
+        var btn = button;
+        $.ajaxSetup({
+            headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        btn.prop('disabled', true);
+        var url = $('#url').val();
+        $.ajax({
+            type: "POST",
+            url: url+'/viewDetail',
+            data: {
+                    id:id,
+                    social:social,
+                  },
+            success: function (data) {
+                var route = data.check?data.result['url']:data.result['description'];
+                window.open(route, '_blank');
+                btn.prop('disabled', false);
+            },
+            error: function (data) {
+                btn.prop('disabled', false);
+            }
+        });
+    },
 }
