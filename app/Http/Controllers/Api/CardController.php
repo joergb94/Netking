@@ -4,10 +4,13 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Card;
+use App\Models\Card_detail;
 use App\Models\Cards_items;
 use App\Repositories\CardsRepository;
 use Carbon\Carbon; 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class CardController extends Controller
 {
@@ -40,5 +43,44 @@ class CardController extends Controller
     {
         $data = $this->repository->get_data_keypl($id);
         return response()->json($data,200);
+    }
+
+    public function update_card_item(Request $request,$id){
+        $data = $this->repository->update_card_detail_item($id,$request->input());
+        return response()->json($data, 201);
+    }
+    public function create_detail(Request $request,$id){
+        $card = Card::find($id);
+        $card_detail = Card_detail::create([
+            'card_id'=> $id,
+            'card_item_id'=>$request->card_item_id,
+            'name' => (strlen($request->name)>0)?$request->name:'',
+            'description' => (strlen($request->description)>0)?$request->description:'',
+        ]);
+        return response()->json($card_detail, 201);
+    }
+
+    public function deleteOrResotore(Request $request,$Card_id)
+    {    
+        $Bval = Card_detail::withTrashed()->find($Card_id)->trashed();
+
+        return DB::transaction(function () use ($Bval,$Card_id) {
+         
+          if($Bval){
+            $Card = Card_detail::withTrashed()->find($Card_id)->restore();
+            $b=4;
+        }else{
+            $Card = Card_detail::find($Card_id)->delete();
+            $b=3;
+        }
+
+        if ($b) {
+            return $b;
+        }
+
+        throw new GeneralException(__('Error deleteOrResotore of Card.'));
+
+      });
+      return response()->json(['data'=>'gola'], 201);
     }
 }
