@@ -57,8 +57,15 @@ const Keypl = {
             type: "Post",
             url: url+'/follow',
             success: function (data) {
-                $("#btn-follow").html(data)
-                messages({title:'Listo!',text:'Ahora sigues a este usuario',type:'success'});
+
+                $("#btn-follow").html(data.label)
+                if(data.add){
+                    messages({title:'Listo!',text:'Ahora sigues a este usuario',type:'success'});
+
+                }else{
+                    messages({title:'Listo!',text:'Ya no sigues a este usuario',type:'success'});
+                }
+                
             },
             error: function (data) {
 

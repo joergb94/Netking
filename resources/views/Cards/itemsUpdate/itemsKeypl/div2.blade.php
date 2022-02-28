@@ -4,15 +4,17 @@
                     @if (isset($data['card_network']))
                     @if($card_style['button_style'] == 0)
                         @foreach ($data['card_network'] as $item)
-                            <a class="btn {{$btn_shape}} btn-social-icon keypl-btn-social theme3-padding-btn" target="_blank" href="{{$item['url']}}">
+                            <button class="btn btn-link-keyp-social {{$btn_shape}} btn-social-icon keypl-btn-social theme3-padding-btn" value="{{$item['id']}}" >
                                 <span class="{{$item['social_network']['icon']}}"></span>
-                            </a>
+                                <input type="hidden" id="cutom-social-token{{$item['id']}}" value="{{$ci['card_detail']['id']}}">
+                            </button>
                         @endforeach
                     @else
                         @foreach ($data['card_network'] as $item)
-                            <a class="btn {{$btn_shape}} btn-social-icon {{$item['social_network']['btn_network']}} theme3-padding-btn" target="_blank" href="{{$item['url']}}">
+                            <button class="btn btn-link-keyp-social {{$btn_shape}} btn-social-icon {{$item['social_network']['btn_network']}} theme3-padding-btn" value="{{$item['id']}}" >
                                 <span class="{{$item['social_network']['icon']}}"></span>
-                            </a>
+                                <input type="hidden" id="cutom-social-token{{$item['id']}}" value="{{$ci['card_detail']['id']}}">
+                            </button>
                         @endforeach
                     @endif
                     @endif
@@ -22,18 +24,23 @@
                     @if (isset($data['card_network']))
                     @if($card_style['button_style'] == 0)
                         @foreach ($data['card_network'] as $item)
-                            <a class="btn {{$btn_shape}} btn-social-icon keypl-btn-social" target="_blank" href="{{$item['url']}}">
-                                <span class="{{$item['social_network']['icon']}}"></span>
-                            </a>
+                            <button class="btn btn-link-keyp-social {{$btn_shape}} btn-social-icon keypl-btn-social"  value="{{$item['id']}}">
+                                <span class="{{$item['social_network']['icon']}} keypl-text-social"></span>
+                                <input type="hidden" id="cutom-social-token{{$item['id']}}" value="{{$ci['card_detail']['id']}}">
+                            
+                             </button>
                         @endforeach
                     @else
                         @foreach ($data['card_network'] as $item)
-                            <a class="btn {{$btn_shape}} btn-social-icon {{$item['social_network']['btn_network']}}" target="_blank" href="{{$item['url']}}">
-                                <span class="{{$item['social_network']['icon']}}"></span>
-                            </a>
+                            <button class="btn btn-link-keyp-social {{$btn_shape}} btn-social-icon btn-social-icon-padding {{$item['social_network']['btn_network']}}" value="{{$item['id']}}">
+                                <span class="{{$item['social_network']['icon']}} "></span>
+                                <input type="hidden" id="cutom-social-token{{$item['id']}}" value="{{$ci['card_detail']['id']}}">
+                            </button>
                         @endforeach
                     @endif
                     @endif
                 </div>
+                     
+        
         @endif
 </div>

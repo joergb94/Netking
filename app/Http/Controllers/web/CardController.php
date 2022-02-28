@@ -208,7 +208,8 @@ class CardController extends Controller
                         }
                    }
     
-                return view('Cards.card',$this->CardsRepository->get_data_keypl($idStr[0]));
+                   return view('Keypls.index',$this->CardsRepository->get_data_keypl($idStr[0]));
+
 
             }  
 
@@ -382,15 +383,18 @@ class CardController extends Controller
 
         if($validateFollow == false){
             $data = $this->FriendsRepository->create($id);
-            return response()->json('<span >following <i class="fas fa-user-check"></i></span>');
+            $result['label'] = '<span >following <i class="fas fa-user-check"></i></span>';
+            $result['add'] = true;
         }else{
             
            $data = $this->FriendsRepository->delete_item($id);
-           if($data == 3){
-            return response()->json('<span class="d-none d-md-block d-lg-block d-xl-block" >follow <i class="fas fa-user-plus"></i></span>');
-           }
-           return response()->json('<span >following <i class="fas fa-user-check"></i></span>');
+           $result['label'] = $data == 3?'<span class="d-none d-md-block d-lg-block d-xl-block" >follow <i class="fas fa-user-plus"></i></span>'
+                                        :'<span >following <i class="fas fa-user-check"></i></span>';
+           $result['add'] = $data == 3? false
+                                      : true;
         }
+
+        return response()->json($result);
         
     }
 

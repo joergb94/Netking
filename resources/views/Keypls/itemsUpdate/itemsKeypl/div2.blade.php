@@ -1,6 +1,6 @@
 <div class="row justify-content-between {{$theme_shape}}">
         @if($data['themes_id'] == 3)
-                <div class="col-12 text-center mx-auto d-block theme{{$data['themes_id']}}-padding" id="social">
+                <div class="col-12 text-center mx-auto d-block theme{{$data['themes_id']}}-padding theme3-col-12" id="social">
                     @if (isset($data['card_network']))
                     @if($card_style['button_style'] == 0)
                         @foreach ($data['card_network'] as $item)
@@ -32,7 +32,7 @@
                         @endforeach
                     @else
                         @foreach ($data['card_network'] as $item)
-                            <button class="btn btn-link-keyp-social {{$btn_shape}} btn-social-icon {{$item['social_network']['btn_network']}}" value="{{$item['id']}}">
+                            <button class="btn btn-link-keyp-social {{$btn_shape}} btn-social-icon btn-social-icon-padding {{$item['social_network']['btn_network']}}" value="{{$item['id']}}">
                                 <span class="{{$item['social_network']['icon']}} "></span>
                                 <input type="hidden" id="cutom-social-token{{$item['id']}}" value="{{$ci['card_detail']['id']}}">
                             </button>
@@ -40,5 +40,7 @@
                     @endif
                     @endif
                 </div>
+                     
+        
         @endif
 </div>
