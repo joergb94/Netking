@@ -560,29 +560,40 @@ ul {
 	}
 
 	.theme1-col-6{
-		max-height: 450px !important;
+		height: 450px !important;
 	}
 
 	.theme1-col{
-		max-height: 150px !important;
+		height: 143.333px !important;
 	}
 
 	.theme1-padding{
-		margin-top: 25px;
+		margin-top: 10px;
+		padding-right: 5px !important;
+    	padding-left: 5px !important;
 	}
 
 	.theme1-padding-frame{
-		margin-top: 25px;
+		margin-top: 10px;
 	}
-	
+	.theme-2{
+		padding-right: 5px !important;
+    	padding-left: 5px !important;
+	}
+	.theme2-col-sm{
+		height: 95px !important;
+		padding-right: 5px !important;
+    	padding-left: 5px !important;
+	}
+
 	.theme2-col{
-		padding-right: 10px;
-		padding-left: 10px;
-		height: 300px !important;
+		height: 200px !important;
+		padding-right: 5px !important;
+    	padding-left: 5px !important;
 	}
 
 	.theme2-padding{
-		margin-top: 25px;
+		margin-top: 10px;
 	}
 
 	.theme-3-col{
@@ -592,7 +603,7 @@ ul {
 	}
 
 	.theme3-padding{
-		margin-top: 50px;
+		margin-top: 25px;
 	}
 
 	.theme3-padding-btn{
@@ -617,6 +628,10 @@ ul {
 		width: 180px !important;
 		border-radius: 50% !important;
 	}
+	.theme3-col-12{
+		max-height: 200px !important;
+		width: 200px !important;
+	}
 
 	.theme3-shape4{
 		max-height: 70px !important;
@@ -626,11 +641,23 @@ ul {
 		margin-right: 5px;
 	}
 
-	.theme3-float{
-		left:10% !important;
+
+	@media screen and (max-width: 576px){
+		.theme3-float{
+			float:right !important;
+			padding-right:0px !important;
+		}
 	}
 
-	
+	.theme3-float{
+		float:right !important;
+		padding-right:70% !important;
+	}
+
+
+	.label-theme3{
+		width: 180px !important;
+	}
 	.no-margin{
 		margin: 0;
 		padding: 0;
@@ -638,6 +665,8 @@ ul {
 
 	.theme4-padding{
 		margin-top: 25px  !important;
+		padding-right: 5px !important;
+    	padding-left: 5px !important;
 	}
 	
 
@@ -648,5 +677,13 @@ ul {
 	.button-form-size{
 		width: 100px;
 		height: 64px;
+	}
+
+	.btn-social-icon{
+		font-size: 16px !important;
+	}
+
+	.btn-social-icon-padding{
+		margin-right: 15px !important;
 	}
 	
