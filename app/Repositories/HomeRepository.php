@@ -5,8 +5,10 @@ namespace App\Repositories;
 use App\Exceptions\GeneralException;
 use App\Models\Card;
 use App\Models\ViewCards;
+use App\Models\ViewCardDetail;
 use App\Models\Card_detail;
 use App\Models\Card_items;
+use App\Models\Card_detail_network;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -21,10 +23,13 @@ class HomeRepository
      *
      * @param  Providers  $model
      */
-    public function __construct(Card $card,ViewCards $view_cards)
+    public function __construct(Card $card,ViewCards $view_cards,Card_detail_network $Card_detail_network,ViewCardDetail $ViewCardDetail)
     {
         $this->card = $card;
         $this->views = $view_cards;
+        $this->Card_detail_network = $Card_detail_network;
+        $this->ViewCardDetail = $ViewCardDetail;
+
     }
 
     public function keypls($search){
@@ -74,10 +79,35 @@ class HomeRepository
                     $data['qr_views'] = $this->views->where('user_id',$user->id)->where('type',1)->count();
                     $data['link_views'] = $this->views->where('user_id',$user->id)->where('type',2)->count();
                     $data['keypls'] = HomeRepository::keypls($search);
-                    $data['kyepls_views']=HomeRepository::keyplsViews($user);
+                    $data['keypls_views']=HomeRepository::keyplsViews($user);
+    
             return $data;
     }
 
+    public function keypls_ids($user){
+        $dataids = [];
+        $keypls = $this->card->where('user_id',$user->id)->get();
+        foreach ($keypls as $keypl) {
+                array_push($dataids,$keypl['id']);
+        }
 
+        return $dataids;
+    }
+
+    public function keyplsSocialViews($user){
+        $views_socials = [];
+        $labels = [];
+
+        $socialsviews = $this->Card_detail_network->whereIn('card_id',HomeRepository::keypls_ids($user))->get();
+
+        foreach ($socialsviews as $value) {
+                $no = $this->ViewCardDetail->where('card_detail_network_id',$value->id)->count();
+                array_push($views_socials,$no);  
+                array_push($labels,$value['social_network']['name']);  
+        }
+
+
+        return ['views'=>$views_socials,'labels'=>$labels];
+     }
 
 }

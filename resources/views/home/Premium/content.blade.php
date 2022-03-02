@@ -84,6 +84,15 @@
 								<input type="hidden" name="link" id="link" value="{{$data['link_views']}}" >
 							</div>
 						</di>
+						<di class="col-sm-12">
+							<div class="card">
+								<br>
+								<div class="chart-container">
+									<canvas id="chart-social"></canvas>
+								
+								</div>
+							</div>
+						</di>
 						<div class="col-sm-12">
 							<div id="index_table">
 								<div class="row">

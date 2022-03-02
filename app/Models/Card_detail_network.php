@@ -15,6 +15,12 @@ class Card_detail_network extends Model implements Auditable
 
     protected $guarded=[];
 
+
+    public function cards()
+    {
+        return $this->hasMany('App\Models\Card','id','card_id');
+    }
+
     public function social_network()
     {
         return $this->hasOne('App\Models\NetworkSocial','id','network_social_id');
