@@ -279,8 +279,8 @@
     overflow: hidden auto;
     background-attachment: scroll;
     background-position: center center;
-	min-height: 797px;
-	max-height: 812px;
+	min-height: 656px;
+	max-height: 677px;
     
 }
 
@@ -291,15 +291,15 @@
     overflow: hidden auto;
     background-attachment: scroll;
     background-position: center center;
-	min-height: 797px;
-	max-height: 812px;
+	min-height: 656px;
+	max-height: 677px;
     background-image: url('../img/shape.jpg');
 }
 
 .device-case {
 	border: 15px solid black;
 	border-radius: 25px;
-	width: 400px;
+	width: 375px;
 	background-color: black;
 }
 
@@ -629,7 +629,7 @@ ul {
 		border-radius: 50% !important;
 	}
 	.theme3-col-12{
-		max-height: 200px !important;
+	
 		width: 200px !important;
 	}
 
@@ -641,6 +641,10 @@ ul {
 		margin-right: 5px;
 	}
 
+	.theme3-float-update{
+		float:right !important;
+		padding-right:70% !important;
+	}
 
 	@media screen and (max-width: 576px){
 		.theme3-float{

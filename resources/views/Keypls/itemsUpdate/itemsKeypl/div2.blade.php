@@ -1,6 +1,6 @@
 <div class="row justify-content-between {{$theme_shape}}">
         @if($data['themes_id'] == 3)
-                <div class="col-12 text-center mx-auto d-block theme{{$data['themes_id']}}-padding theme3-col-12" id="social">
+                <div class="col-12 text-center mx-auto d-block theme{{$data['themes_id']}}-padding" id="social">
                     @if (isset($data['card_network']))
                     @if($card_style['button_style'] == 0)
                         @foreach ($data['card_network'] as $item)

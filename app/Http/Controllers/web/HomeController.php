@@ -42,4 +42,8 @@ class HomeController extends Controller
     public function deleteOrResotore(Request $request){
         return response()->json($this->HomeRepository->deleteOrResotore($request['id']));
     }
+
+    public function socials_views(Request $request){
+        return response()->json($this->HomeRepository->keyplsSocialViews(Auth::user()));
+    }
 }

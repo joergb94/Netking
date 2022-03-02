@@ -11,7 +11,7 @@ $( document ).ready(function() {
 
       $('.btn-link-keyp-social').click(function(){
         var social = $(this).val();
-        var set = $('#cutom-social-token'+ set).val();
+        var set = $('#cutom-social-token'+ social).val();
         var button = $(this);
         Keypl.get_link(set,button,social);
       });

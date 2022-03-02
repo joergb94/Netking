@@ -2,32 +2,22 @@
 @extends('layouts.app')
 @section('style')
 <style>
-
-    @media screen and (max-width: 1440px){
-        #myVideo {
+    #myVideo {
             position: fixed;
             right: 0;
             bottom: 0;
-            min-width: 100%; 
+            width: 100%; 
             min-height: calc(100vh - 123px);
         }
-    }
-    @media screen and (max-width: 1440px){
-            #myVideo {
-                position: fixed;
-                right: 0;
-                bottom: 0;
-                width: 100%; 
-                min-height: calc(100vh - 123px);
-            }
-    }
+ 
+
 </style>
 @endsection
 @section('content')
 
     <video autoplay muted loop id="myVideo">
-    <source src="{{ asset('videos/keypl-video.mp4') }}" type="video/mp4">
-    Your browser does not support HTML5 video.
+        <source src="{{ asset('videos/keypl-video.mp4') }}" type="video/mp4">
+        Your browser does not support HTML5 video.
     </video>
 
 

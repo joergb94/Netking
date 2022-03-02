@@ -399,8 +399,8 @@ class CardController extends Controller
     }
 
     public function view_card_details_link(Request $request,$id){
-   
-            $data = $this->CardsRepository->create_views_details($request);
+          
+            $data = $this->CardsRepository->create_views_details($id,$request->input());
             return response()->json($data);
     }
 }

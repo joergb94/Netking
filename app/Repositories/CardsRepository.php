@@ -12,6 +12,7 @@ use App\Models\NetworkSocial;
 use App\Models\ViewCardDetail;
 use App\Models\text_style;
 use App\Models\Themes;
+use App\Models\ThemeItems;
 use App\Models\Card_detail;
 use App\Models\Cards_items;
 use App\Models\Card_detail_network;
@@ -41,13 +42,7 @@ class CardsRepository
         $this->card_detail_network = $card_detail_network;
         $this->ResgisterUserRepository = $ResgisterUserRepository;
         $this->buttons = ['','btn-fab-r','btn-rounded',''];
-        $this->orderTheme =  [
-                                [1,2],
-                                [1,4],
-                                [1,2],
-                                [5,6],
-                                [1,2],
-                            ];
+
     }
 
 
@@ -78,16 +73,16 @@ class CardsRepository
                     return $Card;
     }
     public function createCardDetail($id,$data){
-
-        $datos = Cards_items::whereIn('id',[1,2])->get();
-        return DB::transaction(function () use ($id,$data,$datos) {
-                $theme_id = $data['theme']?$data['theme']:1;
+        $theme_id = $data['theme']?$data['theme']:1;
+        $datos = ThemeItems::where('theme_id',$theme_id)->whereIn('item_id',[1,2])->get();
+        return DB::transaction(function () use ($id,$datos) {
+               
 
                     foreach ($datos  as $i => $detail) {
                         $Card =Card_detail::create([
                             'card_id'=>$id,
-                            'card_item_id' =>$detail['id'],
-                            'order'=>$this->orderTheme[$theme_id][$i],
+                            'card_item_id' =>$detail['item_id'],
+                            'order'=>$detail['order'],
                         ]);
                     }
                 
@@ -515,7 +510,7 @@ class CardsRepository
 
     }
 
-    public function create_views_details($data)
+    public function create_views_details($id,$data)
     {
             return DB::transaction(function () use ($data) {
                
