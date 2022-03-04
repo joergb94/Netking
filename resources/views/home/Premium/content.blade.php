@@ -73,23 +73,27 @@
 								</div>
 							</div>
 						</div>
-						<di class="col-sm-12">
+						<di class="col-sm-6">
 							<div class="card">
-								<br>
-								<div class="chart-container">
-									<canvas id="chart"></canvas>
+								<div class="card-header">
+									<h2>Views On Keylps</h2>
 								</div>
-								<br>
-								<input type="hidden" name="qr" id="qr" value="{{$data['qr_views']}}">
-								<input type="hidden" name="link" id="link" value="{{$data['link_views']}}" >
+								<div class="card-body">
+									<div class="col-12">
+										<canvas id="chart"></canvas>
+									</div>
+								</div>
 							</div>
 						</di>
-						<di class="col-sm-12">
+						<di class="col-sm-6">
 							<div class="card">
-								<br>
-								<div class="chart-container">
-									<canvas id="chart-social"></canvas>
-								
+								<div class="card-header">
+									<h2>Network Socials</h2>
+								</div>
+								<div class="card-body">
+									<div class="col-12">
+										<canvas id="chart-social"></canvas>
+									</div>
 								</div>
 							</div>
 						</di>

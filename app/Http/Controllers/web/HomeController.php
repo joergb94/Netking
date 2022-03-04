@@ -46,4 +46,9 @@ class HomeController extends Controller
     public function socials_views(Request $request){
         return response()->json($this->HomeRepository->keyplsSocialViews(Auth::user()));
     }
+
+    public function keypls_data(Request $request){
+        
+        return response()->json($this->HomeRepository->keyplsViews(Auth::user()));
+    }
 }
