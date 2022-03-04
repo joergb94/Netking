@@ -42,6 +42,7 @@ Route::group(['middleware'=>['auth']], function(){
         Route::get('/home', [HomeController::class, 'index'])->name('home');
         Route::post('/home/deleteOrResotore',[HomeController::class, 'deleteOrResotore']);
         Route::get('/home/social',[HomeController::class, 'socials_views']);
+        Route::get('/home/keyplsData',[HomeController::class, 'keypls_data']);
         Route::post('/contactUs',[HomeController::class, 'deleteOrResotore']);
         Route::get('/Kepls/background/{id}', [CardController::class, '']);
 

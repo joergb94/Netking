@@ -6,6 +6,7 @@ use App\Exceptions\GeneralException;
 use App\Models\Card;
 use App\Models\ViewCards;
 use App\Models\ViewCardDetail;
+use App\Models\NetworkSocial;
 use App\Models\Card_detail;
 use App\Models\Card_items;
 use App\Models\Card_detail_network;
@@ -29,6 +30,7 @@ class HomeRepository
         $this->views = $view_cards;
         $this->Card_detail_network = $Card_detail_network;
         $this->ViewCardDetail = $ViewCardDetail;
+        $this->colors = ['#3b5998','#3b5998',];
 
     }
 
@@ -56,13 +58,15 @@ class HomeRepository
     }
 
     public function keyplsViews($user){
-            $views =[];
-            $keypls = $this->card->where('user_id',$user->id)->get();
-            foreach ($keypls as $key => $value) {
-                array_push($views, $this->views->where('card_id',$value->id)->count());
-            }
+        $views =[];
+        $keypls = $this->card->where('user_id',$user->id)->get();
+        foreach ($keypls as $key => $value) {
+            $qr = $this->views->where('user_id',$user->id)->where('card_id',$value->id)->where('type',1)->count();
+            $link = $this->views->where('user_id',$user->id)->where('card_id',$value->id)->where('type',2)->count();
+            array_push($views,['qr'=>$qr,'link'=>$link,'keypl'=>$value->title]);
+        }
 
-            return $views;
+        return $views;
     }
 
           /**
@@ -94,20 +98,42 @@ class HomeRepository
         return $dataids;
     }
 
-    public function keyplsSocialViews($user){
-        $views_socials = [];
-        $labels = [];
-
-        $socialsviews = $this->Card_detail_network->whereIn('card_id',HomeRepository::keypls_ids($user))->get();
-
-        foreach ($socialsviews as $value) {
-                $no = $this->ViewCardDetail->where('card_detail_network_id',$value->id)->count();
-                array_push($views_socials,$no);  
-                array_push($labels,$value['social_network']['name']);  
+    public function keypls_network_ids($user){
+        $dataids = [];
+        $keypls = $this->Card_detail_network
+                  ->whereIn('card_id',HomeRepository::keypls_ids($user))
+                  ->get();
+                  
+        foreach ($keypls as $keypl) {
+                array_push($dataids,$keypl['network_social_id']);
         }
 
+        $result =array_unique($dataids);
 
-        return ['views'=>$views_socials,'labels'=>$labels];
+        return $result;
+    }
+
+    public function keyplsSocialViews($user){
+        $data = [];
+        $keypls = $this->card->where('user_id',$user->id)->get();
+        $networks = NetworkSocial::whereIn('id',HomeRepository::keypls_network_ids($user))->get();
+        foreach ($keypls as $keypl) {
+
+                $views_socials = [];
+                $labels = [];
+                foreach ($networks as $net) {
+                  $netcard = $this->Card_detail_network->where('card_id',$keypl->id)->where('network_social_id',$net->id)->first();
+                  $no = isset($netcard->id)?$this->ViewCardDetail->where('card_detail_network_id',$netcard->id)->count():0; 
+                  array_push($views_socials,$no);
+
+                }
+                array_push($data,['cards'=>$keypl->title, 'views'=>$views_socials]); 
+              
+         }
+
+         $result = ['data'=>$data, 'networks'=>$networks];
+
+        return $result;
      }
 
 }
