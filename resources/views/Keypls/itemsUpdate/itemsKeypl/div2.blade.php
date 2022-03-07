@@ -5,7 +5,7 @@
                     @if($card_style['button_style'] == 0)
                         @foreach ($data['card_network'] as $item)
                             <button class="btn btn-link-keyp-social {{$btn_shape}} btn-social-icon keypl-btn-social theme3-padding-btn" value="{{$item['id']}}" >
-                                <span class="{{$item['social_network']['icon']}}"></span>
+                                <span class="{{$item['social_network']['icon']}}  keypl-text-social"></span>
                                 <input type="hidden" id="cutom-social-token{{$item['id']}}" value="{{$ci['card_detail']['id']}}">
                             </button>
                         @endforeach

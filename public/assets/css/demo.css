@@ -628,10 +628,17 @@ ul {
 	}
 
 	.theme3-shape3{
-		max-height: 180px !important;
+		height: 180px !important;
 		width: 180px !important;
 		border-radius: 50% !important;
 	}
+
+	.theme3-shape100{
+		height: 180px !important;
+		width: 180px !important;
+		border-radius: 50% !important;
+	}
+	
 	.theme3-col-12{
 	
 		width: 200px !important;
