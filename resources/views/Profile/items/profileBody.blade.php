@@ -22,16 +22,16 @@
            <div class="col-12">
                <div class="row">
                 <div class="col-sm-3">
-                    <h5>followers {{$follow['followers']['quantity']}}</h5> 
+                    <h5>Followers <i class="fas fa-shoe-prints text-secondary"></i> {{$follow['followers']['quantity']}}</h5> 
                 </div>
                 <div class="col-sm-3">
-                        <h5>following {{$follow['following']['quantity']}}</h5> 
+                        <h5>Following <i class="fas fa-shoe-prints text-warning"></i> {{$follow['following']['quantity']}}</h5> 
                 </div>
                 <div class="col-sm-3">
-                        <h5>Keypls {{$keypls['myKeypls']}}</h5> 
+                        <h5>Keypls <i class="fas fa-qrcode text-secondary"></i> {{$keypls['myKeypls']}}</h5> 
                 </div>
                 <div class="col-sm-3">
-                        <h5>free Keypls {{$keypls['freeKeypls']}}</h5> 
+                        <h5>Free Keypls <i class="fas fa-qrcode text-warning"></i> {{$keypls['freeKeypls']}}</h5> 
                 </div>
                </div>
               

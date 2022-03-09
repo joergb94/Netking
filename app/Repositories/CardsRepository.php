@@ -334,11 +334,13 @@ class CardsRepository
                 $nsInUse = [];
                 $cardItemsDetail =[];
                 $data = $this->model->find($id);
-                $friend = Auth::guest()?''
+                $friend = Auth::guest()
+                        ?false
                         :$this->Friends::where('card_id',$id)
-                              ->where('user_friend_id',Auth::user()->id)
-                              ->where('user_id',$data['user_id'])
+                              ->where('user_friend_id',$data['user_id'])
+                              ->where('user_id',Auth::user()->id)
                               ->exists();
+                              
                 $actual_bg = $data->img_path.$data->img_name;
                 $background = Background_image::all();
                 $themes = Themes::all();
