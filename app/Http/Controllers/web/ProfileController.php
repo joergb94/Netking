@@ -5,6 +5,7 @@ namespace App\Http\Controllers\web;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Card;
 use App\Models\Membership;
 use App\Models\Friends;
 use App\Models\Type_membership;
@@ -14,9 +15,9 @@ use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
-    public function __construct(ProfileRepository $repository, GeneralRepository $generalRepository)
+    public function __construct(ProfileRepository $ProfileRepository, GeneralRepository $generalRepository)
     {
-        $this->repository = $repository;
+        $this->ProfileRepository = $ProfileRepository;
         $this->generalRepository =$generalRepository;
         $this->menu_id = 4;
         $this->module_name = 'Profile';
@@ -25,12 +26,23 @@ class ProfileController extends Controller
 
     public function index(Request $request)
     {
-        $data = $this->repository->getSearchPaginated(Auth::user()->id);
+        $data = $this->ProfileRepository->getSearchPaginated(Auth::user()->id);
+        $follow = $this->ProfileRepository->getfriends();
+        $keypls = $this->ProfileRepository->get_user();
+
         if($request->ajax())
         {
-            return view('Profile.index',['data' => $data, 'dm' => accesUrl(Auth::user(), $this->menu_id)]);
+            return view('Profile.items.contentProfile',['data' => $data,
+                                                        'follow'=>$follow, 
+                                                        'keypls'=>$keypls,
+                                                        'dm' => accesUrl(Auth::user(), $this->menu_id)
+                                                    ]);
         }
-        return view('Profile.index',['data' => $data, 'dm' => accesUrl(Auth::user(), $this->menu_id)]);
+
+        return view('Profile.index',['data' => $data,
+                                     'follow'=>$follow,
+                                     'keypls'=>$keypls,
+                                     'dm' => accesUrl(Auth::user(), $this->menu_id)]);
     }
     public function show_membership(Request $request)
     {
@@ -76,8 +88,7 @@ class ProfileController extends Controller
     {
         if($request->ajax())
         {
-            $user = Auth::user();
-            return response()->json(['user'=>$user]);
+            return view('Profile.edit',$this->ProfileRepository->get_user());
         }
     }
 
@@ -95,16 +106,16 @@ class ProfileController extends Controller
             $nameImg = $user->image;
             $file_path = $user->path;
         }
-        $data = $this->repository->update($request->input(),$id,$nameImg,$file_path);
+        $data = $this->ProfileRepository->update($request->input(),$id,$nameImg,$file_path);
         $membership = Membership::where('user_id',$id)->with('type_memberships')->get();
-        return response()->json(['user'=>$data,'memberships'=>$membership,'answer'=>Answer(
+        return response()->json(Answer(
             $data['id'],
             $this->module_name,
             $this->text_module[1],
             "success",
             'yellow',
             '1'
-        )]);
+        ));
        }
     }
     public function get_user(Request $request,$id)
