@@ -2,32 +2,9 @@
 @section('content')
 <div class="page-inner">
 <div class="card" id="index_blade">
+<div class="card-header">Mi Cuenta</div>
   <div class="card-body">
-    <div class="row">
-      <div class="col-sm-6">
-        <h4 class="card-title mb-0">
-          Profile  <i class='fa fa-user'></i>
-
-        </h4>
-      </div>
-      <!--col-->
-      <div class="col-sm-6">
-        @include('Profile.items.header-buttons')
-      </div>
-      <!--col-->
-    </div>
-    <!--row-->
-    <div class="row">
-      <br>
-      <div class="col-sm-12">
-        @include('Profile.items.profilePicture')
-      </div>
-    </div>
-    </br>
-    <div class="col-sm-12">
-     @include('Profile.items.profileBody')
-    </div>
-   
+    @include('Profile.items.contentProfile')
     <div id="loading" style="display:none" class="col-sm-12 text-center">
       </br></br></br>
       <div class="col-sm-12">
@@ -39,7 +16,7 @@
       <div class="spinner-grow text-danger"></div>
       <div class="spinner-grow text-secondary"></div>
       </br></br></br></br>
-    </div>
+    </div> 
   </div>
   <!--card-body-->
 </div>
