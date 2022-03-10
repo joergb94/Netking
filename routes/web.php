@@ -44,6 +44,7 @@ Route::group(['middleware'=>['auth']], function(){
         Route::get('/home/social',[HomeController::class, 'socials_views']);
         Route::get('/home/keyplsData',[HomeController::class, 'keypls_data']);
         Route::post('/contactUs',[HomeController::class, 'deleteOrResotore']);
+        Route::get('/home/{id}/show_qr', [CardController::class, 'show_qr']);
         Route::get('/Kepls/background/{id}', [CardController::class, '']);
 
         //My First Keypl

@@ -4,7 +4,7 @@
 
       <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title">QR Keypl</h4>
+        <h4 class="modal-title">QR Keypl-{{$data['title']}}-{{$user['nickname']}}</h4>
         <button type="button" class="close btn btn-outline-danger" data-dismiss="modal">&times;</button>
       </div>
 

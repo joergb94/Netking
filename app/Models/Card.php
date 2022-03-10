@@ -16,7 +16,7 @@ class Card extends Model implements Auditable
 
     public function users()
     {
-        return $this->hasMany('App\Models\User','user_id','id');
+        return $this->hasMany('App\Models\User','id','user_id');
     }
 
     public function background_image()

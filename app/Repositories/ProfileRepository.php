@@ -46,6 +46,7 @@ class ProfileRepository {
             throw new GeneralExeption(__('Hubo un error actualizando el usuario'));
         });
     }
+  
 
     public function get_user(){
         $user = Auth::user();

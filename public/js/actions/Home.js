@@ -118,3 +118,52 @@ function data_load_social(){
   
 }
 
+
+const Cards = {
+  close: function (){
+    $("#show_blade").hide();
+    $("#index_blade").show();
+    var filter = datasearch();
+    getData(1, filter);
+  },
+  QR: function (id) {
+    var my_url = url + '/' + id + '/show_qr';
+    actions.show(my_url,false,false,true);
+  },
+}
+
+const QR ={
+  show:function(id){
+      var qrcode = new QRCode("qrcode");
+      var data = $('#baseUrl').val()+'/Keypls/'+id;
+      qrcode.makeCode(data);
+  },
+  copy_link:function(){
+    var origen = document.getElementById('button_link');
+    var copyFrom = document.createElement("textarea");
+    copyFrom.textContent = origen.value;
+    var body = document.getElementsByTagName('body')[0];
+    body.appendChild(copyFrom);
+    copyFrom.select();
+    document.execCommand('copy');
+    body.removeChild(copyFrom);
+    document.execCommand('paste');
+    $('#iconCopyB').hide(500);
+    $('#iconCopyA').show(500);
+    $('#iconCopyA').hide(500);
+    $('#iconCopyB').show(500);
+
+  },
+  download:function(id){
+    const linkSource = $('#qr_img').attr('src');
+    const downloadLink = document.createElement("a");
+    downloadLink.href = linkSource;
+    downloadLink.download = 'Keypl'+id+'.jpg';
+    downloadLink.click();
+    $('#iconDB').hide(500);
+    $('#iconDA').show(500);
+    $('#iconDA').hide(500);
+    $('#iconDB').show(500);
+  }
+  
+}
