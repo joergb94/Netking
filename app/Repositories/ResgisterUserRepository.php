@@ -119,17 +119,22 @@ class ResgisterUserRepository
             $User = $this->model::create([
                 'type_user_id'=>$this->type_user,
                 'name' => $data['name'],
+                'last_name' => $data['last_name'],
                 'email' => $data['email'],
                 'password' => Hash::make($data['password']),
             ]);
-                
-            if($User){
-                    $Membership = ResgisterUserRepository::createMembership($User);
-                        if($Membership){
-                            
-                            return $User;
-                        }   
-    
+            $fInfo=explode(' ', $data['name']);
+            $sInfo=explode(' ', $data['last_name']);
+            $usernickname = User::find($User->id);
+            if($usernickname->update(['nickname'=>$fInfo[0].$sInfo[0].$User->id])){
+                if($User){
+                        $Membership = ResgisterUserRepository::createMembership($User);
+                            if($Membership){
+                                
+                                return $User;
+                            }   
+        
+                }
             }
 
             throw new GeneralException(__('There was an error created the User.'));

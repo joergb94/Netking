@@ -219,8 +219,8 @@ class CardController extends Controller
     {
         if ($request->ajax()) {
             $data = $this->CardsRepository->show($id);
-            
-            return view('Cards.show',['data'=>$data]);
+            $user = User::find($data['user_id']);
+            return view('Cards.show',['data'=>$data, 'user'=>$user]);
         }
     }
    
