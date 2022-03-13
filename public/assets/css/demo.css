@@ -630,6 +630,10 @@ ul {
 		border-radius: 20px;
 	}
 
+	.theme-2-text-size {
+		font-size: 14px !important;
+	}
+
 	.theme-2-btn-rounded-follow {
 		border-radius: 20px;
 		font-size: 16px !important;
@@ -731,10 +735,23 @@ ul {
 		padding: 0;
 	}
 
+	.theme4-col-12{
+		width: 100% !important;
+		height: 250px !important;
+		max-height: 450px !important;
+	}
+
+	.theme4-col-10{
+		width: 100% !important;
+		height: 100px !important;
+		max-height: 150px !important;
+	}
+
 	.theme4-padding{
 		margin-top: 25px  !important;
 		padding-right: 5px !important;
     	padding-left: 5px !important;
+		margin-bottom: 5px  !important;
 	}
 	
 
