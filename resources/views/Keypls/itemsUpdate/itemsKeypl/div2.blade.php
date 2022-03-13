@@ -16,8 +16,9 @@
                                 <input type="hidden" id="cutom-social-token{{$item['id']}}" value="{{$ci['card_detail']['id']}}">
                             </button>
                         @endforeach
+                        
                     @endif
-                    @endif
+                    @endif  
                 </div>
         @else
                 <div class="col-12 text-center mx-auto d-block theme{{$data['themes_id']}}-padding" id="social">
