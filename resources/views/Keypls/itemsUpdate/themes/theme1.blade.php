@@ -1,32 +1,26 @@
 
             <div class="row justify-content-between">
                 @if(isset($cardItems[0]))
-                <div class="col-12 theme1-col-12" id="div-{{$cardItems[0]['card_detail']->id}}">
+                <div class="col-12 theme{{$data['themes_id']}}-padding" id="div-{{$cardItems[0]['card_detail']->id}}">
                         @include('Keypls.itemsUpdate.itemsKeypl.div'.$cardItems[0]['item']->id,['ci' => $cardItems[0],'template'=>250,'theme_shape'=>'theme1-shape'])
         
                 </div>
                 @endif
                 @if(isset($cardItems[1]))
-                <div class="col-12 theme1-col-12" id="div-{{$cardItems[1]['card_detail']->id}}">
+                <div class="col-12 theme1-col-12 theme{{$data['themes_id']}}-padding" id="div-{{$cardItems[1]['card_detail']->id}}">
                         @include('Keypls.itemsUpdate.itemsKeypl.div'.$cardItems[1]['item']->id,['ci' => $cardItems[1],'template'=>250,'theme_shape'=>'theme1-shape'])
         
                 </div>
                 @endif
-                <div class="col-12 theme1-padding text-center">
-                        
-                        <button type="button" class="mx-auto d-block btn {{$card_style['button_style'] == 0? 'keypl-btn ':'keypl-btn-full'}} btn-sm" value="{{$friend?1:0}}" id="btn-follow">
-                                @include('Keypls.itemsUpdate.themes.button')
-                        </button>
-                </div>
                 @if(isset($cardItems[2]))
                 <div class="col-6 theme1-col-6 theme{{$data['themes_id']}}-padding" id="div-{{$cardItems[2]['card_detail']->id}}">
-                        @include('Keypls.itemsUpdate.itemsKeypl.div'.$cardItems[2]['item']->id,['ci' => $cardItems[2],'template'=>450,'theme_shape'=>'theme1-shape'])
+                        @include('Keypls.itemsUpdate.itemsKeypl.div'.$cardItems[2]['item']->id,['ci' => $cardItems[2],'template'=>305,'theme_shape'=>'theme1-shape'])
                 </div>
                 @endif
                 <div class="col-6 theme1-col-6">
                     <div class="row">
                         @if(isset($cardItems[3]))
-                        <div class="col-12 theme1-col theme{{$data['themes_id']}}-padding" id="div-{{$cardItems[3]['card_detail']->id}}">
+                        <div class="col-12 theme1-col-social theme{{$data['themes_id']}}-padding" id="div-{{$cardItems[3]['card_detail']->id}}">
                                 @include('Keypls.itemsUpdate.itemsKeypl.div'.$cardItems[3]['item']->id,['ci' => $cardItems[3],'template'=>'143','theme_shape'=>'theme1-shape'])
                 
                         </div>
@@ -45,11 +39,32 @@
                         @endif
                      </div>
                 </div>
-                @foreach($cardItems as $key => $ci)
-                    @if($key > 5)
-                     <div class="col-12 theme1-col-12 theme{{$data['themes_id']}}-padding" id="div-{{$ci['card_detail']->id}}">
-                        @include('Keypls.itemsUpdate.itemsKeypl.div'.$ci['item']->id,['ci' => $ci,'template'=>250,'theme_shape'=>'theme1-shape'])
-                    </div>
-                    @endif
-                @endforeach
+                @for ($i = 5; $i < count($cardItems); $i += 4)
+                        @if(isset($cardItems[$i]))
+                        <div class="col-6 theme1-col-6 theme{{$data['themes_id']}}-padding" id="div-{{$cardItems[$i]['card_detail']->id}}">
+                                @include('Keypls.itemsUpdate.itemsKeypl.div'.$cardItems[$i]['item']->id,['ci' => $cardItems[$i],'template'=>305,'theme_shape'=>'theme1-shape'])
+                        </div>
+                        @endif
+                        <div class="col-6 theme1-col-6">
+                        <div class="row">
+                                @if(isset($cardItems[$i+1]))
+                                <div class="col-12 theme1-col theme{{$data['themes_id']}}-padding" id="div-{{$cardItems[$i+1]['card_detail']->id}}">
+                                        @include('Keypls.itemsUpdate.itemsKeypl.div'.$cardItems[$i+1]['item']->id,['ci' => $cardItems[$i+1],'template'=>'100','theme_shape'=>'theme1-shape'])
+                                </div>
+                                @endif
+                                @if(isset($cardItems[$i+2]))
+                                <div class="col-12 theme1-col theme{{$data['themes_id']}}-padding" id="div-{{$cardItems[$i+2]['card_detail']->id}}">
+                                        @include('Keypls.itemsUpdate.itemsKeypl.div'.$cardItems[$i+2]['item']->id,['ci' => $cardItems[$i+2],'template'=>'100','theme_shape'=>'theme1-shape'])
+                        
+                                </div>
+                                @endif
+                                @if(isset($cardItems[$i+3]))
+                                <div class="col-12 theme1-col theme{{$data['themes_id']}}-padding" id="div-{{$cardItems[$i+3]['card_detail']->id}}">
+                                        @include('Keypls.itemsUpdate.itemsKeypl.div'.$cardItems[$i+3]['item']->id,['ci' => $cardItems[$i+3],'template'=>'100','theme_shape'=>'theme1-shape'])
+                        
+                                </div>
+                                @endif
+                        </div>
+                        </div>
+                @endfor
             </div>
