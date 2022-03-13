@@ -2,7 +2,7 @@
 <div class="col-12 theme{{$data['themes_id']}}-padding">
     
     @if($data['themes_id'] == 3)
-    <div class="theme3-col-12 theme3-float-update">
+    <div class="theme3-col-12 theme3-float">
         <div class="row no-margin">
             <div class="col-sm-12"  id="contend-image">
                 <div class="col-12 text-center">
@@ -13,7 +13,7 @@
             <div class="col-sm-12" id="contend-title">
                 <div class="col-12">
                     <br>
-                    <div class="label-theme3 mx-auto d-block text-center">
+                    <div class="label-theme3 mx-auto d-block">
                         @if($data['large_text'])
                             <h1 class="text-color mx-auto d-block" id="titlephone" style="color:{!!$data['color']!!}; font-family:{{$text_font->name}};">
                             @if(isset($ci['card_detail']['name'])){{$ci['card_detail']['name']}}@endif
@@ -43,7 +43,7 @@
                     <h2 class="text-color" id="titlephone" style="color:{!!$data['color']!!};font-family:{{$text_font->name}};">@if(isset($ci['card_detail']['name'])){{$ci['card_detail']['name']}}@endif</h2>
                 @endif 
             </div>    
-            <h6 class="text-color" id="subephone" style="color:{!!$data['color']!!};font-family:{{$text_font->name}};">@if(isset($ci['card_detail']['description'])){{$ci['card_detail']['description']}}@endif</h6>
+            <p class="text-color theme-{{$data['themes_id']}}-text-size" id="subephone" style="color:{!!$data['color']!!};font-family:{{$text_font->name}};">@if(isset($ci['card_detail']['description'])){{$ci['card_detail']['description']}}@endif</p>
         </div>
     </div>
     @endif

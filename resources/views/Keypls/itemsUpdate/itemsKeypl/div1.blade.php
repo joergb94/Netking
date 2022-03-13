@@ -43,7 +43,7 @@
                                     <h2 class="text-color" id="titlephone" style="color:{!!$data['color']!!};font-family:{{$text_font->name}};">@if(isset($ci['card_detail']['name'])){{$ci['card_detail']['name']}}@endif</h2>
                                 @endif 
                             </div>    
-                            <h6 class="text-color" id="subephone" style="color:{!!$data['color']!!};font-family:{{$text_font->name}};">@if(isset($ci['card_detail']['description'])){{$ci['card_detail']['description']}}@endif</h6>
+                            <p class="text-color theme-{{$data['themes_id']}}-text-size" id="subephone" style="color:{!!$data['color']!!};font-family:{{$text_font->name}};">@if(isset($ci['card_detail']['description'])){{$ci['card_detail']['description']}}@endif</p>
                         </div>
                     </div>
                     @endif

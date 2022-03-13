@@ -607,12 +607,15 @@ ul {
 	.theme1-padding-frame{
 		margin-top: 10px;
 	}
-	.theme-2{
+
+	.theme2-col-sm{
+		height: 75px !important;
 		padding-right: 5px !important;
     	padding-left: 5px !important;
 	}
-	.theme2-col-sm{
-		height: 95px !important;
+
+	.theme2-col-md{
+		height: 180px !important;
 		padding-right: 5px !important;
     	padding-left: 5px !important;
 	}
@@ -623,10 +626,37 @@ ul {
     	padding-left: 5px !important;
 	}
 
-	.theme2-padding{
-		margin-top: 10px;
+	.theme-2-btn-rounded {
+		border-radius: 20px;
 	}
 
+	.theme-2-text-size {
+		font-size: 14px !important;
+	}
+
+	.theme-2-btn-rounded-follow {
+		border-radius: 20px;
+		font-size: 16px !important;
+	}
+
+	.theme2-button-col-social{
+			width: 40px !important;
+			height: 40px !important;
+			border-radius: 20px;
+	}
+	.theme2-icon-social{
+		padding-top:10%;
+	}
+
+	.theme2-padding{
+		margin-top: 5px !important;
+		margin-bottom: 5px !important;
+		padding-right: 15px !important;
+	}
+	.theme2-padding-social{
+		margin-top: px;
+		margin-bottom: 0px;
+	}
 	.theme-3-col{
 		max-height: 200px !important;
 		width: 200px !important;
@@ -705,10 +735,23 @@ ul {
 		padding: 0;
 	}
 
+	.theme4-col-12{
+		width: 100% !important;
+		height: 250px !important;
+		max-height: 450px !important;
+	}
+
+	.theme4-col-10{
+		width: 100% !important;
+		height: 100px !important;
+		max-height: 150px !important;
+	}
+
 	.theme4-padding{
 		margin-top: 25px  !important;
 		padding-right: 5px !important;
     	padding-left: 5px !important;
+		margin-bottom: 5px  !important;
 	}
 	
 
