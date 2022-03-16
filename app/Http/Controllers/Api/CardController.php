@@ -60,6 +60,27 @@ class CardController extends Controller
         return response()->json($card_detail, 201);
     }
 
+    public function detail(Request $request, $id)
+    {       $idStr =explode("?", $id);
+        
+            if(Card::where('id',$idStr[0])->exists()){
+                if (Auth::guest()){
+                    $this->CardsRepository->create_views($id,2);
+
+                    }else{
+                        $user = Auth::user();
+                        $check = Card::find($id);
+                        if($user->id !==  $check->user_id){
+                            $this->CardsRepository->create_views($id,2);
+                        }
+                   }
+    
+                return response()->json($this->CardsRepository->get_data_keypl($idStr[0]), 200);
+
+            }  
+
+    }
+
     public function deleteOrResotore(Request $request,$Card_id)
     {    
         $Bval = Card_detail::withTrashed()->find($Card_id)->trashed();
