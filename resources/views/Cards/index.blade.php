@@ -19,11 +19,6 @@
       <!--col-->
     </div>
     <!--row-->
-
-    </br>
-    <div class="col-sm-12">
-      @include('Cards.items.search')
-    </div>
     @include('Cards.items.table')
     <div id="loading" style="display:none" class="col-sm-12 text-center">
       </br></br></br>

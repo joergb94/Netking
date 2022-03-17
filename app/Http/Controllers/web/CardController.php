@@ -403,4 +403,8 @@ class CardController extends Controller
             $data = $this->CardsRepository->create_views_details($id,$request->input());
             return response()->json($data);
     }
+
+    public function data_theme_items(){
+        
+    }
 }

@@ -778,4 +778,11 @@ ul {
 	.btn-full-screen{
 		height: 100%;
 	}
+
+	.keypls-card{
+		height: 250px !important;
+	}
 	
+	.footer-keypl{
+		border: none !important;
+	}
