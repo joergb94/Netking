@@ -37,3 +37,4 @@ Route::post('card/item/update/{id}', [CardController::class, 'update_card_item']
 Route::post('card/item/create/{id}', [CardController::class, 'create_detail'])->middleware('auth:sanctum');
 Route::delete('card/item/delete/{id}', [CardController::class, 'deleteOrResotore'])->middleware('auth:sanctum');
 Route::get('/Keypls/{id}', [CardController::class, 'detail'])->middleware('auth:sanctum');
+Route::get('keypl/metrics', [CardController::class, 'metrics'])->middleware('auth:sanctum');
