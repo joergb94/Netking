@@ -18,6 +18,17 @@
 												</div>
 											</div> 
 										</div>
+										<div class="col-12 text-right">
+													@forelse ($data as $item)
+														<button onclick="Profile.detail(1)" class="btn  btn btn-warning theme3-padding-btn btn-sm" >
+																{{$item['type_memberships']['membership']}} <i class="fas fa-credit-card text-secondary"></i><i class="fas fa-pen text-dark"></i>
+														</button>
+													@empty
+														<button onclick="Profile.detail(1)" class="btn  btn btn-warning theme3-padding-btn btn-sm" >
+															Free <i class="fas fa-credit-card text-secondary"></i><i class="fas fa-pen text-dark"></i>
+														</button>
+													@endforelse
+										</div>
 										<div class="col-12 text-center">
 											<br>
 											<h6>{{Auth::user()->name}} {{Auth::user()->last_name}}</h6>

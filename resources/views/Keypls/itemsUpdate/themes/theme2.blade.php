@@ -60,7 +60,7 @@
                           @include('Keypls.itemsUpdate.itemsKeypl.div'.$cardItems[7]['item']->id,['ci' => $cardItems[7],'template'=>95,'theme_shape'=>'theme2-shape'])
                         </div>
                     @endif
-                    @for ($i = 7; $i < count($cardItems); $i += 6)
+                    @for ($i = 8; $i < count($cardItems); $i += 6)
                     @if(isset($cardItems[$i]))
                     <div class="col-6 theme-2" >
                         <div class="row theme-2">
