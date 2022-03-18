@@ -20,13 +20,13 @@ function datasearch(answer) {
       data = (answer)
       ?{
         search: $('#search').val(),
-        type: $('#typesearch').val(),
+        type:'title',
         order: answer['order'],
 
       }
       :{
         search: $('#search').val(),
-        criterion: $('#typesearch').val(),
+        criterion:'title',
         order: $('#orderbysearch').val(),
 
       };
@@ -67,12 +67,20 @@ const transactions = {
     return JSON.stringify(ns);
   },
   mode_delete: function(){
-    if($("#idChk-sm").is(':checked')){
+    var mode_delete = $('#mode-delete').val();
+    if(mode_delete == true){
         $('.btn-update').hide();
-        $('.btn-delete').show();
+        $('.btn-delete').show(); 
+        $("#mode-delete").removeClass("btn-warning");
+        $("#mode-delete").addClass("btn-danger");
+
+        $('#mode-delete').val(0);
     }else{
         $('.btn-delete').hide();
         $('.btn-update').show();
+        $("#mode-delete").removeClass("btn-danger");
+        $("#mode-delete").addClass("btn-warning");
+        $('#mode-delete').val(1)
     }
   },
   take_data_item: function(id,Type){
@@ -508,8 +516,8 @@ const Cards = {
         text: "El bloque sera eliminado",
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
+        confirmButtonColor: '#FFBF2F',
+        cancelButtonColor: '#cdd0d3',
         confirmButtonText: 'Si, Eliminalo!'
       }).then((result) => {
         if (result.value) {

@@ -7,7 +7,7 @@
                 </div>
                 @endif
                 @if(isset($cardItems[1]))
-                <div class="col-12 theme1-col-12 theme{{$data['themes_id']}}-padding" id="div-{{$cardItems[1]['card_detail']->id}}">
+                <div class="col-12 theme{{$data['themes_id']}}-padding" id="div-{{$cardItems[1]['card_detail']->id}}">
                         @include('Keypls.itemsUpdate.itemsKeypl.div'.$cardItems[1]['item']->id,['ci' => $cardItems[1],'template'=>250,'theme_shape'=>'theme1-shape'])
         
                 </div>

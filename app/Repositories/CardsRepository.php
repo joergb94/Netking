@@ -56,20 +56,27 @@ class CardsRepository
     public function getSearchPaginated($criterion, $search,$status): LengthAwarePaginator
     {
       
-              $rg = (strlen($criterion) > 0 &&  strlen($search) > 0) 
-              ? $this->model->where($criterion, 'like', '%'. $search . '%')->where('user_id',Auth::user()->id)
-              : $this->model->where('id','>',0)->where('user_id',Auth::user()->id);
+              $rg = $this->model->select(DB::raw("(SELECT card_details.item_data FROM card_details
+                                                WHERE card_details.card_id = cards.id
+                                                AND card_details.card_item_id = 1
+                                                LIMIT 1) as img"),
+                                    DB::raw("(SELECT cards_style_details.background_color FROM cards_style_details
+                                                WHERE cards_style_details.card_id = cards.id
+                                                LIMIT 1) as background_color"),
+                                    DB::raw("(scan_qr + get_link) as views"),
+                                    'id',
+                                    'title',
+                                    'subtitle',
+                                    'background_image_color',
+                                    'img_name',
+                                    'img_path')
+                                    ->where('user_id',Auth::user()->id);
 
-              switch ($status) {
-                  case 1:
-                      $rg;
-                  break;
-                  case 'D':
-                      $rg->onlyTrashed();
-                  break;
-          } 
-
-              $Card = $rg->orderBy('id', 'desc')->paginate(10);
+            if( (strlen($criterion) > 0 &&  strlen($search) > 0) ){
+                $rg->where($criterion, 'like', '%'. $search . '%');
+            }
+              
+            $Card = $rg->orderBy('id', 'desc')->paginate(5);
                     return $Card;
     }
     public function createCardDetail($id,$data){

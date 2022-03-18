@@ -1,5 +1,34 @@
-data_load();
-data_load_social();
+
+$(document).ready(function () {
+ 
+  $('.search-query').bind("keyup change", function () {
+    event.preventDefault();
+    var filter = datasearch();
+    getData(1, filter);
+    
+  });
+  
+
+});
+
+function datasearch(answer) {
+
+      data = (answer)
+      ?{
+        search: $('#search').val(),
+        type:'title',
+        order: answer['order'],
+
+      }
+      :{
+        search: $('#search').val(),
+        criterion:'title',
+        order: $('#orderbysearch').val(),
+
+      };
+
+  return data;
+}
 function data_load(){
   var url = $("#url").val();
  

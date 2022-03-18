@@ -36,7 +36,10 @@ class HomeController extends Controller
     {    
         $search = trim($request->search);
         $data = $this->HomeRepository->getSearchPaginated($search);
-       if(!$request->ajax()) return view('home.index',['dm'=>accesUrl(Auth::user(),1),'data'=>$data]);
+        if ($request->ajax()) {
+            return view('home.items.content-keypls', ['data' => $data]);
+        }
+        return view('home.index',['dm'=>accesUrl(Auth::user(),1),'data'=>$data,'account'=>Auth::user()]);
     }
 
     public function deleteOrResotore(Request $request){

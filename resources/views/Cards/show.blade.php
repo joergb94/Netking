@@ -16,7 +16,7 @@
               </div>
               <div class="col-sm-12">
                 <br>
-                  <button type="button" id="button_link"  class="btn btn-secondary text-dark btn-block" onclick="QR.copy_link()" value="{{ \Request::root() }}/Keypls/qr/{{$data->id}}"><strong>Copiar </strong> {{ \Request::root() }}/Keypls/{{$data->id}} 
+                  <button type="button" id="button_link"  class="btn btn-warning text-dark btn-block" onclick="QR.copy_link()" value="{{ \Request::root() }}/Keypls/qr/{{$data->id}}"><strong>Copiar </strong> {{ \Request::root() }}/Keypls/{{$data->id}} 
                       <i id="iconCopyB" class="fa fa-copy"></i> 
                       <i id="iconCopyA" style="display:none;" class="fa fa-clipboard-check text-white"></i>
                     </button>

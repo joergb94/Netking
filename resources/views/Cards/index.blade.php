@@ -5,19 +5,8 @@
 @section('content')
 <div class="page-inner">
 <div class="card" id="index_blade">
+  @include('Cards.items.search')
   <div class="card-body">
-    <div class="row">
-      <div class="col-sm-6">
-        <h4 class="card-title mb-0">
-          My Keypls <i class="fas fa-id-card"></i>
-        </h4>
-      </div>
-      <!--col-->
-      <div class="col-sm-6">
-        @include('Cards.items.header-buttons')
-      </div>
-      <!--col-->
-    </div>
     <!--row-->
     @include('Cards.items.table')
     <div id="loading" style="display:none" class="col-sm-12 text-center">
