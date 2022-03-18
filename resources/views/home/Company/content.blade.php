@@ -1,4 +1,5 @@
-<div class="row padding-home">
+					
+					<div class="row padding-home">
 						<div class="col-sm-6 col-md-3">
 							<div class="card card-stats div-rounded">
 								<div class="card-body">
@@ -18,8 +19,8 @@
 										</div>
 										<div class="col-12 text-center">
 											<br>
-											<h6>{{Auth::user()->name}} {{Auth::user()->last_name}}</h6>
-											<h6>{{Auth::user()->email}}</h6>
+											<h2>{{Auth::user()->name}} {{Auth::user()->last_name}}</h2>
+											<h4>{{Auth::user()->email}}</h4>
 										</div>
 										<div class="col-12">
 											<div class="row align-items-center">
