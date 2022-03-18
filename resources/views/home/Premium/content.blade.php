@@ -44,11 +44,18 @@
 												<i class="fa fa-qrcode"></i>
 											</div>
 										</div>
+<<<<<<< Updated upstream
 										<div class="col col-stats ml-3 ml-sm-0">
 											<div class="numbers">
 												<p class="card-category">Vistas QR</p>
 												<h4 class="card-title">{{$data['qr_views']}}</h4>
 											</div>
+=======
+										<div class="col-12 text-center">
+											<br>
+											<h2>{{Auth::user()->name}} {{Auth::user()->last_name}}</h2>
+											<h4>{{Auth::user()->email}}</h4>
+>>>>>>> Stashed changes
 										</div>
 									</div>
 								</div>

@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 
 					<div class="page-header">
 						<h4 class="page-title">Dashboard</h4>
@@ -37,6 +38,12 @@
 						</div>
 						<div class="col-sm-6 col-md-4">
 							<div class="card card-stats card-round">
+=======
+					
+					<div class="row padding-home">
+						<div class="col-sm-6 col-md-3">
+							<div class="card card-stats div-rounded">
+>>>>>>> Stashed changes
 								<div class="card-body">
 									<div class="row align-items-center">
 										<div class="col-icon">
@@ -44,11 +51,18 @@
 												<i class="fa fa-qrcode"></i>
 											</div>
 										</div>
+<<<<<<< Updated upstream
 										<div class="col col-stats ml-3 ml-sm-0">
 											<div class="numbers">
 												<p class="card-category">Vistas QR</p>
 												<h4 class="card-title">{{$data['qr_views']}}</h4>
 											</div>
+=======
+										<div class="col-12 text-center">
+											<br>
+											<h2>{{Auth::user()->name}} {{Auth::user()->last_name}}</h2>
+											<h4>{{Auth::user()->email}}</h4>
+>>>>>>> Stashed changes
 										</div>
 									</div>
 								</div>
