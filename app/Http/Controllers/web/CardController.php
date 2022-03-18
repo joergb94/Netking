@@ -58,7 +58,7 @@ class CardController extends Controller
             if ($request->ajax()) {
                 return view('Cards.items.table', ['data' => $data, 'status' => $status]);
             }
-            return view('Cards.index', ['data' => $data,'items'=>$items, 'dm' => accesUrl(Auth::user(), $this->menu_id), 'status' => $sts]);
+            return view('Cards.index', ['data' => $data,'items'=>$items,'account'=>Auth::user(),'dm' => accesUrl(Auth::user(), $this->menu_id), 'status' => $sts]);
         }else{
             return redirect('/MyFirstKeypl');
         }

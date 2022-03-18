@@ -5,7 +5,7 @@
 				<div class="sidebar-content">
 					<div class="user">
 						<div class="avatar-sm float-left mr-2">
-							<img src="{{(Auth::user()->image)?Auth::user()->path.Auth::user()->image:"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"}}" alt="..." class="avatar-img rounded-circle">
+							<img src='{{(Auth::user()->image)?Auth::user()->path.Auth::user()->image:asset("img/profile.jpg")}}' alt="..." class="avatar-img rounded-circle">
 						</div>
 						<div class="info">
 							<a>

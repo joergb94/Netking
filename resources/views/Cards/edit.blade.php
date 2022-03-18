@@ -38,9 +38,6 @@
                               <br class="br-{{$ci['card_detail']->id}}">
                           @endforeach 
                       </div>
-                      <div class="col-sm-12">
-                        <button type="button" class="btn btn-light btn-block"    onclick="Cards.modal_item({{$data['id']}})"><h2>Agregar Bloque <i class="fa fa-plus"></i></h2></button>
-                      </div>
                   </div>
                   <div id="styleK" class="container tab-pane fade"><br>
                         @include('Cards.itemsUpdate.cardForm')
@@ -67,11 +64,12 @@
           </div>
     </div>
     <div class="col-sm-4 all-screen mx-auto d-block sticky">
-           <div class="card device-case" id="case-mobile">
+    <button type="button" class="btn btn-light btn-block"    onclick="Cards.modal_item({{$data['id']}})"><h2>Agregar Bloque <i class="fa fa-plus"></i></h2></button>
+           <div class="card device-case mx-auto d-block" id="case-mobile">
               @include('Cards.itemsUpdate.keypl')
            </div>    
-           <div class="card device-case" id="loading-mobil-vition" style="display:none">
-           <div class="mobile-screen-loadig bg-warning">
+           <div class="card device-case mx-auto d-block" id="loading-mobil-vition" style="display:none">
+              <div class="mobile-screen-loadig bg-warning">
                   <div class="container text-center">
                     <br><br>
                       <div class="col-12">
@@ -82,7 +80,7 @@
                     <div class="spinner-grow text-dark"></div>
                   </div>
               </div>
-            </div>
+           </div>
     </div>
 </div>
 <script>

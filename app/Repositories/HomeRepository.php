@@ -43,14 +43,23 @@ class HomeRepository
                                                         WHERE card_details.card_id = cards.id
                                                         AND card_details.card_item_id = 1
                                                         LIMIT 1) as img"),
+                                        DB::raw("(SELECT cards_style_details.background_color FROM cards_style_details
+                                                        WHERE cards_style_details.card_id = cards.id
+                                                        LIMIT 1) as background_color"),
                                         DB::raw("(scan_qr + get_link) as views"),
-                                        'id','title', 'subtitle');
+                                        'id',
+                                        'title',
+                                        'subtitle',
+                                        'background_image_color',
+                                        'img_name',
+                                        'img_path'
+                                    );
             if(strlen($search) > 0) {
 
                     $data->where('title', 'like', '%'. $search . '%');
             }
         
-            $rg =$data->where('user_id','!=',$user->id)->orderBy('views', 'desc')->paginate(10);
+            $rg =$data->where('user_id','!=',$user->id)->orderBy('views', 'desc')->paginate(6);
 
             return $rg;
 

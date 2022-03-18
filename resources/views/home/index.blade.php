@@ -15,7 +15,6 @@
 @endsection
 @section('content')
 <div class="page-inner">
-
 <!--card-->
 @include('home.'.$dm['type_membership']['membership'].'.content')
 

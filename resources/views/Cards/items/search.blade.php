@@ -1,15 +1,12 @@
-<div class="col-sm-12">
-  <div class="row justify-content-between">
-    <select class="form-control col-sm-3 search-query" id="typesearch">
-      <option value="title" selected>Title</option>
-      <option value="id">Id</option>
-    </select>
 
-    <input type="text" class="form-control col-sm-4 search-query" id="search">
-    <select class="form-control text-center search-query col-sm-3" id="statusearch">
-      <option value="1" selected>Actived</option>
-      <option value="D">Delete</option>
-    </select>
+<div class="jumbotron text-center">
+<button type="button" class="btn btn-warning btn-circle top-right" id="mode-delete" onclick="transactions.mode_delete()" value="1" > <i class="fa fa-trash"></i></button>
+    <h1>{{$account->name}} {{$account->last_name}}</h1>
+    
+      <div class="form-group col-6 mx-auto d-block">
+        <div class="inner-addon right-addon">
+          <i class="glyphicon glyphicon-search"><i class="fas fa-search"></i></i>
+          <input type="text" class="form-control search-query" id="search" placeholder="Search" />
+        </div>
+      </div>
   </div>
-</div>
-<br>
