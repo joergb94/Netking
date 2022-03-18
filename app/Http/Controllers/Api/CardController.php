@@ -58,6 +58,7 @@ class CardController extends Controller
             'card_item_id'=>$request->card_item_id,
             'name' => (strlen($request->name)>0)?$request->name:'',
             'description' => (strlen($request->description)>0)?$request->description:'',
+            'order'=> (int)$request->order,
         ]);
         return response()->json($card_detail, 201);
     }
@@ -112,5 +113,11 @@ class CardController extends Controller
         $views =  $this->homeRepository->keyplsViews(Auth::user());
         $socialViews = $this->homeRepository->keyplsSocialViews(Auth::user());
         return response()->json(['views'=>$views,'social'=>$socialViews], 200);
+    }
+
+    public function image(Request $request){
+        $user = Auth::user();
+        $image = "{$user->path}"."{$user->image}";
+        return response()->json(['image'=>$image], 201);
     }
 }
