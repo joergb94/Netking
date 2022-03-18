@@ -39,7 +39,7 @@
                         @endif
                      </div>
                 </div>
-                @for ($i = 5; $i < count($cardItems); $i += 4)
+                @for ($i = 6; $i < count($cardItems); $i += 4)
                         @if(isset($cardItems[$i]))
                         <div class="col-6 theme1-col-6 theme{{$data['themes_id']}}-padding" id="div-{{$cardItems[$i]['card_detail']->id}}">
                                 @include('Keypls.itemsUpdate.itemsKeypl.div'.$cardItems[$i]['item']->id,['ci' => $cardItems[$i],'template'=>305,'theme_shape'=>'theme1-shape'])
