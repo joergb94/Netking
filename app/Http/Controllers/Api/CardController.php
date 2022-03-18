@@ -8,6 +8,7 @@ use App\Models\Card;
 use App\Models\Card_detail;
 use App\Models\Cards_items;
 use App\Repositories\CardsRepository;
+use App\Repositories\HomeRepository;
 use Carbon\Carbon; 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -19,9 +20,10 @@ class CardController extends Controller
      *
      * @return void
      */
-    public function __construct(CardsRepository $repository)
+    public function __construct(CardsRepository $repository,HomeRepository $homeRepository)
     {
        $this->repository = $repository;
+       $this->homeRepository = $homeRepository;
     }
 
     public function get_keypls(Request $request){
@@ -103,5 +105,12 @@ class CardController extends Controller
 
       });
       return response()->json(['data'=>'gola'], 201);
+    }
+
+    public function metrics(Request $request)
+    {
+        $views =  $this->homeRepository->keyplsViews(Auth::user());
+        $socialViews = $this->homeRepository->keyplsSocialViews(Auth::user());
+        return response()->json(['views'=>$views,'social'=>$socialViews], 200);
     }
 }
