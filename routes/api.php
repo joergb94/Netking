@@ -38,3 +38,4 @@ Route::post('card/item/create/{id}', [CardController::class, 'create_detail'])->
 Route::delete('card/item/delete/{id}', [CardController::class, 'deleteOrResotore'])->middleware('auth:sanctum');
 Route::get('/Keypls/{id}', [CardController::class, 'detail'])->middleware('auth:sanctum');
 Route::get('keypl/metrics', [CardController::class, 'metrics'])->middleware('auth:sanctum');
+Route::get('keypl/image/profile', [CardController::class, 'image'])->middleware('auth:sanctum');
