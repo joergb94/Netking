@@ -29,8 +29,16 @@
                     </div>
                     @else
                     <div class="row justify-content-between ">
-                        <div class="{{($card_style['head_orientation'] == 1)?'col-6':'col-12'}} text-center" id="contend-image">
-                            <img src="{{(isset($ci['card_detail']['item_data']))? $ci['card_detail']['item_data']:asset('img/profile.jpg')}}" class="{{$card_style['shape_image'] == 0?'rounded-circle':'rounded'}}" alt="Cinque Terre" width="150px" height="150px" id="imageProfile"> 
+                        <div class="{{($card_style['head_orientation'] == 1)?'col-6':'col-12'}} text-center no-margin" id="contend-image">
+                              @include('Keypls.itemsUpdate.themes.button')
+                             <img 
+                                src="{{(isset($ci['card_detail']['item_data']))? $ci['card_detail']['item_data']:asset('img/profile.jpg')}}" 
+                                class="{{$card_style['shape_image'] == 0?'rounded-circle':'rounded'}}" 
+                                alt="Cinque Terre" 
+                                width="150px" 
+                                height="150px" 
+                                style="padding-right: 10px;"
+                                id="imageProfile"> 
                         </div>
                         <div class="{{($card_style['head_orientation'] == 1)?'col-6':'col-12'}} text-center" id="contend-title">
                             <br>

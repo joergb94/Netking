@@ -1,15 +1,5 @@
 
        <div class="row justify-content-between">
-                <div class="col-12 theme{{$data['themes_id']}}-padding text-center">
-                        
-                        <button type="button" class="mx-auto d-block btn {{$card_style['button_style'] == 0? 'keypl-btn ':'keypl-btn-full'}} btn-sm" value="{{$friend?1:0}}" id="btn-follow">
-                           @if($friend) 
-                                <span >following <i class="fas fa-user-check"></i></span>
-                           @else
-                                <span >follow <i class="fas fa-user-plus"></i></span>
-                           @endif
-                        </button>
-                </div>
                 @if(isset($cardItems[0]))
           
                     <div class="col-6 no-margin theme{{$data['themes_id']}}-padding" id="div-{{$cardItems[0]['card_detail']->id}}">

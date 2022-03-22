@@ -12,12 +12,6 @@
                              @include('Keypls.itemsUpdate.itemsKeypl.div'.$cardItems[1]['item']->id,['ci' => $cardItems[1],'template'=>200,'theme_shape'=>'theme2-shape'])
                         </div>
                     @endif
-                    <div class="col-12 theme2-padding theme-2 text-center">
-                        
-                            <button type="button" class="mx-auto d-block btn {{$card_style['button_style'] == 0? 'keypl-btn ':'keypl-btn-full'}}  theme-2-btn-rounded" value="{{$friend?1:0}}" id="btn-follow">
-                                @include('Keypls.itemsUpdate.themes.button')
-                            </button>
-                    </div> 
                     @if(isset($cardItems[2]))
                     <div class="col-6 theme-2" >
                         <div class="row theme-2">

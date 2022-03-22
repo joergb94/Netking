@@ -383,13 +383,13 @@ class CardController extends Controller
 
         if($validateFollow == false){
             $data = $this->FriendsRepository->create($id);
-            $result['label'] = '<span >following <i class="fas fa-user-check"></i></span>';
+            $result['label'] = '<span ><i class="fas fa-user-check"></i></span>';
             $result['add'] = true;
         }else{
             
            $data = $this->FriendsRepository->delete_item($id);
-           $result['label'] = $data == 3?'<span class="d-none d-md-block d-lg-block d-xl-block" >follow <i class="fas fa-user-plus"></i></span>'
-                                        :'<span >following <i class="fas fa-user-check"></i></span>';
+           $result['label'] = $data == 3?'<span"><i class="fas fa-user-plus"></i></span>'
+                                        :'<span ><i class="fas fa-user-check"></i></span>';
            $result['add'] = $data == 3? false
                                       : true;
         }

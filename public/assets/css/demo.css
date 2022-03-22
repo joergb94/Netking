@@ -474,6 +474,19 @@
 	right: 0px;
   }
 
+  .top-right-btn {
+	position: absolute;
+	top:125px;
+	right: 35%;
+  }
+
+  @media screen and (max-width: 539px){
+		.top-right-btn {
+			position: absolute;
+			top:125px;
+			right: 10%;
+		}
+	}
   .custom-control-input:checked ~ .custom-control-label-delete::before {
     color: #fff;
     border-color: #dc3434;
