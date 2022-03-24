@@ -59,7 +59,7 @@
                 </div>
           </div>
     </div>
-    <div class="col-sm-4 all-screen mx-auto d-block sticky">
+    <div class="col-sm-4 all-screen mx-auto d-block ">
     <button type="button" class="btn bg-keypl col-6 mx-auto d-block"    onclick="Cards.modal_item({{$data['id']}})"><h2>Agregar Bloque <i class="fa fa-plus"></i></h2></button>
            <div class="card device-case mx-auto d-block" id="case-mobile">
               @include('Cards.itemsUpdate.keypl')

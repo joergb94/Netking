@@ -7,7 +7,7 @@
 	color: #6c757d !important;
 }
  .padding-home{
-	 padding-top: 15px !important;
+	 margin-top: -5px !important;
  }
  .keypls-home{
 	 height: 80vh;
@@ -941,4 +941,90 @@ ul {
 
 	.text-welcome{
 		text-decoration: underline;
+	}
+
+	.img-my-keypls{
+		width: 75px !important;
+		height: 75px !important;
+		border-radius:50%;
+		-moz-border-radius:50%;
+		-webkit-border-radius:50%;
+	}
+
+
+
+
+	.bg-search-img-keypl {
+		background-color: #f1f1f1;
+		padding: 30px;
+		text-align: center;
+	  }
+	  
+	  #bg-search-keypl {
+		overflow: hidden;
+		background-color: #333;
+	  }
+	  
+	  .content {
+		padding: 16px;
+	  }
+	  
+	  .sticky {
+		position: fixed;
+		top: 0;
+		width: 100%;
+	  }
+	  
+	  .sticky + .content {
+		padding-top: 60px;
+	  }
+	  
+	  #return-to-top {
+		position: fixed;
+		bottom: 20px;
+		right: 20px;
+		background: #a6b3bf;
+		width: 50px;
+		height: 50px;
+		display: block;
+		text-decoration: none;
+		-webkit-border-radius: 35px;
+		-moz-border-radius: 35px;
+		border-radius: 35px;
+		display: none;
+		-webkit-transition: all 0.3s linear;
+		-moz-transition: all 0.3s ease;
+		-ms-transition: all 0.3s ease;
+		-o-transition: all 0.3s ease;
+		transition: all 0.3s ease;
+	}
+	#return-to-top i {
+		color: #fff;
+		margin: 0;
+		position: relative;
+		left: 16px;
+		top: 13px;
+		font-size: 19px;
+		-webkit-transition: all 0.3s ease;
+		-moz-transition: all 0.3s ease;
+		-ms-transition: all 0.3s ease;
+		-o-transition: all 0.3s ease;
+		transition: all 0.3s ease;
+	}
+	#return-to-top:hover {
+		background:#b5bfc9;
+	}
+	#return-to-top:hover i {
+		color: #fff;
+		top: 5px;
+	}
+	
+	.keypl-img-not-found{
+		width: 220px !important;
+		height: 220px !important;
+	}
+
+	.keypl-img-not-found-2{
+		width: 150px !important;
+		height: 150px !important;
 	}

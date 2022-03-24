@@ -31,6 +31,11 @@
                   </div>
               </div>
               @empty
+              <div class="col-6 col-sm-4 text-center">
+                  <img class="keypl-img-not-found-2 mx-auto d-block" src="{{asset('img/nofound.png')}}">
+                  <h1>Oops!</h1>
+                  <h2>We can't find the keypl you're looking for.</h2>
+              </div>
               @endforelse
                 <div class="col-6 col-sm-4">
                   <div class="card">

@@ -36,6 +36,7 @@
 		</div>
 	</div>
 </div>
+<a href="javascript:0" id="return-to-top"><i class="fas fa-chevron-up"></i></a>
 @yield('modal')
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{asset('js/qrcode.js')}}"></script>

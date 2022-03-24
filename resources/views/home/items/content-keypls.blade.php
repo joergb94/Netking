@@ -25,6 +25,11 @@
                                             </a>
                                         </div>
                                     @empty
+                                        <div class="col-12 text-center">
+                                                <img class="keypl-img-not-found mx-auto d-block" src="{{asset('img/nofound.png')}}">
+                                                <h1>Oops!</h1>
+                                                <h2>We can't find the keypl you're looking for.</h2>
+                                        </div>
                                     @endforelse
                                 </div>
                                 <!--pagination section-->
