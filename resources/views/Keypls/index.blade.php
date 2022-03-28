@@ -27,7 +27,7 @@
     @include('Keypls.itemsUpdate.stylek.css')
 <body id="app">
     <div class="bg-image"></div>
-    <div class="col-sm-12 col-md-12 col-lg-4 mx-auto d-block bg">
+    <div class="col-sm-12 col-md-12 col-lg-4 mx-auto d-block bg bg-search-keypl">
         <div class="col-12">
             @include('Keypls.itemsUpdate.themes.theme'.$data['themes_id'])
         </div>

@@ -18,10 +18,14 @@ $( document ).ready(function() {
 })
 
 
-window.onscroll = function() {myFunction()};
+
 
 var navbar = document.getElementById("bg-search-keypl");
-var sticky = navbar.offsetTop;
+
+if(navbar){
+    window.onscroll = function() {myFunction()};
+    var sticky = navbar.offsetTop;
+}
 
 function myFunction() {
   if (window.pageYOffset >= sticky) {
