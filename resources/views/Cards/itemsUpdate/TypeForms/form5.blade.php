@@ -1,8 +1,10 @@
-<div class="card">
-  <div class="card-header">Agregar Publicacion de Facebook</div>
+<div class="col-12">
+  <div class="card-header">
+  <button type="button" class="btn btn-link" onclick="Cards.back_principal()"> <h4 class="text-dark"> <i class="fas fa-angle-left"></i> Agregar Publicacion de Facebook</h4></button>
+   </div>
   <div class="card-body">
     <form id="facebook-form">
-        <div class="form-group">
+        <div class="form-group" style="display:none">
             <label for="email">Titulo:</label>
             <input type="email" class="form-control" placeholder="Enter email" value="{{$data->name}}" id="name{{$data->id}}">
         </div>

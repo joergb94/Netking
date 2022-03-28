@@ -1028,3 +1028,33 @@ ul {
 		width: 150px !important;
 		height: 150px !important;
 	}
+
+	.btn-rounded-keypl {
+		padding-top: 25px !important;
+		padding-top: 25px !important;
+	}
+
+	.btn-warning-keypl{
+		background-color: #b5bfc9 !important;
+		color:white !important;
+
+		width: 75px !important;
+		height: 75px !important;
+
+	}
+
+
+	.btn-warning-keypl:hover {
+		background-color: #FFBF2F !important;
+
+	  }
+
+	  .btn-warning-keypl.active {
+		background-color: #FFBF2F !important;
+
+	  }
+
+	  .theme-keypl{
+		  width: 100% !important;
+		  max-width: 281px !important;
+	  }

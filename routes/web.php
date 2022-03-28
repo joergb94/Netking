@@ -52,6 +52,7 @@ Route::group(['middleware'=>['auth']], function(){
         Route::get('/MyFirstKeypl/create', [CardController::class, 'create']);
         Route::post('/MyFirstKeypl/create', [CardController::class, 'store']);
         Route::get('/MyFirstKeypl/{id}/edit', [CardController::class, 'edit_first']);
+        Route::get('/MyFirstKeypl/{id}/editDetail', [CardController::class, 'edit_detail']);
         Route::post('/MyFirstKeypl/{id}', [CardController::class, 'update']);
         Route::get('/MyFirstKeypl/getCreate', [CardController::class, 'get_create_card']);
         Route::post('/MyFirstKeypl/create/card', [CardController::class, 'store']);
@@ -61,6 +62,7 @@ Route::group(['middleware'=>['auth']], function(){
         Route::post('/MyFirstKeypl/create/item', [CardController::class, 'create_item']);
         Route::delete('/MyFirstKeypl/delete/item/{id}', [CardController::class, 'delete_item']);
         Route::post('/MyFirstKeypl/update_asinc/{id}', [CardController::class, 'update_asinc']);
+        Route::post('/MyFirstKeypl/update_asinc_network/{id}', [CardController::class, 'update_asinc_network']);
         Route::post('/MyFirstKeypl/update_asinc_theme/{id}', [CardController::class, 'update_theme']);
 
         //cards
@@ -69,6 +71,7 @@ Route::group(['middleware'=>['auth']], function(){
         Route::get('/myKepls/create', [CardController::class, 'create']);
         Route::post('/myKepls/create', [CardController::class, 'store']);
         Route::get('/myKepls/{id}/edit', [CardController::class, 'edit']);
+        Route::get('/myKepls/{id}/editDetail', [CardController::class, 'edit_detail']);
         Route::get('/myKepls/{id}/show_qr', [CardController::class, 'show_qr']);
         Route::post('/myKepls/{id}', [CardController::class, 'update']);
         Route::get('/myKepls/getCreate', [CardController::class, 'get_create_card']);
@@ -80,6 +83,7 @@ Route::group(['middleware'=>['auth']], function(){
         Route::post('/myKepls/create/item', [CardController::class, 'create_item']);
         Route::delete('/myKepls/delete/item/{id}', [CardController::class, 'delete_item']);
         Route::post('/myKepls/update_asinc/{id}', [CardController::class, 'update_asinc']);
+        Route::post('/myKepls/update_asinc_network/{id}', [CardController::class, 'update_asinc_network']);
         Route::post('/myKepls/update_asinc_theme/{id}', [CardController::class, 'update_theme']);
 
         //profile

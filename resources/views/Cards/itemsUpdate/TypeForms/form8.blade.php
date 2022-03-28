@@ -1,5 +1,7 @@
-<div class="card">
-  <div class="card-header">Agregar PDF</div>
+<div class="col-12">
+  <div class="card-header">
+  <button type="button" class="btn btn-link" onclick="Cards.back_principal()"> <h4 class="text-dark"> <i class="fas fa-angle-left"></i>  Agregar PDF</h4></button>
+  </div>
   <div class="card-body">
     <form id="file-form-{{$data->id}}">
         <div class="form-group">

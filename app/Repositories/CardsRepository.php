@@ -356,7 +356,7 @@ class CardsRepository
                 $user = User::find($data['user_id']);
                 $nsFree = NetworkSocial::all();
                 $cardItems = Card_detail::where('card_id', $data['id'])->orderBy('order', 'asc')->get();
-         
+                $items = Cards_items::whereNotIn('id',[1,2])->get();
                 $text_styles = text_style::all();
                 $text_font = text_style::find($data['text_style_id']);
 
@@ -388,6 +388,7 @@ class CardsRepository
                             'text_font'=>$text_font,
                             'themes'=>$themes,
                             'friend'=>$friend,
+                            'items'=>$items,
                         ];
     }
 

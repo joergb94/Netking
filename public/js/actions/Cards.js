@@ -239,6 +239,7 @@ const transactions = {
       }
     });
   },
+
 }
 //section for const js 
 const Cards = {
@@ -247,6 +248,10 @@ const Cards = {
     $("#index_blade").show();
     var filter = datasearch();
     getData(1, filter);
+  },
+  back_principal: function(){
+    $("#show_blade_form").hide();
+    $("#principalForm").show();
   },
   QR: function (id) {
     var my_url = url + '/' + id + '/show_qr';
@@ -292,7 +297,29 @@ const Cards = {
     var my_url = url + '/' + id + '/edit';
     actions.show(my_url,'form', 'form');
   },
-  save: function (state, id = '') {
+  edit_detail: function(id){
+    var my_url = url + '/' + id + '/editDetail';
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    })
+    $.ajax({
+      type: "GET",
+      url: my_url,
+      success: function (data) {
+        $("#card_show_form").empty().html(data);
+        $("#principalForm").hide();
+        $("#show_blade_form").show();
+      },
+      error: function (data) {
+        $('.btn-save').prop("disabled", false);
+        console.log('Error:', data);
+        messageserror(data);
+      }
+    });
+  },
+  save: function (state,id = '') {
     var formData1 = document.getElementById('card-form');
     var form = new FormData(formData1);
     form.append('networks', transactions.get_data_ns());
@@ -363,7 +390,9 @@ const Cards = {
       success: function (data) {
         $("#case-mobile").empty().html(data);
         $('#loading-mobil-vition').hide();
-        $('#case-mobile').show();
+        $('#case-mobile').show(); 
+        $("#show_blade_form").hide();
+        $("#principalForm").show();
       },
       error: function (data) {
         $('.btn-save').prop("disabled", false);
@@ -393,6 +422,8 @@ const Cards = {
         $("#case-mobile").empty().html(data);
         $('#loading-mobil-vition').hide();
         $('#case-mobile').show();
+        $("#show_blade_form").hide();
+        $("#principalForm").show();
       },
       error: function (data) {
         $('.btn-save').prop("disabled", false);
@@ -436,6 +467,43 @@ const Cards = {
         $('.btn-save').prop("disabled", false);
         console.log('Error:', data.responseText);
         $("#case-mobile").empty().html(data.responseText);
+      }
+    });
+  },
+  save_asinc_network:function(id){
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+    var formData1 = document.getElementById('card-form-style');
+    var qr = $('#qr_img').attr('src');
+    var form = new FormData(formData1);
+    console.log(qr)
+    form.append('img_base_64',qr);
+    form.append('networks', transactions.get_data_ns());
+
+    $('#case-mobile').hide();
+    $('#loading-mobil-vition').show();
+
+    $.ajax({
+      type: "POST",
+      url: url+'/update_asinc_network/'+id,
+      data: form,
+      async: true,
+      cache:false,
+      processData: false, 
+      contentType: false, 
+      datatype: "html",
+      success: function (data) {
+        
+        $("#case-mobile").empty().html(data);
+        $('#loading-mobil-vition').hide();
+        $('#case-mobile').show();
+  
+      },
+      error: function (data) {
+        messageserror(data);
       }
     });
   },
@@ -501,7 +569,11 @@ const Cards = {
       data: form,
       dataType: 'text',
       success: function (data) {
-        $("#contenedor-divs").append(data);
+        $("#addnew").removeClass('active');
+        $("#addnew").addClass('fade');
+        $("#btnAddNew").removeClass('active');
+        $("#btnHead").addClass('active');
+        $("#styleHead").addClass('active');
         transactions.update_keypl(form.card_id);
       },
       error: function (data) {
@@ -523,6 +595,9 @@ const Cards = {
         if (result.value) {
           transactions.delete_item_detail(id);
           transactions.update_keypl(card);
+          $("#mode-delete-item").removeClass("btn-danger");
+          $("#mode-delete-item").addClass("btn-warning");
+          $('#mode-delete-item').val(1)
         }
       })
     
@@ -548,7 +623,24 @@ const Cards = {
 
         }
       });
+  }, 
+  mode_delete_item: function(){
+    var mode_delete = $('#mode-delete-item').val();
+    if(mode_delete == true){
+        $('.btn-update-item').hide();
+        $('.btn-delete-item').show(); 
+        $("#mode-delete-item").removeClass("btn-warning");
+        $("#mode-delete-item").addClass("btn-danger");
+        $('#mode-delete-item').val(0);
+    }else{
+        $('.btn-delete-item').hide();
+        $('.btn-update-item').show();
+        $("#mode-delete-item").removeClass("btn-danger");
+        $("#mode-delete-item").addClass("btn-warning");
+        $('#mode-delete-item').val(1)
+    }
   },
+  
 
 }
 const QR ={

@@ -37,7 +37,6 @@
 <input id="baseUrl" type="hidden" value="{{ \Request::root() }}">
 @endsection
 @section('modal')
-    @include('Cards.items.modal')
     <div id="show_blade2" style="display:none">
       <div id="card_show2"></div>
     </div>

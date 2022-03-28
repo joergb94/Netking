@@ -1,5 +1,7 @@
-<div class="card">
-  <div class="card-header">Contacto</div>
+<div class="col-12">
+  <div class="card-header">
+  <button type="button" class="btn btn-link" onclick="Cards.back_principal()"> <h4 class="text-dark"> <i class="fas fa-angle-left"></i>   Contacto</h4></button>
+   </div>
   <div class="card-body">
     <form id="contact-form">
     <div class="form-group">

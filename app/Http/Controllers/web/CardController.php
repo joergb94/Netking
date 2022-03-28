@@ -41,6 +41,7 @@ class CardController extends Controller
         $this->module_name = 'Card';
         $this->text_module = ['Created', 'Updated', 'Deleted', 'Restored', 'Actived', 'Deactived'];
         $this->buttons = ['','btn-fab-r','btn-rounded',''];
+        $this->themes = [9,3, 7,0, 9];
     }
 
     public function index(CardsRequest $request)
@@ -133,10 +134,69 @@ class CardController extends Controller
     public function edit(Request $request, $id)
     {
         if ($request->ajax()) {
+            
                 return view('Cards.edit', $this->CardsRepository->get_data_keypl($id));
         }
     }
 
+    public function edit_detail(Request $request, $id)
+    {
+        if ($request->ajax()) {
+
+            $nsInUse = [];
+            $detail = Card_detail::find($id);
+            if($detail['card_item_id'] == 2){
+                $nsFree = NetworkSocial::all();
+                foreach ($nsFree as $ns) {
+                    $inUse = Card_detail_network::where('network_social_id', $ns['id'])
+                        ->where('card_id', $detail['card_id'])
+                        ->first();
+                    array_push($nsInUse, ['nsData' => $ns, 'nsUser' => $inUse,'card_id'=>$id]);
+                }
+            }
+               
+                return view('Cards.itemsUpdate.TypeForms.form'.$detail['card_item_id'], ['data'=>$detail, 'ns' => $nsInUse,]);
+        }
+    }
+
+    public function update_asinc_network(Request $request, $id)
+    {
+        if ($request->ajax()) {
+            $detail = Card_detail::find($id);
+            $card = Card::where('id', $detail['card_id'])->first();
+            $ns =json_decode($request['networks']);
+            $check = 0;
+            foreach ($ns as $key) {
+                if($key->link != ''){
+                  $check += 1;
+                }
+               }
+            if($check > $this->themes[$card['themes_id']]){
+                return response()->json(['errors' => ['erro'=>'you selected the maximum of social networks']], 422);
+                
+            }else{
+                if (isset($request['image'])) {
+                    $image = $request->file('image');
+                    $nameImg = time() . $image->getClientOriginalName();
+                    $file_path = '/images/card/profile/';
+                    $image->move(public_path() . '/images/card/profile/', $nameImg);
+                } else {
+                    $nameImg = $card->img_name;
+                    $file_path = $card->img_path;
+                }
+                $data = $this->CardsRepository->update_asinc($detail['card_id'], $request->input(), $nameImg, $file_path);
+        
+            
+                if(Card::where('id',$data['id'])->exists()){
+    
+                    return view('Cards.itemsUpdate.keypl',$this->CardsRepository->get_data_keypl($data['id']));
+
+                }
+                
+            }
+        }
+    }
+    
     public function update_theme(Request $request, $id)
     {
         if ($request->ajax()) {
@@ -150,7 +210,7 @@ class CardController extends Controller
     {
         if ($request->ajax()) {
             $card = Card::where('id', $id)->first();
-            if ($request['image']) {
+            if (isset($request['image'])) {
                 $image = $request->file('image');
                 $nameImg = time() . $image->getClientOriginalName();
                 $file_path = '/images/card/profile/';
@@ -307,7 +367,7 @@ class CardController extends Controller
     {
         if ($request->ajax()) {
             $card = Card::where('id', $id)->first();
-            if ($request['image']) {
+            if (isset($request['image'])) {
                 $image = $request->file('image');
                 $nameImg = time() . $image->getClientOriginalName();
                 $file_path = '/images/card/profile/';
@@ -349,6 +409,8 @@ class CardController extends Controller
             }
         }
     }
+    
+    
 
     public function create_item(Request $request)
     { 

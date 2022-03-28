@@ -1,17 +1,19 @@
-<div class="card">
-  <div class="card-header">Header</div>
+<div class="col-12">
+  <div class="card-header">
+   <button type="button" class="btn btn-link" onclick="Cards.back_principal()"> <h4 class="text-dark"> <i class="fas fa-angle-left"></i> Header</h4></button>
+  </div>
   <div class="card-body">
     <form id="file-form-{{$data->id}}">
         <div class="form-group">
           <div class="row">
             <div class="col-sm-6">
-                  <img id="blah{{$data->id}}" class="mx-auto d-block img-fluid" src="{{isset($ci['card_detail']['item_data'])? asset($ci['card_detail']['item_data']):asset('img/profile.jpg')}}" alt="your image" />
+                  <img id="blah{{$data->id}}" class="mx-auto d-block img-fluid" src="{{isset($data['item_data'])? asset($data['item_data']):asset('img/profile.jpg')}}" alt="your image" />
             </div>
             <div class="col-sm-6">
               <div class="form-group">
                 <label for="PDF">Agregar Imagen:</label>
                 <div class="custom-file mb-3">
-                  <input type="file" class="custom-file-input custom-file-input-img" id="imgInp{{$data->id}}" value="{{$ci['card_detail']['item_data']}}" name="file">
+                  <input type="file" class="custom-file-input custom-file-input-img" id="imgInp{{$data->id}}" value="{{$data['item_data']}}" name="file">
                   <label class="custom-file-label" for="PDF">Choose file</label>
                 </div>
               </div>

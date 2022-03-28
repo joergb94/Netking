@@ -1,8 +1,9 @@
-<div class="card">
-  <div class="card-header bg-danger text-white"> Agregar Video de Youtube <span class="fa fa-youtube" aria-hidden="true"></span></div>
+<div class="col-12">
+  <div class="card-header"> 
+  <button type="button" class="btn btn-link" onclick="Cards.back_principal()"> <h4 class="text-dark"> <i class="fas fa-angle-left"></i> Agregar Video de Youtube <span class="fa fa-youtube" aria-hidden="true"></span></h4></button></div>
   <div class="card-body">
     <form id="facebook-form">
-        <div class="form-group">
+        <div class="form-group" style="display:none">
             <label for="email">Titulo:</label>
             <input type="email" class="form-control" placeholder="Enter email" value="{{$data->name}}" id="name{{$data->id}}">
         </div>
