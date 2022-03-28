@@ -466,7 +466,7 @@ class CardController extends Controller
             return response()->json($data);
     }
 
-    public function data_theme_items(){
+    public function data_views(){
         
     }
 }

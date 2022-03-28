@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<title>Azzara Bootstrap 4 Admin Dashboard</title>
+	<title>Welcome To Keypls</title>
 	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
 	<link rel="icon" href="assets/img/icon.ico" type="image/x-icon"/>
 	<meta name="csrf-token" content="{{ csrf_token() }}" />
