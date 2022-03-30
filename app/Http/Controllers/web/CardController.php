@@ -466,7 +466,7 @@ class CardController extends Controller
             return response()->json($data);
     }
 
-    public function data_views(){
-        
+    public function get_data_chart(Request $request,$id){
+        $this->CardsRepository->get_data_chart(1);
     }
 }
