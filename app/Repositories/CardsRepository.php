@@ -44,6 +44,7 @@ class CardsRepository
         $this->ResgisterUserRepository = $ResgisterUserRepository;
         $this->buttons = ['','btn-fab-r','btn-rounded',''];
         $this->months = array(1 => 'Jan.', 2 => 'Feb.', 3 => 'Mar.', 4 => 'Apr.', 5 => 'May', 6 => 'Jun.', 7 => 'Jul.', 8 => 'Aug.', 9 => 'Sep.', 10 => 'Oct.', 11 => 'Nov.', 12 => 'Dec.');
+        $this->months = array(1 => 'Jan.', 2 => 'Feb.', 3 => 'Mar.', 4 => 'Apr.', 5 => 'May', 6 => 'Jun.', 7 => 'Jul.', 8 => 'Aug.', 9 => 'Sep.', 10 => 'Oct.', 11 => 'Nov.', 12 => 'Dec.');
     }
 
 
@@ -580,8 +581,8 @@ class CardsRepository
                                             ->whereTime('created_at', '>',$hoursMQ)
                                             ->count();
                     
-                    array_push($dataLabelsD,[$hoursMQ]);
-                    array_push($dataCharD,[$quantity]);
+                    array_push($dataLabelsD,[$i+1]);
+                    array_push($dataCharD,$quantity);
             }
             $day = ['labels'=>$dataLabelsD ,'data'=>$dataCharD, 'title'=>'Last 24 hours'];
 
@@ -589,8 +590,8 @@ class CardsRepository
             for ($i=0; $i < 7; $i++) { 
                     $firstDate = Carbon::now()->startOfWeek()->addDays($i);
                     $quantity = $this->views::whereDate('created_at', '=', $firstDate)->count();
-                    array_push($dataLabelsW,[$firstDate->format('l')]);
-                    array_push($dataCharW,[$quantity]);
+                    array_push($dataLabelsW,[substr($firstDate->format('l'),0,3)]);
+                    array_push($dataCharW,$quantity);
             }
             $week = ['labels'=>$dataLabelsW ,'data'=>$dataCharW, 'title'=>'On Week'];
 
@@ -600,7 +601,7 @@ class CardsRepository
                         $dateQ = Carbon::now()->startOfMonth()->addDays($i);
                         $quantity = $this->views::whereDate('created_at', '=', $firstDate->addDays($i))->count();
                         array_push($dataLabelsM,[$i+1]);
-                        array_push($dataCharM,[$quantity]);
+                        array_push($dataCharM,$quantity);
             }
             $month = ['labels'=>$dataLabelsM ,'data'=>$dataCharM, 'title'=>'On '.Carbon::now()->format('F')];
 
@@ -611,7 +612,7 @@ class CardsRepository
                                             ->count();
                 
                     array_push($dataLabelsY,[$this->months[$i]]);
-                    array_push($dataCharY,[$quantity]);
+                    array_push($dataCharY,$quantity);
             }
             $year = ['labels'=>$dataLabelsY ,'data'=>$dataCharY, 'title'=>'On '.Carbon::now()->year];
             
@@ -620,7 +621,7 @@ class CardsRepository
 
                     $quantity = $this->views::whereYear('created_at', '=', $dbDate->year+$i)->count();
                     array_push($dataLabelsA,[$dbDate->year+$i]);
-                    array_push($dataCharA,[$quantity]);
+                    array_push($dataCharA,$quantity);
             }
             $all = ['labels'=>$dataLabelsA ,'data'=>$dataCharA, 'title'=>'All Years'];
             $result = [

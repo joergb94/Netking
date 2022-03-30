@@ -56,7 +56,7 @@
               <div class="col-10">
                 <!-- Tab panes -->
                   <form id="card-form-style" >
-                    <div class="tab-content">
+                    <div class="tab-content content-edit">
                             @include('Cards.itemsUpdate.cardForm')
                       <div class="col-sm-12"  style="display:none" >
                           <div id="qrcode" class="mx-auto d-block"></div>

@@ -43,5 +43,6 @@
 @endsection
 @section('js')
 
+  <script src="{{asset('js/chart.min.js')}}"></script>
   <script src="{{asset('js/actions/Cards.js')}}"></script>
 @endsection

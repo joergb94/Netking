@@ -640,8 +640,10 @@ const Cards = {
         $('#mode-delete-item').val(1)
     }
   },
-  
-
+  graphics: function () {
+    var my_url = url + '/graphics';
+    actions.show(my_url,'form', 'form')
+  }
 }
 const QR ={
       show:function(id){

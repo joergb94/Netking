@@ -85,7 +85,8 @@ Route::group(['middleware'=>['auth']], function(){
         Route::post('/myKepls/update_asinc/{id}', [CardController::class, 'update_asinc']);
         Route::post('/myKepls/update_asinc_network/{id}', [CardController::class, 'update_asinc_network']);
         Route::post('/myKepls/update_asinc_theme/{id}', [CardController::class, 'update_theme']);
-        Route::get('/myKepls/chart/{id}', [CardController::class, 'get_data_chart']);
+        Route::get('/myKepls/graphics', [CardController::class, 'get_data_chart']);
+        Route::get('/myKepls/get_graphics', [CardController::class, 'get_data_chart_json']);
 
         //profile
         Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
