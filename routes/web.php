@@ -25,18 +25,24 @@ use App\Http\Controllers\Auth\RegisterController;
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 Route::get('/register/checkedData', [RegisterController::class, 'checkedData']);
 
+
+Route::get('/offline', function () {    
+        return view('modules/laravelpwa/offline');
+    });
+    
 Route::get('/contactUs/{id}',[contacUsController::class, 'send_mail']);
    //genera 
 Route::get('/Keypls/qr/{id}', [CardController::class, 'detail_qr']);
 Route::get('/Keypls/{id}', [CardController::class, 'detail']);
 Route::post('/Keypls/{id}/viewDetail', [CardController::class, 'view_card_details_link']); 
-
+Route::get('/qr/scanPWA', [CardController::class, 'scann_pwa']);
 
 Auth::routes();
 
 Route::group(['middleware'=>['auth']], function(){
 
         Route::post('/Keypls/{id}/follow', [CardController::class, 'friendship']); 
+        Route::get('/getStart', [GeneralController::class, 'get_start']);
        
         //home 
         Route::get('/home', [HomeController::class, 'index'])->name('home');

@@ -68,17 +68,17 @@ class CardController extends Controller
         
             if(Card::where('id',$idStr[0])->exists()){
                 if (Auth::guest()){
-                    $this->CardsRepository->create_views($id,2);
+                    $this->repository->create_views($id,2);
 
                     }else{
                         $user = Auth::user();
                         $check = Card::find($id);
                         if($user->id !==  $check->user_id){
-                            $this->CardsRepository->create_views($id,2);
+                            $this->repository->create_views($id,2);
                         }
                    }
     
-                return response()->json($this->CardsRepository->get_data_keypl($idStr[0]), 200);
+                return response()->json($this->repository->get_data_keypl($idStr[0]), 200);
 
             }  
 
@@ -120,4 +120,32 @@ class CardController extends Controller
         $image = "{$user->path}"."{$user->image}";
         return response()->json(['image'=>$image], 201);
     }
+
+
+    public function get_data_metricas(Request $request){
+        $data = [];
+        $allData = Card::where('user_id',Auth::user()->id)->get();
+
+        foreach ($allData as $key => $card) {
+            $card = $this->repository->show($card->id);
+            $graphics = $this->repository->get_data_chart($card->id);
+            array_push($data,['graphics'=>$graphics,'card'=>$card]);
+        }
+        
+        return view('Cards.metricas',['data'=>$data]);
+    }
+
+    
+    public function get_data_metricas_json(Request $request){
+        $data = [];
+        
+        $allData = Card::where('user_id',$request->id)->get();
+        foreach ($allData as $key => $card) {
+            $card = $this->repository->show($card->id);
+            $graphics = $this->repository->get_data_chart_api($card->id,$request->id);
+            array_push($data,['graphics'=>$graphics,'card'=>$card]);
+        }
+        return response()->json($data);
+    }
+
 }

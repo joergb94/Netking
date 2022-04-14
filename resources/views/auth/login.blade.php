@@ -1,8 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.welcome')
 
 @section('content')
 <div class="col-12">
-    <br>
+    <a href="/"><h1 class="text-color-keypl"><i class="fa fa-angle-left"></i></h1></a>
     <br>
     <div class="row justify-content-center" >
         <div class="col-12">

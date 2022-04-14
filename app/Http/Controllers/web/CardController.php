@@ -479,6 +479,9 @@ class CardController extends Controller
         return view('Cards.chart',['data'=>$data]);
     }
 
+
+
+
     public function get_data_chart_json(Request $request){
         $data = [];
         $allData = Card::where('user_id',Auth::user()->id)->get();
@@ -490,5 +493,9 @@ class CardController extends Controller
         }
 
         return response()->json($data);
+    }
+
+    public function scann_pwa(Request $request){
+        return view('qrscan.index');
     }
 }

@@ -1,8 +1,13 @@
 @extends('layouts.app')
+@section('style')
+ <style>body {
+    background-color:#e6e6e6;
+  }
+ </style>
+@endsection
 @section('content')
 <div class="page-inner">
-<div class="card" id="index_blade">
-<div class="card-header">Mi Cuenta <button class="btn btn-warning btn-circle top-right btn-update" id="button-edit" data-toggle="tooltip" title="Editar Perfil!" onclick="Profile.edit()" ><i class='fas fa-edit'></i></button></div>
+<div id="index_blade">
   <div class="card-body">
     @include('Profile.items.contentProfile')
     <div id="loading" style="display:none" class="col-sm-12 text-center">

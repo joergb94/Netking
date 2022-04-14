@@ -17,4 +17,8 @@ class GeneralController extends Controller
             return response()->json(['user'=>Auth::user()]);
         }
     }
+
+    public function get_start(Request $request){
+        return view('getstart.index');
+    }
 }

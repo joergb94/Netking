@@ -634,4 +634,87 @@ class CardsRepository
      
             return $result;
     }
+
+    public function get_data_chart_api($id,$user){
+
+        $dataCharD = [];
+        $dataCharW = [];
+        $dataCharM = [];
+        $dataCharY = [];
+        $dataCharA = [];
+
+        $dataLabelsD = [];
+        $dataLabelsW = [];
+        $dataLabelsM = [];
+        $dataLabelsY = [];
+        $dataLabelsA = [];
+        $userD = User::find($user);
+        $dbDate = Carbon::parse($userD->create_at);
+        $diffYears = Carbon::now()->diffInYears($dbDate);
+
+ 
+
+            //for day
+            for ($i=0; $i < 24; $i++) { 
+        
+                    $hoursQ = Carbon::now()->startOfDay()->addHours($i)->addMinutes(59);
+                    $hoursMQ =Carbon::now()->startOfDay()->addHours($i);
+                    $quantity = $this->views::whereDate('created_at', '=',Carbon::now())
+                                            ->whereTime('created_at', '<', $hoursQ )
+                                            ->whereTime('created_at', '>',$hoursMQ)
+                                            ->count();
+                    
+                    array_push($dataLabelsD,[$i+1]);
+                    array_push($dataCharD,$quantity);
+            }
+            $day = ['labels'=>$dataLabelsD ,'data'=>$dataCharD, 'title'=>'Last 24 hours'];
+
+            //for week
+            for ($i=0; $i < 7; $i++) { 
+                    $firstDate = Carbon::now()->startOfWeek()->addDays($i);
+                    $quantity = $this->views::whereDate('created_at', '=', $firstDate)->count();
+                    array_push($dataLabelsW,[substr($firstDate->format('l'),0,3)]);
+                    array_push($dataCharW,$quantity);
+            }
+            $week = ['labels'=>$dataLabelsW ,'data'=>$dataCharW, 'title'=>'On Week'];
+
+            //for month
+            for ($i=0; $i < $dbDate->daysInMonth; $i++) { 
+                        $firstDate = Carbon::now()->startOfMonth();
+                        $dateQ = Carbon::now()->startOfMonth()->addDays($i);
+                        $quantity = $this->views::whereDate('created_at', '=', $firstDate->addDays($i))->count();
+                        array_push($dataLabelsM,[$i+1]);
+                        array_push($dataCharM,$quantity);
+            }
+            $month = ['labels'=>$dataLabelsM ,'data'=>$dataCharM, 'title'=>'On '.Carbon::now()->format('F')];
+
+            //for year
+            for ($i=1; $i < $dbDate->month+1; $i++) { 
+                    $quantity = $this->views::whereYear('created_at', '=', $dbDate->year)
+                                            ->whereMonth('created_at', '=',$i)
+                                            ->count();
+                
+                    array_push($dataLabelsY,[$this->months[$i]]);
+                    array_push($dataCharY,$quantity);
+            }
+            $year = ['labels'=>$dataLabelsY ,'data'=>$dataCharY, 'title'=>'On '.Carbon::now()->year];
+            
+            //for all years
+            for ($i=0; $i < $diffYears+1; $i++) {
+
+                    $quantity = $this->views::whereYear('created_at', '=', $dbDate->year+$i)->count();
+                    array_push($dataLabelsA,[$dbDate->year+$i]);
+                    array_push($dataCharA,$quantity);
+            }
+            $all = ['labels'=>$dataLabelsA ,'data'=>$dataCharA, 'title'=>'All Years'];
+            $result = [
+                    'day'=>$day,
+                    'week'=>$week,
+                    'month'=>$month,
+                    'year'=>$year,
+                    'all'=>$all,
+                ];
+     
+            return $result;
+    }
 }

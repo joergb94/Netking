@@ -28,13 +28,14 @@
 <body id="app">
     <div class="bg-image"></div>
     <div class="col-sm-12 col-md-12 col-lg-4 mx-auto d-block bg bg-search-keypl">
-        <div class="col-12">
+        <div class="col-12 padding-keypl">
             @include('Keypls.itemsUpdate.themes.theme'.$data['themes_id'])
         </div>
     </div>
     <input id="baseUrl" type="hidden" value="{{ \Request::root() }}">
     <input id="url" type="hidden" value="{{ \Request::url() }}">
 </body>
+
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
 <script src="{{ asset('js/MasterAjax.js') }}"></script>

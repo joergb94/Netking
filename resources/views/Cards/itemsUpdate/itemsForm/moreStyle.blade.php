@@ -1,4 +1,4 @@
-<div id="styleMore" class="tab-pane fade">
+<div id="styleMore" class="tab-pane fade col-12">
 <div class="modal-header">
           <h4 class="modal-title">More </h4>
 </div>

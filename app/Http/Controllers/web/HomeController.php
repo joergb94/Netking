@@ -54,4 +54,7 @@ class HomeController extends Controller
         
         return response()->json($this->HomeRepository->keyplsViews(Auth::user()));
     }
+
+    
+    
 }

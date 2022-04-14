@@ -1,5 +1,5 @@
   <!-- The Modal -->
-  <div id="addnew" class="tab-pane fade">
+  <div id="addnew" class="tab-pane fade col-12">
 
       <div class="modal-content">
       

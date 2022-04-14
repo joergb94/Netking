@@ -1,18 +1,17 @@
-@extends('layouts.app')
-
+@extends('layouts.welcome')
 @section('content')
-<div class="col-sm-12 bg-white">
-    <br>
+<div class="col-12 bg-white">
+    <a class="" href="/"><h1 class="text-color-keypl"><i class="fa fa-angle-left"></i></h1></a>
     <br>
     <div class="row justify-content-center">
-        <div class="col-sm-12">
+        <div class="col-12">
             <div class="">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-sm-6">
+                        <div class="col-12 col-sm-6">
                             <img class="img-fluid" src="{{asset('img/register.png')}}" alt="">
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-12 col-sm-6">
                         <h1>Bienvenidx a keypl</h1>
                         <form method="POST" action="{{ route('register') }}">
                             @csrf
@@ -72,11 +71,13 @@
                             </div>
                             <div class="form-group form-floating-label">
                                 <div class="col-12">
-                                    <div class="custom-control custom-checkbox">
+                                    <div class="custom-control custom-checkbox col-8 text-flow">
                                         <input class="form-check-input custom-control-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
                                     
-                                        <label class="custom-control-label" for="remember">
-                                            {{ __('HE LEIDO Y ACEPTO LOS TERMINOS Y CONDICIONES') }}
+                                        <label class="custom-control-label text-flow" for="remember">
+                                            <h6 class="text-dark">HE LEIDO Y ACEPTO LOS TERMINOS Y</h6>  
+                                            <h6 class="text-dark">CONDICIONES</h6>
+                                           
                                         </label>
                                     </div>
                                 </div>

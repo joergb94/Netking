@@ -20,22 +20,15 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Sans:wght@300&family=Island+Moments&family=M+PLUS+1p&family=Playfair+Display:ital@1&family=Pushster&family=Roboto+Mono:wght@200&family=Roboto:wght@100&family=Shizuru&display=swap" rel="stylesheet">
+	@laravelPWA
 	@yield('style')
 </head>
-<body>
-	<div class="wrapper">
-		<!--Main header-->
-        @include('layouts.items.main-header')
-		<!--End Main header-->
-		<!-- End Sidebar -->
-
-		<div class="main-panel">
-			<div class="content" id="app">
-                @yield('content')
-			</div>
-		</div>
+<body id="app">
+	<div id="main-keypl" >
+		@yield('content')
 	</div>
-</div>
+	 @include('layouts.items.main-header')
+
 <a href="javascript:0" id="return-to-top"><i class="fas fa-chevron-up"></i></a>
 @yield('modal')
 <script src="{{ asset('js/app.js') }}"></script>

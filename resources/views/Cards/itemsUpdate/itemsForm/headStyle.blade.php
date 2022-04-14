@@ -1,4 +1,4 @@
-<div id="styleHead" class="tab-pane active">
+<div id="styleHead" class="tab-pane active col-12">
 <div class="modal-header">
           <h4 class="modal-title">Hearder </h4>
 </div>

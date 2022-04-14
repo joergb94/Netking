@@ -1,4 +1,4 @@
-<div id="styleBlocks" class="tab-pane fade">
+<div id="styleBlocks" class="tab-pane fade col-12">
         <div class="modal-header">
           <h4 class="modal-title">Blocks </h4>
         </div>

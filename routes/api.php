@@ -23,6 +23,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('mobile/register',[RegisterApiController::class, 'create']);
+Route::get('keypl/metrics/data/json', [CardController::class, 'get_data_metricas_json']);
 Route::delete('mobile/logout',[LogoutApiController::class, 'logoutDevice'])->middleware('auth:sanctum');
 Route::post('mobile/login',[LoginApiController::class, 'loginDevice']);
 Route::post('mobile/test',[LoginApiController::class, 'test']);
@@ -38,4 +39,6 @@ Route::post('card/item/create/{id}', [CardController::class, 'create_detail'])->
 Route::delete('card/item/delete/{id}', [CardController::class, 'deleteOrResotore'])->middleware('auth:sanctum');
 Route::get('/Keypls/{id}', [CardController::class, 'detail'])->middleware('auth:sanctum');
 Route::get('keypl/metrics', [CardController::class, 'metrics'])->middleware('auth:sanctum');
+Route::get('keypl/metrics/data', [CardController::class, 'get_data_metricas'])->middleware('auth:sanctum');
+
 Route::get('keypl/image/profile', [CardController::class, 'image'])->middleware('auth:sanctum');

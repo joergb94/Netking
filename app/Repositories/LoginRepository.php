@@ -35,7 +35,7 @@ class LoginRepository
        }
        return [
         'token'=>$user->createToken('cel')->plainTextToken,
-        'user'=>$user->name,
+        'user'=>$user->name.' '.$user->last_name,
         'image'=>"{$user->path}"."{$user->image}"
        ];
     }

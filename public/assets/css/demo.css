@@ -411,6 +411,16 @@
 	background-color: black;
 }
 
+@media screen and (max-width: 576px){
+	.device-case {
+		border: 15px solid black;
+		border-radius: 25px;
+		width: 100%;
+		background-color: black;
+	};
+
+}
+
 .all-screen {
 	height:100vh;
 }
@@ -487,76 +497,7 @@
 			right: 10%;
 		}
 	}
-  .custom-control-input:checked ~ .custom-control-label-delete::before {
-    color: #fff;
-    border-color: #dc3434;
-    background-color: #dc3434;
- }
-
-ul {
-	list-style-type: none;
-  }
-  
-  li {
-	display: inline-block;
-  }
-  
-  input[type="checkbox"][id^="myCheckbox"] {
-	display: none;
-  }
-  
-  label {
-	border: 1px solid #fff;
-	padding: 10px;
-	display: block;
-	position: relative;
-	margin: 10px;
-	cursor: pointer;
-  }
-  
-  label:before {
-	background-color: white;
-	color: white;
-	content: " ";
-	display: block;
-	border-radius: 50%;
-	border: 1px solid grey;
-	position: absolute;
-	top: -5px;
-	left: -5px;
-	width: 25px;
-	height: 25px;
-	text-align: center;
-	line-height: 28px;
-	transition-duration: 0.4s;
-	transform: scale(0);
-  }
-  label .full{
-	width: 100%;
-  }
-  label img {
-	height: 100px;
-	width: 100px;
-	transition-duration: 0.2s;
-	transform-origin: 50% 50%;
-  }
-  
-  :checked + label {
-	border-color: #ddd;
-  }
-  
-  :checked + label:before {
-	content: "✓";
-	background-color: grey;
-	transform: scale(1);
-  }
-  
-  :checked + label img {
-	transform: scale(0.9);
-	/* box-shadow: 0 0 5px #333; */
-	z-index: -1;
-  }
-
+ 
   .image-form{
 	   max-width: 40px;
 	   max-height: 40px;
@@ -906,7 +847,7 @@ ul {
 	
 	@media screen and (max-width: 576px){
 		.keypls-card{
-			
+			height: 180px !important;
 		}
 	}
 	.footer-keypl{
@@ -1093,4 +1034,76 @@ ul {
 		background-color: #FFBF2F !important;
 
 	  }
+
+	  .bg-keypl-nav{
+		background-color: #f2f2f2!important;
+	  }
+
+	  .bg-keypl{
+		background-color: #FFBF2F!important;
+	  }
+
+
+	  .nav-jeypls {
+		  color:black !important;
+	  }
+
+	  .nav-jeypls:hover {
+		 color:#FFBF2F !important;
+	  }
+	  .padding-keypl{
+		  padding-top: 20px !important;
+	  }
 	
+	  .nav-keypls-01{
+		margin-top: 15px !important;
+		min-height: 55px !important;
+	  }
+
+	  #main-keypl{
+		margin-bottom: 50px !important;
+	  }
+
+	  @media screen and (max-width: 375px){
+		#main-keypl{
+			margin-bottom: 160px !important;
+		  }
+	}
+
+	.padding-welcome-keypls{
+		margin-top: 100px !important;
+	}
+
+	@media screen and (max-width: 375px){
+		.padding-welcome-keypls{
+			margin-top: 20px !important;
+		  }
+	}
+
+	.full-screen-welcome{
+		height: 100vh !important;
+	}
+
+	.image-welcome{
+		max-height: 100vh !important;
+	}
+
+	#app{
+		width: 100% !important;
+	}
+
+	.text-flow{
+		overflow-wrap: break-word !important;
+	}
+
+	.style-profile{
+		margin-top: 10px;
+		margin-bottom: 0px !important;
+		border-bottom-style: solid !important;
+		border-bottom-color: #999999 !important;
+	}
+
+	.profile-img{
+		width:200px !important; 
+		height:200px !important;
+	}
