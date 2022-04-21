@@ -1,6 +1,7 @@
 <div id="styleMore" class="tab-pane fade col-12">
 <div class="modal-header">
           <h4 class="modal-title">More </h4>
+          @include('Cards.itemsUpdate.itemsForm.buttonDevice')
 </div>
 <div class="form-group">
             <label>Theme:</label>

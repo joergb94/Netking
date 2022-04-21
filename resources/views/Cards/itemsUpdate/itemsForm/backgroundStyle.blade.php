@@ -1,6 +1,7 @@
 <div id="styleBackground" class="tab-pane fade col-12">
         <div class="modal-header">
           <h4 class="modal-title">Backgroud </h4>
+          @include('Cards.itemsUpdate.itemsForm.buttonDevice')
         </div>
         <div class="form-group">
             <h3>Fondo del Keypl:</h3>

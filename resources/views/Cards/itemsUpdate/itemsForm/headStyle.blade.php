@@ -1,6 +1,7 @@
 <div id="styleHead" class="tab-pane active col-12">
 <div class="modal-header">
           <h4 class="modal-title">Hearder </h4>
+          @include('Cards.itemsUpdate.itemsForm.buttonDevice')
 </div>
 <div class="form-group">
             <h3>Forma de imagen:</h3>

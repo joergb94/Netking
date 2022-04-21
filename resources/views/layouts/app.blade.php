@@ -24,10 +24,13 @@
 	@yield('style')
 </head>
 <body id="app">
-	<div id="main-keypl" >
+	<div id="main-keypl" style="display:none">
 		@yield('content')
+		@include('layouts.items.main-header')
 	</div>
-	 @include('layouts.items.main-header')
+	<div id="loading-splash">
+			<img src="{{ asset('img/splash.png') }}" class="img-fluid centered-btn">
+	</div>
 
 <a href="javascript:0" id="return-to-top"><i class="fas fa-chevron-up"></i></a>
 @yield('modal')
@@ -64,6 +67,14 @@
 
 <!-- colorPlug in -->
 <script src="{{asset('js/jscolor.js')}}"></script>
+<script>
+	const myTimeout = setTimeout(myGreeting, 1000);
+
+	function myGreeting() {
+		$("#loading-splash").hide();
+		$("#main-keypl").show();
+	}
+</script>
 @yield('js')
 </body>
 </html>

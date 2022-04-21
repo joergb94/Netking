@@ -14,6 +14,27 @@ $(document).ready(function () {
   
 
 });
+function mouseUp() {
+  window.removeEventListener('mousemove', divMove, true);
+}
+
+function mouseDown(e) {
+  var div = document.getElementById('dxy');
+  x_pos = e.clientX - div.offsetLeft;
+  y_pos = e.clientY - div.offsetTop;
+  window.addEventListener('mousemove', divMove, true);
+}
+
+function divMove(e) {
+  var div = document.getElementById('dxy');
+  div.style.position = 'absolute';
+  div.style.top = (e.clientY - y_pos) + 'px';
+  div.style.left = (e.clientX - x_pos) + 'px';
+}
+function addListeners(id) {
+  document.getElementById(id).addEventListener('mousedown', mouseDown, false);
+  window.addEventListener('mouseup', mouseUp, false);
+}
 
 function datasearch(answer) {
 
@@ -643,6 +664,23 @@ const Cards = {
   graphics: function () {
     var my_url = url + '/graphics';
     actions.show(my_url,'form', 'form')
+  },
+  config: function(){
+      $("#show-buttons").removeClass("col-9");
+      $("#show-buttons").addClass("col-12");
+      $("#cel").addClass('cel-case');
+      $("#cel").hide();
+      $("#show-form").hide();
+      $('.show-device').show();
+      $("#FormModal").show();
+  },
+  device: function(){
+    $("#cel").removeClass('cel-case');
+    $("#show-buttons").removeClass("col-12");
+    $("#show-buttons").addClass("col-9");
+    $("#FormModal").hide();
+    $("#show-form").show();
+    $("#cel").show();
   }
 }
 const QR ={
@@ -680,3 +718,48 @@ const QR ={
       }
       
   }
+
+
+const dragAndDrop ={
+  allowDrop : function(ev) {
+    ev.preventDefault();
+  },
+  
+  drag: function(ev) {
+    addListeners(ev.target.id)
+    ev.dataTransfer.setData("text", ev.target.id);
+  },
+  drop: function(ev) {
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    })
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    ev.target.appendChild(document.getElementById(data));
+    var drop_id = data.replace(/[^\d.-]/g, '');
+    var drag_id = ev.target.id.replace(/[^\d.-]/g, '');
+  
+    var form = {  drop_id:drop_id, drag_id:drag_id };
+    var state = 1;
+    var type = "PUT"; //for creating new resource
+    var my_url = url+ '/dragAndDrop';
+  
+    $.ajax({
+      type: type,
+      url: my_url,
+      data: form,
+      dataType: 'json',
+      success: function (data) {
+        messages(data.answer);
+        transactions.update_keypl(data.card_id);
+      },
+      error: function (data) {
+        messageserror(data);
+      }
+    });
+  },
+  
+  
+}

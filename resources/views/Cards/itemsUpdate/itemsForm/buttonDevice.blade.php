@@ -1,0 +1,1 @@
+<button onclick="Cards.device()" type="button" class="btn btn-light show-device"><i class="fa fa-angle-left"></i></button>

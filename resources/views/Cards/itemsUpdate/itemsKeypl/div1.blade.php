@@ -2,7 +2,7 @@
 <div class="col-12 theme{{$data['themes_id']}}-padding">
     
     @if($data['themes_id'] == 3)
-    <div class="theme3-col-12 theme3-float">
+    <div onmousedown="return false" class="theme3-col-12 theme3-float">
         <div class="row no-margin">
             <div class="col-sm-12"  id="contend-image">
                 <div class="col-12 text-center">

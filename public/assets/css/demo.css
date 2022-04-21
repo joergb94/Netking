@@ -837,9 +837,7 @@
 		margin-bottom: 5px  !important;
 	}
 	
-	.btn-full-screen{
-		height: 100%;
-	}
+	
 
 	.keypls-card{
 		height: 250px !important;
@@ -1106,4 +1104,39 @@
 	.profile-img{
 		width:200px !important; 
 		height:200px !important;
+	}
+
+	.button-default{
+		width: 100% !important;
+		height: 100% !important;
+	}
+
+	#loading-splash{
+		width: 100% !important;
+		height: 100vh !important;
+		background-color: #FFBF2F !important;
+	}
+
+	.btn-full-screen-edit{
+		height: 100%;
+	}
+	.centered-btn {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	  }
+	  .groove {border-style: groove;}
+	  .dashed {border-style: dashed;}
+	  @media screen and (max-width: 400px){
+		.cel-case{
+			display: none !important;
+		  }
+		
+		.btn-full-screen{
+			height: 100%;
+		}
+	}
+	.btn-full-screen{
+		height: 100px;
 	}

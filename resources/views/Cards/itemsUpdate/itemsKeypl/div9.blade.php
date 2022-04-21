@@ -1,7 +1,7 @@
 
   <div class="col-12 text-center mx-auto d-block theme{{$data['themes_id']}}-padding">
     <div class="card {!! $card_style['divs_shape']  == 1?'div-rounded':''!!} text-dark">
-      <div class="card-header"> <h3 style="font-family:{{$text_font->name}};">{{$ci['card_detail']['name']}}</h3></div>
+      <div   onmousedown="return false" class="card-header"> <h3 style="font-family:{{$text_font->name}};">{{$ci['card_detail']['name']}}</h3></div>
       <div class="card-body">
       <form id="keypls-fom-{{$ci['card_detail']['id']}}" >
             <div class="form-group">

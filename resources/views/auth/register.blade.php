@@ -80,6 +80,10 @@
                                            
                                         </label>
                                     </div>
+                                    <a href="{{ route('facebook.login') }}" class="btn btn-facebook btn-user btn-block">
+                                    <i class="fab fa-facebook-f fa-fw"></i>
+                                    Login with Facebook
+                                    </a>
                                 </div>
                             </div>
                             <div class="form-group row mb-0">

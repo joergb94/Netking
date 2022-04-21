@@ -410,8 +410,6 @@ class CardController extends Controller
         }
     }
     
-    
-
     public function create_item(Request $request)
     { 
         if($request->ajax()){
@@ -479,9 +477,6 @@ class CardController extends Controller
         return view('Cards.chart',['data'=>$data]);
     }
 
-
-
-
     public function get_data_chart_json(Request $request){
         $data = [];
         $allData = Card::where('user_id',Auth::user()->id)->get();
@@ -497,5 +492,22 @@ class CardController extends Controller
 
     public function scann_pwa(Request $request){
         return view('qrscan.index');
+    }
+
+    public function drag_and_drop_order(Request $request){
+       
+        $data = $this->CardsRepository->update_card_detail_item_order($request->drag_id,$request->drop_id);
+        
+        return response()->json(["answer" =>Answer(
+            1,
+            $this->module_name,
+            $this->text_module[1],
+            "success",
+            'yellow',
+            '1'
+        ), 
+        "card_id"=>$data->card_id
+        ]
+    );
     }
 }

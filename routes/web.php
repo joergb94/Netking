@@ -7,7 +7,8 @@ use App\Http\Controllers\web\CardController;
 use App\Http\Controllers\web\HomeController;
 use App\Http\Controllers\web\WelcomeController;
 use App\Http\Controllers\web\ProfileController;
-use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\RegisterController; 
+use App\Http\Controllers\web\FaceBookController;
 
 
 
@@ -21,6 +22,12 @@ use App\Http\Controllers\Auth\RegisterController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+// Facebook Login URL
+Route::prefix('facebook')->name('facebook.')->group( function(){        
+        Route::get('auth', [FaceBookController::class, 'loginUsingFacebook'])->name('login');
+        Route::get('callback', [FaceBookController::class, 'callbackFromFacebook'])->name('callback');
+    });
 
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 Route::get('/register/checkedData', [RegisterController::class, 'checkedData']);
@@ -72,7 +79,6 @@ Route::group(['middleware'=>['auth']], function(){
         Route::post('/MyFirstKeypl/update_asinc_theme/{id}', [CardController::class, 'update_theme']);
 
         //cards
-
         Route::get('/myKepls', [CardController::class, 'index'])->name('myKepls');
         Route::get('/myKepls/create', [CardController::class, 'create']);
         Route::post('/myKepls/create', [CardController::class, 'store']);
@@ -93,6 +99,7 @@ Route::group(['middleware'=>['auth']], function(){
         Route::post('/myKepls/update_asinc_theme/{id}', [CardController::class, 'update_theme']);
         Route::get('/myKepls/graphics', [CardController::class, 'get_data_chart']);
         Route::get('/myKepls/get_graphics', [CardController::class, 'get_data_chart_json']);
+        Route::put('/myKepls/dragAndDrop', [CardController::class, 'drag_and_drop_order']);
 
         //profile
         Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
@@ -103,6 +110,7 @@ Route::group(['middleware'=>['auth']], function(){
         Route::post('/profile/update/{id}', [ProfileController::class, 'update']);
         Route::get('/profile/{id}/user', [ProfileController::class, 'get_user']);
         Route::get('/profile/renovate/{id}', [ProfileController::class, 'renovate']);
+
         // generatQR
         Route::get('/GeneratQR', [CardController::class, 'qrGenerator']);
 });

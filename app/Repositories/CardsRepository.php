@@ -83,7 +83,7 @@ class CardsRepository
     }
     public function createCardDetail($id,$data){
         $theme_id = $data['theme']?$data['theme']:1;
-        $datos = ThemeItems::where('theme_id',$theme_id)->whereIn('item_id',[1,2])->get();
+        $datos = ThemeItems::where('theme_id',$theme_id)->get();
         return DB::transaction(function () use ($id,$datos) {
                
 
@@ -94,7 +94,7 @@ class CardsRepository
                             'order'=>$detail['order'],
                         ]);
                     }
-                
+              
                     if(Card_detail::where('card_id',$id)->count() > 0){
                             return true;
                     }
@@ -358,7 +358,7 @@ class CardsRepository
                 $user = User::find($data['user_id']);
                 $nsFree = NetworkSocial::all();
                 $cardItems = Card_detail::where('card_id', $data['id'])->orderBy('order', 'asc')->get();
-                $items = Cards_items::whereNotIn('id',[1,2])->get();
+                $items = Cards_items::whereNotIn('id',[1,2,4,9])->get();
                 $text_styles = text_style::all();
                 $text_font = text_style::find($data['text_style_id']);
 
@@ -370,13 +370,15 @@ class CardsRepository
                 }
 
                 foreach ($cardItems as $ci) {
-                    $card_item = Cards_items::where('id', $ci['card_item_id'])->first();
-                    if($card_item){
-                        array_push($cardItemsDetail, ['item' =>$card_item, 'card_detail' => $ci]);
-                    }
+                    $card_item = Cards_items::where('id', $ci['card_item_id'])->exists()
+                                    ?Cards_items::where('id', $ci['card_item_id'])->first()
+                                    :NULL;
+              
+                    array_push($cardItemsDetail, ['item' =>$card_item, 'card_detail' => $ci]);
+                
                 
                 }
-     
+           
                 return  [
                             'cardItems'=>$cardItemsDetail,
                             'data' => $data,
@@ -420,6 +422,30 @@ class CardsRepository
                     }else{
                         return $card_item;  
                     }
+                    
+                }
+                throw new GeneralException(__('Error update of keypl detail.'));
+
+            });
+
+    }
+
+    public function update_card_detail_item_order($card_item_drag_id,$card_item_drop_id)
+    {
+            $card_item_drag = Card_detail::find($card_item_drag_id);
+            $card_item_drop = Card_detail::find($card_item_drop_id);
+            $last_order = $card_item_drag->order;
+            $new_order = $card_item_drop->order;
+
+            return DB::transaction(function () use ($card_item_drag,$card_item_drop,$new_order,$last_order) {
+                if($card_item_drag->update([
+                        'order'=>$new_order,
+                ])){
+                    if($card_item_drop->update([
+                        'order'=>$last_order,
+                     ])){
+                         return $card_item_drag; 
+                     }
                     
                 }
                 throw new GeneralException(__('Error update of keypl detail.'));
