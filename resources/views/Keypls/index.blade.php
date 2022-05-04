@@ -25,17 +25,49 @@
 	<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Sans:wght@300&family=Island+Moments&family=M+PLUS+1p&family=Playfair+Display:ital@1&family=Pushster&family=Roboto+Mono:wght@200&family=Roboto:wght@100&family=Shizuru&display=swap" rel="stylesheet">
 
     @include('Keypls.itemsUpdate.stylek.css')
-<body id="app">
-    <div class="bg-image"></div>
-    <div class="col-sm-12 col-md-12 col-lg-4 mx-auto d-block bg bg-search-keypl">
-        <div class="col-12 padding-keypl">
-            @include('Keypls.itemsUpdate.themes.theme'.$data['themes_id'])
-        </div>
-    </div>
-    <input id="baseUrl" type="hidden" value="{{ \Request::root() }}">
-    <input id="url" type="hidden" value="{{ \Request::url() }}">
-</body>
+	<body class="" id="app">
+		<div class="bg-image" ></div>
+		<div id="keypl-content" style="display:none !important" class="col-sm-12 col-md-12 col-lg-4 mx-auto d-block bg bg-search-keypl">
+			<div class="col-12 padding-keypl">
+				@include('Keypls.itemsUpdate.themes.theme'.$data['themes_id'])
+			</div>
+		</div>
+		
+		<input id="baseUrl" type="hidden" value="{{ \Request::root() }}">
+		<input id="url" type="hidden" value="{{ \Request::url() }}">
+	
 
+
+	<div id="content-player" class="no-margin"  >
+			<iframe id="player"
+					class="no-margin"
+					style="width:100%; height: 100vh"
+			 		src="https://www.youtube.com/embed/{{$presentation['name']}}?version=3&autoplay=1&modestbranding=1" 
+					 title="YouTube video player" 
+					 frameborder="0" 
+					 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen autoplay></iframe>
+					 <button class="btn btn-warning btn-block btn-update no-margin" onclick="video_hide()"><i class='fas fa-edit'></i></button>
+		</div>
+	</body>
+<script>
+	//this script on api for youtube excute play video 
+	function onPlayerReady(event) {
+		var embedCode = event.target.getVideoEmbedCode();
+		event.target.playVideo();
+		if (document.getElementById('player')) {
+			document.getElementById('player').innerHTML = embedCode;
+		}
+	}
+
+
+	function video_hide(){
+
+		$("body").addClass("keypls-body");
+		$("#content-player").remove();
+		$("#keypl-content").show();
+	}
+
+</script>
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
 <script src="{{ asset('js/MasterAjax.js') }}"></script>

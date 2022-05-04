@@ -25,6 +25,7 @@ class CardItems extends Seeder
             ['name'=> 'Archivo PDF','icon'=> 'fa fa-file','style'=> 'btn-gray text-white','active'=> 1,],     
             ['name'=> 'Contacto (email)','icon'=> 'fa fa-envelope','style'=> 'bg-info text-white','active'=> 1,],
             ['name'=> 'Link','icon'=> 'fa fa-link','style'=> 'bg-dark text-white','active'=> 1,],
+            ['name'=> 'Presentation','icon'=> 'fa fa-link','style'=> 'bg-dark text-white','active'=> 1,],
         ];
 
            

@@ -20,14 +20,15 @@ class CardController extends Controller
      *
      * @return void
      */
-    public function __construct(CardsRepository $repository,HomeRepository $homeRepository)
+    public function __construct(CardsRepository $CardRepository,HomeRepository $homeRepository)
     {
-       $this->repository = $repository;
+       $this->CardRepository = $CardRepository;
        $this->homeRepository = $homeRepository;
     }
 
     public function get_keypls(Request $request){
-        $data = $this->repository->get_keypls($request->user());
+        $data = $this->CardRepository->get_keypls($request->user());
+    
         return response()->json($data,200);
     }
 
@@ -43,12 +44,12 @@ class CardController extends Controller
 
     public function get_data_keypl(Request $request,$id)
     {
-        $data = $this->repository->get_data_keypl($id);
+        $data = $this->CardRepository->get_data_keypl($id);
         return response()->json($data,200);
     }
 
     public function update_card_item(Request $request,$id){
-        $data = $this->repository->update_card_detail_item($id,$request->input());
+        $data = $this->CardRepository->update_card_detail_item($id,$request->input());
         return response()->json($data, 201);
     }
     public function create_detail(Request $request,$id){
@@ -68,17 +69,17 @@ class CardController extends Controller
         
             if(Card::where('id',$idStr[0])->exists()){
                 if (Auth::guest()){
-                    $this->repository->create_views($id,2);
+                    $this->CardRepository->create_views($id,2);
 
                     }else{
                         $user = Auth::user();
                         $check = Card::find($id);
                         if($user->id !==  $check->user_id){
-                            $this->repository->create_views($id,2);
+                            $this->CardRepository->create_views($id,2);
                         }
                    }
     
-                return response()->json($this->repository->get_data_keypl($idStr[0]), 200);
+                return response()->json($this->CardRepository->get_data_keypl($idStr[0]), 200);
 
             }  
 
@@ -127,8 +128,8 @@ class CardController extends Controller
         $allData = Card::where('user_id',Auth::user()->id)->get();
 
         foreach ($allData as $key => $card) {
-            $card = $this->repository->show($card->id);
-            $graphics = $this->repository->get_data_chart($card->id);
+            $card = $this->CardRepository->show($card->id);
+            $graphics = $this->CardRepository->get_data_chart($card->id);
             array_push($data,['graphics'=>$graphics,'card'=>$card]);
         }
         
@@ -141,8 +142,8 @@ class CardController extends Controller
         
         $allData = Card::where('user_id',$request->id)->get();
         foreach ($allData as $key => $card) {
-            $card = $this->repository->show($card->id);
-            $graphics = $this->repository->get_data_chart_api($card->id,$request->id);
+            $card = $this->CardRepository->show($card->id);
+            $graphics = $this->CardRepository->get_data_chart_api($card->id,$request->id);
             array_push($data,['graphics'=>$graphics,'card'=>$card]);
         }
         return response()->json($data);

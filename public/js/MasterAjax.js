@@ -153,7 +153,7 @@ const actions = {
         });
     }
   },
-  show: function (my_url, key = '', view = '',nv = '',) {
+  show: function (my_url, key = '', view = '',nv = '') {
     if (key) {
       $('.btn-show-' + key).prop("disabled", true);
       $('.btn-detail-' + key).prop("disabled", true);
@@ -177,7 +177,6 @@ const actions = {
         } else {
           $('.btn-create').prop("disabled", false);
         }
-        $("#card_show").empty().html('');
         $("#card_show2").empty().html('');
         
         if (nv == true) {
@@ -207,6 +206,7 @@ const actions = {
       }
     });
   },
+  
   restored: function (my_url) {
     $.ajaxSetup({
       headers: {

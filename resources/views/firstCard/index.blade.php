@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('style')
-
+  <link rel="stylesheet" href="{{ asset('css/editkeypl.css') }}">
 @endsection
 @section('content')
 <div class="page-inner">

@@ -6,7 +6,7 @@
 
     /* Handle */
    
-    body, html  
+   .keypls-body
     {
             @if($card_style['background_color'] == 1)
                 /* The color used */

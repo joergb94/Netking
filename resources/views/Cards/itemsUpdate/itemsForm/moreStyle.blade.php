@@ -1,9 +1,9 @@
 <div id="styleMore" class="tab-pane fade col-12">
 <div class="modal-header">
-          <h4 class="modal-title">More </h4>
+          <h4 class="modal-title">Youtube Video Presentation </h4>
           @include('Cards.itemsUpdate.itemsForm.buttonDevice')
 </div>
-<div class="form-group">
+          <div class="form-group" style="display:none">
             <label>Theme:</label>
             <select  id="theme" name="theme" onchange="Cards.save_asinc_theme({{$data['id']}})" class="form-control">
               @forelse ($themes as $theme)
@@ -39,8 +39,13 @@
               @endforelse
             </select>
           </div>
-          <div class="form-group">
+          <div class="form-group" style="display:none">
             <label>Location:</label>
             <input type="text" id="ocation" onchange="Cards.save_asinc({{$data['id']}})" name="location" value="{{(isset($data['location']))?$data['location']:''}}" class="form-control">
+          </div>
+          <div class="form-group">
+            <label>Youtube link:</label>
+          
+            <input type="text" id="description{{$presentation['id']}}" onchange="Cards.save_item({{$presentation['id']}},3)" name="location" value="{{$presentation['description']}}" class="form-control">
           </div>
 </div>

@@ -43,6 +43,7 @@ class ThemeSeed extends Seeder
                         ['theme_id'=>1, 'item_id' =>2,'name'=>'example','order'=>4,'description'=>1,'item_data'=>1,'size'=>12],
                         ['theme_id'=>1, 'item_id' =>NULL,'name'=>'example','order'=>5,'description'=>1,'item_data'=>1,'size'=>12],
                         ['theme_id'=>1, 'item_id' =>NULL,'name'=>'example','order'=>6,'description'=>1,'item_data'=>1,'size'=>12],
+                        ['theme_id'=>1, 'item_id' =>11,'name'=>'example','order'=>6,'description'=>1,'item_data'=>1,'size'=>12],
                         
                         ['theme_id'=>2, 'item_id' =>1,'name'=>'example','order'=>1,'description'=>1,'item_data'=>1,'size'=>12],
                         ['theme_id'=>2, 'item_id' =>2,'name'=>'example','order'=>2,'description'=>1,'item_data'=>1,'size'=>12],
@@ -52,12 +53,14 @@ class ThemeSeed extends Seeder
                         ['theme_id'=>2, 'item_id' =>NULL,'name'=>'example','order'=>6,'description'=>1,'item_data'=>1,'size'=>12],
                         ['theme_id'=>2, 'item_id' =>NULL,'name'=>'example','order'=>7,'description'=>1,'item_data'=>1,'size'=>12],
                         ['theme_id'=>2, 'item_id' =>NULL,'name'=>'example','order'=>8,'description'=>1,'item_data'=>1,'size'=>12],
+                        ['theme_id'=>2, 'item_id' =>11,'name'=>'example','order'=>8,'description'=>1,'item_data'=>1,'size'=>12],
                       
 
                         ['theme_id'=>3, 'item_id' =>1,'name'=>'example','order'=>5,'description'=>1,'item_data'=>1,'size'=>12],
                         ['theme_id'=>3, 'item_id' =>2,'name'=>'example','order'=>6,'description'=>1,'item_data'=>1,'size'=>12],
                         ['theme_id'=>3, 'item_id' =>NULL,'name'=>'example','order'=>1,'description'=>1,'item_data'=>1,'size'=>12],
                         ['theme_id'=>3, 'item_id' =>NULL,'name'=>'example','order'=>1,'description'=>1,'item_data'=>1,'size'=>12],
+                        ['theme_id'=>3, 'item_id' =>11,'name'=>'example','order'=>1,'description'=>1,'item_data'=>1,'size'=>12],
                         
                         ['theme_id'=>4, 'item_id' =>1,'name'=>'example','order'=>1,'description'=>1,'item_data'=>1,'size'=>12],
                         ['theme_id'=>4, 'item_id' =>2,'name'=>'example','order'=>1,'description'=>1,'item_data'=>1,'size'=>12],
@@ -69,6 +72,7 @@ class ThemeSeed extends Seeder
                         ['theme_id'=>4, 'item_id' =>8,'name'=>'example','order'=>1,'description'=>1,'item_data'=>1,'size'=>12],
                         ['theme_id'=>4, 'item_id' =>9,'name'=>'example','order'=>1,'description'=>1,'item_data'=>1,'size'=>12],
                         ['theme_id'=>4, 'item_id' =>10,'name'=>'example','order'=>1,'description'=>1,'item_data'=>1,'size'=>12],
+                        ['theme_id'=>4, 'item_id' =>11,'name'=>'example','order'=>1,'description'=>1,'item_data'=>1,'size'=>12],
             ];
             foreach ($themesItemes as $t) {
 

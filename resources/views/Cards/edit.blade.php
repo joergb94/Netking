@@ -42,8 +42,8 @@
                       </li>
                       <li class="nav-item btn-rounded-keypl">
                         <button class="btn btn-warning-keypl btn-rounded" data-toggle="tab" id="btnMore" href="#styleMore"  onclick="transactions.all_toggle()">
-                          <h2><i class="fas fa-wrench"></i></h2>
-                          <h6>More</h6>
+                          <h2><i class="fas fa-video"></i></h2>
+                          <h6>Video</h6>
                         </button>
                       </li>
                       <li class="nav-item btn-rounded-keypl ">

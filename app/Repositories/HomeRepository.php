@@ -68,7 +68,7 @@ class HomeRepository
 
     public function keyplsViews($user){
         $views =[];
-        $keypls = $this->card->where('user_id',$user->id)->get();
+        $keypls = $this->card->where('user_id',$user->id)->where('deleted_at',NULL)->get();
         foreach ($keypls as $key => $value) {
             $qr = $this->views->where('user_id',$user->id)->where('card_id',$value->id)->where('type',1)->count();
             $link = $this->views->where('user_id',$user->id)->where('card_id',$value->id)->where('type',2)->count();

@@ -27,13 +27,14 @@
 	<div id="main-keypl" style="display:none">
 		@yield('content')
 		@include('layouts.items.main-header')
+		@yield('modal')
 	</div>
 	<div id="loading-splash">
 			<img src="{{ asset('img/splash.png') }}" class="img-fluid centered-btn">
 	</div>
 
 <a href="javascript:0" id="return-to-top"><i class="fas fa-chevron-up"></i></a>
-@yield('modal')
+
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{asset('js/qrcode.js')}}"></script>
 <script src="{{ asset('assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js') }}"></script>

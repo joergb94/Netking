@@ -1,6 +1,5 @@
-
 <div class="row justify-content-between">
-    <div class="card col-sm-12 col-md-12 col-lg-7 col-xl-7" id="FormModal">
+    <div class="card  col-sm-12 col-md-12 col-lg-7 col-xl-7" id="FormModal">
             <a type="button" class="btn btn-danger btn-circle top-right" href="/myKepls" >
               <i class='fas fa-window-close'></i>
             </a>
@@ -42,8 +41,8 @@
                       </li>
                       <li class="nav-item btn-rounded-keypl">
                         <button class="btn btn-warning-keypl btn-rounded" data-toggle="tab" id="btnMore" href="#styleMore"  onclick="transactions.all_toggle()">
-                          <h2><i class="fas fa-wrench"></i></h2>
-                          <h6>More</h6>
+                          <h2><i class="fas fa-video"></i></h2>
+                          <h6>Video</h6>
                         </button>
                       </li>
                       <li class="nav-item btn-rounded-keypl ">
@@ -56,7 +55,7 @@
               <div class="col-10">
                 <!-- Tab panes -->
                   <form id="card-form-style" >
-                    <div class="tab-content">
+                    <div class="tab-content content-edit">
                             @include('Cards.itemsUpdate.cardForm')
                       <div class="col-sm-12"  style="display:none" >
                           <div id="qrcode" class="mx-auto d-block"></div>
@@ -70,13 +69,23 @@
                   <div id="card_show_form"></div>
                 </div>
     </div>
-    <div class="col-sm-4 all-screen mx-auto d-block ">
-    <button type="button" class="btn bg-keypl col-6 mx-auto d-block" value="1" id="mode-delete-item" onclick="Cards.mode_delete_item()"><h2>Delete Blocks <i class="fas fa-minus"></i></h2></button>
+    <div id="cel" class="col-12 col-sm-4 all-screen mx-auto d-block cel-case">
+            <div class="col-9 mx-auto d-block justify-content-between">
+              <div class="row">
+                <div class="col-3" id="show-form" style="display:none">
+                  <button  onclick="Cards.config()"  type="button" class="btn btn-light show-device"><i class="fa fa-angle-right"></i></button>
+                </div>
+                <div class="col-12" id="show-buttons">
+                  <button type="button" class="btn bg-keypl mx-auto d-block" value="1" id="mode-delete-item" onclick="Cards.mode_delete_item()"><h4>Delete Blocks <i class="fas fa-minus"></i></h4></button>
+                </div>
+              </div>
+            </div>
            <div class="card device-case mx-auto d-block" id="case-mobile">
               @include('Cards.itemsUpdate.keypl')
            </div>    
     </div>
 </div>
 <script>
+
   QR.show({{$data['id']}});
 </script>

@@ -134,7 +134,7 @@ class CardController extends Controller
     public function edit(Request $request, $id)
     {
         if ($request->ajax()) {
-            
+              
                 return view('Cards.edit', $this->CardsRepository->get_data_keypl($id));
         }
     }
@@ -427,12 +427,14 @@ class CardController extends Controller
         }    
     }
 
-    public function delete_item(Request $request,$id){
+    public function delete_item(Request $request,$id)
+    {
         $data_id = $this->CardsRepository->delete_item($id);
         return response()->json($data_id);
     }
 
-    public function friendship(Request $request,$id){
+    public function friendship(Request $request,$id)
+    {
         $cardData = Card::find($id);
         $friends = Friends::withTrashed()
                             ->where('card_id',$cardData['id'])
@@ -458,13 +460,15 @@ class CardController extends Controller
         
     }
 
-    public function view_card_details_link(Request $request,$id){
+    public function view_card_details_link(Request $request,$id)
+    {
           
             $data = $this->CardsRepository->create_views_details($id,$request->input());
             return response()->json($data);
     }
 
-    public function get_data_chart(Request $request){
+    public function get_data_chart(Request $request)
+    {
         $data = [];
         $allData = Card::where('user_id',Auth::user()->id)->get();
 
@@ -477,7 +481,8 @@ class CardController extends Controller
         return view('Cards.chart',['data'=>$data]);
     }
 
-    public function get_data_chart_json(Request $request){
+    public function get_data_chart_json(Request $request)
+    {
         $data = [];
         $allData = Card::where('user_id',Auth::user()->id)->get();
 
@@ -490,24 +495,43 @@ class CardController extends Controller
         return response()->json($data);
     }
 
-    public function scann_pwa(Request $request){
+    public function scann_pwa(Request $request)
+    {
         return view('qrscan.index');
     }
 
-    public function drag_and_drop_order(Request $request){
+    public function drag_and_drop_order(Request $request)
+    {
        
         $data = $this->CardsRepository->update_card_detail_item_order($request->drag_id,$request->drop_id);
         
         return response()->json(["answer" =>Answer(
-            1,
-            $this->module_name,
-            $this->text_module[1],
-            "success",
-            'yellow',
-            '1'
-        ), 
-        "card_id"=>$data->card_id
-        ]
-    );
+                                                    1,
+                                                    $this->module_name,
+                                                    $this->text_module[1],
+                                                    "success",
+                                                    'yellow',
+                                                    '1'
+                                                ), 
+                                                "card_id"=>$data->card_id
+                                                ]
+                                            );
+    }
+
+    public function show_add_type_item(Request $request){
+        $items = Cards_items::whereNotIn('id',[1,2,4,9])->get();
+        $id=$request->id;
+        return view('Cards.itemsUpdate.itemsForm.modalAddType',['items'=>$items,'id'=>$id]);
+    }
+
+    public function update_type_item(Request $request){
+        $card_item = Card_detail::find($request->card_detail_id);
+        $data = $this->CardsRepository->update_card_detail_item_type($request->card_detail_id,$request->card_item_id);
+        if(Card::where('id',$card_item->card_id)->exists()){
+   
+            return view('Cards.itemsUpdate.keypl',$this->CardsRepository->get_data_keypl($card_item->card_id));
+
+        }
+
     }
 }

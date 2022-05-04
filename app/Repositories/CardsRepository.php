@@ -43,6 +43,7 @@ class CardsRepository
         $this->card_detail_network = $card_detail_network;
         $this->ResgisterUserRepository = $ResgisterUserRepository;
         $this->buttons = ['','btn-fab-r','btn-rounded',''];
+        $this->themes = [9,3, 7,0, 9];
         $this->months = array(1 => 'Jan.', 2 => 'Feb.', 3 => 'Mar.', 4 => 'Apr.', 5 => 'May', 6 => 'Jun.', 7 => 'Jul.', 8 => 'Aug.', 9 => 'Sep.', 10 => 'Oct.', 11 => 'Nov.', 12 => 'Dec.');
         $this->months = array(1 => 'Jan.', 2 => 'Feb.', 3 => 'Mar.', 4 => 'Apr.', 5 => 'May', 6 => 'Jun.', 7 => 'Jul.', 8 => 'Aug.', 9 => 'Sep.', 10 => 'Oct.', 11 => 'Nov.', 12 => 'Dec.');
     }
@@ -339,7 +340,7 @@ class CardsRepository
 
     public function get_data_keypl($id)
     {
-
+            
                 $nsInUse = [];
                 $cardItemsDetail =[];
                 $data = $this->model->find($id);
@@ -359,12 +360,16 @@ class CardsRepository
                 $nsFree = NetworkSocial::all();
                 $cardItems = Card_detail::where('card_id', $data['id'])->orderBy('order', 'asc')->get();
                 $items = Cards_items::whereNotIn('id',[1,2,4,9])->get();
+                $presentation = [];
                 $text_styles = text_style::all();
                 $text_font = text_style::find($data['text_style_id']);
-
+                $ns_quantity = Card_detail_network::where('card_id', $data['id'])
+                                                  ->where('deleted_at',null)
+                                                  ->count();
                 foreach ($nsFree as $ns) {
                     $inUse = Card_detail_network::where('network_social_id', $ns['id'])
                         ->where('card_id', $data['id'])
+                        ->where('deleted_at',null)
                         ->first();
                     array_push($nsInUse, ['nsData' => $ns, 'nsUser' => $inUse,'card_id'=>$id]);
                 }
@@ -373,12 +378,13 @@ class CardsRepository
                     $card_item = Cards_items::where('id', $ci['card_item_id'])->exists()
                                     ?Cards_items::where('id', $ci['card_item_id'])->first()
                                     :NULL;
-              
-                    array_push($cardItemsDetail, ['item' =>$card_item, 'card_detail' => $ci]);
-                
-                
+                    if($ci['card_item_id'] == 11){
+                        array_push($presentation, $ci);
+                    }else{
+                        array_push($cardItemsDetail, ['item' =>$card_item, 'card_detail' => $ci]);
+                    }
                 }
-           
+          
                 return  [
                             'cardItems'=>$cardItemsDetail,
                             'data' => $data,
@@ -387,12 +393,16 @@ class CardsRepository
                             'user' => $user,
                             'card_style' => $card_style,
                             'ns' => $nsInUse,
+                            'ns_quantity'=>$ns_quantity,
+                            'ns_default_free'=>$this->themes[$data['themes_id']],
                             'text_styles' => $text_styles,
                             'btn_shape'=>$btn_shape, 
                             'text_font'=>$text_font,
                             'themes'=>$themes,
                             'friend'=>$friend,
                             'items'=>$items,
+                            'presentation'=>$presentation[0],
+                            
                         ];
     }
 
@@ -454,6 +464,22 @@ class CardsRepository
 
     }
    
+    public function update_card_detail_item_type($id,$item_id)
+    {
+            $card_item = Card_detail::find($id);
+            $card_id = $card_item->card_id;
+            return DB::transaction(function () use ($card_item,$item_id,$card_id) {
+                if($card_item->update([
+                        'card_item_id' =>$item_id,
+                ])){
+                        return $card_id;  
+                    }
+                    
+                throw new GeneralException(__('Error update of keypl detail.'));
+
+            });
+
+    }
 
     public function delete_item($id)
     {
@@ -501,7 +527,7 @@ class CardsRepository
 
     public function get_keypls($user)
     {
-        $rg = $this->model->where('id','>',0)->where('user_id',$user->id);
+        $rg = $this->model->where('id','>',0)->where('user_id',$user->id)->where('deleted_at',NULL);
         $Card = $rg->orderBy('id', 'desc')->get();
         return $Card;
     }

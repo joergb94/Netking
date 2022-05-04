@@ -1,5 +1,5 @@
 <!-- The Modal -->
-<div class="modal" id="myModal">
+<div class="modal fade" id="Modal">
   <div class="modal-dialog">
     <div class="modal-content">
 
@@ -14,7 +14,7 @@
                  @foreach($items as $item)
                     <div class="col-12 col-md-4">
                         <br>
-                        <button type="button" onclick="Cards.add_item('{{$item->id}}')" class="btn {{$item->style}} btn-div text-center ">
+                        <button type="button" onclick="Cards.add_type_item('{{$item->id}}','{{$id}}')" class="btn {{$item->style}} btn-div text-center ">
                             <h1><i class="{{$item->icon}}"></i></h1>
                             <h3>{{$item->name}}</h3>
                         </button>

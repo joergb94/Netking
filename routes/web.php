@@ -100,6 +100,13 @@ Route::group(['middleware'=>['auth']], function(){
         Route::get('/myKepls/graphics', [CardController::class, 'get_data_chart']);
         Route::get('/myKepls/get_graphics', [CardController::class, 'get_data_chart_json']);
         Route::put('/myKepls/dragAndDrop', [CardController::class, 'drag_and_drop_order']);
+        Route::get('/myKepls/show_add_type_item', [CardController::class, 'show_add_type_item']);
+
+        Route::post('/update_type_items', [CardController::class, 'update_type_item']);
+
+        
+
+        
 
         //profile
         Route::get('/profile', [ProfileController::class, 'index'])->name('profile');

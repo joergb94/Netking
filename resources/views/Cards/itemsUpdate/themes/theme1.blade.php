@@ -12,15 +12,15 @@
                 @if(isset($cardItems[1]))
                         @if(isset($cardItems[1]['item']))
                                 <div class="col-12  drop theme1-col-12 theme{{$data['themes_id']}}-padding" id="drop{{$cardItems[1]['card_detail']->id}}"  ondrop="dragAndDrop.drop(event)" ondragover="dragAndDrop.allowDrop(event)">
-                                <div class="drag" draggable="true" ondragstart="dragAndDrop.drag(event)"  id="drag{{$cardItems[1]['card_detail']->id}}">
-                                        <button class="btn btn-warning  btn-circle top-right btn-update-item" data-toggle="tooltip" title="Editar Keypl!" onclick="Cards.edit_detail({{$cardItems[1]['card_detail']->id}})"><i class='fas fa-edit'></i></button>
-                                        <button type="button" class="btn btn-danger btn-circle top-right btn-delete-item" style="display:none" onclick="Cards.delete_item({{$cardItems[1]['card_detail']->id}},{{$cardItems[1]['card_detail']->card_id}})" > <i class="fa fa-trash"></i></button>
-                                                @include('Cards.itemsUpdate.itemsKeypl.div'.$cardItems[1]['item']->id,['ci' => $cardItems[1],'template'=>250,'theme_shape'=>'theme1-shape'])
-                                </div>
+                                        <div class="drag" draggable="true" ondragstart="dragAndDrop.drag(event)"  id="drag{{$cardItems[1]['card_detail']->id}}">
+                                                <button class="btn btn-warning  btn-circle top-right btn-update-item" data-toggle="tooltip" title="Editar Keypl!" onclick="Cards.edit_detail({{$cardItems[1]['card_detail']->id}})"><i class='fas fa-edit'></i></button>
+                                                <button type="button" class="btn btn-danger btn-circle top-right btn-delete-item" style="display:none" onclick="Cards.delete_item({{$cardItems[1]['card_detail']->id}},{{$cardItems[1]['card_detail']->card_id}})" > <i class="fa fa-trash"></i></button>
+                                                        @include('Cards.itemsUpdate.itemsKeypl.div'.$cardItems[1]['item']->id,['ci' => $cardItems[1],'template'=>250,'theme_shape'=>'theme1-shape'])
+                                        </div>
                                 </div>
                         @else
                                 <div class="col-12  drop theme1-col-12  theme{{$data['themes_id']}}-padding" id="drop{{$cardItems[3]['card_detail']->id}}"  >
-                                        @include('Cards.itemsUpdate.itemsKeypl.defaultDiv')
+                                        @include('Cards.itemsUpdate.itemsKeypl.defaultDiv',['id' => $cardItems[1]['card_detail']->id])
                                 </div> 
                         @endif
                 @endif
@@ -35,7 +35,7 @@
                                 </div>
                         @else
                                 <div class="col-6  drop theme1-col-6  theme{{$data['themes_id']}}-padding" id="drop{{$cardItems[3]['card_detail']->id}}"  >
-                                        @include('Cards.itemsUpdate.itemsKeypl.defaultDiv')
+                                        @include('Cards.itemsUpdate.itemsKeypl.defaultDiv',['id' => $cardItems[2]['card_detail']->id])
                                 </div> 
                         @endif
                 @endif
@@ -59,10 +59,11 @@
                                                         <button class="btn btn-warning  btn-circle top-right btn-update-item" data-toggle="tooltip" title="Editar Keypl!" onclick="Cards.edit_detail({{$cardItems[4]['card_detail']->id}})"><i class='fas fa-edit'></i></button>
                                                         <button type="button" class="btn btn-danger btn-circle top-right btn-delete-item" style="display:none" onclick="Cards.delete_item({{$cardItems[4]['card_detail']->id}},{{$cardItems[4]['card_detail']->card_id}})" > <i class="fa fa-trash"></i></button>
                                                                 @include('Cards.itemsUpdate.itemsKeypl.div'.$cardItems[4]['item']->id,['ci' => $cardItems[4],'template'=>'95','theme_shape'=>'theme1-shape'])
+                                                </div>
                                         </div>
                                 @else
                                         <div class="col-12  drop theme1-col   theme{{$data['themes_id']}}-padding" id="drop{{$cardItems[3]['card_detail']->id}}"  >
-                                                @include('Cards.itemsUpdate.itemsKeypl.defaultDiv')
+                                                @include('Cards.itemsUpdate.itemsKeypl.defaultDiv',['id' => $cardItems[4]['card_detail']->id])
                                         </div> 
                                 @endif
                     
@@ -80,7 +81,7 @@
                                         </div>
                                 @else
                                         <div class="col-12  drop theme1-col   theme{{$data['themes_id']}}-padding" id="drop{{$cardItems[3]['card_detail']->id}}"  >
-                                                @include('Cards.itemsUpdate.itemsKeypl.defaultDiv')
+                                                @include('Cards.itemsUpdate.itemsKeypl.defaultDiv',['id' => $cardItems[5]['card_detail']->id])
                                         </div> 
                                 @endif
                         @endif

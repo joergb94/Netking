@@ -22,8 +22,8 @@
                 </div>
         @else
                 <div onmousedown="return false" class="col-12 text-center mx-auto d-block theme{{$data['themes_id']}}-padding" id="social">
-                    @if (count($data['card_network']) == 0)
-                        @for ($i = 0; $i > 3; $i++)
+                    @if ($ns_quantity == 0)
+                        @for ($i = 0; $i < $ns_default_free; $i++)
                             <button class="btn btn-link-keyp-socialtheme-{{$data['themes_id']}}-btn-rounded btn-social-icon btn-social-icon-padding   theme{{$data['themes_id']}}-button-col-social  bg-keypl" >
                                 <i class="fa fa-plus"></i>
                             </button>

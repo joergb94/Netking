@@ -146,6 +146,7 @@ const transactions = {
           var formData1 = document.getElementById(`file-form-${id}`);
               form = new FormData(formData1);
        break;
+       
       default:
         form = {
             name:$("#name"+id).val(),
@@ -572,6 +573,58 @@ const Cards = {
   },
   modal_close:function(){
     $("#myModalBloque").modal('hide');
+  },
+  show_add_item_type:function(id){
+      var my_url = url + '/show_add_type_item?id='+id;
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      })
+      // Populate Data in Edit Modal Form
+      $.ajax({
+        type: "GET",
+        url: my_url,
+        success: function (data) {
+              $("#card_show2").empty().html(data);
+              $("#show_blade2").show();
+              $("#Modal").modal('show');
+        },
+        error: function (data) {
+          console.log('Error:', data);
+        }
+      });
+  },
+  add_type_item:function(card_item_id,card_detail_id){
+    var my_url = baseUrl+'/update_type_items';
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+    var form ={
+      card_detail_id:card_detail_id,
+      card_item_id:card_item_id,
+    };
+    
+    $.ajax({
+      type: "POST",
+      url: my_url,
+      data: form,
+      dataType: 'text',
+      success: function (data) {
+        $("#Modal").modal('hide');
+        $("#case-mobile").empty().html(data);
+        $('#loading-mobil-vition').hide();
+        $('#case-mobile').show();
+        transactions.save_asinc_theme(id);
+        
+      },
+      error: function (data) {
+        console.log('Error:', data.responseText);
+    
+      }
+    });
   },
   add_item:function(id){
     $.ajaxSetup({
