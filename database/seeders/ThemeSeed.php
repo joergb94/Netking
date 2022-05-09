@@ -64,14 +64,14 @@ class ThemeSeed extends Seeder
                         
                         ['theme_id'=>4, 'item_id' =>1,'name'=>'example','order'=>1,'description'=>1,'item_data'=>1,'size'=>12],
                         ['theme_id'=>4, 'item_id' =>2,'name'=>'example','order'=>1,'description'=>1,'item_data'=>1,'size'=>12],
-                        ['theme_id'=>4, 'item_id' =>3,'name'=>'example','order'=>1,'description'=>1,'item_data'=>1,'size'=>12],
-                        ['theme_id'=>4, 'item_id' =>4,'name'=>'example','order'=>1,'description'=>1,'item_data'=>1,'size'=>12],
-                        ['theme_id'=>4, 'item_id' =>5,'name'=>'example','order'=>1,'description'=>1,'item_data'=>1,'size'=>12],
-                        ['theme_id'=>4, 'item_id' =>6,'name'=>'example','order'=>1,'description'=>1,'item_data'=>1,'size'=>12],
-                        ['theme_id'=>4, 'item_id' =>7,'name'=>'example','order'=>1,'description'=>1,'item_data'=>1,'size'=>12],
-                        ['theme_id'=>4, 'item_id' =>8,'name'=>'example','order'=>1,'description'=>1,'item_data'=>1,'size'=>12],
-                        ['theme_id'=>4, 'item_id' =>9,'name'=>'example','order'=>1,'description'=>1,'item_data'=>1,'size'=>12],
-                        ['theme_id'=>4, 'item_id' =>10,'name'=>'example','order'=>1,'description'=>1,'item_data'=>1,'size'=>12],
+                        ['theme_id'=>4, 'item_id' =>NULL,'name'=>'example','order'=>1,'description'=>1,'item_data'=>1,'size'=>12],
+                        ['theme_id'=>4, 'item_id' =>NULL,'name'=>'example','order'=>1,'description'=>1,'item_data'=>1,'size'=>12],
+                        ['theme_id'=>4, 'item_id' =>NULL,'name'=>'example','order'=>1,'description'=>1,'item_data'=>1,'size'=>12],
+                        ['theme_id'=>4, 'item_id' =>NULL,'name'=>'example','order'=>1,'description'=>1,'item_data'=>1,'size'=>12],
+                        ['theme_id'=>4, 'item_id' =>NULL,'name'=>'example','order'=>1,'description'=>1,'item_data'=>1,'size'=>12],
+                        ['theme_id'=>4, 'item_id' =>NULL,'name'=>'example','order'=>1,'description'=>1,'item_data'=>1,'size'=>12],
+                        ['theme_id'=>4, 'item_id' =>NULL,'name'=>'example','order'=>1,'description'=>1,'item_data'=>1,'size'=>12],
+                        ['theme_id'=>4, 'item_id' =>NULL,'name'=>'example','order'=>1,'description'=>1,'item_data'=>1,'size'=>12],
                         ['theme_id'=>4, 'item_id' =>11,'name'=>'example','order'=>1,'description'=>1,'item_data'=>1,'size'=>12],
             ];
             foreach ($themesItemes as $t) {
