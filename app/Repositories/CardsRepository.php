@@ -45,7 +45,6 @@ class CardsRepository
         $this->buttons = ['','btn-fab-r','btn-rounded',''];
         $this->themes = [9,3, 7,0, 9];
         $this->months = array(1 => 'Jan.', 2 => 'Feb.', 3 => 'Mar.', 4 => 'Apr.', 5 => 'May', 6 => 'Jun.', 7 => 'Jul.', 8 => 'Aug.', 9 => 'Sep.', 10 => 'Oct.', 11 => 'Nov.', 12 => 'Dec.');
-        $this->months = array(1 => 'Jan.', 2 => 'Feb.', 3 => 'Mar.', 4 => 'Apr.', 5 => 'May', 6 => 'Jun.', 7 => 'Jul.', 8 => 'Aug.', 9 => 'Sep.', 10 => 'Oct.', 11 => 'Nov.', 12 => 'Dec.');
     }
 
 
@@ -85,6 +84,7 @@ class CardsRepository
     public function createCardDetail($id,$data){
         $theme_id = $data['theme']?$data['theme']:1;
         $datos = ThemeItems::where('theme_id',$theme_id)->get();
+      
         return DB::transaction(function () use ($id,$datos) {
                
 
