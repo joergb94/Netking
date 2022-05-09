@@ -30,12 +30,12 @@ class FriendsController extends Controller
      /**
    * UserController constructor.
    *
-   * @param CategoryRepository $CategoryRepository
+   * @param FriendsRepository $FriendsRepository
    */
-  public function __construct(CategoryRepository $CategoryRepository)
+  public function __construct(FriendsRepository $FriendsRepository)
   {
-      $this->CategoryRepository = $CategoryRepository;
-      $this->menu_id =2;
+      $this->FriendsRepository = $FriendsRepository;
+      $this->menu_id = 3;
       $this->module_name ='Categoria';
       $this->text_module = [  
                               'Creado',
@@ -60,14 +60,14 @@ class FriendsController extends Controller
           $search = trim($request->search);
           $criterion = trim($request->criterion);
           $status = ($request->status)? $request->status : 1;
-          $data = $this->CategoryRepository->getSearchPaginated($criterion, $search,$status);
+          $data = $this->FriendsRepository->getSearchPaginated($criterion, $search,$status);
+      
           $dm = accesUrl(Auth::user(),$this->menu_id);
-          $ages = categoryAge::all();
           if($dm['access']){
               if ($request->ajax()) { 
-                  return view('Categories.items.table',['data'=>$data,'dm'=>$dm]);
+                  return view('Friends.items.table',['data'=>$data,'dm'=>$dm]);
               }
-                  return view('Categories.index',['data'=>$data,'dm'=>$dm,'ages'=>$ages]);
+                  return view('Friends.index',['data'=>$data,'dm'=>$dm,'account'=>Auth::user()]);
 
           }
           return redirect("/");
@@ -92,7 +92,7 @@ class FriendsController extends Controller
    *
    */
   public function store(Request $request){
-      $data = $this->CategoryRepository->create($request->input());
+      $data = $this->FriendsRepository->create($request->input());
 
       return response()->json(Answer( $data['id'],
                                       $this->module_name,
@@ -125,7 +125,7 @@ class FriendsController extends Controller
    */
   public function update(Request $request,$id){ 
 
-      $data = $this->CategoryRepository->update($id, $request->only(
+      $data = $this->FriendsRepository->update($id, $request->only(
           'name',
           'category_age_id',
       ));
@@ -143,7 +143,7 @@ class FriendsController extends Controller
    */
   public function updatePassword(Request $request,$id){ 
 
-      $data = $this->CategoryRepository->updatePass($id, $request->only(
+      $data = $this->FriendsRepository->updatePass($id, $request->only(
                   'password',
               ));
 
@@ -157,12 +157,12 @@ class FriendsController extends Controller
 
   public function change_status(Request $request,$id)
   {
-      return response()->json($this->CategoryRepository->updateStatus($request->id));
+      return response()->json($this->FriendsRepository->updateStatus($request->id));
   } 
 
   public function deleteOrResotore(Request $request,$id)
   {    
-      $state = $this->CategoryRepository->deleteOrResotore($id);
+      $state = $this->FriendsRepository->deleteOrResotore($id);
       return response()->json(Answer( $id,
                                       $this->module_name,
                                       $this->text_module[$state],

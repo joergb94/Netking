@@ -17,12 +17,17 @@ class Friends extends Model implements Auditable
     
     public function users()
     {
-        return $this->hasMany('App\Models\User','user_id','id');
+        return $this->hasOne('App\Models\User','id','user_id');
     }
 
     public function friends()
     {
-        return $this->hasMany('App\Models\User','user_friend_id	','id');
+        return $this->hasOne('App\Models\User','id','user_friend_id');
+    }
+
+    public function cards()
+    {
+        return $this->hasOne('App\Models\Card','id','card_id');
     }
 
 

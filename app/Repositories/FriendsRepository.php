@@ -39,9 +39,19 @@ class FriendsRepository
         $this->card_detail_network = $card_detail_network;
         $this->ResgisterUserRepository = $ResgisterUserRepository;
     }
+    
+    public function take_user_friend_ids($search){
+        $users = User::where('name', 'like', '%'. $search . '%')->get();
+        $ids = array();
 
+        foreach ($users as $user) {
+            array_push($ids,$user->id);
+        }
 
-          /**
+        return $ids;
+    }
+
+    /**
      * @param int    $paged
      * @param string $orderBy
      * @param string $sort
@@ -52,9 +62,9 @@ class FriendsRepository
     {
       
               $rg = (strlen($criterion) > 0 &&  strlen($search) > 0) 
-              ? $this->model->where($criterion, 'like', '%'. $search . '%')->where('user_id',Auth::user()->id)
+              ? $this->model->whereIn('user_friend_id',FriendsRepository::take_user_friend_ids($search))->where('user_id',Auth::user()->id)
               : $this->model->where('id','>',0)->where('user_id',Auth::user()->id);
-
+              
               switch ($status) {
                   case 1:
                       $rg;

@@ -7,6 +7,7 @@ use App\Http\Controllers\web\CardController;
 use App\Http\Controllers\web\HomeController;
 use App\Http\Controllers\web\WelcomeController;
 use App\Http\Controllers\web\ProfileController;
+use App\Http\Controllers\web\FriendsController;
 use App\Http\Controllers\Auth\RegisterController; 
 use App\Http\Controllers\web\FaceBookController;
 
@@ -101,7 +102,6 @@ Route::group(['middleware'=>['auth']], function(){
         Route::get('/myKepls/get_graphics', [CardController::class, 'get_data_chart_json']);
         Route::put('/myKepls/dragAndDrop', [CardController::class, 'drag_and_drop_order']);
         Route::get('/myKepls/show_add_type_item', [CardController::class, 'show_add_type_item']);
-
         Route::post('/update_type_items', [CardController::class, 'update_type_item']);
 
         
@@ -120,6 +120,11 @@ Route::group(['middleware'=>['auth']], function(){
 
         // generatQR
         Route::get('/GeneratQR', [CardController::class, 'qrGenerator']);
+
+        //friends
+        Route::get('/friends', [FriendsController::class, 'index'])->name('profile');
+      
+
 });
 
 

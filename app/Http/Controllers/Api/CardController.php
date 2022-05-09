@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Card;
 use App\Models\Card_detail;
 use App\Models\Cards_items;
-use App\Repositories\CardsRepository;
+use App\Repositories\api\CardsRepository;
 use App\Repositories\HomeRepository;
 use Carbon\Carbon; 
 use Illuminate\Support\Facades\Auth;
