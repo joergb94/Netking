@@ -1,33 +1,25 @@
 <div class="container">
   <h2>Estos son tus grupos</h2>
-  <div id="demo" class="carousel slide" data-ride="carousel">
+  <div class="col-lg-12 no-pad scroller">
+                <div class="left-btn-scroller left-scroll ">
+                    <i class="fas fa-chevron-left"></i>
+                </div>
+                <div class="right-btn-scroller right-scroll ">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+                <div class="col-lg-12 no-pad btn-header-links padding-align top-adjust" id="scroll-div">
 
-    <!-- Indicators -->
-    <ul class="carousel-indicators">
-    <li data-target="#demo" data-slide-to="0" class="active"></li>
-    <li data-target="#demo" data-slide-to="1"></li>
-    <li data-target="#demo" data-slide-to="2"></li>
-    </ul>
-
-    <!-- The slideshow -->
-    <div class="carousel-inner">
-    <div class="carousel-item col-2 active">
-        <h2>f2</h2>
-    </div>
-    <div class="carousel-item col-2">
-        <h2>f3</h2>
-    </div>
-    <div class="carousel-item col-2">
-        <h2>f4</h2>
-    </div>
-    </div>
-
-    <!-- Left and right controls -->
-    <a class="carousel-control-prev" href="#demo" data-slide="prev">
-    <span class="carousel-control-prev-icon"></span>
-    </a>
-    <a class="carousel-control-next" href="#demo" data-slide="next">
-    <span class="carousel-control-next-icon"></span>
-    </a>
-    </div>
+                    <button class="btn btn-danger btn-pin btn-bg1">Product</button>
+                    <button class="btn btn-success btn-pin btn-bg2">Showroom</button>
+                    <button class="btn btn-info btn-pin btn-bg3">Catalogs</button>
+                    <button class="btn btn-primary btn-pin btn-bg4 ">Site Photos</button>
+                    <button class="btn btn-warning btn-pin btn-bg5">360 Photos of Showroom</button>
+                    <button class="btn btn-danger btn-pin btn-bg6">Product</button>
+                    <button class="btn btn-success btn-pin btn-bg7">Showroom</button>
+                    <button class="btn btn-info btn-pin btn-bg8">Catalogs</button>
+                    <button class="btn btn-primary btn-pin btn-bg9 ">Site Photos</button>
+                    <button class="btn btn-warning btn-pin btn-bg10">360 Photos of Showroom</button>
+                </div>
+            </div>
+	</div>
 </div>
