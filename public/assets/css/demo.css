@@ -1120,6 +1120,9 @@
 	.btn-full-screen-edit{
 		height: 100%;
 	}
+	.btn-default-theme4{
+		height: 180px;
+	}
 	.centered-btn {
 		position: absolute;
 		top: 50%;
