@@ -1,25 +1,23 @@
 <div class="container">
   <h2>Estos son tus grupos</h2>
-  <div class="col-lg-12 no-pad scroller">
-                <div class="left-btn-scroller left-scroll ">
-                    <i class="fas fa-chevron-left"></i>
+  <div id="container-groups">
+      <div class="row">
+            @foreach($groups as $group)
+            <div class="col-3 col-md-1">
+                <div class="card div-friends text-groups">
+                <button class="btn btn-warning btn-show btn-circle btn-sm top-right btn-update" data-toggle="tooltip" title="Editar Keypl!" onclick="Friends.edit({{$group['id']}})"><i class="fas fa-pen"></i></button>
+                    <h3 class="friends-centered">{{strtoupper(substr($group->name, 0,2))}}</h3>
                 </div>
-                <div class="right-btn-scroller right-scroll ">
-                    <i class="fas fa-chevron-right"></i>
-                </div>
-                <div class="col-lg-12 no-pad btn-header-links padding-align top-adjust" id="scroll-div">
-
-                    <button class="btn btn-danger btn-pin btn-bg1">Product</button>
-                    <button class="btn btn-success btn-pin btn-bg2">Showroom</button>
-                    <button class="btn btn-info btn-pin btn-bg3">Catalogs</button>
-                    <button class="btn btn-primary btn-pin btn-bg4 ">Site Photos</button>
-                    <button class="btn btn-warning btn-pin btn-bg5">360 Photos of Showroom</button>
-                    <button class="btn btn-danger btn-pin btn-bg6">Product</button>
-                    <button class="btn btn-success btn-pin btn-bg7">Showroom</button>
-                    <button class="btn btn-info btn-pin btn-bg8">Catalogs</button>
-                    <button class="btn btn-primary btn-pin btn-bg9 ">Site Photos</button>
-                    <button class="btn btn-warning btn-pin btn-bg10">360 Photos of Showroom</button>
+                <p class="">{{$group->name}}</p>
+            </div>
+            @endforeach
+            <div class="col-3 col-md-1" onclick="Friends.create()">
+                <div class="card div-friends">
+                    <h3 class="friends-centered"><i class="fas fa-plus"></i></h3>
                 </div>
             </div>
-	</div>
+      </div>
+   
+    </div>
+
 </div>

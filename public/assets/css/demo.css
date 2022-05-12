@@ -447,6 +447,15 @@
   border: none !important;
 }
 
+.btn-circle.btn-sm {
+	width: 20px;
+	height: 20px;
+	text-align: center !important;
+	padding: 2px 0;
+	font-size: 10px;
+	line-height: 1.428571429;
+	border-radius: 15px;
+  }
 .btn-circle {
 	width: 30px;
 	height: 30px;
@@ -480,8 +489,8 @@
 
   .top-right {
 	position: absolute;
-	top: -6px;
-	right: 0px;
+	top: -10px;
+    right: -9px;
   }
 
   .top-right-btn {
@@ -1129,6 +1138,7 @@
 		left: 50%;
 		transform: translate(-50%, -50%);
 	  }
+
 	  .groove {border-style: groove;}
 	  .dashed {border-style: dashed;}
 	  @media screen and (max-width: 400px){
@@ -1148,3 +1158,131 @@
 		max-width:64px !important; 
 		max-height:64px !important;
 	}
+
+	#container-groups {
+		padding-top: 20px;
+		width: 100% !important;
+		height: 100px !important;
+		overflow-x: scroll !important;
+	  }
+  
+	  .div-friends {
+		height: 48px !important;
+	  }
+	  .div-content{
+		width:20% !important; 
+	  }
+
+	  .friends-centered {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	  }
+
+
+	  /* The container */
+.container-checkbox-keypl {
+	display: block;
+	position: relative;
+	padding-left: 35px;
+	margin-bottom: 12px;
+	cursor: pointer;
+	font-size: 22px;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+  }
+  
+  /* Hide the browser's default checkbox */
+  .container-checkbox-keypl input {
+	position: absolute;
+	opacity: 0;
+	cursor: pointer;
+	height: 0;
+	width: 0;
+  }
+  
+  /* Create a custom checkbox */
+  .checkmark-keypl {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 25px;
+	width: 25px;
+	background-color: #eee;
+  }
+  
+  /* On mouse-over, add a grey background color */
+  .container-checkbox-keypl:hover input ~ .checkmark-keypl {
+	background-color: #ccc;
+  }
+  
+  /* When the checkbox is checked, add a blue background */
+  .container-checkbox-keypl input:checked ~ .checkmark-keypl {
+	background-color: #ffa534 !important;
+  }
+  
+  /* Create the checkmark/indicator (hidden when not checked) */
+  .checkmark-keypl:after {
+	content: "";
+	position: absolute;
+	display: none;
+  }
+  
+  /* Show the checkmark when checked */
+  .container-checkbox-keypl input:checked ~ .checkmark-keypl:after {
+	display: block;
+  }
+  
+  /* Style the checkmark/indicator */
+  .container-checkbox-keypl .checkmark-keypl:after {
+	left: 9px;
+	top: 5px;
+	width: 5px;
+	height: 10px;
+	border: solid white;
+	border-width: 0 3px 3px 0;
+	-webkit-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform: rotate(45deg);
+  }
+
+  .div-group-name{
+		width: 100px;
+		height: 100px;
+		border-radius: 20px;
+		background-color: #e9ecef !important;
+  }
+
+  .btn-yellow-keypls{
+	background-color: #FFBF2F !important;
+	color:white !important;
+
+  }
+
+  .footer-add-groups{
+	  padding-bottom:15px !important;
+  }
+  
+  .vertical-center {
+	margin: 0;
+	position: absolute;
+	top: 50%;
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+  }
+  .text-groups{
+	  margin-bottom:0px;
+  }
+ .friend_groups_edit
+ {
+	 height: 171px !important;
+	 border-radius: 20px;
+
+ }
+
+ .mega_icon {
+	font-size: 50px !important; 
+ }

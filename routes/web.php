@@ -10,6 +10,7 @@ use App\Http\Controllers\web\ProfileController;
 use App\Http\Controllers\web\FriendsController;
 use App\Http\Controllers\Auth\RegisterController; 
 use App\Http\Controllers\web\FaceBookController;
+use App\Http\Controllers\web\GroupsController;
 
 
 
@@ -122,7 +123,10 @@ Route::group(['middleware'=>['auth']], function(){
         Route::get('/GeneratQR', [CardController::class, 'qrGenerator']);
 
         //friends
-        Route::get('/friends', [FriendsController::class, 'index'])->name('profile');
+        Route::get('/friends', [FriendsController::class, 'index']);
+        Route::get('/friends/createGroup', [GroupsController::class, 'create']);
+        Route::post('/friends/createGroup', [GroupsController::class, 'store']);
+        Route::get('/friends/{id}/editGroup', [GroupsController::class, 'edit']);
       
 
 });

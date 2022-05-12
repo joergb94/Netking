@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\FriendsRepository;
 use App\Repositories\GeneralRepository;
+use App\Repositories\GroupsRepository; 
+use App\Repositories\FriendsGroupRepository; 
 use App\Repositories\ResgisterUserRepository;
 use App\Http\Requests\Cards\CardsRequest;
 use App\Http\Requests\Cards\CardsIdRequest;
@@ -32,9 +34,11 @@ class FriendsController extends Controller
    *
    * @param FriendsRepository $FriendsRepository
    */
-  public function __construct(FriendsRepository $FriendsRepository)
+  public function __construct(FriendsRepository $FriendsRepository,GroupsRepository $GroupsRepository,FriendsGroupRepository $FriendsGroupRepository)
   {
       $this->FriendsRepository = $FriendsRepository;
+      $this->GruposRepository = $GroupsRepository;
+      $this->FriendsGroupRepository = $FriendsGroupRepository;
       $this->menu_id = 3;
       $this->module_name ='Categoria';
       $this->text_module = [  
@@ -56,18 +60,19 @@ class FriendsController extends Controller
    */
   public function index(Request $request){
 
-      
+           
           $search = trim($request->search);
           $criterion = trim($request->criterion);
           $status = ($request->status)? $request->status : 1;
           $data = $this->FriendsRepository->getSearchPaginated($criterion, $search,$status);
+          $groups = $this->GruposRepository->getGroups(Auth::user());
       
           $dm = accesUrl(Auth::user(),$this->menu_id);
           if($dm['access']){
               if ($request->ajax()) { 
                   return view('Friends.items.table',['data'=>$data,'dm'=>$dm]);
               }
-                  return view('Friends.index',['data'=>$data,'dm'=>$dm,'account'=>Auth::user()]);
+                  return view('Friends.index',['data'=>$data,'groups'=>$groups,'dm'=>$dm,'account'=>Auth::user()]);
 
           }
           return redirect("/");
