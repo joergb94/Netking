@@ -1,4 +1,4 @@
-<div id="index_table">
+<div >
   <div class="row">
     <!--table section-->
   

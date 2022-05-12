@@ -65,7 +65,7 @@ const Friends = {
     var type = "POST";
 
     if (state == 'update') {
-      var my_url = url + '/' + id;
+      var my_url = url + '/' + id+'/editGroup';
       var type = "POST";
     }
 
@@ -73,8 +73,8 @@ const Friends = {
   },
   delete: function (id) {
     Swal.fire({
-      title: "Do you want to Delete the Card?",
-      text: "The Card will be Eliminated",
+      title: "Do you want to Delete friend?",
+      text: "The friend will be Eliminated for the group",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -82,28 +82,31 @@ const Friends = {
       confirmButtonText: 'Yes, Delete it!'
     }).then((result) => {
       if (result.value) {
-        var my_url = url + '/' + id;
-        actions.delete(my_url);
+        var my_url = url + '/deleteOfGroup/' + id;
+        $.ajaxSetup({
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+        })
+        $.ajax({
+          type: "DELETE",
+          url: my_url,
+          success: function (data) {
+            messages(data.msg);
+            $("#friend"+data.id).remove();
+          },
+    
+          error: function (data) {
+            console.log('Error:', data);
+            messageserror(data);
+    
+          }
+        });
       }
     })
 
   },
-  restored: function (id) {
-    Swal.fire({
-      title: "Do you want to Restore the Category?",
-      text: "The Category will be Restored",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, Restore it!'
-    }).then((result) => {
-      if (result.value) {
-        var my_url = url + '/' + id;
-        actions.restored(my_url);
-      }
-    })
-  }
+
 }
 
 const transactions = { 

@@ -127,6 +127,8 @@ Route::group(['middleware'=>['auth']], function(){
         Route::get('/friends/createGroup', [GroupsController::class, 'create']);
         Route::post('/friends/createGroup', [GroupsController::class, 'store']);
         Route::get('/friends/{id}/editGroup', [GroupsController::class, 'edit']);
+        Route::post('/friends/{id}/editGroup', [GroupsController::class, 'update']);
+        Route::delete('/friends/deleteOfGroup/{id}', [GroupsController::class, 'delete']);
       
 
 });

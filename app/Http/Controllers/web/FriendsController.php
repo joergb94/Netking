@@ -70,7 +70,7 @@ class FriendsController extends Controller
           $dm = accesUrl(Auth::user(),$this->menu_id);
           if($dm['access']){
               if ($request->ajax()) { 
-                  return view('Friends.items.table',['data'=>$data,'dm'=>$dm]);
+                  return view('Friends.items.itemsGroup',['data'=>$data,'groups'=>$groups,'dm'=>$dm,'account'=>Auth::user()]);
               }
                   return view('Friends.index',['data'=>$data,'groups'=>$groups,'dm'=>$dm,'account'=>Auth::user()]);
 

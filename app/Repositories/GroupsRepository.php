@@ -80,7 +80,7 @@ class GroupsRepository
      * @throws \Throwable
      * @return Provider
      */
-    public function update($Group_id,$location, array $data): Group
+    public function update($Group_id, array $data): Group
     {
 
         $Group = $this->model->find($Group_id);

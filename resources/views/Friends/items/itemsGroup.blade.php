@@ -1,4 +1,4 @@
-<div class="container">
+<div id="index_table" class="container">
   <h2>Estos son tus grupos</h2>
   <div id="container-groups">
       <div class="row">

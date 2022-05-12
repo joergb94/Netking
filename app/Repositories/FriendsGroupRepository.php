@@ -41,7 +41,7 @@ class FriendsGroupRepository
 
                 foreach ($data as  $value) {
                         $friends = Friends::find($value['friend_id']);
-                        array_push($result,['friends'=>$friends['friends'],'cards'=>$friends['cards']]);
+                        array_push($result,['group'=>$value,'friends'=>$friends['friends'],'cards'=>$friends['cards']]);
                 }
 
         return $result;
@@ -72,15 +72,15 @@ class FriendsGroupRepository
 
     public function deleteOrResotore($FriendsGroup_id)
     {    
-        $Bval = Group::withTrashed()->find($FriendsGroup_id)->trashed();
+        $Bval = FriendsGroup::withTrashed()->find($FriendsGroup_id)->trashed();
 
         return DB::transaction(function () use ($Bval,$FriendsGroup_id) {
          
           if($Bval){
-            $FriendsGroup = Group::withTrashed()->find($FriendsGroup_id)->restore();
+            $FriendsGroup = FriendsGroup::withTrashed()->find($FriendsGroup_id)->restore();
             $b=4;
         }else{
-            $FriendsGroup = Group::find($FriendsGroup_id)->delete();
+            $FriendsGroup = FriendsGroup::find($FriendsGroup_id)->delete();
             $b=3;
         }
 

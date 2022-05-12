@@ -63,4 +63,33 @@ class GroupsController extends Controller
             $data['friendsGroups'] =  $this->FriendsGroupRepository::getFriendsGroup($data['group']->id);
             return view('Friends.editGroup', ['data' => $data]);
         }
+
+        public function update(Request $request){
+            $data = $this->GruposRepository->update($request->id,$request->input());
+            return response()->json(Answer(
+                $data['id'],
+                $this->module_name,
+                $this->text_module[1],
+                "success",
+                'yellow',
+                '1'
+            ));
+        }
+
+        public function delete(Request $request,$id){
+
+            $state=  $this->FriendsGroupRepository::deleteOrResotore($id);
+            $msg = Answer(
+                $id,
+                $this->module_name,
+                $this->text_module[$state - 1],
+                "success",
+                $state == 4 ? 'green' : 'red',
+                $state == 4 ? '1' : 'D'
+            ) ;
+            return response()->json([
+                'msg'=>$msg,
+                'id'=>$id
+            ]);
+        }
 }
