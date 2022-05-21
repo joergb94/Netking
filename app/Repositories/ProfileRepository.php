@@ -46,6 +46,26 @@ class ProfileRepository {
             throw new GeneralExeption(__('Hubo un error actualizando el usuario'));
         });
     }
+
+    
+    public function update_start(array $data,$id,$image,$path)
+    {   
+        $user = User::find($id);
+        return DB::transaction(function () use($data,$user,$image,$path){
+
+                if($user->update([
+                        'name' => $data['name'],
+                        'occupation'=>$data['occupation'],
+                        'image'=>$image,
+                        'path'=>$path
+                    ])){
+               
+                        return $user;
+                }
+                
+                
+            });
+    }
   
 
     public function get_user(){

@@ -467,34 +467,6 @@ class CardController extends Controller
             return response()->json($data);
     }
 
-    public function get_data_chart(Request $request)
-    {
-        $data = [];
-        $allData = Card::where('user_id',Auth::user()->id)->get();
-
-        foreach ($allData as $key => $card) {
-            $card = $this->CardsRepository->show($card->id);
-            $graphics = $this->CardsRepository->get_data_chart($card->id);
-            array_push($data,['graphics'=>$graphics,'card'=>$card]);
-        }
-        
-        return view('Cards.chart',['data'=>$data]);
-    }
-
-    public function get_data_chart_json(Request $request)
-    {
-        $data = [];
-        $allData = Card::where('user_id',Auth::user()->id)->get();
-
-        foreach ($allData as $key => $card) {
-            $card = $this->CardsRepository->show($card->id);
-            $graphics = $this->CardsRepository->get_data_chart($card->id);
-            array_push($data,['graphics'=>$graphics,'card'=>$card]);
-        }
-
-        return response()->json($data);
-    }
-
     public function scann_pwa(Request $request)
     {
         return view('qrscan.index');

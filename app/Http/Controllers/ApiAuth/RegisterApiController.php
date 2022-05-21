@@ -21,4 +21,5 @@ class RegisterApiController extends Controller
         $user = $this->ResgisterUserRepository->create($data);
         return response()->json(['user'=>$user,'token' => $user->createToken('null')->plainTextToken]);
     }
+    
 }

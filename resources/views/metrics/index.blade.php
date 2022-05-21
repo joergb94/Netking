@@ -1,16 +1,13 @@
 @extends('layouts.app')
 @section('style')
-    <link rel="stylesheet" href="{{ asset('css/contacs.css') }}">
-
-    </style>
 @endsection
 @section('content')
 <div class="page-inner">
 <div class="card" id="index_blade">
-  @include('Friends.items.search')
+  @include('metrics.items.search')
   <div class="card-body">
     <!--row-->
-    @include('Friends.items.table')
+    @include('metrics.items.table')
     <div id="loading" style="display:none" class="col-sm-12 text-center">
       </br></br></br>
       <div class="col-sm-12">
@@ -42,16 +39,8 @@
     <div id="show_blade2" style="display:none">
       <div id="card_show2"></div>
     </div>
-
-    <div id ="show_group" style="display:none" >
-      <div id="edit_group">
-      </div>
-    </div>
 @endsection
 @section('js')
-
   <script src="{{asset('js/chart.min.js')}}"></script>
-  <script src="{{asset('js/actions/Friends.js')}}"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.js"></script>
-
+  <script src="{{asset('js/actions/Metrics.js')}}"></script>
 @endsection

@@ -18,8 +18,8 @@ class CreateUsersTable extends Migration
             $table->string('mat', 3)->default('Use');
             $table->unsignedBigInteger('type_user_id')->default(5);
             $table->string('nickname')->nullable();
-            $table->string('name')->nullable();
-            $table->string('last_name')->nullable();
+            $table->longText('name')->nullable();
+            $table->longText('occupation')->nullable();
             $table->string('phone')->nullable();
             $table->string('street')->nullable();
             $table->string('email',90)->unique();

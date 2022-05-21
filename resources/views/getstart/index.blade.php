@@ -46,7 +46,8 @@
 
     <div class="row justify-content-center">
         <div class="col-12">
-            <form id="regForm" action="/action_page.php">
+            <form id="regForm" method="POST" action="{{ route('updateStart') }}" enctype="multipart/form-data">
+                    @csrf
                     <div class="tab">
                         @include('getstart.items.name')
                     </div>

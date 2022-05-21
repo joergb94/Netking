@@ -19,6 +19,13 @@ class GeneralController extends Controller
     }
 
     public function get_start(Request $request){
-        return view('getstart.index');
+        if(isset(Auth::user()->name)){
+            
+                return redirect('/home');
+        }else{
+            
+                return view('getstart.index');
+        }
+       
     }
 }

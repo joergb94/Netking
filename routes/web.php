@@ -11,6 +11,7 @@ use App\Http\Controllers\web\FriendsController;
 use App\Http\Controllers\Auth\RegisterController; 
 use App\Http\Controllers\web\FaceBookController;
 use App\Http\Controllers\web\GroupsController;
+use App\Http\Controllers\web\GraphicsController;
 
 
 
@@ -25,17 +26,17 @@ use App\Http\Controllers\web\GroupsController;
 |
 */
 
-// Facebook Login URL
-Route::prefix('facebook')->name('facebook.')->group( function(){        
+    // Facebook Login URL
+    Route::prefix('facebook')->name('facebook.')->group( function(){        
         Route::get('auth', [FaceBookController::class, 'loginUsingFacebook'])->name('login');
         Route::get('callback', [FaceBookController::class, 'callbackFromFacebook'])->name('callback');
     });
 
-Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
-Route::get('/register/checkedData', [RegisterController::class, 'checkedData']);
+    Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
+    Route::get('/register/checkedData', [RegisterController::class, 'checkedData']);
 
 
-Route::get('/offline', function () {    
+    Route::get('/offline', function () {    
         return view('modules/laravelpwa/offline');
     });
     
@@ -49,9 +50,10 @@ Route::get('/qr/scanPWA', [CardController::class, 'scann_pwa']);
 Auth::routes();
 
 Route::group(['middleware'=>['auth']], function(){
-
+    
         Route::post('/Keypls/{id}/follow', [CardController::class, 'friendship']); 
         Route::get('/getStart', [GeneralController::class, 'get_start']);
+        Route::post('/updateStart', [ProfileController::class, 'update_start'])->name('updateStart');
        
         //home 
         Route::get('/home', [HomeController::class, 'index'])->name('home');
@@ -99,14 +101,14 @@ Route::group(['middleware'=>['auth']], function(){
         Route::post('/myKepls/update_asinc/{id}', [CardController::class, 'update_asinc']);
         Route::post('/myKepls/update_asinc_network/{id}', [CardController::class, 'update_asinc_network']);
         Route::post('/myKepls/update_asinc_theme/{id}', [CardController::class, 'update_theme']);
-        Route::get('/myKepls/graphics', [CardController::class, 'get_data_chart']);
-        Route::get('/myKepls/get_graphics', [CardController::class, 'get_data_chart_json']);
         Route::put('/myKepls/dragAndDrop', [CardController::class, 'drag_and_drop_order']);
         Route::get('/myKepls/show_add_type_item', [CardController::class, 'show_add_type_item']);
         Route::post('/update_type_items', [CardController::class, 'update_type_item']);
 
         
-
+        //metrics 
+        Route::get('/metrics', [GraphicsController::class, 'get_data_chart']);
+        Route::get('/metrics/get_graphics', [GraphicsController::class, 'get_data_chart_json']);
         
 
         //profile
@@ -129,6 +131,8 @@ Route::group(['middleware'=>['auth']], function(){
         Route::get('/friends/{id}/editGroup', [GroupsController::class, 'edit']);
         Route::post('/friends/{id}/editGroup', [GroupsController::class, 'update']);
         Route::delete('/friends/deleteOfGroup/{id}', [GroupsController::class, 'delete']);
+        Route::get('/friends/{id}/addGroup', [GroupsController::class, 'add_to_group']);
+        Route::post('/friends/{id}/addGroup', [GroupsController::class, 'store_to_group']);
       
 
 });

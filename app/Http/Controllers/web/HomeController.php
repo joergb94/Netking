@@ -33,13 +33,17 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index(Request $request)
-    {    
-        $search = trim($request->search);
-        $data = $this->HomeRepository->getSearchPaginated($search);
-        if ($request->ajax()) {
-            return view('home.items.content-keypls', ['data' => $data]);
+    {   
+        if(isset(Auth::user()->name)){ 
+            $search = trim($request->search);
+            $data = $this->HomeRepository->getSearchPaginated($search);
+            if ($request->ajax()) {
+                return view('home.items.content-keypls', ['data' => $data]);
+            }
+            return view('home.index',['dm'=>accesUrl(Auth::user(),1),'data'=>$data,'account'=>Auth::user()]);
+        }else{
+            return redirect('/getStart');
         }
-        return view('home.index',['dm'=>accesUrl(Auth::user(),1),'data'=>$data,'account'=>Auth::user()]);
     }
 
     public function deleteOrResotore(Request $request){
@@ -51,7 +55,6 @@ class HomeController extends Controller
     }
 
     public function keypls_data(Request $request){
-        
         return response()->json($this->HomeRepository->keyplsViews(Auth::user()));
     }
 

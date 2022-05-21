@@ -16,7 +16,7 @@
                                 <p>Podrias decirnos ¿a que te dedicas?</p>
 
                                         <div class="form-group form-floating-label">
-                                            <input id="name" type="name" class="form-control @error('name') is-invalid @enderror input-border-bottom" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                            <input id="ocupation" type="text" name="occupation" class="form-control @error('ocupation') is-invalid @enderror input-border-bottom" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
                                             <label for="username" class="placeholder">ME DEDICO A</label>
                                             @error('email')
                                                 <span class="invalid-feedback" role="alert">

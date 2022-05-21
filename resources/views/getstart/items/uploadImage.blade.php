@@ -16,7 +16,7 @@
                                     <p>Agregar la foto que mas te guste para tu perfil</p>
 
                                     <div class="form-group form-floating-label" >
-                                        <input id="name" type="name" class="form-control @error('name') is-invalid @enderror input-border-bottom" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                        <input id="image_update_start" type="file" name="image" class="form-control @error('image') is-invalid @enderror input-border-bottom" required autofocus>
                                         <label for="username" class="placeholder">ME DEDICO A</label>
                                         @error('email')
                                             <span class="invalid-feedback" role="alert">

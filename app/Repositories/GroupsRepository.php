@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Exceptions\GeneralException;
 use App\Models\Group;
 use App\Models\FriendsGroup;
+use App\Models\Friends;
 use App\Repositories\FriendsGroupRepository; 
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
@@ -118,5 +119,23 @@ class GroupsRepository
         throw new GeneralException(__('Error deleteOrResotore of Group.'));
 
       });
-  }
+    }
+    public function take_ids_friendsgroup($Group_id){
+        $friends = array();
+        $group = FriendsGroup::where('group_id',$Group_id)->get();
+
+        foreach ($group as $friend) {
+           array_push($friends,$friend['friend_id']);
+        }
+
+        return $friends;
+    }
+    public function get_friends_without_group($Group_id){
+        $friends_ids = GroupsRepository::take_ids_friendsgroup($Group_id);
+        $data = Friends::where('user_id',Auth::user()->id)
+                            ->whereNotIn('id',$friends_ids)
+                            ->get();
+
+        return $data;
+    }
 }

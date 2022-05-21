@@ -103,8 +103,8 @@ class ProfileController extends Controller
             $file_path = '/images/user/profile/';
             $image->move(public_path() . '/images/user/profile/', $nameImg);
         } else {
-            $nameImg = $user->image;
-            $file_path = $user->path;
+            $nameImg = isset($user->image)? $user->image : NULL;
+            $file_path = isset($user->path)? $user->path : NULL;
         }
         $data = $this->ProfileRepository->update($request->input(),$id,$nameImg,$file_path);
         $membership = Membership::where('user_id',$id)->with('type_memberships')->get();
@@ -117,6 +117,25 @@ class ProfileController extends Controller
             '1'
         ));
        }
+    }
+
+    public function update_start(Request $request){
+        $user = User::find(Auth::user()->id);
+        if ($request['image']) {
+            $image = $request->file('image');
+            $nameImg = $image->getClientOriginalName();
+            $file_path = '/images/user/profile/';
+            $image->move(public_path() . '/images/user/profile/', $nameImg);
+        } else {
+            $nameImg = $user->image;
+            $file_path = $user->path;
+        }
+
+        $data = $this->ProfileRepository->update_start($request->input(),$user->id,$nameImg,$file_path);
+     
+        if(isset($data)){
+            return redirect('/home'); 
+        }
     }
     public function get_user(Request $request,$id)
     {

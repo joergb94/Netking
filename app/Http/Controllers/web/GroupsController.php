@@ -92,4 +92,26 @@ class GroupsController extends Controller
                 'id'=>$id
             ]);
         }
+
+        public function add_to_group(Request $request,$Group_id){
+
+            $data['user'] = Auth::user();
+            $data['group'] = Group::find($Group_id);
+            $data['friends'] = $this->GruposRepository->get_friends_without_group($Group_id);
+
+            return view('Friends.addGroup', ['data' => $data]);
+        }
+
+        public function store_to_group(Request $request,$Group_id){
+            foreach ($request->friends as $friend) {
+                $this->FriendsGroupRepository->create([
+                    'group_id'=>$Group_id,
+                    'friend_id'=>$friend
+                ]);
+            }
+
+            $data['group'] = Group::find($Group_id);
+            $data['friendsGroups'] =  $this->FriendsGroupRepository::getFriendsGroup($Group_id);
+            return view('Friends.items.edit.list', ['data' => $data]);
+        }
 }

@@ -15,31 +15,6 @@
                         <h1>Bienvenidx a keypl</h1>
                         <form method="POST" action="{{ route('register') }}">
                             @csrf
-
-                            <div class="form-group form-floating-label">
-
-                                    <input id="name" type="text" class="form-control @error('name') is-invalid  @enderror input-border-bottom" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-                                    <label for="name" class="placeholder">{{ __('NOMBRE(S)') }}</label>
-                                    @error('name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                        
-                            </div>
-
-                            <div class="form-group form-floating-label">
-
-                                    <input id="last_name" type="text" class="form-control @error('last_name') is-invalid @enderror input-border-bottom" name="last_name" value="{{ old('last_name') }}" required autocomplete="last_name" autofocus>
-                                    <label for="last_name" class="placeholder">{{ __('APELLIDO(S)') }}</label>
-                                    @error('last_name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                            
-                            </div>
-
                             <div class="form-group form-floating-label">
 
                                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror input-border-bottom" name="email" value="{{ old('email') }}" required autocomplete="email">

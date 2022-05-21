@@ -1067,6 +1067,19 @@
 		min-height: 55px !important;
 	  }
 
+	  .nav-link-keypls {
+		display: block !important;
+		padding: 0.5rem 1rem !important;
+	  }
+
+	  @media screen and (max-width: 768px){
+		.nav-link-keypls {
+			display: block !important;
+			padding: 0.5rem 0.3rem !important
+		  }
+	}
+	  
+
 	  #main-keypl{
 		margin-bottom: 50px !important;
 	  }
@@ -1285,4 +1298,10 @@
 
  .mega_icon {
 	font-size: 50px !important; 
+ }
+
+ #friends-list-edit{
+
+	 max-height: 667px;
+	 overflow-y: scroll;
  }

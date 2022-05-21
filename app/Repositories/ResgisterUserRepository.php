@@ -118,15 +118,15 @@ class ResgisterUserRepository
 
             $User = $this->model::create([
                 'type_user_id'=>$this->type_user,
-                'name' => $data['name'],
-                'last_name' => $data['last_name'],
                 'email' => $data['email'],
                 'password' => Hash::make($data['password']),
             ]);
-            $fInfo=explode(' ', $data['name']);
-            $sInfo=explode(' ', $data['last_name']);
+
+            $fnick=explode('@', $User['email']);
             $usernickname = User::find($User->id);
-            if($usernickname->update(['nickname'=>$fInfo[0].$sInfo[0].$User->id])){
+
+            if($usernickname->update(['nickname'=>$fnick[0].$User->id])){
+           
                 if($User){
                         $Membership = ResgisterUserRepository::createMembership($User);
                             if($Membership){
@@ -135,13 +135,12 @@ class ResgisterUserRepository
                             }   
         
                 }
+            
             }
-
             throw new GeneralException(__('There was an error created the User.'));
         });
     }
     
-
     public function create_only_card($User){
 
         return DB::transaction(function () use ($User) {
