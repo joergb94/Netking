@@ -1,24 +1,12 @@
 <div class="col-12" id="index_table">
 		<div class="row">
 			<div class="col-12 text-center">
-						<h2>{{Auth::user()->name}} {{Auth::user()->last_name}}</h2>
-						<img class="img-circle rounded-circle profile-img mx-auto d-block" src='{{(Auth::user()->image)?Auth::user()->path.Auth::user()->image:asset("img/profile.jpg")}}' />
+						<h5 class="text-my-keypls" >{{Auth::user()->name}} {{Auth::user()->last_name}}</h5>
+						<img class="img-my-keypls mx-auto d-block" src='{{(Auth::user()->image)?Auth::user()->path.Auth::user()->image:asset("img/profile.jpg")}}' />
 			</div>
 			<div class="col-12 Text-left">
 				<br>
 				<h3>CUENTA</h3>
-			</div>
-			<div class="col-12 style-profile" onclick="Profile.edit()">
-				<div class="row">
-					<div class="col-10">
-						Categoria
-					</div>
-					<div class="col-2">
-						<h2 class="float-right">
-							<i class="fa fa-angle-right"></i>
-						</h2>
-					</div>
-				</div>
 			</div>
 			<div class="col-12 style-profile" onclick="Profile.edit()">
 				<div class="row">

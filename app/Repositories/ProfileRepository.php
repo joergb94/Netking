@@ -33,7 +33,6 @@ class ProfileRepository {
         return DB::transaction(function () use($data,$user,$image,$path){
             if($user->update([
                 'name'=>$data['name'],
-                'last_name'=>$data['last_name'],
                 'street'=>$data['street'],
                 'email'=>$data['email'],
                 'nickname'=>$data['nickname'],

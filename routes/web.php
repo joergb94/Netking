@@ -54,6 +54,7 @@ Route::group(['middleware'=>['auth']], function(){
         Route::post('/Keypls/{id}/follow', [CardController::class, 'friendship']); 
         Route::get('/getStart', [GeneralController::class, 'get_start']);
         Route::post('/updateStart', [ProfileController::class, 'update_start'])->name('updateStart');
+        Route::post('/updateStartno', [ProfileController::class, 'update_start_no']);
        
         //home 
         Route::get('/home', [HomeController::class, 'index'])->name('home');

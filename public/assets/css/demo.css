@@ -892,11 +892,24 @@
 	}
 
 	.img-my-keypls{
-		width: 75px !important;
-		height: 75px !important;
+		width: 150px !important;
+		height: 150px !important;
 		border-radius:50%;
 		-moz-border-radius:50%;
 		-webkit-border-radius:50%;
+	}
+	@media screen and (max-width: 576px){
+		.img-my-keypls{
+			width: 115px !important;
+			height: 115px !important;
+			border-radius:50%;
+			-moz-border-radius:50%;
+			-webkit-border-radius:50%;
+		}
+	}
+
+	.text-my-keypls{
+		font-size: 15px !important;
 	}
 
 
@@ -1123,6 +1136,10 @@
 		border-bottom-color: #999999 !important;
 	}
 
+	.style-profile:active{
+		color: #FFBF2F !important;
+	}
+
 	.profile-img{
 		width:200px !important; 
 		height:200px !important;
@@ -1301,7 +1318,18 @@
  }
 
  #friends-list-edit{
-
 	 max-height: 667px;
 	 overflow-y: scroll;
  }
+
+ .image-start{
+	width: 250px !important;
+	height: 250px !important;
+  }
+
+ @media screen and (min-width: 800px){
+	.image-start{
+		max-width: 500px !important;
+		max-height: 500px !important;
+	}
+}

@@ -14,7 +14,7 @@
             <div class="row justify-content-center">
                 @foreach($themes as  $theme)
                 @if($theme->id != 3)
-                    <div class="col-4">
+                    <div class="col-12 col-sm-4 col-md-4 col-lg-4">
                       <div class="col-12 btn-outline-warning" onclick="Cards.create_card({{$theme->id}})">
                             <br>
                             <img class="img-fluid theme-keypl mx-auto d-block" src="{{ asset('images/'.$theme->image)}}" alt="{{$theme->name}}">

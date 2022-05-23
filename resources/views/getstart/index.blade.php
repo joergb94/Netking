@@ -68,13 +68,16 @@
                         <span class="step"></span>
                     </div>
                     <div class="col-12 col-sm-4 mx-auto d-block" style="overflow:auto;">
-                        <button type="button" class="btn bg-keypl btn-block" id="nextBtn" onclick="nextPrev(1)">SIGUIENTE PASO</button>
+                        <button type="button" class="btn bg-keypl btn-block btn-rounded-keypls-start" id="nextBtn" onclick="nextPrev(1)">SIGUIENTE PASO</button>
+                        <button type="button" class="btn btn-gray btn-block btn-rounded-keypls-start" id="noCreateKeypl" style="display:none">MEJOR LUEGO</button>
                     </div>
                   
             </form>
         </div>
     </div>
 </div>
+    <input id="baseUrl" type="hidden" value="{{ \Request::root() }}">
+		<input id="url" type="hidden" value="{{ \Request::url() }}">
 @endsection
 @section('js')
   <script src="{{asset('js/actions/getstart.js')}}"></script>

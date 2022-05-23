@@ -7,7 +7,7 @@
                     <div class="row">
                         <di class="col-12">
                             <div class="col-12 col-sm-4 mx-auto d-block">
-                                <img class="img-fluid" src="{{asset('img/description.png')}}" alt="">
+                                <img class="img-fluid image-start" src="{{asset('img/description.png')}}" alt="">
                             </div>
                         </di>
                        <div class="col-12">

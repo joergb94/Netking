@@ -1,8 +1,9 @@
 @extends('layouts.app')
 @section('style')
- <style>body {
-    background-color:#e6e6e6;
-  }
+ <style>
+  body {
+      background-color:#e6e6e6;
+    }
  </style>
 @endsection
 @section('content')

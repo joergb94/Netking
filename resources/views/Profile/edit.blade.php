@@ -18,10 +18,6 @@
                             <input type="text" class="form-control" name="name" id="name" value="{{$data->name}}" />
                         </div>
                         <div class="form-group">
-                            <h5 class="card-title">Last Name:</h5>
-                            <input type="text" class="form-control" name="last_name" id="last_name" value="{{$data->last_name}}" />
-                        </div>
-                        <div class="form-group">
                             <h5 class="card-title">Street:</h5>
                             <input type="text" class="form-control" name="street" id="street" value="{{$data->street}}" />
                         </div>
@@ -40,9 +36,9 @@
                         <div class="form-group">
                             <h5 class="card-title">Imagen de perfil:</h5>
                                 <div class="custom-file mb-3">
-                                <input type="file" class="custom-file-input custom-file-input-img" id="imgInp{{$data->id}}" value="{{$data->path.$data->image}}" name="image">
-                                <label class="custom-file-label" for="PDF">Choose file</label>
-                            </div>
+                                  <input type="file" class="custom-file-input custom-file-input-img" id="imgInp{{$data->id}}" value="{{$data->path.$data->image}}" name="image">
+                                  <label class="custom-file-label" for="PDF">Choose file</label>
+                                </div>
                         </div>     
                     </form>
                 </div>

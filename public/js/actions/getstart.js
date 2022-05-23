@@ -1,5 +1,13 @@
+var url = $('#url').val();
+var baseUrl = $('#baseUrl').val();
 var currentTab = 0; // Current tab is set to be the first tab (0)
 showTab(currentTab); // Display the current tab
+document.getElementById('noCreateKeypl').onclick = nocreate;
+
+function nocreate(){
+    $("#regForm").attr("action", baseUrl+"/updateStartno");
+    document.getElementById("regForm").submit();
+}
 
 function showTab(n) {
   // This function will display the specified tab of the form...
@@ -12,9 +20,10 @@ function showTab(n) {
     document.getElementById("prevBtn").style.display = "inline";
   }
   if (n == (x.length - 1)) {
-    document.getElementById("nextBtn").innerHTML = "Submit";
+    document.getElementById("nextBtn").innerHTML = "MENCANTARIA";
+    document.getElementById("noCreateKeypl").style.display = "block";
   } else {
-    document.getElementById("nextBtn").innerHTML = "Next";
+    document.getElementById("nextBtn").innerHTML = "SIGUIENTE PASO";
   }
   //... and run a function that will display the correct step indicator:
   fixStepIndicator(n)
@@ -70,3 +79,15 @@ function fixStepIndicator(n) {
   //... and adds the "active" class on the current step:
   x[n].className += " active";
 }
+
+document.getElementById('image_update_start').onchange = evt => {
+  const [file] = document.getElementById('image_update_start').files
+  if (file) {
+
+    document.getElementById('image-start').src = URL.createObjectURL(file)
+  }
+}
+$(".custom-file-input-img").on("change", function() {
+  var fileName = $(this).val().split("\\").pop();
+  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+});

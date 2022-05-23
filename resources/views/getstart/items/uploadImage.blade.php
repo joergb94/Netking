@@ -7,8 +7,9 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="col-12 col-sm-4 mx-auto d-block">
-                                <img class="img-fluid" src="{{asset('img/image.png')}}" alt="">
+                                <img id="image-start" class="img-fluid rounded-circle image-start" src="{{asset('img/image.png')}}" alt="">
                             </div> 
+                            <br>
                         </div>
                         <div class="col-12">
                             <div class="col-12 col-sm-4 mx-auto d-block">

@@ -134,6 +134,25 @@ class ProfileController extends Controller
         $data = $this->ProfileRepository->update_start($request->input(),$user->id,$nameImg,$file_path);
      
         if(isset($data)){
+            return redirect('/MyFirstKeypl'); 
+        }
+    }
+
+    public function update_start_no(Request $request){
+        $user = User::find(Auth::user()->id);
+        if ($request['image']) {
+            $image = $request->file('image');
+            $nameImg = $image->getClientOriginalName();
+            $file_path = '/images/user/profile/';
+            $image->move(public_path() . '/images/user/profile/', $nameImg);
+        } else {
+            $nameImg = $user->image;
+            $file_path = $user->path;
+        }
+
+        $data = $this->ProfileRepository->update_start($request->input(),$user->id,$nameImg,$file_path);
+     
+        if(isset($data)){
             return redirect('/home'); 
         }
     }
