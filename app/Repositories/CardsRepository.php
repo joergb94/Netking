@@ -186,6 +186,7 @@ class CardsRepository
     { 
         $Card = $this->model->find($Card_id);
         $Card_style = Cards_style_detail::where('card_id',$Card_id)->first();
+       
         return DB::transaction(function () use ($Card, $data,$location,$Card_style,$Card_id,$image,$path) {
             if ($Card->update([
                 'location' => $location,
@@ -203,6 +204,7 @@ class CardsRepository
                 'shape'=>0,
                 'outline'=>0
                 ]);
+              
                 if(isset($data['networks']))
                 {
                     $Card_network = $this->card_detail_network::where('card_id', $Card_id)->delete();
@@ -257,8 +259,46 @@ class CardsRepository
                 'button_style'=>strlen($data['button_style']) > 0?$data['button_style']:0
                 ]);
 
+                return $Card;
+            }
+
+            throw new GeneralException(__('There was an error updating the Card.'));
+        });
+    }
+
+    public function update_asinc_network($Card_id, array $data,$image,$path)
+    {  
+        $Card = $this->model->find($Card_id);
+        $Card_style = Cards_style_detail::where('card_id',$Card_id)->first();
+        
+        return DB::transaction(function () use ($Card, $data,$Card_style,$Card_id,$image,$path) {
+            if ($Card->update([
+                'location' => $data['location']?$data['location']:null,
+                'themes_id' => $data['theme']?$data['theme']:$Card['themes_id'],
+                'large_text' => $data['large_text']?$data['large_text']:null,
+                'text_style_id'=>$data['text_style_id']?$data['text_style_id']:1,
+                'background_image_id' =>$data['background'],
+                'background_image_color' =>$data['background_image_color']?$data['background_image_color']:'#000000',
+                'color' => $data['color']?$data['color']:'#fff',
+                'img_name' => $image?$image:null,
+                'img_path' => $path?$path:null,
+                'img_base_64'=>$data['img_base_64']?$data['img_base_64']:$Card['img_base_64']
+            ])) {
+                $Card_style->update([
+                'shape_image'=>$data['shape_image']?$data['shape_image']:0,
+                'divs_shape'=>$data['divs_shape']?$data['divs_shape']:0,
+                'buttons_shape'=>$data['buttons_shape']?$data['buttons_shape']:0,
+                'head_orientation'=>$data['head_orientation']?$data['head_orientation']:0,
+                'shape'=>0,
+                'outline'=>0,
+                'background_color'=>strlen($data['background_color']) > 0?$data['background_color']:1,
+                'button_style'=>strlen($data['button_style']) > 0?$data['button_style']:0
+                ]);
+
                 if(isset($data['networks']))
-                {
+                {   
+
+                
                     $Card_network = $this->card_detail_network::where('card_id', $Card_id)->delete();
                     foreach ((array)$data['networks'] as $network) {
                         $ns = json_decode($network);
@@ -407,7 +447,7 @@ class CardsRepository
     }
 
     public function update_card_detail_item($id,$data)
-    {
+    {       
             $card_item = Card_detail::find($id);
 
             return DB::transaction(function () use ($card_item,$data) {
@@ -482,7 +522,7 @@ class CardsRepository
     }
 
     public function delete_item($id)
-    {
+    {       
             return DB::transaction(function () use ($id) {
                 $card_item = Card_detail::find($id)->delete();
                 $b=3;

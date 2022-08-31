@@ -33,7 +33,6 @@ class HomeApiController extends Controller
             $search = trim($request->search);
             $criterion = trim($request->criterion);
             $status = ($request->status)? $request->status : 1;
-
-        return response()->json($this->HomeRepository->getSearchPaginated($criterion, $search, $status));
+        return response()->json($this->HomeRepository->getSearchPaginated($criterion, $search, $status), 201);
     }
 }

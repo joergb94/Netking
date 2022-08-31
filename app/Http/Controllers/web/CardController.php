@@ -184,7 +184,7 @@ class CardController extends Controller
                     $nameImg = $card->img_name;
                     $file_path = $card->img_path;
                 }
-                $data = $this->CardsRepository->update_asinc($detail['card_id'], $request->input(), $nameImg, $file_path);
+                $data = $this->CardsRepository->update_asinc_network($detail['card_id'], $request->input(), $nameImg, $file_path);
         
             
                 if(Card::where('id',$data['id'])->exists()){
@@ -491,7 +491,7 @@ class CardController extends Controller
     }
 
     public function show_add_type_item(Request $request){
-        $items = Cards_items::whereNotIn('id',[1,2,4,9])->get();
+        $items = Cards_items::whereNotIn('id',[1,2,4,9,11])->get();
         $id=$request->id;
         return view('Cards.itemsUpdate.itemsForm.modalAddType',['items'=>$items,'id'=>$id]);
     }

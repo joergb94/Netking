@@ -1,11 +1,11 @@
 
        <div class="row justify-content-between">
                 @if(isset($cardItems[0]))
-          
+                    @if(isset($cardItems[0]))
                     <div class="col-6 no-margin theme{{$data['themes_id']}}-padding" id="div-{{$cardItems[0]['card_detail']->id}}">
                              @include('Cards.itemsUpdate.itemsKeypl.div'.$cardItems[0]['item']->id,['ci' => $cardItems[0],'template'=>250,'theme_shape'=>'theme3-shape1 float-right'])
                     </div>
-             
+                    @endif
                 @endif
                 @if(isset($cardItems[1]))
                     <div class="col-6 no-margin theme{{$data['themes_id']}}-padding" id="div-{{$cardItems[1]['card_detail']->id}}">

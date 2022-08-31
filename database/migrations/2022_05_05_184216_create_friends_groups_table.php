@@ -21,9 +21,6 @@ class CreateFriendsGroupsTable extends Migration
             $table->unsignedTinyInteger('active')->default(1);
             $table->timestamps();
             $table->softDeletes();
-             //foreing key 
-             $table->foreign('friend_id')->references('id')->on('friends')->onDelete('cascade'); 
-             $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade'); 
     
         });
     }

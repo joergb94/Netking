@@ -46,7 +46,7 @@
 					 title="YouTube video player" 
 					 frameborder="0" 
 					 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen autoplay></iframe>
-					 <button class="btn btn-warning btn-block btn-update no-margin" onclick="video_hide()"><i class='fas fa-edit'></i></button>
+				<button class="btn btn-danger btn-block btn-update no-margin" onclick="video_hide()">Saltar <i class="fas fa-angle-right"></i></button>
 		</div>
 	</body>
 <script>

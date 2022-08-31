@@ -80,6 +80,7 @@ Route::group(['middleware'=>['auth']], function(){
         Route::post('/MyFirstKeypl/create/item', [CardController::class, 'create_item']);
         Route::delete('/MyFirstKeypl/delete/item/{id}', [CardController::class, 'delete_item']);
         Route::post('/MyFirstKeypl/update_asinc/{id}', [CardController::class, 'update_asinc']);
+        Route::get('/MyFirstKeypl/show_add_type_item', [CardController::class, 'show_add_type_item']);
         Route::post('/MyFirstKeypl/update_asinc_network/{id}', [CardController::class, 'update_asinc_network']);
         Route::post('/MyFirstKeypl/update_asinc_theme/{id}', [CardController::class, 'update_theme']);
 
