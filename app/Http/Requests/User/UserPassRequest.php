@@ -1,34 +1,33 @@
 <?php
 
-namespace App\Http\Requests\Api\Friend;
-
+namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class StoreGroupRequest extends FormRequest
+class UserPassRequest extends FormRequest
 {
-     /**
+    /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(Request $request)
     {
-        return validateAccess(Auth::user(),1);
+        return true; 
     }
+
 
     /**
      * Get the validation rules that apply to the request.
      *
      * @return array
      */
-    public function rules()
+    public function rules(Request $request)
     {
         return [
-            'name' => "required|max:100",
-            'friends' =>"required"
+            'password' => 'required|confirmed|min:8',
         ];
     }
 }

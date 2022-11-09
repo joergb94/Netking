@@ -3,11 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\Api\Cards\updateItemRequest;
-use App\Http\Requests\Api\Cards\storeItemRequest; 
-use App\Http\Requests\Api\Cards\DeleteItemRequest;
-use App\Http\Requests\Api\Cards\IdCardRequest;
-use App\Http\Requests\Cards\CardsStoreRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Card;
 use App\Models\Card_detail;
@@ -29,35 +24,6 @@ class CardController extends Controller
     {
        $this->CardRepository = $CardRepository;
        $this->homeRepository = $homeRepository;
-    }
-
-    public function store(CardsStoreRequest $request)
-    {   
-        $status = $this->GeneralRepository->card_max();
-        if ($status) {
-            $theme = Theme_detail::find($request['theme']);
-            $data =  [
-                'user_id'=>Auth::user()->id,
-                'shape_image' => $theme['shape_image'],
-                'head_orientation' => $theme['head_orientation'],
-                'divs_shape' => $theme['divs_shape'],
-                'buttons_shape' => $theme['buttons_shape'],
-                'color' => $theme['color'],
-                'background_image_color' =>$theme['background_image_color'],
-                'large_text' => $theme['large_text'],
-                'text_style_id' => $theme['text_style_id'],
-                'theme' => $request['theme'],
-                'background' => $theme['background_image_id'],
-                'background_color' => $theme['background_color'],
-                'location' => $request['location'],
-                'img_base_64' =>$request['img_base_64'],
-                'networks' =>$request['networks']
-            ];
-            $result = $this->CardsRepository->create($data,null,null);
-            return $result;
-        }else{
-            return response()->json($status);
-        }
     }
 
     public function get_keypls(Request $request){
@@ -82,14 +48,14 @@ class CardController extends Controller
         return response()->json($data,200);
     }
 
-    public function update_card_item(updateItemRequest $request){
-        $data = $this->CardRepository->update_card_detail_item($request->card_detail_id,$request->input());
+    public function update_card_item(Request $request,$id){
+        $data = $this->CardRepository->update_card_detail_item($id,$request->input());
         return response()->json($data, 201);
     }
-    public function create_detail(storeItemRequest $request){
-        $card = Card::find($request->card_id);
+    public function create_detail(Request $request,$id){
+        $card = Card::find($id);
         $card_detail = Card_detail::create([
-            'card_id'=> $request->card_id,
+            'card_id'=> $id,
             'card_item_id'=>$request->card_item_id,
             'name' => (strlen($request->name)>0)?$request->name:'',
             'description' => (strlen($request->description)>0)?$request->description:'',
@@ -98,9 +64,8 @@ class CardController extends Controller
         return response()->json($card_detail, 201);
     }
 
-    public function detail(IdCardRequest $request)
-    {       
-            $idStr =explode("?",$request->card_id);
+    public function detail(Request $request, $id)
+    {       $idStr =explode("?", $id);
         
             if(Card::where('id',$idStr[0])->exists()){
                 if (Auth::guest()){
@@ -108,9 +73,9 @@ class CardController extends Controller
 
                     }else{
                         $user = Auth::user();
-                        $check = Card::find($request->card_id);
+                        $check = Card::find($id);
                         if($user->id !==  $check->user_id){
-                            $this->CardRepository->create_views($request->card_id,2);
+                            $this->CardRepository->create_views($id,2);
                         }
                    }
     
@@ -120,13 +85,28 @@ class CardController extends Controller
 
     }
 
-    public function deleteOrResotore(DeleteItemRequest $request)
+    public function deleteOrResotore(Request $request,$Card_id)
     {    
-        $data = $this->CardRepository->delete_item($request->card_detail_id);
-        return response()->json([
-                'msg'=>"deleted",
-                'id'=>$request->card_detail_id
-            ], 201);
+        $Bval = Card_detail::withTrashed()->find($Card_id)->trashed();
+
+        return DB::transaction(function () use ($Bval,$Card_id) {
+         
+          if($Bval){
+            $Card = Card_detail::withTrashed()->find($Card_id)->restore();
+            $b=4;
+        }else{
+            $Card = Card_detail::find($Card_id)->delete();
+            $b=3;
+        }
+
+        if ($b) {
+            return $b;
+        }
+
+        throw new GeneralException(__('Error deleteOrResotore of Card.'));
+
+      });
+      return response()->json(['data'=>'gola'], 201);
     }
 
     public function metrics(Request $request)
@@ -152,8 +132,8 @@ class CardController extends Controller
             $graphics = $this->CardRepository->get_data_chart($card->id);
             array_push($data,['graphics'=>$graphics,'card'=>$card]);
         }
-        return response()->json($data);
-     
+        
+        return view('Cards.metricas',['data'=>$data]);
     }
 
     

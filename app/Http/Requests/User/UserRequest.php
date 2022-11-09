@@ -1,21 +1,21 @@
 <?php
 
-namespace App\Http\Requests\Api\Cards;
+namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class storeItemRequest extends FormRequest
+class UserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(Request $request)
     {
-        return validateAccess(Auth::user(),1);
+        return true; 
     }
 
     /**
@@ -26,10 +26,7 @@ class storeItemRequest extends FormRequest
     public function rules()
     {
         return [
-            'card_id'=> "required",
-            'card_item_id'=>"required",
-            'name' => "nullable|max:100",
-            'description' =>"nullable|max:100"
+        
         ];
     }
 }

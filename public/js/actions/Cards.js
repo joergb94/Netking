@@ -134,7 +134,7 @@ const transactions = {
             var nbutton = $(this).children('.n-button').val();
             var id = $(this).children('.ns-id').val();
             var nsDerailId = $(this).children('.ns-detail-id').val();
-        
+
             ns.push({
               link:link,
               ns_id:id,

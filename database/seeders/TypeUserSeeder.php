@@ -16,7 +16,8 @@ class TypeUserSeeder extends Seeder
     public function run()
     {
         $types = [
-                      ['mat'=> 'TYU','name'=> 'Admin','max_cards'=> 10,'active'=> 1,],
+                      ['mat'=> 'TYU','name'=> 'Admin','max_cards'=> 0,'active'=> 1,],
+                      ['mat'=> 'TYU','name'=> 'Company','max_cards'=> 10,'active'=> 1,],
                       ['mat'=> 'TYU','name'=> 'Manager','max_cards'=> 5,'active'=> 1,], 
                       ['mat'=> 'TYU','name'=> 'User','max_cards'=> 1,'active'=> 1,],       ];
 
@@ -25,6 +26,13 @@ class TypeUserSeeder extends Seeder
             }
             $tu_prof = [
                 //Admin
+                  ['type_user_id'=> 1,'data_menu_id'=> 1,'active'=> 1,],
+                  ['type_user_id'=> 1,'data_menu_id'=> 2,'active'=> 1,],
+                  ['type_user_id'=> 1,'data_menu_id'=> 3,'active'=> 1,],
+                  ['type_user_id'=> 1,'data_menu_id'=> 4,'active'=> 1,],
+                  ['type_user_id'=> 1,'data_menu_id'=> 5,'active'=> 1,],
+
+              //Company
                   ['type_user_id'=> 1,'data_menu_id'=> 1,'active'=> 1,],
                   ['type_user_id'=> 1,'data_menu_id'=> 2,'active'=> 1,],
                   ['type_user_id'=> 1,'data_menu_id'=> 3,'active'=> 1,],

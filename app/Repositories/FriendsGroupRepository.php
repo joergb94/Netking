@@ -6,7 +6,6 @@ use App\Exceptions\GeneralException;
 use App\Models\Group;
 use App\Models\FriendsGroup;
 use App\Models\Friends;
-use App\Models\User;
 use App\Models\Card;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
@@ -39,10 +38,10 @@ class FriendsGroupRepository
         $data =  FriendsGroup::where('group_id',$group_id)
                             ->orderBy('id', 'desc')
                             ->get(); 
+
                 foreach ($data as  $value) {
-                        $user = User::find($value['friend_id']);
-                       
-                        array_push($result,['group_friend'=>$value,'friend'=>$user]);
+                        $friends = Friends::find($value['friend_id']);
+                        array_push($result,['group'=>$value,'friends'=>$friends['friends'],'cards'=>$friends['cards']]);
                 }
 
         return $result;
@@ -55,20 +54,19 @@ class FriendsGroupRepository
      * @throws \Throwable
      * @return Providers
      */
-    public function createMemberGroup(array $data): FriendsGroup
+    public function create(array $data): FriendsGroup
     {
         return DB::transaction(function () use ($data) {
+            $FriendsGroup = $this->model::create([
+                'friend_id' => $data['friend_id'],
+                'group_id' => $data['group_id'],
+            ]);
 
-            
-                $FriendsGroup = $this->model::FirstOrCreate([
-                    'friend_id' => $data['friend_id'],
-                    'group_id' => $data['group_id'],
-                ]);
+            if ($FriendsGroup) {
+                return $FriendsGroup;
+            }
 
-                if ($FriendsGroup) {
-                    return $FriendsGroup;
-                }
-                throw new GeneralException(__('There was an error created the Group.'));
+            throw new GeneralException(__('There was an error created the Group.'));
         });
     }
 

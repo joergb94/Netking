@@ -12,6 +12,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\web\FaceBookController;
 use App\Http\Controllers\web\GroupsController;
 use App\Http\Controllers\web\GraphicsController;
+use App\Http\Controllers\web\UserController;
 
 
 
@@ -64,6 +65,17 @@ Route::group(['middleware'=>['auth']], function(){
         Route::post('/contactUs',[HomeController::class, 'deleteOrResotore']);
         Route::get('/home/{id}/show_qr', [CardController::class, 'show_qr']);
         Route::get('/Kepls/background/{id}', [CardController::class, '']);
+        
+        //User
+        Route::get('/users', [UserController::class, 'index']);
+        Route::get('/users/create', [UserController::class, 'create']);
+        Route::post('/users/create', [UserController::class, 'store']);
+        Route::get('/users/{id}', [UserController::class, 'detail']);
+        Route::get('/users/{id}/edit', [UserController::class, 'edit']);
+        Route::put('/users/{id}', [UserController::class, 'update']);
+        Route::get('/users/{id}/editpass', [UserController::class, 'editPassword']);
+        Route::put('/users/{id}/pass', [UserController::class, 'updatePassword']);
+        Route::delete('/users/{id}',[UserController::class, 'deleteOrResotore']);
 
         //My First Keypl
         Route::get('/MyFirstKeypl', [CardController::class, 'create_first'])->name('first');
@@ -80,7 +92,6 @@ Route::group(['middleware'=>['auth']], function(){
         Route::post('/MyFirstKeypl/create/item', [CardController::class, 'create_item']);
         Route::delete('/MyFirstKeypl/delete/item/{id}', [CardController::class, 'delete_item']);
         Route::post('/MyFirstKeypl/update_asinc/{id}', [CardController::class, 'update_asinc']);
-        Route::get('/MyFirstKeypl/show_add_type_item', [CardController::class, 'show_add_type_item']);
         Route::post('/MyFirstKeypl/update_asinc_network/{id}', [CardController::class, 'update_asinc_network']);
         Route::post('/MyFirstKeypl/update_asinc_theme/{id}', [CardController::class, 'update_theme']);
 

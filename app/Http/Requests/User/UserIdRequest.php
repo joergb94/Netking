@@ -1,21 +1,21 @@
 <?php
 
-namespace App\Http\Requests\Api\Cards;
+namespace App\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class DeleteItemRequest extends FormRequest
+class UserIdRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(Request $request)
     {
-        return validateAccess(Auth::user(),1);
+        return true; 
     }
 
     /**
@@ -26,7 +26,7 @@ class DeleteItemRequest extends FormRequest
     public function rules()
     {
         return [
-            "card_detail_id"=>"required",
+            'id' => 'required',
         ];
     }
 }

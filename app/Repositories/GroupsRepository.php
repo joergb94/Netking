@@ -54,14 +54,13 @@ class GroupsRepository
     {
     
         return DB::transaction(function () use ($data) {
-        
             $Group = $this->model::create([
                 'user_id' => Auth::user()->id,
                 'name' =>$data['name'],
             ]);
             if ($Group) {
                 foreach ($data['friends'] as $friend) {
-                    $this->FriendsGroupRepository->createMemberGroup([
+                    $this->FriendsGroupRepository->create([
                         'group_id'=>$Group->id,
                         'friend_id'=>$friend
                     ]);
