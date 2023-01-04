@@ -69,6 +69,27 @@ class MetricsRepository
         return $data;
     }
 
+    
+    public function getSearchCompany($search)
+    {
+        $data = [];
+        $allData = Card::whereIn('user_id',$this->CardsRepository->take_id_users_company());
+        
+                if(strlen($search) > 0) {
+
+                    $allData->where('title', 'like', '%'. $search . '%');
+                }
+               $rg =  $allData->get();
+
+        foreach ($rg as $key => $card) {
+            $card = $this->CardsRepository->show($card->id);
+            $graphics = $this->CardsRepository->get_data_chart($card->id);
+            array_push($data,['graphics'=>$graphics,'card'=>$card]);
+        }
+        
+        return $data;
+    }
+
     public function get_data_chart($id){
 
         $dataCharD = [];
@@ -93,20 +114,20 @@ class MetricsRepository
         
                     $hoursQ = Carbon::now()->startOfDay()->addHours($i)->addMinutes(59);
                     $hoursMQ =Carbon::now()->startOfDay()->addHours($i);
-                    $quantity = $this->views::whereDate('created_at', '=',Carbon::now())
+                    $quantity = $this->views::where('card_id',$id)->whereDate('created_at', '=',Carbon::now())
                                             ->whereTime('created_at', '<', $hoursQ )
                                             ->whereTime('created_at', '>',$hoursMQ)
                                             ->count();
-                    
+              
                     array_push($dataLabelsD,[$i+1]);
                     array_push($dataCharD,$quantity);
             }
             $day = ['labels'=>$dataLabelsD ,'data'=>$dataCharD, 'title'=>'Last 24 hours'];
-
+            
             //for week
             for ($i=0; $i < 7; $i++) { 
                     $firstDate = Carbon::now()->startOfWeek()->addDays($i);
-                    $quantity = $this->views::whereDate('created_at', '=', $firstDate)->count();
+                    $quantity = $this->views::where('card_id',$id)->whereDate('created_at', '=', $firstDate)->count();
                     array_push($dataLabelsW,[substr($firstDate->format('l'),0,3)]);
                     array_push($dataCharW,$quantity);
             }
@@ -116,7 +137,7 @@ class MetricsRepository
             for ($i=0; $i < $dbDate->daysInMonth; $i++) { 
                         $firstDate = Carbon::now()->startOfMonth();
                         $dateQ = Carbon::now()->startOfMonth()->addDays($i);
-                        $quantity = $this->views::whereDate('created_at', '=', $firstDate->addDays($i))->count();
+                        $quantity = $this->views::where('card_id',$id)->whereDate('created_at', '=', $firstDate->addDays($i))->count();
                         array_push($dataLabelsM,[$i+1]);
                         array_push($dataCharM,$quantity);
             }
@@ -124,7 +145,7 @@ class MetricsRepository
 
             //for year
             for ($i=1; $i < $dbDate->month+1; $i++) { 
-                    $quantity = $this->views::whereYear('created_at', '=', $dbDate->year)
+                    $quantity = $this->views::where('card_id',$id)->whereYear('created_at', '=', $dbDate->year)
                                             ->whereMonth('created_at', '=',$i)
                                             ->count();
                 
@@ -136,7 +157,7 @@ class MetricsRepository
             //for all years
             for ($i=0; $i < $diffYears+1; $i++) {
 
-                    $quantity = $this->views::whereYear('created_at', '=', $dbDate->year+$i)->count();
+                    $quantity = $this->views::where('card_id',$id)->whereYear('created_at', '=', $dbDate->year+$i)->count();
                     array_push($dataLabelsA,[$dbDate->year+$i]);
                     array_push($dataCharA,$quantity);
             }

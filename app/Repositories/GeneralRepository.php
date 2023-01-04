@@ -10,16 +10,18 @@ use App\Models\CardUserDetail;
 use App\Models\Membership;
 use App\Models\Type_membership;
 use App\Models\Type_user;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class GeneralRepository {
-   public function  __construct(Card $Card, Card_detail $Card_detail)
+   public function  __construct(Card $Card, Card_detail $Card_detail,User $User)
     {
         $this->Card = $Card;
         $this->Card_detail = $Card_detail;
+        $this->User = $User;
     }
 
     public function card_max()
@@ -58,6 +60,7 @@ class GeneralRepository {
                             'date_renovation' => $date_renovation
                         ])
                     ){
+                        GeneralRepository::update_type_user($num_cards);
                         return true;
                     }
                     throw new GeneralException(__('There was an error updating the Membership.'));
@@ -70,6 +73,7 @@ class GeneralRepository {
         if($status)
         {
             $num_cards = Type_membership::find($new_membership);
+
                return DB::transaction(function () use ($new_membership,$num_cards,$user){
                     if(
                         Membership::create([
@@ -79,6 +83,7 @@ class GeneralRepository {
                             'type_membership_id' => $new_membership
                         ])
                     ){
+                        
                         return true;
                     }
                     throw new GeneralException(__('There was an error updating the Membership.'));
@@ -180,4 +185,18 @@ class GeneralRepository {
     {
         return true;
     }
+
+    public function update_type_user($num_cards){
+     
+        return DB::transaction(function () use ($num_cards) {
+             
+                if($this->User->find(Auth::user()->id)->update([
+                    'type_user_id'=>$num_cards->type_user_id,
+                ])){
+                    return true; 
+                }
+        });
+       
+    }
+
 }

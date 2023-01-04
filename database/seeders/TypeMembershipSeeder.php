@@ -15,10 +15,13 @@ class TypeMembershipSeeder extends Seeder
     public function run()
     {
         $memberships = [
-            ['membership' => 'Free','description'=>'descripcion de la membresia','quantity'=>1],
-            ['membership' => 'extra','description'=>'descripcion de la membresia','quantity'=>1],
-            ['membership' => 'Premium','description'=>'descripcion de la membresia','quantity'=>10],
-            ['membership' => 'Company','description'=>'descripcion de la membresia','quantity'=>20],
+            ['type_user_id'=>4,'membership' => 'Free','description'=>'descripcion de la membresia','quantity'=>1],
+            ['type_user_id'=>NUll,'membership' => 'extra','description'=>'descripcion de la membresia','quantity'=>1],
+            ['type_user_id'=>3,'membership' => 'Premium','description'=>'descripcion de la membresia','quantity'=>10],
+            ['type_user_id'=>2,'membership' => 'Company','description'=>'descripcion de la membresia','quantity'=>20],
+                            
+                            
+                           
         ];
 
         foreach($memberships as $membership){

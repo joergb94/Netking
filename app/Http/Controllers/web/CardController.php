@@ -46,13 +46,18 @@ class CardController extends Controller
 
     public function index(CardsRequest $request)
     {   
-        $cards = Card::where('user_id',Auth::user()->id)->withTrashed()->count();
-        if($cards > 0){
+        $cards = (Auth::user()->type_user_id == 2)
+                    ?Card::whereIn('user_id',$this->CardsRepository->take_id_users_company())->withTrashed()->count()
+                    :Card::where('user_id',Auth::user()->id)->withTrashed()->count();
+        if($cards > 0 ){
             $search = trim($request->search);
             $criterion = trim($request->criterion);
             $status = ($request->status) ? $request->status : 1;
             $location = ($request->location > 0) ? $request->location : 'all';
-            $data = $this->CardsRepository->getSearchPaginated($criterion, $search, $status);
+            $data = (Auth::user()->type_user_id == 2)
+                        ?$this->CardsRepository->getSearchPaginatedCompany($criterion, $search,$status)
+                        :$this->CardsRepository->getSearchPaginated($criterion, $search, $status);
+                        
             $sts = $this->GeneralRepository->card_max();
             $items = Cards_items::whereNotIn('id',[1,2])->get();
     

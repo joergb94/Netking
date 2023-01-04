@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Exceptions\GeneralException;
 use App\Models\User;
+use App\Repositories\ResgisterUserRepository;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -13,9 +14,10 @@ use Illuminate\Support\Facades\Hash;
 class UserRepository 
 {
     
-    public function __construct(User $model)
+    public function __construct(User $model,ResgisterUserRepository $ResgisterUserRepository)
     {
         $this->model = $model;
+        $this->ResgisterUserRepository = $ResgisterUserRepository;
     }
 
 
@@ -58,8 +60,23 @@ class UserRepository
             ]);
 
             if ($User) {
-                    
-                    return $User;
+
+                $fnick=explode('@', $User['email']);
+                $usernickname = User::find($User->id);
+    
+                if($usernickname->update(['nickname'=>$fnick[0].$User->id])){
+               
+                    if($User){
+                            $Membership = ResgisterUserRepository::createMembership($User);
+                                if($Membership){
+                                    
+                                    return $User;
+                                }   
+            
+                    }
+                
+                }
+                throw new GeneralException(__('There was an error created the User.'));
             }
 
             throw new GeneralException(__('There was an error created the User.'));
@@ -129,7 +146,9 @@ class UserRepository
 
          
     }
-
+    
+   
+    
   
 
 }

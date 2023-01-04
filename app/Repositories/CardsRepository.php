@@ -46,7 +46,15 @@ class CardsRepository
         $this->themes = [9,3, 7,0, 9];
         $this->months = array(1 => 'Jan.', 2 => 'Feb.', 3 => 'Mar.', 4 => 'Apr.', 5 => 'May', 6 => 'Jun.', 7 => 'Jul.', 8 => 'Aug.', 9 => 'Sep.', 10 => 'Oct.', 11 => 'Nov.', 12 => 'Dec.');
     }
-
+    public function take_id_users_company(){
+         $ids = [];
+         $data = User::where('admin_company_id',Auth::user()->id)->get();
+         foreach ($data as $dato) {
+            array_push($ids,$dato['id']);
+         }
+         array_push($ids,Auth::user()->id);
+         return $ids;
+    }
 
           /**
      * @param int    $paged
@@ -73,6 +81,42 @@ class CardsRepository
                                     'img_name',
                                     'img_path')
                                     ->where('user_id',Auth::user()->id);
+
+            if( (strlen($criterion) > 0 &&  strlen($search) > 0) ){
+                $rg->where($criterion, 'like', '%'. $search . '%');
+            }
+              
+            $Card = $rg->orderBy('id', 'desc')->paginate(5);
+                    return $Card;
+    }
+
+    /**
+     * @param int    $paged
+     * @param string $orderBy
+     * @param string $sort
+     *
+     * @return mixed
+     */
+    public function getSearchPaginatedCompany($criterion, $search,$status): LengthAwarePaginator
+    {
+                $ids = CardsRepository::take_id_users_company();
+              $rg = $this->model->select(DB::raw("(SELECT card_details.item_data FROM card_details
+                                                WHERE card_details.card_id = cards.id
+                                                AND card_details.card_item_id = 1
+                                                LIMIT 1) as img"),
+                                    DB::raw("(SELECT cards_style_details.background_color FROM cards_style_details
+                                                WHERE cards_style_details.card_id = cards.id
+                                                LIMIT 1) as background_color"),
+                                    DB::raw("(scan_qr + get_link) as views"),
+                                    'id',
+                                    'title',
+                                    'subtitle',
+                                    'background_image_color',
+                                    'img_name',
+                                    'img_path');
+            if(count($ids) > 0){
+                $rg->whereIn('user_id',CardsRepository::take_id_users_company());
+            }
 
             if( (strlen($criterion) > 0 &&  strlen($search) > 0) ){
                 $rg->where($criterion, 'like', '%'. $search . '%');

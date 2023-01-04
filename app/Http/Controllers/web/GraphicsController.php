@@ -49,7 +49,9 @@ class GraphicsController extends Controller
     public function get_data_chart(Request $request)
     {   
         $search = trim($request->search);
-        $data = $this->MetricsRepository->getSearch($search);
+        $data = (Auth::user()->type_user_id == 2)
+                ?$this->MetricsRepository->getSearchCompany($search)
+                :$this->MetricsRepository->getSearch($search);
         if ($request->ajax()) {
             return view('metrics.items.table', ['data' => $data]);
         }

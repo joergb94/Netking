@@ -21,7 +21,7 @@
           </div>
           <div class="form-group">
             <label>Street:</label>
-            <input type="number" id="street" name="street" value="" class="form-control">
+            <input type="text" id="street" name="street" value="" class="form-control">
           </div>
           <div class="form-group">
             <label>Phone:</label>
